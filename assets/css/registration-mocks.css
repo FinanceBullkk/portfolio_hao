@@ -1,0 +1,299 @@
+/* ============================================================
+   L&D event platform mockups (registration.html)
+   The production app is a dark, Luma-style UI — every mock here is
+   redrawn from design_handoff_user_events/screenshots/*. Local tokens
+   keep the app's shades in one place, separate from the page palette.
+   ============================================================ */
+.app-mock {
+  --a-bg: #0b0b0d;
+  --a-surface: #16161a;
+  --a-surface-2: #1c1c21;
+  --a-line: #26262c;
+  --a-line-soft: #1b1b20;
+  --a-text: #f2f2f5;
+  --a-text-2: #9d9da8;
+  --a-text-3: #6b6b76;
+  --a-blue: #6f9bff;
+  --a-amber: #e3a33d;
+  --a-green: #4cc985;
+
+  background: var(--a-bg);
+  border: 1px solid var(--border-md);
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--a-text);
+}
+
+/* shared app top bar (the real app's nav) */
+.app-topbar {
+  display: flex; align-items: center; gap: 18px;
+  padding: 11px 16px; border-bottom: 1px solid var(--a-line-soft); background: var(--a-surface);
+  font-size: 12px; color: var(--a-text-3);
+}
+.app-topbar .brand { font-family: var(--font-mono); font-weight: 600; font-size: 11px; letter-spacing: .18em; color: var(--a-text); }
+.app-topbar .nav-item.on { color: var(--a-text); background: var(--a-surface-2); border-radius: 6px; padding: 4px 10px; }
+.app-topbar .spacer { flex: 1; }
+.app-topbar .avatar {
+  width: 22px; height: 22px; border-radius: 50%; background: #2e6f63; color: #d8f5ec;
+  display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; flex: 0 0 auto;
+}
+@media (max-width: 560px) { .app-topbar .nav-item:not(.on) { display: none; } }
+
+.app-screen-title { padding: 18px 20px 4px; font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
+.app-screen-sub { padding: 0 20px 14px; font-size: 12.5px; color: var(--a-text-2); }
+
+/* ------------------------------------------------------------
+   Mock 0 — the Google Sheet this replaced (light surface, redrawn
+   from the real sheet: pink header band, per-cell dropdowns)
+   ------------------------------------------------------------ */
+.sheet-mock {
+  --s-line: #d3d3d3;
+  --s-ink: #202124;
+  --s-ink-2: #5f6368;
+  --s-pink: #e6bcd6;
+  --s-pink-dark: #d494bb;
+
+  border: 1px solid var(--border-md); border-radius: 8px; overflow: hidden; background: #fff;
+}
+.sheet-scroll { overflow-x: auto; }
+.sheet-table {
+  border-collapse: collapse; width: 100%; min-width: 720px;
+  font-family: var(--font-sans); font-size: 11px; color: var(--s-ink); background: #fff;
+}
+.sheet-table th, .sheet-table td { border: 1px solid var(--s-line); padding: 6px 8px; text-align: left; }
+.sheet-table th {
+  background: var(--s-pink); font-weight: 700; font-size: 10.5px; text-align: center; line-height: 1.3;
+}
+.sheet-table th.wide-head { background: var(--s-pink-dark); }
+.sheet-table th small { display: block; font-weight: 400; font-size: 9px; color: #4a3a44; margin-top: 2px; }
+.sheet-table th .fil { float: right; color: var(--s-ink-2); font-size: 9px; }
+.sheet-table td.n { text-align: center; color: var(--s-ink-2); width: 26px; }
+.sheet-table tr:nth-child(even) td { background: #fbfbfb; }
+
+/* the sheet's data-validation dropdowns */
+.sheet-table .dd {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  background: #e8eaed; border-radius: 3px; padding: 3px 6px; color: var(--s-ink-2); min-width: 62px;
+}
+.sheet-table .dd.sel { background: #a8d4f5; color: #12304a; font-weight: 600; justify-content: center; gap: 10px; }
+.sheet-table .dd .car { font-size: 8px; }
+.sheet-table td.time { white-space: nowrap; }
+.sheet-table td.time .car { float: right; color: var(--s-ink-2); font-size: 8px; margin-left: 8px; }
+/* annotation only — the real sheet had no such marker, that is the point */
+.sheet-table td.dup { background: #fde8e8 !important; outline: 1px dashed #d93025; outline-offset: -2px; }
+.sheet-fade { height: 14px; background: linear-gradient(#fff, rgba(255,255,255,.55)); }
+
+/* seat math, drawn rather than explained: capacity vs what the sheet accepted */
+.seat-math {
+  display: grid; grid-template-columns: auto auto auto; align-items: start; gap: 22px;
+  padding: 18px 16px; background: var(--bg-raised); border-top: 1px solid var(--border-md);
+}
+@media (max-width: 700px) { .seat-math { grid-template-columns: 1fr; gap: 14px; } }
+.sm-seats { display: flex; align-items: center; gap: 4px; }
+.sm-seats i {
+  width: 19px; height: 19px; border-radius: 3px;
+  background: var(--bg-input); border: 1px solid var(--border-md); display: block;
+}
+.sm-seats i.over { background: rgba(239,88,88,.22); border-color: rgba(239,88,88,.65); }
+.sm-seats .more { font-family: var(--font-mono); font-size: 13px; color: #ff9b9b; margin-left: 2px; }
+.sm-lab { font-size: 13px; font-weight: 600; color: var(--fg-dim); margin-top: 10px; }
+.sm-lab small { display: block; font-weight: 400; font-size: 11.5px; color: var(--fg-faint); margin-top: 3px; }
+.sm-col.over .sm-lab { color: #ff9b9b; }
+.sm-vs {
+  align-self: center; font-family: var(--font-mono); font-size: 11px;
+  color: var(--fg-faint); text-transform: uppercase; letter-spacing: .08em;
+}
+
+/* ------------------------------------------------------------
+   Diagram 0 — same moment, two systems. Answers "who wins?"
+   ------------------------------------------------------------ */
+.versus { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border-md); border-radius: 8px; overflow: hidden; }
+@media (max-width: 760px) { .versus { grid-template-columns: 1fr; } }
+.vs-col { background: var(--bg); display: flex; flex-direction: column; }
+.vs-head {
+  padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-raised);
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--fg-mute);
+}
+.vs-col.app .vs-head { color: #9ae7bd; }
+
+.vs-log { padding: 6px 0; }
+.vs-line { display: grid; grid-template-columns: 74px 1fr auto; align-items: center; gap: 12px; padding: 8px 16px; }
+.vs-line .t { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-ghost); white-space: nowrap; }
+@media (max-width: 420px) { .vs-line { grid-template-columns: 1fr auto; } .vs-line .t { display: none; } }
+.vs-line .act { font-size: 13px; color: var(--fg-dim); }
+.vs-line .res {
+  font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .04em;
+  padding: 3px 7px; border-radius: 4px; white-space: nowrap;
+}
+.vs-line .res.ok { background: rgba(76,201,133,.14); color: #7fe0ab; border: 1px solid rgba(76,201,133,.4); }
+.vs-line .res.bad { background: rgba(239,88,88,.13); color: #ff9b9b; border: 1px solid rgba(239,88,88,.38); }
+.vs-line .res.same { background: var(--bg-input); color: var(--fg-mute); border: 1px solid var(--border-md); }
+
+.vs-facts { margin-top: auto; padding: 13px 16px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
+.vs-facts div { display: flex; gap: 9px; font-size: 12.5px; color: var(--fg-mute); line-height: 1.45; }
+.vs-facts .mk { color: var(--fg-ghost); flex: 0 0 auto; }
+.vs-col.app .vs-facts .mk { color: #4cc985; }
+.vs-facts b { color: var(--fg-dim); font-weight: 600; }
+
+/* ------------------------------------------------------------
+   Mock A — event list (Luma-style date rail + cards)
+   ------------------------------------------------------------ */
+.evt-list { padding: 4px 20px 20px; display: flex; flex-direction: column; }
+.evt-row { display: grid; grid-template-columns: 74px 1fr; gap: 16px; padding: 14px 0; }
+.evt-row + .evt-row { border-top: 1px solid var(--a-line-soft); }
+@media (max-width: 560px) { .evt-row { grid-template-columns: 1fr; gap: 8px; } }
+.evt-date .d { font-size: 13px; font-weight: 600; }
+.evt-date .w { font-size: 11.5px; color: var(--a-text-3); margin-top: 1px; }
+
+/* col 1 = all the text; col 2 = category tag stacked over the cover tile */
+.evt-card {
+  display: grid; grid-template-columns: 1fr 76px; grid-template-rows: auto 1fr; gap: 10px 14px;
+  border: 1px solid var(--a-line); border-radius: 10px; background: var(--a-surface); padding: 14px;
+}
+.evt-card .grow { grid-column: 1; grid-row: 1 / span 2; }
+.evt-card .evt-cat { grid-column: 2; grid-row: 1; }
+.evt-card .evt-cover { grid-column: 2; grid-row: 2; }
+@media (max-width: 560px) {
+  .evt-card { grid-template-columns: 1fr auto; }
+  .evt-card .evt-cover { display: none; }
+}
+.evt-card .time { font-size: 12px; color: var(--a-text-2); }
+.evt-card .name { font-size: 15px; font-weight: 600; margin-top: 3px; letter-spacing: -.01em; }
+.evt-card .by { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 12px; color: var(--a-text-2); }
+.evt-card .by .org {
+  width: 17px; height: 17px; border-radius: 4px; background: #23324f; color: #9dbcff;
+  display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; flex: 0 0 auto;
+}
+.evt-card .where { font-size: 12px; color: var(--a-text-3); margin-top: 6px; }
+.evt-card .foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 11px; }
+.evt-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--a-line); border-radius: 999px; padding: 4px 10px;
+  font-size: 11px; color: var(--a-text-2); background: var(--a-surface-2);
+}
+.evt-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--a-green); }
+.evt-pill.low .dot { background: var(--a-amber); }
+.evt-cat {
+  align-self: start; justify-self: end; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .1em; padding: 3px 7px; border-radius: 4px;
+}
+.evt-cat.assessment { background: rgba(227,163,61,.14); color: #edc07b; border: 1px solid rgba(227,163,61,.32); }
+.evt-cat.training { background: rgba(111,155,255,.14); color: #a6c1ff; border: 1px solid rgba(111,155,255,.32); }
+.evt-cover {
+  align-self: stretch; min-height: 64px;
+  border-radius: 8px; display: flex; align-items: flex-end; justify-content: flex-end; padding: 8px;
+  font-size: 20px; font-weight: 700; color: rgba(255,255,255,.34);
+}
+.evt-cover.a-plus { background: linear-gradient(150deg, #4a3418, #7a5524 70%, #8d6329); }
+.evt-cover.talk { background: linear-gradient(150deg, #1f2c4d, #2f4a80 70%, #35538f); }
+
+/* ------------------------------------------------------------
+   Mock B — registration form (profile-once + locked empCode)
+   ------------------------------------------------------------ */
+.reg-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+.reg-event {
+  display: flex; align-items: center; gap: 12px;
+  border: 1px solid var(--a-line); border-radius: 9px; background: var(--a-surface); padding: 11px 13px;
+}
+.reg-event .thumb {
+  width: 40px; height: 40px; border-radius: 6px; flex: 0 0 auto;
+  background: linear-gradient(150deg, #4a3418, #8d6329);
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: rgba(255,255,255,.6);
+}
+.reg-event .t { font-size: 13.5px; font-weight: 600; }
+.reg-event .s { font-size: 11.5px; color: var(--a-text-3); margin-top: 3px; }
+
+.reg-slot-banner {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  border: 1px solid rgba(227,163,61,.38); background: rgba(227,163,61,.09);
+  border-radius: 9px; padding: 11px 13px; font-size: 13px; color: #edc07b;
+}
+.reg-slot-banner .change { margin-left: auto; color: var(--a-amber); font-weight: 600; }
+
+.reg-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.reg-field.wide { grid-column: 1 / -1; }
+@media (max-width: 560px) { .reg-fields { grid-template-columns: 1fr; } }
+.reg-field .lab { font-size: 11.5px; color: var(--a-text-2); margin-bottom: 6px; }
+.reg-field .inp {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--a-line); border-radius: 7px; background: var(--a-surface); padding: 10px 12px;
+  font-size: 13px; color: var(--a-text);
+}
+.reg-field .inp .end { margin-left: auto; color: var(--a-text-3); font-size: 11px; flex: 0 0 auto; }
+/* locked = the empCode claim made visible in the UI */
+.reg-field.locked .inp { background: var(--a-surface-2); border-style: dashed; }
+.reg-note {
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--a-text-3);
+  border-top: 1px solid var(--a-line-soft); padding-top: 11px;
+}
+
+/* ------------------------------------------------------------
+   Mock C — slot picker (seats-left before you commit)
+   ------------------------------------------------------------ */
+.slots-body { padding: 4px 20px 20px; }
+.day-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+.day-tab { border: 1px solid var(--a-line); border-radius: 999px; padding: 6px 13px; font-size: 12px; color: var(--a-text-3); }
+.day-tab.on { background: var(--a-surface-2); color: var(--a-text); }
+.slot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .slot-grid { grid-template-columns: 1fr; } }
+.slot-card { border: 1px solid var(--a-line); border-radius: 9px; background: var(--a-surface); padding: 12px 13px; }
+.slot-card .t { font-size: 13.5px; font-weight: 600; }
+.slot-card .s { font-size: 11.5px; color: var(--a-text-2); margin-top: 4px; }
+.slot-card.full { background: transparent; border-color: var(--a-line-soft); }
+.slot-card.full .t, .slot-card.full .s { color: var(--a-text-3); font-weight: 500; }
+.slot-card.low .s { color: #edc07b; }
+
+/* ------------------------------------------------------------
+   Diagram A — three contention shapes, three mechanisms
+   ------------------------------------------------------------ */
+.mech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+@media (max-width: 780px) { .mech-grid { grid-template-columns: 1fr; } }
+.mech {
+  background: var(--bg); padding: 18px 16px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.mech .flow-name { font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; }
+.mech .load {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; align-self: flex-start;
+}
+.mech .load.rush { background: rgba(239,88,88,.13); color: #ff9b9b; border: 1px solid rgba(239,88,88,.36); }
+.mech .load.spread { background: rgba(111,155,255,.13); color: #a6c1ff; border: 1px solid rgba(111,155,255,.36); }
+.mech .load.unique { background: rgba(76,201,133,.13); color: #7fe0ab; border: 1px solid rgba(76,201,133,.36); }
+.mech .measure { font-size: 13px; color: var(--fg-mute); line-height: 1.5; }
+.mech .measure b { color: var(--fg-dim); font-weight: 600; }
+.mech .arrow { font-family: var(--font-mono); font-size: 12px; color: var(--fg-ghost); }
+.mech .how {
+  border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); padding: 11px 12px;
+  margin-top: auto;
+}
+.mech .how .k { font-family: var(--font-mono); font-size: 11.5px; color: var(--fg-dim); word-break: break-all; }
+.mech .how .why { font-size: 12px; color: var(--fg-mute); margin-top: 6px; line-height: 1.5; }
+
+/* ------------------------------------------------------------
+   Diagram B — eligibility gate, fixed priority order
+   ------------------------------------------------------------ */
+.gate { border: 1px solid var(--border-md); border-radius: 8px; overflow: hidden; }
+.gate-row {
+  display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 6px 14px;
+  padding: 13px 16px; border-bottom: 1px solid var(--border);
+}
+.gate-row .n { font-family: var(--font-mono); font-size: 11px; color: var(--fg-ghost); }
+.gate-row .what { font-size: 14px; font-weight: 600; }
+.gate-row .detail { grid-column: 2 / -1; font-size: 12.5px; color: var(--fg-mute); line-height: 1.5; }
+.gate-verdict {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+  background: rgba(239,88,88,.12); color: #ff9b9b; border: 1px solid rgba(239,88,88,.34);
+}
+.gate-verdict.gated { background: rgba(227,163,61,.12); color: #edc07b; border-color: rgba(227,163,61,.34); }
+.gate-pass {
+  display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: rgba(76,201,133,.06);
+  font-size: 13.5px; font-weight: 600; color: #9ae7bd;
+}
+.gate-pass .tick { font-size: 12px; }
+.gate-foot {
+  padding: 11px 16px; border-top: 1px solid var(--border); background: var(--bg-raised);
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); line-height: 1.6;
+}

@@ -1,33 +1,6 @@
-/* ============================================================
-   Flow sequence — numbered, connected steps (shows how stages link)
-   ============================================================ */
-.flow-sequence { display: flex; flex-direction: column; margin-top: 12px; }
-.flow-step { position: relative; padding-left: 60px; padding-bottom: 48px; }
-.flow-step:last-child { padding-bottom: 0; }
-.flow-step .connector-line {
-  position: absolute; left: 19px; top: 44px; bottom: 4px; width: 1px; background: var(--border-lg);
-}
-.flow-step:last-child .connector-line { display: none; }
-.flow-step .connector-arrow {
-  position: absolute; left: 14px; bottom: 2px;
-  font-family: var(--font-mono); font-size: 13px; line-height: 1; color: var(--fg-faint);
-}
-.flow-step:last-child .connector-arrow { display: none; }
-.flow-step .num-badge {
-  position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
-  border: 1.5px solid var(--border-lg); background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--fg);
-}
-.flow-step .step-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 6px; }
-.flow-step .step-title { font-family: var(--font-sans); font-weight: 700; font-size: 20px; margin-bottom: 10px; }
-.flow-step .step-body { font-size: 14.5px; color: var(--fg-mute); max-width: 68ch; margin-bottom: 18px; }
-@media (max-width: 680px) {
-  .flow-step { padding-left: 48px; }
-  .flow-step .num-badge { width: 32px; height: 32px; font-size: 12px; }
-  .flow-step .connector-line { left: 15px; }
-  .flow-step .connector-arrow { left: 10px; }
-}
+/* NOTE: the generic .flow-sequence / .flow-step primitives now live in
+   case-study.css so every case study page can use them. Only cert-pipeline
+   specific extensions remain in this file. */
 
 /* small connector between two stacked mocks (before/after) */
 .mini-connector {

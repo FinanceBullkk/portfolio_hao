@@ -201,57 +201,49 @@
 
 .caption {
   font-size: 13px;
+  line-height: 1.6;
   color: var(--fg-mute);
   margin-top: 16px;
+  max-width: 74ch;
+  text-wrap: pretty;
   font-family: var(--font-mono);
 }
+.caption em { color: var(--fg-dim); font-style: normal; font-weight: 500; }
+/* .cs-section > p is more specific than .caption — restore caption sizing there */
+.cs-section > p.caption { font-size: 13px; max-width: 74ch; }
 
 /* ============================================================
-   Corgi77 Mockups (registration.html)
+   Flow sequence — numbered, connected steps
+   Shared primitive: used by registration / tms / certificate-pipeline
    ============================================================ */
-.corgi-confirm-mock { padding: 0; background: #0c0c0e; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
-.corgi-confirm-mock .chrome { padding: 12px 16px; background: #161619; border-bottom: 1px solid #1b1b1f; font-family: var(--font-mono); font-size: 11px; color: #8a8a92; display: flex; align-items: center; gap: 12px; }
-.corgi-confirm-mock .chrome .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2a2a30; margin-right: 4px; }
-.corgi-preview-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #0c0c0e; }
-.corgi-profile-card { border: 1px solid #232328; border-radius: 14px; padding: 16px; background: #161619; }
-.corgi-profile-card .row { display: flex; justify-content: space-between; align-items: center; }
-.corgi-profile-card .k { font-family: var(--font-mono); font-size: 10.5px; color: #8a8a92; text-transform: uppercase; letter-spacing: 0.06em; }
-.corgi-profile-card .v { height: 10px; width: 80px; border-radius: 2px; background: #2a2a30; }
-.corgi-confirm-btn { background: #f4f4f6; color: #0c0c0e; text-align: center; padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 15px; cursor: pointer; transition: opacity 0.16s ease; }
-.corgi-confirm-btn:hover { opacity: 0.88; }
-.corgi-seat-row { display: flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-size: 12.5px; color: #8a8a92; margin-top: 4px; justify-content: center; }
-.corgi-seat-row .dot { width: 8px; height: 8px; border-radius: 50%; background: #4cc985; }
-
-.corgi-calendar-mock { padding: 0; background: #0c0c0e; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
-.corgi-calendar-mock .chrome { padding: 12px 16px; background: #161619; border-bottom: 1px solid #1b1b1f; font-family: var(--font-mono); font-size: 11px; color: #8a8a92; display: flex; align-items: center; gap: 12px; }
-.corgi-calendar-mock .chrome .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2a2a30; margin-right: 4px; }
-.cal-inner { background: #0c0c0e; font-family: var(--font-sans); }
-.cal-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #1b1b1f; }
-.cal-header .month { font-weight: 500; font-size: 18px; color: #ffffff; letter-spacing: -0.02em; }
-.cal-limits { display: flex; gap: 12px; font-family: var(--font-mono); font-size: 11px; }
-.cal-limits .lim { background: #161619; border: 1px solid #232328; padding: 4px 8px; border-radius: 14px; color: #8a8a92; font-weight: 500; }
-.cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.cal-day { padding: 16px; border-right: 1px solid #1b1b1f; display: flex; flex-direction: column; gap: 10px; }
-.cal-day:last-child { border-right: none; }
-.d-name { font-family: var(--font-mono); font-size: 11px; color: #8a8a92; font-weight: 500; margin-bottom: 4px; text-transform: uppercase; }
-.slot { padding: 12px 10px; border-radius: 8px; font-size: 13px; font-weight: 500; text-align: center; }
-.slot.booked { background: rgba(91,155,255,0.14); color: #9cc3ff; border: 1px solid rgba(91,155,255,0.4); }
-.slot.blackout { background: repeating-linear-gradient(45deg,#141416 0 6px,#171719 6px 12px); color: #6a6a72; border: 1px solid #232328; }
-.slot.disabled { background: #0e0e10; color: #4a4a52; border: 1px solid #1c1c20; }
-
-/* Race Anatomy */
-.race-anatomy { padding: 24px; background: #fff; border-radius: 8px; border: 1px solid var(--border-md); overflow: hidden; }
-.race-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; font-family: var(--font-sans); }
-@media (max-width: 640px) { .race-grid { grid-template-columns: 1fr; } }
-.req-col { display: flex; flex-direction: column; gap: 12px; }
-.req-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; background: #f8fafc; }
-.req-card.win { border-color: #bbf7d0; background: #f0fdf4; }
-.req-card.fail { border-color: #fecaca; background: #fef2f2; }
-.req-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-weight: 700; font-size: 13px; color: #0f172a; }
-.status-badge { font-size: 10.5px; font-family: var(--font-mono); padding: 3px 6px; border-radius: 4px; font-weight: 700; letter-spacing: 0.04em; }
-.status-badge.code-201 { background: #10b981; color: #fff; }
-.status-badge.code-409 { background: #ef4444; color: #fff; }
-.req-time, .req-stat { font-size: 11.5px; color: #475569; margin-top: 4px; }
-.req-stat { font-weight: 500; color: #0f172a; }
-.race-lock { text-align: center; padding: 20px; border: 1px dashed #cbd5e1; border-radius: 8px; background: #f8fafc; font-weight: 600; color: #475569; }
-.lock-icon { font-size: 24px; margin-bottom: 8px; display: block; }
+.flow-sequence { display: flex; flex-direction: column; margin-top: 12px; }
+.flow-step { position: relative; padding-left: 60px; padding-bottom: 48px; }
+.flow-step:last-child { padding-bottom: 0; }
+.flow-step .connector-line {
+  position: absolute; left: 19px; top: 44px; bottom: 4px; width: 1px; background: var(--border-lg);
+}
+.flow-step:last-child .connector-line { display: none; }
+.flow-step .connector-arrow {
+  position: absolute; left: 14px; bottom: 2px;
+  font-family: var(--font-mono); font-size: 13px; line-height: 1; color: var(--fg-faint);
+}
+.flow-step:last-child .connector-arrow { display: none; }
+.flow-step .num-badge {
+  position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--border-lg); background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--fg);
+}
+.flow-step .step-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 6px; }
+.flow-step .step-title { font-family: var(--font-sans); font-weight: 700; font-size: 20px; margin-bottom: 10px; }
+.flow-step .step-body { font-size: 14.5px; color: var(--fg-mute); max-width: 68ch; margin-bottom: 18px; }
+.flow-step .step-body code {
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-dim);
+  background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px;
+}
+@media (max-width: 680px) {
+  .flow-step { padding-left: 48px; }
+  .flow-step .num-badge { width: 32px; height: 32px; font-size: 12px; }
+  .flow-step .connector-line { left: 15px; }
+  .flow-step .connector-arrow { left: 10px; }
+}
