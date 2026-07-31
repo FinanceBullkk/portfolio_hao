@@ -1,0 +1,229 @@
+/* ============================================================
+   Mockup palettes.
+   Mock windows render as LIGHT surfaces (real Sheets/Canva/Gmail
+   are white UIs) so they read like screenshots on the dark site.
+   --m-* = light-surface tokens · brand accents tuned per surface.
+   ============================================================ */
+:root {
+  /* brand accents used on the dark page (chips, badges, demo) */
+  --sheets-green: #34a853;
+  --sheets-green-dim: rgba(52, 168, 83, .14);
+  --canva-purple: #8b3dff;
+  --canva-teal: #00c4cc;
+  --ilovepdf-red: #e5322d;
+  --gmail-blue: #1a73e8;
+  --amber: #e8a33d;
+  --amber-dim: rgba(232, 163, 61, .14);
+  --mint: #6fd7c0;
+  --mint-dim: rgba(111, 215, 192, .14);
+
+  /* light mock surfaces */
+  --m-bg: #fbfbfa;
+  --m-bg2: #f1f3f4;
+  --m-text: #202124;
+  --m-text2: #5f6368;
+  --m-text3: #9aa0a6;
+  --m-border: #e0e3e7;
+  --m-border2: #cdd1d6;
+  --m-green: #188038;
+  --m-green-bg: #e6f4ea;
+  --m-green-bd: #b7dfc2;
+  --m-amber: #b26a00;
+  --m-amber-bg: #fdf1dc;
+  --m-amber-bd: #ecc98c;
+  --m-mint: #0e8a6f;
+  --m-mint-bg: #e0f5f0;
+  --m-mint-bd: #9fd9c9;
+}
+
+/* ============================================================
+   Mock frame shell — light window on the dark page
+   ============================================================ */
+.mock-shot {
+  border: 1px solid var(--border-lg);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--m-bg);
+  color: var(--m-text);
+}
+.mock-shot .chrome {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--m-border);
+  background: var(--m-bg2);
+  font-family: var(--font-mono); font-size: 11px; color: var(--m-text2);
+}
+.mock-shot .chrome .dots { display: flex; gap: 6px; }
+.mock-shot .chrome .dots i { width: 7px; height: 7px; border-radius: 50%; background: #c0c4c8; display: block; }
+.mock-shot .chrome .brand-icon { width: 13px; height: 13px; border-radius: 3px; flex: 0 0 auto; }
+.brand-icon.sheets { background: var(--sheets-green); }
+.brand-icon.canva { background: linear-gradient(135deg, var(--canva-purple), var(--canva-teal)); }
+.brand-icon.ilovepdf { background: var(--ilovepdf-red); }
+.brand-icon.gmail { background: var(--gmail-blue); }
+.brand-icon.drive { background: linear-gradient(135deg, #4285f4, #1ea362 55%, #ffcf3f); }
+
+/* ============================================================
+   Sheet mock — menu bar, data grid, script strip
+   ============================================================ */
+.sheet-mock .menubar {
+  display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 7px 14px;
+  border-bottom: 1px solid var(--m-border);
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--m-text2);
+}
+.sheet-mock .menubar .custom { color: var(--m-green); font-weight: 600; }
+.sheet-mock .script-strip {
+  display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+  border-bottom: 1px solid var(--m-amber-bd);
+  font-family: var(--font-mono); font-size: 10.5px;
+  color: var(--m-amber); background: var(--m-amber-bg);
+}
+.sheet-mock table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 11.5px; }
+.sheet-mock th {
+  text-align: left; padding: 9px 12px; white-space: nowrap;
+  background: var(--m-bg2); color: var(--m-text2); font-weight: 600;
+  border-bottom: 1px solid var(--m-green-bd);
+}
+.sheet-mock td { padding: 9px 12px; white-space: nowrap; border-bottom: 1px solid var(--m-border); color: var(--m-text); }
+.sheet-mock tr:last-child td { border-bottom: none; }
+.sheet-mock td.more { color: var(--m-text3); }
+.sheet-mock .status-tag {
+  font-size: 10px; border: 1px solid var(--m-amber-bd); border-radius: 3px; padding: 3px 7px;
+  color: var(--m-amber); background: var(--m-amber-bg);
+}
+.sheet-mock .status-tag.ok { color: var(--m-green); background: var(--m-green-bg); border-color: var(--m-green-bd); }
+.sheet-mock .email-empty { color: var(--m-text3); }
+.sheet-mock .email-test {
+  color: var(--m-green); font-weight: 700; background: var(--m-green-bg);
+  padding: 3px 8px; border-radius: 3px;
+}
+.sheet-mock tr.highlight td { background: #f2f8f4; }
+
+/* ============================================================
+   Canva Bulk Create mock — data-fields panel + cert preview
+   ============================================================ */
+.canva-bulk-mock .body { display: flex; }
+.canva-bulk-mock .side {
+  flex: 0 0 190px; border-right: 1px solid var(--m-border); padding: 16px 14px;
+  display: flex; flex-direction: column; gap: 10px; background: #fff;
+}
+.canva-bulk-mock .side .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--m-text3); }
+.canva-bulk-mock .side .txt { font-size: 11.5px; color: var(--m-text); }
+.canva-bulk-mock .side .pill {
+  align-self: flex-start; font-family: var(--font-mono); font-size: 9.5px; padding: 3px 8px; border-radius: 3px;
+  color: #7c3aed; background: #f3e8ff; border: 1px solid #d8b4fe;
+}
+.canva-bulk-mock .side .btn-plain {
+  border: 1px solid var(--m-border2); border-radius: 3px; padding: 6px 9px; text-align: center;
+  font-family: var(--font-mono); font-size: 10px; color: var(--m-text2);
+}
+.canva-bulk-mock .side .btn-continue {
+  background: var(--canva-purple); color: #fff; border-radius: 3px; padding: 7px 9px; text-align: center;
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
+}
+.canva-bulk-mock .preview { flex: 1; padding: 22px; display: flex; align-items: center; justify-content: center; background: #e9ebee; }
+.canva-bulk-mock .cert { width: min(320px, 100%); border: 1px solid var(--m-border); border-radius: 4px; padding: 18px; background: #fff; }
+.canva-bulk-mock .cert .brand { font-family: var(--font-sans); font-weight: 700; font-size: 13px; color: #1b1b1b; margin-bottom: 10px; }
+.canva-bulk-mock .cert .kind { font-family: var(--font-mono); font-size: 7px; letter-spacing: .1em; color: #8a8a8a; margin-bottom: 4px; }
+.canva-bulk-mock .cert .lvl { font-family: var(--font-sans); font-weight: 600; font-size: 13px; line-height: 1.25; color: #12a5b0; margin-bottom: 12px; }
+.canva-bulk-mock .cert .name { font-family: var(--font-sans); font-weight: 700; font-size: 13.5px; color: #12a5b0; }
+.canva-bulk-mock .cert .date { font-size: 8px; color: #777; margin-top: 3px; }
+.canva-bulk-mock .pagesbar { border-top: 1px solid var(--m-border); padding: 8px 14px; font-family: var(--font-mono); font-size: 10px; color: var(--m-text3); text-align: right; }
+@media (max-width: 680px) {
+  .canva-bulk-mock .body { flex-direction: column; }
+  .canva-bulk-mock .side { flex: none; border-right: none; border-bottom: 1px solid var(--m-border); }
+}
+
+/* ============================================================
+   Canva download toast mock
+   ============================================================ */
+.download-mock { padding: 16px; }
+.download-mock .toast {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  border: 1px solid var(--m-border2); border-radius: 6px; padding: 12px 14px; background: #fff;
+}
+.download-mock .toast .title { font-family: var(--font-mono); font-size: 11.5px; color: var(--m-text); font-weight: 600; }
+.download-mock .toast .sub { font-family: var(--font-mono); font-size: 10px; color: var(--m-text2); margin-top: 3px; }
+.download-mock .toast .done { font-family: var(--font-mono); font-size: 10.5px; color: var(--m-green); white-space: nowrap; }
+
+/* ============================================================
+   CLT Certificate Renamer mock — folder row, 2 toolbars, log
+   ============================================================ */
+.renamer-mock .folder-row {
+  display: flex; align-items: center; gap: 8px; padding: 12px 14px 0;
+  font-family: var(--font-mono); font-size: 10.5px; color: var(--m-text);
+}
+.renamer-mock .folder-row .path { flex: 1; border: 1px solid var(--m-border2); border-radius: 3px; padding: 6px 9px; background: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.renamer-mock .folder-row .choose { border: 1px solid var(--m-border2); border-radius: 3px; padding: 6px 9px; white-space: nowrap; color: var(--m-text2); }
+.renamer-mock .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 12px 14px; }
+.renamer-mock .toolbar + .toolbar { padding-top: 0; }
+.renamer-mock .toolbar.last { border-bottom: 1px solid var(--m-border); }
+.renamer-mock .toolbar .group-label { font-family: var(--font-mono); font-size: 10px; color: var(--m-text3); }
+.renamer-mock .btn-mock {
+  font-family: var(--font-mono); font-size: 10.5px; padding: 7px 11px; border-radius: 3px;
+  border: 1px solid var(--m-border2); color: var(--m-text2);
+}
+.renamer-mock .btn-mock.dry-run { background: var(--m-mint-bg); border-color: var(--m-mint-bd); color: var(--m-mint); }
+.renamer-mock .btn-mock.primary { background: var(--amber); color: #241a08; border-color: var(--amber); font-weight: 600; }
+.renamer-mock .btn-mock.canva-split { background: var(--m-green-bg); border-color: var(--m-green-bd); color: var(--m-green); }
+.renamer-mock .log-label { padding: 12px 16px 0; font-family: var(--font-mono); font-size: 10px; color: var(--m-text3); }
+.renamer-mock .log { padding: 10px 16px 16px; font-family: var(--font-mono); font-size: 11.5px; color: #333; }
+.renamer-mock .log-line { margin-bottom: 7px; opacity: 0; transform: translateY(4px); }
+.renamer-mock .log-line:last-child { margin-bottom: 0; }
+.renamer-mock .log-line .check { color: var(--m-green); margin-right: 6px; }
+.renamer-mock .log-line.gap { color: var(--m-text3); }
+.renamer-mock .log-line.fail { color: var(--m-amber); }
+.renamer-mock .log-summary { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--m-border); color: var(--m-text); font-weight: 600; opacity: 0; transform: translateY(4px); }
+.renamer-mock .log-summary .ok-count { color: var(--m-green); }
+.renamer-mock .log-summary .fail-count { color: var(--m-amber); }
+
+.is-visible .renamer-mock .log-line,
+.is-visible .renamer-mock .log-summary { animation: logIn .4s ease forwards; }
+.is-visible .renamer-mock .log-line:nth-child(1) { animation-delay: .15s; }
+.is-visible .renamer-mock .log-line:nth-child(2) { animation-delay: .35s; }
+.is-visible .renamer-mock .log-line:nth-child(3) { animation-delay: .55s; }
+.is-visible .renamer-mock .log-line:nth-child(4) { animation-delay: .75s; }
+.is-visible .renamer-mock .log-line:nth-child(5) { animation-delay: .95s; }
+.is-visible .renamer-mock .log-line:nth-child(6) { animation-delay: 1.15s; }
+.is-visible .renamer-mock .log-summary { animation-delay: 1.35s; }
+@keyframes logIn { to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   Google Drive folder mock
+   ============================================================ */
+.drive-mock .file {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 9px 14px; border-bottom: 1px solid var(--m-border);
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--m-text);
+}
+.drive-mock .file span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drive-mock .file .sz { color: var(--m-text3); white-space: nowrap; }
+.drive-mock .more { padding: 9px 14px; font-family: var(--font-mono); font-size: 10.5px; color: var(--m-text3); }
+
+/* ============================================================
+   ilovepdf split mock — old manual process
+   ============================================================ */
+.ilovepdf-mock { padding: 18px 16px; }
+.ilovepdf-mock .pages { display: flex; gap: 14px; margin-bottom: 16px; }
+.ilovepdf-mock .page { flex: 1; border: 1px solid var(--m-border2); border-radius: 4px; padding: 12px; background: #fff; }
+.ilovepdf-mock .page .brand { font-family: var(--font-sans); font-weight: 700; font-size: 9px; margin-bottom: 9px; color: var(--m-text2); }
+.ilovepdf-mock .page .name { font-family: var(--font-sans); font-weight: 600; font-size: 9.5px; color: var(--m-text); }
+.ilovepdf-mock .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ilovepdf-mock .note { font-family: var(--font-mono); font-size: 11px; color: var(--m-text2); }
+.ilovepdf-mock .split-btn {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: #fff;
+  background: var(--ilovepdf-red); padding: 8px 16px; border-radius: 4px; white-space: nowrap;
+}
+
+/* ============================================================
+   Gmail compose mock — old manual send
+   ============================================================ */
+.gmail-mock .field { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--m-border); color: var(--m-text); font-family: var(--font-mono); font-size: 11px; }
+.gmail-mock .field .k { color: var(--m-text2); flex: 0 0 52px; }
+.gmail-mock .attachment {
+  margin: 12px 16px 0; display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--m-border2); border-radius: 4px; padding: 9px 11px; color: var(--m-text); font-size: 11px; font-family: var(--font-mono); background: #fff;
+}
+.gmail-mock .send-btn {
+  margin: 14px 16px 16px; display: inline-block; font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  padding: 8px 18px; border-radius: 3px; background: var(--gmail-blue); color: #fff;
+}

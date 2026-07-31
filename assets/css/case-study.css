@@ -1,0 +1,207 @@
+/* ============================================================
+   Case-study hero
+   ============================================================ */
+.cs-hero { padding: 100px 0 48px; }
+
+.cs-hero h1 {
+  font-family: var(--font-sans);
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.08;
+  max-width: 19ch;
+  margin-bottom: 26px;
+}
+
+.cs-hero p.lede {
+  font-size: 18px;
+  color: var(--fg-mute);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.cs-hero p.lede b { color: var(--fg); font-weight: 600; }
+
+.cs-live-badge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin-bottom: 24px;
+}
+
+.cs-tags { display: flex; flex-wrap: wrap; align-items: center; row-gap: 8px; margin-top: 32px; }
+.cs-tags .tag { font-size: 12px; }
+.cs-tags .tag:not(:last-child)::after {
+  content: '/';
+  margin: 0 10px;
+  color: var(--fg-ghost);
+}
+
+@media (max-width: 680px) {
+  .cs-hero h1 { font-size: 34px; }
+}
+
+/* ============================================================
+   Metric / stat bar
+   ============================================================ */
+.stat-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border-lg);
+  border-bottom: 1px solid var(--border);
+}
+.stat-bar .stat { padding: 26px 8px; border-left: 1px solid var(--border); }
+.stat-bar .stat:first-child { padding-left: 0; border-left: none; }
+.stat-bar .stat .value { font-family: var(--font-sans); font-size: 28px; font-weight: 700; letter-spacing: -.02em; }
+.stat-bar .stat .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--fg-faint); margin-top: 6px; }
+
+@media (max-width: 680px) {
+  .stat-bar { grid-template-columns: repeat(2, 1fr); }
+  .stat-bar .stat:nth-child(3) { border-left: none; padding-left: 0; }
+}
+
+/* ============================================================
+   Section blocks
+   ============================================================ */
+.cs-section { padding: 60px 0 0; }
+.cs-section.tight { padding-top: 52px; }
+.cs-section.bordered { border-top: 1px solid var(--border-lg); margin-top: 8px; }
+
+.cs-section h2 {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  margin-bottom: 18px;
+  max-width: 22ch;
+}
+.cs-section > p { font-size: 16px; color: var(--fg-mute); max-width: 64ch; text-wrap: pretty; }
+
+/* ============================================================
+   Two-column stage detail (pipeline breakdown)
+   ============================================================ */
+.stage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 30px;
+  border-top: 1px solid var(--border-lg);
+}
+@media (max-width: 860px) {
+  .stage-grid { grid-template-columns: 1fr; }
+  .stage-card { border-left: none !important; padding-left: 0 !important; }
+}
+
+.stage-card {
+  padding: 28px 32px 0 0;
+}
+.stage-card + .stage-card {
+  border-left: 1px solid var(--border);
+  padding-left: 32px;
+}
+@media (max-width: 860px) {
+  .stage-card + .stage-card { padding-top: 32px; border-top: 1px solid var(--border); margin-top: 8px; }
+}
+
+.stage-card .head { margin-bottom: 20px; }
+.stage-card .head .kicker { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; color: var(--fg-ghost); margin-bottom: 8px; }
+.stage-card .head .title { font-family: var(--font-sans); font-size: 21px; font-weight: 700; }
+
+.stage-card .body > p { font-size: 14.5px; color: var(--fg-mute); margin-bottom: 20px; text-wrap: pretty; }
+.stage-card code, .stage-card .code { font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-dim); }
+
+.rename-example {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+.rename-example .file-line { display: flex; align-items: center; gap: 8px; color: var(--fg-mute); margin-bottom: 5px; }
+.rename-example .file-line:last-child { margin-bottom: 0; color: var(--fg-ghost); }
+.rename-example .file-line .arrow { color: var(--fg-faint); }
+.rename-example .meta { color: var(--fg-faint); margin-bottom: 8px; }
+
+.sheet-log {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.sheet-log .row { display: flex; padding: 8px 0; color: var(--fg-mute); border-top: 1px solid var(--border); }
+.sheet-log .row:first-child { border-top: none; }
+.sheet-log .row.head { color: var(--fg-ghost); }
+.sheet-log .row .who { flex: 1; }
+.sheet-log .row .status { width: 80px; text-align: right; }
+.sheet-log .row.ok .status { color: var(--fg-dim); }
+.sheet-log .row.err .status { color: var(--fg); font-weight: 600; }
+
+.checklist { display: flex; flex-direction: column; gap: 9px; }
+.checklist .item { display: flex; gap: 9px; font-size: 13.5px; color: var(--fg-dim); }
+.checklist .item .check { color: var(--fg-faint); }
+.checklist .kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--fg-ghost); margin-bottom: 11px; }
+
+/* ============================================================
+   Before / after
+   ============================================================ */
+.ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 28px; border-top: 1px solid var(--border-lg); }
+@media (max-width: 860px) { .ba-grid { grid-template-columns: 1fr; } }
+
+.ba-card { padding: 26px 32px 0 0; }
+.ba-card.after { border-left: 1px solid var(--border); padding-left: 32px; }
+@media (max-width: 860px) {
+  .ba-card.after { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 26px; margin-top: 8px; }
+}
+.ba-card .heading { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; margin-bottom: 18px; color: var(--fg-faint); }
+.ba-card .rows { display: flex; flex-direction: column; gap: 13px; }
+.ba-card .rows div { display: flex; gap: 11px; font-size: 14px; }
+.ba-card.before .rows div { color: var(--fg-mute); }
+.ba-card.after .rows div { color: var(--fg-dim); }
+.ba-card .rows div .mark { color: var(--fg-ghost); }
+.ba-card.after .rows div .mark { color: var(--fg-faint); }
+
+/* ============================================================
+   Kanban-style board mock (recruitment case study)
+   ============================================================ */
+.board-mock {
+  border: 1px solid var(--border-md);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.board-mock .chrome {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-raised);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--fg-faint);
+}
+.board-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 22px; }
+@media (max-width: 680px) { .board-cols { grid-template-columns: repeat(2, 1fr); } }
+.board-cols .col-head {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 10px; margin-bottom: 12px; color: var(--fg-faint);
+}
+.board-cols .col-head .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.board-cols .cards { display: flex; flex-direction: column; gap: 9px; }
+.board-cols .card {
+  border-radius: 4px; background: var(--bg-raised); padding: 12px;
+  border: 1px solid var(--border);
+}
+.board-cols .card .bar-1 { height: 8px; border-radius: 2px; background: var(--bg-input); margin-bottom: 8px; }
+.board-cols .card .bar-2 { height: 6px; border-radius: 2px; background: var(--bg-card-2); }
+.board-cols .card .comment-row { display: flex; gap: 5px; margin-top: 8px; align-items: center; }
+.board-cols .card .comment-row .avatar { width: 14px; height: 14px; border-radius: 50%; background: var(--bg-input); }
+.board-cols .card .comment-row .comment-label { font-family: var(--font-mono); font-size: 8px; color: var(--fg-ghost); }
+
+.caption {
+  font-size: 13px;
+  color: var(--fg-mute);
+  margin-top: 16px;
+  font-family: var(--font-mono);
+}

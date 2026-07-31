@@ -1,0 +1,85 @@
+/* ============================================================
+   About hero — photo + bio
+   ============================================================ */
+.about-hero {
+  display: flex;
+  gap: 44px;
+  align-items: flex-start;
+  padding: 100px 0 48px;
+}
+@media (max-width: 680px) {
+  .about-hero { flex-direction: column; padding-top: 64px; }
+}
+
+.about-hero h1 {
+  font-family: var(--font-sans);
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: -.025em;
+  line-height: 1.08;
+  margin-bottom: 22px;
+}
+@media (max-width: 680px) {
+  .about-hero h1 { font-size: 34px; }
+}
+
+.about-hero .lede {
+  font-size: 18px;
+  color: var(--fg-mute);
+  max-width: 60ch;
+  text-wrap: pretty;
+  margin-bottom: 24px;
+}
+
+.avatar-placeholder {
+  flex: 0 0 auto;
+  width: 148px;
+  height: 148px;
+  border: 1.5px solid var(--border-lg);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 56px;
+  color: var(--fg-ghost);
+  background: var(--bg-card);
+}
+
+.about-meta {
+  display: flex;
+  gap: 10px 24px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg-faint);
+}
+.about-meta a {
+  color: var(--fg-mute);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-lg);
+  padding-bottom: 1px;
+  transition: color .18s, border-color .18s;
+}
+.about-meta a:hover { color: var(--fg); border-color: var(--fg); }
+
+/* ============================================================
+   Full skills list — grouped
+   ============================================================ */
+.skills-groups {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 48px;
+  margin-top: 30px;
+}
+@media (max-width: 680px) {
+  .skills-groups { grid-template-columns: 1fr; }
+}
+.skills-groups .group h3 {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--fg-dim);
+}

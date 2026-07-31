@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>L&amp;D event registration platform — Hao</title>
+  <meta name="description" content="Case study: a Firebase-backed event registration and instructor-booking platform, live in production for CyberLogitec's L&D team. React, TypeScript, Cloud Functions, Firestore.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23f0f0ee' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/case-study.css">
+</head>
+<body>
+
+  <nav class="subnav">
+    <div class="container">
+      <a href="index.html" class="subnav-back">← all projects</a>
+      <div class="subnav-title">Registration platform <span class="subnav-sub">/ case study</span></div>
+      <div class="subnav-actions">
+        <a href="about.html" class="subnav-link">About</a>
+        <a href="https://github.com/FinanceBullkk/Corgi77" target="_blank" rel="noopener" class="btn btn-primary btn-sm">View repo ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <header class="cs-hero" data-reveal>
+      <div class="eyebrow">Case Study — 04</div>
+      <div class="cs-live-badge">Live · CyberLogitec production — internal, no public demo</div>
+      <h1>A company-wide event registration platform, from first login to a confirmed seat.</h1>
+      <p class="lede">A Firebase-backed SPA that runs L&amp;D event registration and a recurring instructor-booking program for CyberLogitec. Profile captured once, seats claimed atomically, eligibility enforced server-side — not just in the UI.</p>
+      <div class="cs-tags">
+        <span class="tag">React + TypeScript</span>
+        <span class="tag">Vite</span>
+        <span class="tag">Firebase Cloud Functions v2</span>
+        <span class="tag">Firestore</span>
+        <span class="tag">Firebase Auth</span>
+      </div>
+    </header>
+
+    <!-- STAT BAR -->
+    <div class="stat-bar" data-reveal>
+      <div class="stat"><div class="value">31</div><div class="label">FUNCTIONS SHIPPED</div></div>
+      <div class="stat"><div class="value">400+</div><div class="label">TESTS</div></div>
+      <div class="stat"><div class="value">0</div><div class="label">CRIT/HIGH/MED AUDIT FINDINGS</div></div>
+      <div class="stat"><div class="value">2</div><div class="label">LIVE FLOWS</div></div>
+    </div>
+
+    <!-- THE PROBLEM -->
+    <section class="cs-section" data-reveal>
+      <div class="eyebrow">The problem</div>
+      <h2>Scattered forms, real double-booking risk</h2>
+      <p>L&amp;D needed to register employees for trainings and assessments, and separately run a recurring weekly instructor-booking program — without a form that re-asks the same profile info every time, and without two people accidentally claiming the same seat or the same trainer slot under real concurrent use.</p>
+    </section>
+
+    <!-- WHAT I BUILT -->
+    <section class="cs-section tight" data-reveal>
+      <div class="eyebrow">What I built — two live flows</div>
+      <div class="stage-grid">
+
+        <div class="stage-card">
+          <div class="head">
+            <div class="kicker">FLOW 1 · EVENT REGISTRATION</div>
+            <div class="title">Simple &amp; slotted events</div>
+          </div>
+          <div class="body">
+            <p>Simple events (1 seat, 1 step) and slotted events (pick a timed exam slot, configurable Exam Parts per event). Every seat claim is a single Firestore document created inside a transaction — a duplicate id is rejected outright, so the same seat can't be claimed twice even if 100 people click at once.</p>
+            <div class="kicker">GUARDRAILS</div>
+            <div class="checklist">
+              <div class="item"><span class="check">✓</span> Eligibility checked twice — preflight, then re-enforced inside the transaction</div>
+              <div class="item"><span class="check">✓</span> 3-layer gate: permanent block → per-event blocklist → per-event allowlist</div>
+              <div class="item"><span class="check">✓</span> Employee-code + email dedup — one person, one seat per event</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="head">
+            <div class="kicker">FLOW 2 · PRONUNCIATION PROGRAM</div>
+            <div class="title">Weekly instructor booking</div>
+          </div>
+          <div class="body">
+            <p>A single trainer's weekly calendar, booked by a PIC (Person In Charge) on behalf of their class. Each session's document id is <span class="code">date_startMin</span> — a global lock, so a given date + time slot can hold exactly one session company-wide.</p>
+            <div class="kicker">GUARDRAILS</div>
+            <div class="checklist">
+              <div class="item"><span class="check">✓</span> Monthly cap (4) + weekly cap (2) per class, enforced server-side</div>
+              <div class="item"><span class="check">✓</span> Blackout dates/slots block booking for everyone — including admins, no bypass</div>
+              <div class="item"><span class="check">✓</span> Registration window + deadline locks self-service after cutoff</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ZERO-INPUT CONFIRM -->
+    <section class="cs-section" data-reveal>
+      <div class="eyebrow">The detail that matters</div>
+      <h2>Zero-input confirm</h2>
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <div class="heading">TYPICAL EVENT FORM</div>
+          <div class="rows">
+            <div><span class="mark">—</span> Re-enter employee code, name, business unit every time</div>
+            <div><span class="mark">—</span> No feedback on whether you already hold a seat</div>
+            <div><span class="mark">—</span> Concurrent submits can silently conflict</div>
+          </div>
+        </div>
+        <div class="ba-card after">
+          <div class="heading">THIS PLATFORM</div>
+          <div class="rows">
+            <div><span class="mark">✓</span> Profile completed once at first login — every later registration is a single confirm</div>
+            <div><span class="mark">✓</span> Seat claim is atomic — Firestore rejects the duplicate, no oversell</div>
+            <div><span class="mark">✓</span> Eligibility resolved before the user even sees the register button</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY IT'S SOLID -->
+    <section class="cs-section" data-reveal>
+      <div class="eyebrow">Why it's solid</div>
+      <h2>Server-side by default, verified not assumed</h2>
+      <div class="numbered-list">
+        <div class="numbered-row">
+          <div class="num">01</div>
+          <div><div class="title">Nothing trusts the client</div><div class="body">All money-path writes run inside Cloud Functions transactions in <span class="code">asia-southeast1</span>; Firestore security rules block direct client writes entirely.</div></div>
+        </div>
+        <div class="numbered-row">
+          <div class="num">02</div>
+          <div><div class="title">Defense in depth</div><div class="body">App Check + reCAPTCHA v3 gates every callable, rate limiting on top of that, and a full audit log on every admin and booking action.</div></div>
+        </div>
+        <div class="numbered-row">
+          <div class="num">03</div>
+          <div><div class="title">Verified, not assumed</div><div class="body">400+ tests across unit and Firestore-rules-emulator suites, plus a security audit that came back 0 Critical/High/Medium findings.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ADMIN SIDE -->
+    <section class="cs-section bordered" style="padding-bottom:64px" data-reveal>
+      <div class="eyebrow" style="margin-top:48px">Also runs the admin side</div>
+      <h2>One console for HR to operate it themselves</h2>
+      <div class="checklist" style="margin-top:24px">
+        <div class="item"><span class="check">✓</span> Create &amp; configure events — capacity, exam parts, eligibility rules</div>
+        <div class="item"><span class="check">✓</span> Per-event email templates via the Trigger Email extension</div>
+        <div class="item"><span class="check">✓</span> Manage per-event and permanent blocklists</div>
+        <div class="item"><span class="check">✓</span> Reconcile seat capacity, review the audit log, export data</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer with-border">
+      <a href="index.html" class="footer-back">← back to all projects</a>
+      <a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener" class="footer-back">LinkedIn ↗</a>
+      <div class="footer-note">Code is public — the live app is CyberLogitec-internal (Google auth, company domain only)</div>
+    </footer>
+
+  </div>
+
+  <script src="assets/js/reveal.js"></script>
+</body>
+</html>
