@@ -31,9 +31,9 @@
     <!-- HERO -->
     <header class="cs-hero" data-reveal>
       <div class="eyebrow">Case Study — 04</div>
-      <div class="cs-live-badge">Live · CyberLogitec production — internal, no public demo</div>
+      <div class="cs-live-badge">Live · CyberLogitec production · internal, no public demo</div>
       <h1>A spreadsheet ran the assessment. Now L&amp;D ships events without asking engineering.</h1>
-      <p class="lede">CyberLogitec's L&amp;D team booked its English assessment out of a shared sheet, then out of a page hard-coded for that one exam. I turned it into an event platform: L&amp;D opens a training, workshop or assessment themselves, employees enter their details once, and a seat can't be handed to two people — even when an announcement sends a thousand of them at the same minute.</p>
+      <p class="lede">CyberLogitec's L&amp;D team booked its English assessment out of a shared sheet, then out of a page hard-coded for that one exam. I turned it into an event platform: L&amp;D opens a training, workshop or assessment themselves, employees enter their details once, and a seat can't be handed to two people, even when an announcement sends a thousand of them at the same minute.</p>
       <div class="cs-tags">
         <span class="tag">React + TypeScript</span>
         <span class="tag">Vite</span>
@@ -137,18 +137,18 @@
           </div>
         </div>
       </div>
-      <p class="caption">Redrawn from the real sheet; names and codes replaced, dashed outline added by me. The sheet itself gave no warning — that is the point.</p>
+      <p class="caption">Redrawn from the real sheet; names and codes replaced, dashed outline added by me. The sheet itself gave no warning. That is the point.</p>
     </section>
 
     <!-- WHY THE SHEET CAN'T STOP IT -->
     <section class="cs-section tight" data-reveal>
       <div class="eyebrow">The mechanism</div>
-      <h2>So who gets the seat? In a sheet — everyone</h2>
-      <p>The dropdown is data validation: it checks that your cell holds one of the allowed <em>values</em>. It has no idea how many other cells already hold that same value. And two people typing into two different rows aren't editing the same cell, so the spreadsheet sees no conflict at all — there is nothing to arbitrate.</p>
+      <h2>So who gets the seat? In a sheet, everyone does</h2>
+      <p>The dropdown is data validation: it checks that your cell holds one of the allowed <em>values</em>. It has no idea how many other cells already hold that same value. And two people typing into two different rows aren't editing the same cell, so the spreadsheet sees no conflict at all. There is nothing to arbitrate.</p>
 
       <div class="versus" style="margin-top: 30px">
         <div class="vs-col sheet">
-          <div class="vs-head">In the sheet — two people, same second</div>
+          <div class="vs-head">In the sheet · two people, same second</div>
           <div class="vs-log">
             <div class="vs-line"><span class="t">13:42:07</span><span class="act">Minh picks 13:30 – 14:30 in row 7</span><span class="res same">accepted</span></div>
             <div class="vs-line"><span class="t">13:42:07</span><span class="act">Lan picks 13:30 – 14:30 in row 8</span><span class="res same">accepted</span></div>
@@ -157,13 +157,13 @@
           </div>
           <div class="vs-facts">
             <div><span class="mk">▪</span> Different cells, so <b>no conflict exists to detect</b></div>
-            <div><span class="mk">▪</span> Nobody is rejected — every edit succeeds</div>
+            <div><span class="mk">▪</span> Nobody is rejected. Every edit succeeds</div>
             <div><span class="mk">▪</span> The clash surfaces hours later, to a human</div>
           </div>
         </div>
 
         <div class="vs-col app">
-          <div class="vs-head">In the platform — same second</div>
+          <div class="vs-head">In the platform · same second</div>
           <div class="vs-log">
             <div class="vs-line"><span class="t">13:42:07</span><span class="act">Minh claims the last seat</span><span class="res ok">held</span></div>
             <div class="vs-line"><span class="t">13:42:07</span><span class="act">Lan claims the same seat</span><span class="res bad">refused</span></div>
@@ -171,13 +171,13 @@
             <div class="vs-line"><span class="t">—</span><span class="act">nothing left for anyone to reconcile</span><span class="res ok">done</span></div>
           </div>
           <div class="vs-facts">
-            <div><span class="mk">✦</span> The seat <b>is</b> the document — a second create can't exist</div>
+            <div><span class="mk">✦</span> The seat <b>is</b> the document, so a second create cannot exist</div>
             <div><span class="mk">✦</span> Exactly one wins, decided inside the write</div>
             <div><span class="mk">✦</span> The other person knows before they walk away</div>
           </div>
         </div>
       </div>
-      <p class="caption">You can bolt a COUNTIF rule onto the cell. It still reads, then writes, with no lock in between — so two people clicking in the same second both read “space left” and both pass. Validation is not arbitration.</p>
+      <p class="caption">You can bolt a COUNTIF rule onto the cell. It still reads, then writes, with no lock in between, so two people clicking in the same second both read “space left” and both pass. Validation is not arbitration.</p>
 
     </section>
 
@@ -185,7 +185,7 @@
     <section class="cs-section" data-reveal>
       <div class="eyebrow">What changed</div>
       <h2>A sheet, then a one-off page, then a platform</h2>
-      <p>The first rewrite did fix the counting — but only for that one exam. It was hard-coded down to the branding, so the next program meant another build, coordinated with IT, on IT's timeline.</p>
+      <p>The first rewrite did fix the counting, but only for that one exam. It was hard-coded down to the branding, so the next program meant another build, coordinated with IT, on IT's timeline.</p>
 
       <div class="ba-grid" style="margin-top: 34px">
         <div class="ba-card before">
@@ -203,11 +203,11 @@
           <div class="heading">AFTER — ONE PLATFORM L&amp;D OPERATES</div>
           <div class="rows">
             <div><span class="mark">✦</span> Profile captured once at first login, auto-filled after</div>
-            <div><span class="mark">✦</span> Seats claimed atomically — overselling is impossible</div>
+            <div><span class="mark">✦</span> Seats claimed atomically, so overselling is impossible</div>
             <div><span class="mark">✦</span> Employees book, change and cancel themselves, instantly</div>
             <div><span class="mark">✦</span> Confirmation email fires on the successful write</div>
             <div><span class="mark">✦</span> Allowlist + blocklist enforced by the system, not memory</div>
-            <div><span class="mark">✦</span> Any training, workshop or assessment — no rebuild</div>
+            <div><span class="mark">✦</span> Any training, workshop or assessment, with no rebuild</div>
           </div>
         </div>
       </div>
@@ -229,7 +229,7 @@
         <div class="connector-line"></div>
         <div class="num-badge">1</div>
         <div class="step-kicker">Discover</div>
-        <div class="step-title">See what's on — and only what's for you</div>
+        <div class="step-title">See what's on, and only what's for you</div>
         <p class="step-body">There was no landing page before, just a form link in an email. The platform gives every event a real page: cover, description, organizer, and how full it already is. Eligibility is resolved server-side, so an employee gated out of an event never has to find that out by filling the form first.</p>
         <div class="app-mock">
           <div class="app-topbar">
@@ -279,7 +279,7 @@
             </div>
           </div>
         </div>
-        <p class="caption">Same platform, two event shapes: the assessment sends you to a slot picker, the workshop is one seat and one tap. L&amp;D picks which on creation — no code either way.</p>
+        <p class="caption">Same platform, two event shapes: the assessment sends you to a slot picker, the workshop is one seat and one tap. L&amp;D picks which one on creation. No code either way.</p>
       </div>
 
       <!-- STEP 2 — PICK A TIME -->
@@ -289,7 +289,7 @@
         <div class="num-badge">2</div>
         <div class="step-kicker">Choose</div>
         <div class="step-title">Seats left, visible before you commit</div>
-        <p class="step-body">The spreadsheet's worst failure was that it looked identical whether a slot had space or not — you found out afterwards, from a person. Here remaining capacity is on every slot card, and a full slot is dead on arrival rather than accepting a booking it can't honour.</p>
+        <p class="step-body">The spreadsheet's worst failure was that it looked identical whether a slot had space or not. You found out afterwards, from a person. Here remaining capacity is on every slot card, and a full slot is dead on arrival rather than accepting a booking it can't honour.</p>
         <div class="app-mock">
           <div class="app-topbar">
             <span class="brand">CLT</span>
@@ -314,7 +314,7 @@
             </div>
           </div>
         </div>
-        <p class="caption">Which exam parts a slot covers is per-event configuration — some exams need Speaking and 3 Skills, some only one. That used to be an assumption baked into the code.</p>
+        <p class="caption">Which exam parts a slot covers is per-event configuration: some exams need Speaking and 3 Skills, some only one. That used to be an assumption baked into the code.</p>
       </div>
 
       <!-- STEP 3 — REGISTER -->
@@ -324,7 +324,7 @@
         <div class="num-badge">3</div>
         <div class="step-kicker">Register</div>
         <div class="step-title">Type your details once, ever</div>
-        <p class="step-body">First login asks for employee code, name and business unit, and stores them against the account. Every registration after that is a confirm, not a form. The employee code field is locked on purpose — once a code has claimed a place in an event, it can't be reused from a second account.</p>
+        <p class="step-body">First login asks for employee code, name and business unit, and stores them against the account. Every registration after that is a confirm, not a form. The employee code field is locked on purpose. Once a code has claimed a place in an event, it cannot be reused from a second account.</p>
         <div class="app-mock">
           <div class="app-topbar">
             <span class="brand">CLT</span>
@@ -379,7 +379,7 @@
     <section class="cs-section bordered" data-reveal>
       <div class="eyebrow" style="margin-top:48px">Part 2 — under the hood</div>
       <h2>Three flows, three load shapes, three different locks</h2>
-      <p>The interesting decision wasn't picking a concurrency pattern. It was measuring each flow and refusing to use the same one everywhere — then writing down why, so the next reviewer doesn't "fix" the odd one out.</p>
+      <p>The interesting decision wasn't picking a concurrency pattern. It was measuring each flow and refusing to use the same one everywhere, then writing down why, so the next reviewer doesn't "fix" the odd one out.</p>
 
       <div class="mech-grid" style="margin-top: 32px">
         <div class="mech">
@@ -389,7 +389,7 @@
           <div class="arrow">↓ a shared counter would serialize at ~1 write/sec</div>
           <div class="how">
             <div class="k">capacityClaims/000000…</div>
-            <div class="why">Capacity becomes N documents — one per seat. Each caller walks its own shuffled order, so the crowd spreads instead of piling on one doc.</div>
+            <div class="why">Capacity becomes N documents, one per seat. Each caller walks its own shuffled order, so the crowd spreads instead of piling on one doc.</div>
           </div>
         </div>
         <div class="mech">
@@ -405,7 +405,7 @@
         <div class="mech">
           <div class="flow-name">Employee identity</div>
           <span class="load unique">Uniqueness</span>
-          <div class="measure">One employee code may hold <b>at most one place</b> in a given event — across every account they own.</div>
+          <div class="measure">One employee code may hold <b>at most one place</b> in a given event, across every account they own.</div>
           <div class="arrow">↓ not a volume problem, an identity one</div>
           <div class="how">
             <div class="k">empCodeClaims/{empCode}</div>
@@ -413,14 +413,14 @@
           </div>
         </div>
       </div>
-      <p class="caption">The rule underneath all three: make the contended thing the document id and let <em>create-if-absent</em> arbitrate — never a shared counter, unless the measurement says the counter is free.</p>
+      <p class="caption">The rule underneath all three: make the contended thing the document id and let <em>create-if-absent</em> arbitrate, never a shared counter, unless the measurement says the counter is free.</p>
     </section>
 
     <!-- ELIGIBILITY GATE -->
     <section class="cs-section" data-reveal>
       <div class="eyebrow">Who gets in</div>
       <h2>One priority order, evaluated twice</h2>
-      <p>"Right people in, wrong people out" used to be reconciled by hand after the fact. Now it's a fixed order of checks — and the client is never trusted with the verdict.</p>
+      <p>"Right people in, wrong people out" used to be reconciled by hand after the fact. Now it's a fixed order of checks, and the client is never trusted with the verdict.</p>
 
       <div class="gate" style="margin-top: 28px">
         <div class="gate-row">
@@ -433,7 +433,7 @@
           <div class="n">02</div>
           <div class="what">Per-event blocklist</div>
           <span class="gate-verdict">Rejected</span>
-          <div class="detail">Excluded from this event only — typically a no-show from the previous round.</div>
+          <div class="detail">Excluded from this event only, typically a no-show from the previous round.</div>
         </div>
         <div class="gate-row">
           <div class="n">03</div>
@@ -447,8 +447,8 @@
           <span class="gate-verdict">Taken</span>
           <div class="detail">Has this employee code already taken a place in this event under another account?</div>
         </div>
-        <div class="gate-pass"><span class="tick">✓</span> Eligible — seat claim proceeds inside the transaction</div>
-        <div class="gate-foot">Run once as a preflight so the button never appears for someone who can't register — then run again inside the write. Passing the first check is not permission to write.</div>
+        <div class="gate-pass"><span class="tick">✓</span> Eligible · seat claim proceeds inside the transaction</div>
+        <div class="gate-foot">Run once as a preflight so the button never appears for someone who can't register, then run again inside the write. Passing the first check is not permission to write.</div>
       </div>
     </section>
 
@@ -482,21 +482,21 @@
       <h2>L&amp;D opens an event without opening a ticket</h2>
       <p style="margin-bottom:24px">The admin console is the reason this stopped being a one-off. Everything that used to require a developer is a form now.</p>
       <div class="checklist">
-        <div class="item"><span class="check">✓</span> Create an event — details, cover image, markdown description, capacity, deadline</div>
+        <div class="item"><span class="check">✓</span> Create an event: details, cover image, markdown description, capacity, deadline</div>
         <div class="item"><span class="check">✓</span> Choose the shape: one seat per person, or timed slots with configurable exam parts</div>
         <div class="item"><span class="check">✓</span> Stage it unlisted, check it, then flip listed + enrollment open</div>
         <div class="item"><span class="check">✓</span> Paste an eligibility list; block a code per-event or platform-wide, with the reason</div>
         <div class="item"><span class="check">✓</span> Per-event email templates and sender identity, no redeploy</div>
         <div class="item"><span class="check">✓</span> Export the roster to CSV, reconcile capacity, read the audit log</div>
       </div>
-      <p class="caption">Adding an admin is a field in Configuration, not a deploy — and the console refuses to let you remove your own access.</p>
+      <p class="caption">Adding an admin is a field in Configuration, not a deploy, and the console refuses to let you remove your own access.</p>
     </section>
 
     <!-- FOOTER -->
     <footer class="site-footer with-border">
       <a href="index.html" class="footer-back">← back to all projects</a>
       <a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener" class="footer-back">LinkedIn ↗</a>
-      <div class="footer-note">Code is public — the live app is CyberLogitec-internal (Google auth, company domain only)</div>
+      <div class="footer-note">Code is public. The live app is CyberLogitec-internal (Google auth, company domain only)</div>
     </footer>
 
   </div>
