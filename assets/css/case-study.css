@@ -209,34 +209,35 @@
 /* ============================================================
    Corgi77 Mockups (registration.html)
    ============================================================ */
-.corgi-confirm-mock { padding: 0; background: var(--bg-card); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
-.corgi-confirm-mock .chrome { padding: 12px 16px; background: var(--bg-raised); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); display: flex; align-items: center; gap: 12px; }
-.corgi-confirm-mock .chrome .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--border-md); margin-right: 4px; }
-.corgi-preview-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #fff; }
-.corgi-profile-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; background: #f8fafc; }
+.corgi-confirm-mock { padding: 0; background: #0c0c0e; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
+.corgi-confirm-mock .chrome { padding: 12px 16px; background: #161619; border-bottom: 1px solid #1b1b1f; font-family: var(--font-mono); font-size: 11px; color: #8a8a92; display: flex; align-items: center; gap: 12px; }
+.corgi-confirm-mock .chrome .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2a2a30; margin-right: 4px; }
+.corgi-preview-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #0c0c0e; }
+.corgi-profile-card { border: 1px solid #232328; border-radius: 14px; padding: 16px; background: #161619; }
 .corgi-profile-card .row { display: flex; justify-content: space-between; align-items: center; }
-.corgi-profile-card .k { font-family: var(--font-mono); font-size: 10px; color: #475569; text-transform: uppercase; }
-.corgi-profile-card .v { height: 10px; width: 80px; border-radius: 2px; background: #cbd5e1; }
-.corgi-confirm-btn { background: #2563eb; color: #fff; text-align: center; padding: 12px; border-radius: 6px; font-weight: 600; font-size: 14px; cursor: pointer; }
-.corgi-seat-row { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11.5px; color: #475569; margin-top: 4px; justify-content: center; }
-.corgi-seat-row .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; }
+.corgi-profile-card .k { font-family: var(--font-mono); font-size: 10.5px; color: #8a8a92; text-transform: uppercase; letter-spacing: 0.06em; }
+.corgi-profile-card .v { height: 10px; width: 80px; border-radius: 2px; background: #2a2a30; }
+.corgi-confirm-btn { background: #f4f4f6; color: #0c0c0e; text-align: center; padding: 14px 26px; border-radius: 999px; font-weight: 500; font-size: 15px; cursor: pointer; transition: opacity 0.16s ease; }
+.corgi-confirm-btn:hover { opacity: 0.88; }
+.corgi-seat-row { display: flex; align-items: center; gap: 8px; font-family: var(--font-sans); font-size: 12.5px; color: #8a8a92; margin-top: 4px; justify-content: center; }
+.corgi-seat-row .dot { width: 8px; height: 8px; border-radius: 50%; background: #4cc985; }
 
-.corgi-calendar-mock { padding: 0; background: var(--bg-card); border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
-.corgi-calendar-mock .chrome { padding: 12px 16px; background: var(--bg-raised); border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); display: flex; align-items: center; gap: 12px; }
-.corgi-calendar-mock .chrome .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--border-md); margin-right: 4px; }
-.cal-inner { background: #fff; font-family: var(--font-sans); }
-.cal-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid #e2e8f0; }
-.cal-header .month { font-weight: 700; font-size: 15px; color: #0f172a; }
+.corgi-calendar-mock { padding: 0; background: #0c0c0e; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-md); }
+.corgi-calendar-mock .chrome { padding: 12px 16px; background: #161619; border-bottom: 1px solid #1b1b1f; font-family: var(--font-mono); font-size: 11px; color: #8a8a92; display: flex; align-items: center; gap: 12px; }
+.corgi-calendar-mock .chrome .dots i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2a2a30; margin-right: 4px; }
+.cal-inner { background: #0c0c0e; font-family: var(--font-sans); }
+.cal-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #1b1b1f; }
+.cal-header .month { font-weight: 500; font-size: 18px; color: #ffffff; letter-spacing: -0.02em; }
 .cal-limits { display: flex; gap: 12px; font-family: var(--font-mono); font-size: 11px; }
-.cal-limits .lim { background: #f1f5f9; padding: 4px 8px; border-radius: 4px; color: #475569; font-weight: 600; }
+.cal-limits .lim { background: #161619; border: 1px solid #232328; padding: 4px 8px; border-radius: 14px; color: #8a8a92; font-weight: 500; }
 .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
-.cal-day { padding: 16px; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px; }
+.cal-day { padding: 16px; border-right: 1px solid #1b1b1f; display: flex; flex-direction: column; gap: 10px; }
 .cal-day:last-child { border-right: none; }
-.d-name { font-family: var(--font-mono); font-size: 10.5px; color: #475569; font-weight: 600; margin-bottom: 4px; }
-.slot { padding: 10px; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 12px; font-weight: 600; text-align: center; }
-.slot.booked { background: #2563eb; color: #fff; border-color: #2563eb; }
-.slot.blackout { background: #f1f5f9; color: #94a3b8; text-decoration: line-through; border-style: dashed; }
-.slot.disabled { background: #f8fafc; color: #64748b; opacity: 0.7; }
+.d-name { font-family: var(--font-mono); font-size: 11px; color: #8a8a92; font-weight: 500; margin-bottom: 4px; text-transform: uppercase; }
+.slot { padding: 12px 10px; border-radius: 8px; font-size: 13px; font-weight: 500; text-align: center; }
+.slot.booked { background: rgba(91,155,255,0.14); color: #9cc3ff; border: 1px solid rgba(91,155,255,0.4); }
+.slot.blackout { background: repeating-linear-gradient(45deg,#141416 0 6px,#171719 6px 12px); color: #6a6a72; border: 1px solid #232328; }
+.slot.disabled { background: #0e0e10; color: #4a4a52; border: 1px solid #1c1c20; }
 
 /* Race Anatomy */
 .race-anatomy { padding: 24px; background: #fff; border-radius: 8px; border: 1px solid var(--border-md); overflow: hidden; }
