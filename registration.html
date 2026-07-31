@@ -55,7 +55,7 @@
     <section class="cs-section" data-reveal>
       <div class="eyebrow">Why this got built</div>
       <h2>This is what registration used to be</h2>
-      <p>The English proficiency assessment was booked out of a shared Google Sheet. Everyone typed into the same grid, picked their exam times from a dropdown, and hoped. Nothing in the sheet knew how many people a time window could hold.</p>
+      <p>The English proficiency assessment was booked out of a shared Google Sheet. Everyone typed into the same grid, picked their exam times from a dropdown, and hoped. <b class="hl">Nothing in the sheet knew how many people a time window could hold.</b></p>
 
       <div class="sheet-mock" style="margin-top: 30px">
         <div class="sheet-scroll">
@@ -144,7 +144,7 @@
     <section class="cs-section tight" data-reveal>
       <div class="eyebrow">The mechanism</div>
       <h2>So who gets the seat? In a sheet, everyone does</h2>
-      <p>The dropdown is data validation: it checks that your cell holds one of the allowed <em>values</em>. It has no idea how many other cells already hold that same value. And two people typing into two different rows aren't editing the same cell, so the spreadsheet sees no conflict at all. There is nothing to arbitrate.</p>
+      <p>The dropdown is data validation: it checks that your cell holds one of the allowed <em>values</em>. It has <b class="hl">no idea how many other cells already hold that same value</b>. And two people typing into two different rows aren't editing the same cell, so the spreadsheet sees no conflict at all. There is nothing to arbitrate.</p>
 
       <div class="versus" style="margin-top: 30px">
         <div class="vs-col sheet">
@@ -177,7 +177,7 @@
           </div>
         </div>
       </div>
-      <p class="caption">You can bolt a COUNTIF rule onto the cell. It still reads, then writes, with no lock in between, so two people clicking in the same second both read “space left” and both pass. Validation is not arbitration.</p>
+      <p class="caption">You can bolt a COUNTIF rule onto the cell. It still reads, then writes, with no lock in between, so two people clicking in the same second both read “space left” and both pass. <b class="hl">Validation is not arbitration.</b></p>
 
     </section>
 
@@ -185,7 +185,7 @@
     <section class="cs-section" data-reveal>
       <div class="eyebrow">What changed</div>
       <h2>A sheet, then a one-off page, then a platform</h2>
-      <p>The first rewrite did fix the counting, but only for that one exam. It was hard-coded down to the branding, so the next program meant another build, coordinated with IT, on IT's timeline.</p>
+      <p>The first rewrite did fix the counting, but only for that one exam. It was hard-coded down to the branding, so <b class="hl">the next program meant another build</b>, coordinated with IT, on IT's timeline.</p>
 
       <div class="ba-grid" style="margin-top: 34px">
         <div class="ba-card before">
@@ -219,7 +219,7 @@
     <section class="cs-section bordered" data-reveal>
       <div class="eyebrow" style="margin-top:48px">Part 1 — the employee side</div>
       <h2>Three screens, and the sheet is gone</h2>
-      <p>Redrawn from the production UI. Each screen removes one thing the spreadsheet made someone do by hand.</p>
+      <p>Redrawn from the production UI. Each screen removes <b class="hl">one thing the spreadsheet made someone do by hand</b>.</p>
     </section>
 
     <div class="flow-sequence" style="margin-top: 48px">
@@ -230,7 +230,7 @@
         <div class="num-badge">1</div>
         <div class="step-kicker">Discover</div>
         <div class="step-title">See what's on, and only what's for you</div>
-        <p class="step-body">There was no landing page before, just a form link in an email. The platform gives every event a real page: cover, description, organizer, and how full it already is. Eligibility is resolved server-side, so an employee gated out of an event never has to find that out by filling the form first.</p>
+        <p class="step-body">There was no landing page before, just a form link in an email. The platform gives every event a real page: cover, description, organizer, and how full it already is. Eligibility is resolved server-side, so an employee gated out of an event <b class="hl">never finds that out after filling the form</b>.</p>
         <div class="app-mock">
           <div class="app-topbar">
             <span class="brand">CLT</span>
@@ -289,7 +289,7 @@
         <div class="num-badge">2</div>
         <div class="step-kicker">Choose</div>
         <div class="step-title">Seats left, visible before you commit</div>
-        <p class="step-body">The spreadsheet's worst failure was that it looked identical whether a slot had space or not. You found out afterwards, from a person. Here remaining capacity is on every slot card, and a full slot is dead on arrival rather than accepting a booking it can't honour.</p>
+        <p class="step-body">The spreadsheet's worst failure was that it looked identical whether a slot had space or not. You found out afterwards, from a person. Here <b class="hl">remaining capacity is on every slot card</b>, and a full slot is dead on arrival rather than accepting a booking it can't honour.</p>
         <div class="app-mock">
           <div class="app-topbar">
             <span class="brand">CLT</span>
@@ -324,7 +324,7 @@
         <div class="num-badge">3</div>
         <div class="step-kicker">Register</div>
         <div class="step-title">Type your details once, ever</div>
-        <p class="step-body">First login asks for employee code, name and business unit, and stores them against the account. Every registration after that is a confirm, not a form. The employee code field is locked on purpose. Once a code has claimed a place in an event, it cannot be reused from a second account.</p>
+        <p class="step-body">First login asks for employee code, name and business unit, and stores them against the account. <b class="hl">Every registration after that is a confirm, not a form.</b> The employee code field is locked on purpose. Once a code has claimed a place in an event, it cannot be reused from a second account.</p>
         <div class="app-mock">
           <div class="app-topbar">
             <span class="brand">CLT</span>
@@ -379,7 +379,7 @@
     <section class="cs-section bordered" data-reveal>
       <div class="eyebrow" style="margin-top:48px">Part 2 — under the hood</div>
       <h2>Three flows, three load shapes, three different locks</h2>
-      <p>The interesting decision wasn't picking a concurrency pattern. It was measuring each flow and refusing to use the same one everywhere, then writing down why, so the next reviewer doesn't "fix" the odd one out.</p>
+      <p>The interesting decision wasn't picking a concurrency pattern. It was <b class="hl">measuring each flow and refusing to use the same one everywhere</b>, then writing down why, so the next reviewer doesn't "fix" the odd one out.</p>
 
       <div class="mech-grid" style="margin-top: 32px">
         <div class="mech">
@@ -420,7 +420,7 @@
     <section class="cs-section" data-reveal>
       <div class="eyebrow">Who gets in</div>
       <h2>One priority order, evaluated twice</h2>
-      <p>"Right people in, wrong people out" used to be reconciled by hand after the fact. Now it's a fixed order of checks, and the client is never trusted with the verdict.</p>
+      <p>"Right people in, wrong people out" used to be <b class="hl">reconciled by hand after the fact</b>. Now it's a fixed order of checks, and the client is never trusted with the verdict.</p>
 
       <div class="gate" style="margin-top: 28px">
         <div class="gate-row">
@@ -480,7 +480,7 @@
     <section class="cs-section bordered" style="padding-bottom:64px" data-reveal>
       <div class="eyebrow" style="margin-top:48px">The half that made it a platform</div>
       <h2>L&amp;D opens an event without opening a ticket</h2>
-      <p style="margin-bottom:24px">The admin console is the reason this stopped being a one-off. Everything that used to require a developer is a form now.</p>
+      <p style="margin-bottom:24px">The admin console is the reason this stopped being a one-off. <b class="hl">Everything that used to require a developer is a form now.</b></p>
       <div class="checklist">
         <div class="item"><span class="check">✓</span> Create an event: details, cover image, markdown description, capacity, deadline</div>
         <div class="item"><span class="check">✓</span> Choose the shape: one seat per person, or timed slots with configurable exam parts</div>

@@ -220,6 +220,12 @@ body {
 }
 .btn-outline:hover { border-color: var(--fg); color: var(--fg); }
 
+/* Key term in body copy. Lifts one phrase out of the muted paragraph colour so
+   a reader skimming the page still picks up the number that matters.
+   Applied explicitly (<b class="hl">) rather than to every <b>, because the
+   light-surface mockups use <b> on white and must stay dark. */
+.hl { color: var(--fg); font-weight: 600; }
+
 .tag {
   font-family: var(--font-mono);
   font-size: 12px;

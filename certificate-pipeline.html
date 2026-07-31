@@ -33,7 +33,7 @@
     <header class="cs-hero" data-reveal>
       <div class="eyebrow">Case Study — 01 · Centerpiece</div>
       <h1>Automated certificate generation, naming &amp; delivery.</h1>
-      <p class="lede">~300 training certificates split, named, matched to the right person, and emailed — a <b>3–5 day</b> manual job turned into a near hands-off run.</p>
+      <p class="lede">About <b>300 training certificates</b> split, named, matched to the right person and emailed. A job that took <b>3 to 5 days</b> by hand now runs almost entirely on its own.</p>
     </header>
 
     <!-- METRICS -->
@@ -48,26 +48,26 @@
     <section class="cs-section" data-reveal>
       <div class="eyebrow">The problem</div>
       <h2>A week of manual work, every batch</h2>
-      <p>The L&amp;D team made the certs in Canva, then split the merged PDF one page at a time through a free online splitter, renamed every file by hand, and attached + sent each one individually through Gmail: ~1–2 days to make a batch, then <b style="color:var(--fg-dim);font-weight:600">2–3 more days</b> renaming and sending it. Slow, error-prone, and it didn't scale as training volume grew.</p>
+      <p>The L&amp;D team made the certs in Canva. Then someone split the merged PDF <b class="hl">one page at a time</b> through a free online splitter, renamed every file by hand, and attached and sent each one individually through Gmail. About <b class="hl">1 to 2 days</b> to make a batch, then <b class="hl">2 to 3 more days</b> renaming and sending it. Slow, easy to get wrong, and it got worse every time training volume grew.</p>
     </section>
 
     <!-- THE PIPELINE -->
     <section class="cs-section tight" data-reveal>
-      <div class="eyebrow">What I built — one pipeline, six steps end to end</div>
+      <div class="eyebrow">What I built · one pipeline, six steps end to end</div>
 
       <div class="mock-shot flow-demo">
         <div class="chrome"><div class="dots"><i></i><i></i><i></i></div> Watch the flow</div>
         <div class="flow-demo-stage">
           <div class="flow-demo-panel p1 active">
             <div class="mini-label">1 · Check the Sheet</div>
-            <div class="mini-desc">See who's due for a cert this cycle — 43 people this batch.</div>
+            <div class="mini-desc">See who is due for a cert this cycle. 43 people in this batch.</div>
             <div class="mini-row"><span>Nguyen Van A</span><span class="tag">To-be-printed</span></div>
             <div class="mini-row"><span>Tran Thi B</span><span class="tag">To-be-printed</span></div>
             <div class="mini-row"><span>Le Van C</span><span class="tag">To-be-printed</span></div>
           </div>
           <div class="flow-demo-panel p2">
             <div class="mini-label">2 · Bulk Create in Canva</div>
-            <div class="mini-desc">Sheet columns fill the template — one page per person.</div>
+            <div class="mini-desc">Sheet columns fill the template. One page per person.</div>
             <div class="mini-grid">
               <div class="mini-cell"><div class="kind">English Proficiency</div><div class="name">Nguyen Van A</div></div>
               <div class="mini-cell"><div class="kind">English Proficiency</div><div class="name">Tran Thi B</div></div>
@@ -77,12 +77,12 @@
           </div>
           <div class="flow-demo-panel p3">
             <div class="mini-label">3 · Download the merged PDF</div>
-            <div class="mini-desc">The whole batch exports as one file — 1 page = 1 cert.</div>
+            <div class="mini-desc">The whole batch exports as one file. 1 page = 1 cert.</div>
             <div class="mini-row"><span>(Bulk 1) Level 3.pdf</span><span class="tag ok">43 pages · Completed</span></div>
           </div>
           <div class="flow-demo-panel p4">
             <div class="mini-label">4 · CLT Certificate Renamer</div>
-            <div class="mini-desc">My tool reads each page's own text — no page-order mistakes possible.</div>
+            <div class="mini-desc">My tool reads each page's own text, so page order cannot matter.</div>
             <div class="mini-toolbar">
               <span class="mini-btn">Xem Trước (Dry Run)</span>
               <span class="mini-btn primary">Đổi Tên Thật</span>
@@ -100,7 +100,7 @@
           </div>
           <div class="flow-demo-panel p6">
             <div class="mini-label">6 · Test-send &amp; log</div>
-            <div class="mini-desc">Name + cert no. must both match, or it's flagged — then test-send to myself before the real batch.</div>
+            <div class="mini-desc">Name and cert number must both match or the row is flagged. Then a test send to myself before the real batch.</div>
             <div class="mini-row"><span>Nguyen Van A</span><span class="tag ok">you@example.com</span></div>
             <div class="mini-row"><span>Tran Thi B</span><span class="tag">To-be-printed</span></div>
           </div>
@@ -118,7 +118,7 @@
           <button class="flow-demo-nav" data-dir="1" aria-label="Next step">→</button>
         </div>
       </div>
-      <div class="caption" style="margin-bottom:32px">Mockup — the whole flow, looped · hover to pause (test data)</div>
+      <div class="caption" style="margin-bottom:32px">Mockup · the whole flow, looped · hover to pause (test data)</div>
 
       <div class="flow-sequence">
 
@@ -129,9 +129,9 @@
           <div class="num-badge">1</div>
           <div class="step-kicker">Manual · Google Sheets · every run starts here</div>
           <div class="step-title">Check the Sheet</div>
-          <p class="step-body">Open the participant Sheet and see who's due this cycle. The custom <b style="font-weight:600;color:var(--fg-dim)">Cert Sender</b> menus in the menu bar are my Apps Script — that's where the sending happens later, right inside the Sheet.</p>
+          <p class="step-body">Open the participant Sheet and see who is due this cycle. The <b class="hl">Cert Sender</b> menus in the menu bar are my Apps Script. The sending happens later from right there, inside the Sheet the team already uses.</p>
           <div class="mock-shot sheet-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon sheets"></span> CERT CEREMONY — Google Sheets</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon sheets"></span> CERT CEREMONY · Google Sheets</div>
             <div class="menubar"><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Data</span><span>Tools</span><span class="custom">Cert Sender ▾</span><span class="custom">Module Cert Sender ▾</span></div>
             <div style="overflow-x:auto">
             <table>
@@ -143,12 +143,12 @@
                 <tr><td>24xxxx</td><td>Pham Thi D</td><td>MOC</td><td>Level 3</td><td>English Proficiency_Level 3</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-004</td></tr>
                 <tr><td>25xxxx</td><td>Hoang Van E</td><td>LBU</td><td>Level 2</td><td>English Proficiency_Level 2</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-005</td></tr>
                 <tr><td>23xxxx</td><td>Vo Thi F</td><td>LBU</td><td>Level 3</td><td>English Proficiency_Level 3</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-006</td></tr>
-                <tr><td colspan="7" class="more">… 37 more rows this batch — 43 total</td></tr>
+                <tr><td colspan="7" class="more">… 37 more rows this batch · 43 total</td></tr>
               </tbody>
             </table>
             </div>
           </div>
-          <div class="caption">Mockup — the participant Sheet, custom menus included (test data)</div>
+          <div class="caption">Mockup · the participant Sheet, custom menus included (test data)</div>
         </div>
 
         <!-- STEP 2 -->
@@ -158,9 +158,9 @@
           <div class="num-badge">2</div>
           <div class="step-kicker">Manual · Canva · Bulk Create</div>
           <div class="step-title">Generate the batch</div>
-          <p class="step-body">Feed the same Sheet into Canva's Bulk Create: map the <span class="code">Name</span> and <span class="code">Cert No.</span> columns to the template once, and Canva stamps out one page per person — 43 pages in Sheet order.</p>
+          <p class="step-body">Feed the same Sheet into Canva's Bulk Create. Map the <span class="code">Name</span> and <span class="code">Cert No.</span> columns to the template once, and Canva stamps out <b class="hl">one page per person</b>, 43 pages in Sheet order.</p>
           <div class="mock-shot canva-bulk-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon canva"></span> Canva — Bulk Create</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon canva"></span> Canva · Bulk Create</div>
             <div class="body">
               <div class="side">
                 <div class="lbl">BULK CREATE</div>
@@ -181,7 +181,7 @@
             </div>
             <div class="pagesbar">Pages 1 / 43</div>
           </div>
-          <div class="caption">Mockup — Bulk Create maps Sheet columns into the cert template (test data)</div>
+          <div class="caption">Mockup · Bulk Create maps Sheet columns into the cert template (test data)</div>
         </div>
 
         <!-- STEP 3 -->
@@ -191,9 +191,9 @@
           <div class="num-badge">3</div>
           <div class="step-kicker">Manual · Canva → local file</div>
           <div class="step-title">Download the merged PDF</div>
-          <p class="step-body">One export, one file — all 43 certs in a single merged PDF, 1 page = 1 cert.</p>
+          <p class="step-body">One export, one file. All 43 certs land in a single merged PDF, 1 page = 1 cert.</p>
           <div class="mock-shot download-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon canva"></span> Canva — Download</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon canva"></span> Canva · Download</div>
             <div class="toast">
               <div>
                 <div class="title">(Bulk 1) Level 3.pdf</div>
@@ -202,7 +202,7 @@
               <div class="done">✓ Completed</div>
             </div>
           </div>
-          <div class="caption">Mockup — the whole batch as one merged file (test data)</div>
+          <div class="caption">Mockup · the whole batch as one merged file (test data)</div>
         </div>
 
         <!-- STEP 4 -->
@@ -211,8 +211,8 @@
           <div class="connector-arrow">↓</div>
           <div class="num-badge">4</div>
           <div class="step-kicker">Automated · Python desktop tool · "CLT Certificate Renamer"</div>
-          <div class="step-title">Split &amp; rename <span class="time-chip">one click — was file-by-file</span></div>
-          <p class="step-body">Here's the trick that makes this safe: the tool doesn't rely on page order or any mapping file. <span class="code">pdfplumber</span> reads <b style="font-weight:600;color:var(--fg-dim)">each page's own text</b> to extract the name + cert ID printed on the cert itself — so a re-sorted Sheet or a skipped person can't shift every file one position over. <span class="code">pypdf</span> then splits and renames.</p>
+          <div class="step-title">Split &amp; rename <span class="time-chip">one click · was file by file</span></div>
+          <p class="step-body">This is the part that makes the whole thing safe. The tool relies on <b class="hl">no page order and no mapping file</b>. <span class="code">pdfplumber</span> reads <b class="hl">each page's own text</b> and pulls the name and cert ID printed on that certificate. So a re-sorted Sheet or one skipped person cannot shift every file one position over, which is the failure that silently sends 42 people someone else's certificate. <span class="code">pypdf</span> then splits and renames.</p>
           <div class="match-anatomy">
             <div class="ma-cert">
               <div class="brand">CLT</div>
@@ -222,7 +222,7 @@
             <div class="ma-arrow">→<small>pdfplumber reads<br>the page's own text</small></div>
             <div class="ma-file"><span class="n">NGUYEN VAN A</span> (<span class="c">C-COM 26.02-001</span>).pdf</div>
           </div>
-          <div class="caption" style="margin:0 0 20px">Every page names itself — no mapping file, no page-order mistakes possible</div>
+          <div class="caption" style="margin:0 0 20px">Every page names itself. No mapping file, so page order cannot cause a mistake.</div>
           <div class="mock-shot renamer-mock">
             <div class="chrome"><div class="dots"><i></i><i></i><i></i></div> CLT Certificate Renamer</div>
             <div class="folder-row"><span>Thư mục:</span><span class="path">E:/CertBatch/Mar-2026</span><span class="choose">Chọn Thư Mục…</span></div>
@@ -242,11 +242,11 @@
               <div class="log-line"><span class="check">✓</span>split_003.pdf → LE VAN C (C-COM 26.02-003).pdf</div>
               <div class="log-line"><span class="check">✓</span>split_004.pdf → PHAM THI D (C-COM 26.02-004).pdf</div>
               <div class="log-line gap">· · · 38 more files · · ·</div>
-              <div class="log-line fail">✗ split_043.pdf — could not identify recipient name</div>
+              <div class="log-line fail">✗ split_043.pdf · could not identify recipient name</div>
               <div class="log-summary">Hoàn thành. Thành công: <span class="ok-count">42</span>, Thất bại: <span class="fail-count">1</span></div>
             </div>
           </div>
-          <div class="caption" style="margin-bottom:20px">Mockup — the actual tool UI: folder picker, dry-run &amp; Canva-split modes, live log (test data)</div>
+          <div class="caption" style="margin-bottom:20px">Mockup · the actual tool UI: folder picker, dry-run &amp; Canva-split modes, live log (test data)</div>
           <div class="kicker">BUILT FOR NON-TECHNICAL USERS</div>
           <div class="checklist">
             <div class="item"><span class="check">✓</span> GUI (tkinter) + drag-and-drop <span class="code">.bat</span>, one-click install</div>
@@ -263,41 +263,41 @@
           <div class="num-badge">5</div>
           <div class="step-kicker">Manual · Google Drive</div>
           <div class="step-title">Push to Drive</div>
-          <p class="step-body">The renamed certs go up to the team's shared Drive folder — one place the Apps Script (and everyone on L&amp;D) can pull from.</p>
+          <p class="step-body">The renamed certs go to the team's shared Drive folder. <b class="hl">One place</b> the Apps Script pulls from, and the same place anyone on L&amp;D can look in.</p>
           <div class="mock-shot drive-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon drive"></span> Google Drive — Certs · Mar 2026</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon drive"></span> Google Drive · Certs · Mar 2026</div>
             <div class="file"><span>NGUYEN VAN A (C-COM 26.02-001).pdf</span><span class="sz">255 KB</span></div>
             <div class="file"><span>TRAN THI B (C-COM 26.02-002).pdf</span><span class="sz">255 KB</span></div>
             <div class="file"><span>LE VAN C (C-COM 26.02-003).pdf</span><span class="sz">254 KB</span></div>
             <div class="file"><span>PHAM THI D (C-COM 26.02-004).pdf</span><span class="sz">255 KB</span></div>
             <div class="more">… 38 more files · 42 total</div>
           </div>
-          <div class="caption">Mockup — renamed certs in the shared folder (test data)</div>
+          <div class="caption">Mockup · renamed certs in the shared folder (test data)</div>
         </div>
 
         <!-- STEP 6 -->
         <div class="flow-step auto">
           <div class="num-badge">6</div>
           <div class="step-kicker">Automated · Google Apps Script · the "Cert Sender" menu</div>
-          <div class="step-title">Match, test-send &amp; log <span class="time-chip">one run — was 2–3 days</span></div>
-          <p class="step-body">Run straight from the <b style="font-weight:600;color:var(--fg-dim)">Cert Sender</b> menu in the Sheet. Before anything sends, every file must match its Sheet row on <b style="font-weight:600;color:var(--fg-dim)">two keys — name AND cert number</b> — with Vietnamese diacritics and casing normalized before comparing. One key isn't enough; a mismatch gets flagged, never guessed. Then I test-send to my own inbox, and only after that does the real batch go out.</p>
+          <div class="step-title">Match, test-send &amp; log <span class="time-chip">one run · was 2 to 3 days</span></div>
+          <p class="step-body">Run it from the <b class="hl">Cert Sender</b> menu in the Sheet. Before anything sends, every file has to match its Sheet row on <b class="hl">two keys, name and cert number</b>, with Vietnamese diacritics and casing normalized first. One key is not enough to be sure. A mismatch gets <b class="hl">flagged, never guessed</b>. Then a test send lands in my own inbox, and only after I have read it does the real batch go out.</p>
           <div class="verify-anatomy">
             <div class="va-row">
               <span class="va-file">NGUYEN VAN A (C-COM 26.02-001).pdf</span>
               <span><span class="key ok">name ✓</span><span class="key ok">cert no. ✓</span></span>
               <span class="va-verdict ok">2/2 → send</span>
             </div>
-            <div class="va-note">"Nguyễn Văn A" in the Sheet still matches — diacritics &amp; casing are normalized before comparing</div>
+            <div class="va-note">"Nguyễn Văn A" in the Sheet still matches. Diacritics and casing are normalized before comparing.</div>
             <div class="va-row bad">
               <span class="va-file">TRAN THI B (C-COM 26.02-007).pdf</span>
               <span><span class="key ok">name ✓</span><span class="key bad">cert no. ✗</span></span>
               <span class="va-verdict bad">1/2 → flagged, not sent</span>
             </div>
           </div>
-          <div class="caption" style="margin:0 0 20px">Both keys must match or nothing sends — a cert can't reach the wrong person</div>
+          <div class="caption" style="margin:0 0 20px">Both keys must match or nothing sends, so a cert cannot reach the wrong person.</div>
           <div class="mock-shot sheet-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon sheets"></span> CERT CEREMONY — Google Sheets</div>
-            <div class="script-strip">⟳ Running script — Cert Sender › Send test to myself…</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon sheets"></span> CERT CEREMONY · Google Sheets</div>
+            <div class="script-strip">⟳ Running script · Cert Sender › Send test to myself…</div>
             <div style="overflow-x:auto">
             <table>
               <thead><tr><th>Name</th><th>Status</th><th>Email</th><th>Sent At</th></tr></thead>
@@ -309,16 +309,16 @@
             </table>
             </div>
           </div>
-          <div class="caption" style="margin-bottom:20px">Mockup — test email sent to my own inbox &amp; logged, before the real batch (test data)</div>
+          <div class="caption" style="margin-bottom:20px">Mockup · test email sent to my own inbox &amp; logged, before the real batch (test data)</div>
           <div class="kicker">PRODUCTION-GRADE BY DESIGN</div>
           <div class="checklist">
             <div class="item"><span class="check">✓</span> Normalized (Unicode/format-insensitive) matching + duplicate detection</div>
             <div class="item"><span class="check">✓</span> Test-sends to my own inbox first, swap in real recipients after</div>
-            <div class="item"><span class="check">✓</span> <b style="font-weight:600">Idempotent</b> — never re-sends a row already sent</div>
+            <div class="item"><span class="check">✓</span> <b class="hl">Idempotent.</b> Never re-sends a row that already went out</div>
             <div class="item"><span class="check">✓</span> Rate-limited to respect Gmail quotas</div>
             <div class="item"><span class="check">✓</span> Logs timestamp + error reason, colors rows on the sheet</div>
             <div class="item"><span class="check">✓</span> 3 email variants (standard / test-passed / test-failed)</div>
-            <div class="item"><span class="check">✓</span> Custom Sheet menu + email previews — L&amp;D runs it themselves</div>
+            <div class="item"><span class="check">✓</span> Custom Sheet menu and email previews, so <b class="hl">L&amp;D runs it themselves</b></div>
           </div>
         </div>
 
@@ -333,13 +333,13 @@
         <div class="ba-card before">
           <div class="heading">BEFORE — MANUAL</div>
           <div class="rows">
-            <div><span class="mark">—</span> Split the merged PDF via a free online tool, one page at a time</div>
-            <div><span class="mark">—</span> Rename every file by hand, then attach + send through Gmail individually</div>
-            <div><span class="mark">—</span> 2–3 days of sending; easy to mistype a name or attach the wrong file</div>
-            <div><span class="mark">—</span> No record of who got what, when</div>
+            <div><span class="mark">▪</span> Split the merged PDF via a free online tool, one page at a time</div>
+            <div><span class="mark">▪</span> Rename every file by hand, then attach + send through Gmail individually</div>
+            <div><span class="mark">▪</span> 2–3 days of sending; easy to mistype a name or attach the wrong file</div>
+            <div><span class="mark">▪</span> No record of who got what, when</div>
           </div>
           <div class="mock-shot ilovepdf-mock" style="margin-top:20px">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon ilovepdf"></span> ilovepdf.com — Split PDF</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon ilovepdf"></span> ilovepdf.com · Split PDF</div>
             <div class="pages">
               <div class="page"><div class="brand">CLT</div><div class="name">Nguyen Van A</div></div>
               <div class="page"><div class="brand">CLT</div><div class="name">Tran Thi B</div></div>
@@ -349,24 +349,24 @@
               <span class="split-btn">Split PDF</span>
             </div>
           </div>
-          <div class="caption">Mockup — the manual split, page by page (test data)</div>
+          <div class="caption">Mockup · the manual split, page by page (test data)</div>
           <div class="mini-connector">then, one by one</div>
           <div class="mock-shot gmail-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon gmail"></span> Gmail — New Message</div>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon gmail"></span> Gmail · New Message</div>
             <div class="field"><span class="k">To</span> nguyen.van.a@example.com</div>
             <div class="field"><span class="k">Subject</span> Your English Proficiency Certificate</div>
             <div class="attachment">📎 Nguyen Van A C-COM 26.02-001.pdf</div>
             <span class="send-btn">Send</span>
           </div>
-          <div class="caption">Mockup — attaching &amp; sending one cert by hand (test data)</div>
+          <div class="caption">Mockup · attaching &amp; sending one cert by hand (test data)</div>
         </div>
         <div class="ba-card after">
           <div class="heading">AFTER — AUTOMATED</div>
           <div class="rows">
-            <div><span class="mark">✓</span> One run splits + renames all 300 correctly</div>
-            <div><span class="mark">✓</span> Matched &amp; emailed automatically, no mismatches</div>
-            <div><span class="mark">✓</span> Days of work → a near hands-off run</div>
-            <div><span class="mark">✓</span> Every send logged; failures visible &amp; recoverable</div>
+            <div><span class="mark">✦</span> One run splits + renames all 300 correctly</div>
+            <div><span class="mark">✦</span> Matched &amp; emailed automatically, no mismatches</div>
+            <div><span class="mark">✦</span> Days of work → a near hands-off run</div>
+            <div><span class="mark">✦</span> Every send logged; failures visible &amp; recoverable</div>
           </div>
         </div>
       </div>
@@ -379,7 +379,7 @@
       <div class="numbered-list">
         <div class="numbered-row">
           <div class="num">01</div>
-          <div><div class="title">Every failure is visible</div><div class="body">Dry-runs, a <span class="code">failed.log</span>, and marked sheet rows mean a bad page or unmatched name never silently disappears — you see it and fix it.</div></div>
+          <div><div class="title">Every failure is visible</div><div class="body">Dry runs, a <span class="code">failed.log</span> and marked sheet rows mean a bad page or an unmatched name <b class="hl">never disappears quietly</b>. You see it, and you fix it.</div></div>
         </div>
         <div class="numbered-row">
           <div class="num">02</div>
@@ -396,7 +396,7 @@
     <section class="cs-section bordered" style="padding-bottom:8px" data-reveal>
       <div class="eyebrow" style="margin-top:48px">More automations, same pattern</div>
       <h2>Two more live Apps Script tools</h2>
-      <p style="margin-bottom:8px">Same L&amp;D team, same safety-first approach — built and running day to day, not just this page's centerpiece.</p>
+      <p style="margin-bottom:8px">Same L&amp;D team, same safety-first approach. Both are <b class="hl">running day to day</b>, not just the one project this page is built around.</p>
 
       <div class="stage-grid">
         <div class="stage-card">
@@ -405,12 +405,12 @@
             <div class="title">Calendar invite tool</div>
           </div>
           <div class="body">
-            <p>Reads a visual class-timetable grid — date from the column header, time from the row position — and fuzzy-matches each class to its instructor's email, showing a "Matched PIC" column so a human can verify before anything sends.</p>
+            <p>Reads a visual class-timetable grid, taking the date from the column header and the time from the row position, then fuzzy-matches each class to its instructor's email. A <b class="hl">"Matched PIC" column</b> lets a human check the guesses before anything sends.</p>
             <div class="kicker">GUARDRAILS</div>
             <div class="checklist">
-              <div class="item"><span class="check">✓</span> Two-phase flow — build a review table, human marks rows ready, then send</div>
+              <div class="item"><span class="check">✓</span> <b class="hl">Two-phase flow.</b> Build a review table, a human marks rows ready, then it sends</div>
               <div class="item"><span class="check">✓</span> Flags unmatched instructors instead of guessing</div>
-              <div class="item"><span class="check">✓</span> Idempotent — never resends, dedupes automatically</div>
+              <div class="item"><span class="check">✓</span> Idempotent. Never resends, and dedupes on its own</div>
               <div class="item"><span class="check">✓</span> Logs a Calendar Event ID per row for traceability</div>
             </div>
           </div>
@@ -422,7 +422,7 @@
             <div class="title">Exam results tool</div>
           </div>
           <div class="body">
-            <p>Takes an already-scored competency matrix (module × level × points) for one exam period and emails each person their own modules, levels, total points, and rank. Assembles and sends — it doesn't grade.</p>
+            <p>Takes an already-scored competency matrix (module × level × points) for one exam period and emails each person their own modules, levels, total points and rank. It <b class="hl">assembles and sends. It does not grade.</b></p>
             <div class="kicker">GUARDRAILS</div>
             <div class="checklist">
               <div class="item"><span class="check">✓</span> Only sends rows marked ready</div>
