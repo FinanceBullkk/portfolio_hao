@@ -57,68 +57,107 @@
       <p>L&amp;D needed to register employees for trainings and assessments, and separately run a recurring weekly instructor-booking program — without a form that re-asks the same profile info every time, and without two people accidentally claiming the same seat or the same trainer slot under real concurrent use.</p>
     </section>
 
-    <!-- WHAT I BUILT -->
-    <section class="cs-section tight" data-reveal>
-      <div class="eyebrow">What I built — two live flows</div>
-      <div class="stage-grid">
-
-        <div class="stage-card">
-          <div class="head">
-            <div class="kicker">FLOW 1 · EVENT REGISTRATION</div>
-            <div class="title">Simple &amp; slotted events</div>
-          </div>
-          <div class="body">
-            <p>Simple events (1 seat, 1 step) and slotted events (pick a timed exam slot, configurable Exam Parts per event). Every seat claim is a single Firestore document created inside a transaction — a duplicate id is rejected outright, so the same seat can't be claimed twice even if 100 people click at once.</p>
-            <div class="kicker">GUARDRAILS</div>
-            <div class="checklist">
-              <div class="item"><span class="check">✓</span> Eligibility checked twice — preflight, then re-enforced inside the transaction</div>
-              <div class="item"><span class="check">✓</span> 3-layer gate: permanent block → per-event blocklist → per-event allowlist</div>
-              <div class="item"><span class="check">✓</span> Employee-code + email dedup — one person, one seat per event</div>
+    <!-- WHAT I BUILT / FLOW SEQUENCE -->
+    <div class="flow-sequence" style="margin-top: 64px">
+      
+      <!-- STEP 1 -->
+      <div class="flow-step" data-reveal>
+        <div class="connector-line"></div>
+        <div class="num-badge">1</div>
+        <div class="step-kicker">Flow 1 · Event Registration</div>
+        <div class="step-title">Zero-Input Confirm</div>
+        <p class="step-body">Instead of forcing employees to re-enter their details for every event, the platform authenticates via Google Workspace. The user's profile and eligibility are verified server-side before the button even appears. A single atomic transaction guarantees they can't double-book a slot.</p>
+        <div class="mock-shot corgi-confirm-mock" style="margin-top: 24px">
+          <div class="chrome"><div class="dots"><i></i><i></i><i></i></div>lnd-assessment.cyberlogitec.com.vn</div>
+          <div class="corgi-preview-body">
+            <div class="corgi-profile-card">
+              <div class="row"><b style="font-size:14px;color:var(--m-text)">Nguyen Van A</b><span class="k">MOC</span></div>
+              <div class="row" style="margin-top:6px"><span class="v"></span><span class="v" style="width:40px"></span></div>
             </div>
+            <div class="corgi-confirm-btn">Confirm registration</div>
+            <div class="corgi-seat-row"><span class="dot"></span> Seat claimed — 1 of 1</div>
           </div>
         </div>
+      </div>
 
-        <div class="stage-card">
-          <div class="head">
-            <div class="kicker">FLOW 2 · PRONUNCIATION PROGRAM</div>
-            <div class="title">Weekly instructor booking</div>
-          </div>
-          <div class="body">
-            <p>A single trainer's weekly calendar, booked by a PIC (Person In Charge) on behalf of their class. Each session's document id is <span class="code">date_startMin</span> — a global lock, so a given date + time slot can hold exactly one session company-wide.</p>
-            <div class="kicker">GUARDRAILS</div>
-            <div class="checklist">
-              <div class="item"><span class="check">✓</span> Monthly cap (4) + weekly cap (2) per class, enforced server-side</div>
-              <div class="item"><span class="check">✓</span> Blackout dates/slots block booking for everyone — including admins, no bypass</div>
-              <div class="item"><span class="check">✓</span> Registration window + deadline locks self-service after cutoff</div>
+      <!-- STEP 2 -->
+      <div class="flow-step" data-reveal>
+        <div class="connector-line"></div>
+        <div class="connector-arrow">↓</div>
+        <div class="num-badge">2</div>
+        <div class="step-kicker">Flow 2 · Pronunciation Program</div>
+        <div class="step-title">Weekly Instructor Booking</div>
+        <p class="step-body">A self-service weekly calendar for booking 1-on-1 sessions. Monthly and weekly capacity limits (e.g., max 2 per week per class) and blackout dates are enforced entirely via Firestore Security Rules, completely untrusting the client UI.</p>
+        <div class="mock-shot corgi-calendar-mock" style="margin-top: 24px">
+          <div class="chrome"><div class="dots"><i></i><i></i><i></i></div>lnd-assessment.cyberlogitec.com.vn/booking</div>
+          <div class="cal-inner">
+            <div class="cal-header">
+              <div class="month">May 2026</div>
+              <div class="cal-limits"><span class="lim">Week: 2/2</span><span class="lim">Month: 4/4</span></div>
+            </div>
+            <div class="cal-grid">
+              <div class="cal-day">
+                <div class="d-name">MON 11</div>
+                <div class="slot booked">09:00 (Booked)</div>
+                <div class="slot disabled">10:00</div>
+                <div class="slot booked">11:00 (Booked)</div>
+              </div>
+              <div class="cal-day">
+                <div class="d-name">TUE 12</div>
+                <div class="slot blackout">09:00 (Blackout)</div>
+                <div class="slot blackout">10:00 (Blackout)</div>
+                <div class="slot blackout">11:00 (Blackout)</div>
+              </div>
+              <div class="cal-day">
+                <div class="d-name">WED 13</div>
+                <div class="slot disabled">09:00</div>
+                <div class="slot disabled">10:00</div>
+                <div class="slot disabled">11:00</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- ZERO-INPUT CONFIRM -->
-    <section class="cs-section" data-reveal>
-      <div class="eyebrow">The detail that matters</div>
-      <h2>Zero-input confirm</h2>
-      <div class="ba-grid">
-        <div class="ba-card before">
-          <div class="heading">TYPICAL EVENT FORM</div>
-          <div class="rows">
-            <div><span class="mark">—</span> Re-enter employee code, name, business unit every time</div>
-            <div><span class="mark">—</span> No feedback on whether you already hold a seat</div>
-            <div><span class="mark">—</span> Concurrent submits can silently conflict</div>
-          </div>
-        </div>
-        <div class="ba-card after">
-          <div class="heading">THIS PLATFORM</div>
-          <div class="rows">
-            <div><span class="mark">✓</span> Profile completed once at first login — every later registration is a single confirm</div>
-            <div><span class="mark">✓</span> Seat claim is atomic — Firestore rejects the duplicate, no oversell</div>
-            <div><span class="mark">✓</span> Eligibility resolved before the user even sees the register button</div>
+      
+      <!-- STEP 3 -->
+      <div class="flow-step" data-reveal>
+        <div class="connector-line"></div>
+        <div class="connector-arrow">↓</div>
+        <div class="num-badge">3</div>
+        <div class="step-kicker">Under the hood</div>
+        <div class="step-title">Atomic Capacity Locks</div>
+        <p class="step-body">Booking conflicts are impossible. Each session uses <code>date_startMin</code> as its Firestore document ID. When 50 people click a slot at exactly 09:00:00.000, only the first transaction creates the document (HTTP 201). The other 49 transactions instantly hit a unique constraint violation (HTTP 409) and fail gracefully.</p>
+        <div class="mock-shot race-anatomy" style="margin-top: 24px;">
+          <div class="race-grid">
+            <div class="req-col">
+              <div class="req-card win">
+                <div class="req-header"><span>Nguyen Van A</span><span class="status-badge code-201">HTTP 201</span></div>
+                <div class="req-time">Req: 09:00:00.012</div>
+                <div class="req-stat">Status: Document created</div>
+              </div>
+            </div>
+            <div class="race-lock">
+              <span class="lock-icon">🔒</span>
+              <div style="font-size:10px;text-transform:uppercase">Document ID</div>
+              <code style="background:var(--m-bg2);padding:4px 8px;border-radius:4px;margin-top:6px;display:inline-block;font-size:12px;color:var(--m-text);border:1px solid var(--m-border)">20260511_0900</code>
+            </div>
+            <div class="req-col">
+              <div class="req-card fail" style="margin-bottom:8px">
+                <div class="req-header"><span>Tran Thi B</span><span class="status-badge code-409">HTTP 409</span></div>
+                <div class="req-time">Req: 09:00:00.015</div>
+                <div class="req-stat">Status: Already exists</div>
+              </div>
+              <div class="req-card fail">
+                <div class="req-header"><span>Le Van C</span><span class="status-badge code-409">HTTP 409</span></div>
+                <div class="req-time">Req: 09:00:00.018</div>
+                <div class="req-stat">Status: Already exists</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+
+    </div>
 
     <!-- WHY IT'S SOLID -->
     <section class="cs-section" data-reveal>
