@@ -1,2 +1,4 @@
 Video/
 assets/raw/
+node_modules/
+**/node_modules/

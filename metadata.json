@@ -1,0 +1,6 @@
+{
+  "name": "L&D Event Registration Platform",
+  "description": "Nền tảng đăng ký sự kiện đa mục đích và L&D Assessment Booking (Corgi77)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

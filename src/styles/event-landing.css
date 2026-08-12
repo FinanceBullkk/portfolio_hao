@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Event landing — page header, grid, redesigned cards (Redesign · screen 02)
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* Landing main: wider 1040px canvas, per Registration.dc.html <main>. */
+.container.lc-main { max-width: 1040px; padding: var(--s-10) var(--s-7) var(--s-16); }
+.lc-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-5); margin-bottom: var(--s-7); flex-wrap: wrap; }
+.lc-head h1 { font-size: var(--fs-3xl); font-weight: 700; letter-spacing: -.025em; color: var(--text-strong); margin: 0 0 var(--s-2); }
+.lc-head p { font-size: var(--fs-md); line-height: 1.5; color: var(--text-muted); margin: 0; max-width: 60ch; }
+.lc-active { display: inline-flex; align-items: center; gap: var(--s-2); padding: var(--s-2) var(--s-3); border-radius: var(--r-lg); background: var(--card); border: 1px solid var(--border); font-size: var(--fs-base); color: var(--text-secondary); white-space: nowrap; }
+.lc-active .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success-600); }
+.lc-active.empty .dot { background: var(--border-3); }
+.lc-active b { color: var(--text-strong); font-variant-numeric: tabular-nums; }
+.lc-head-actions { display: inline-flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+
+/* ── My registrations (read-only history) ───────────────────────────────── */
+/* Cards in a row share the tallest height (footer pinned to the bottom via
+   .mr-foot margin-top:auto) so an entry with slots doesn't leave its row-mate short. */
+.mr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); align-items: stretch; }
+@media (max-width: 760px) { .mr-grid { grid-template-columns: 1fr; } }
+/* P2-13: shimmer skeleton placeholders for the "My registrations" loading state. */
+@keyframes sk-shimmer { 0% { background-position: -240px 0; } 100% { background-position: calc(240px + 100%) 0; } }
+.sk-card { pointer-events: none; }
+.sk-card .mr-card-bd { padding-bottom: var(--s-4); }
+.sk-line { display: block; height: 12px; border-radius: 6px; background: var(--ink-100); background-image: linear-gradient(90deg, var(--ink-100) 25%, var(--ink-150) 50%, var(--ink-100) 75%); background-size: 240px 100%; background-repeat: no-repeat; animation: sk-shimmer 1.4s ease-in-out infinite; }
+.sk-line.sk-chip { width: 84px; height: 16px; margin-bottom: 8px; }
+.sk-line.sk-title { width: 70%; height: 16px; margin-bottom: 7px; }
+.sk-line.sk-sub { width: 45%; }
+.sk-line.sk-row { width: 88%; margin: 8px 0; }
+.sk-line.sk-row.short { width: 55%; }
+.sk-line.sk-foot { width: 40%; }
+@media (prefers-reduced-motion: reduce) { .sk-line { animation: none; } }
+.mr-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 1px 2px rgba(15,18,23,.04), 0 12px 26px -20px rgba(15,18,23,.16); }
+.mr-card.status-archived { background: #FBFBFC; }
+.mr-card-hd { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); padding: var(--s-4) var(--s-5) var(--s-3); border-bottom: 1px solid var(--surface-2); }
+.mr-card-ttl :is(h2, h3) { margin: var(--s-1) 0 2px; font-size: var(--fs-lg); font-weight: 700; letter-spacing: -.02em; color: var(--text-strong); }
+.mr-card-ttl p { margin: 0; font-size: var(--fs-base); line-height: 1.45; color: var(--text-muted); }
+/* Category eyebrow — same blue chip as the landing card (.lc-cat) for consistency. */
+.mr-cat { display: inline-block; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand-600); background: var(--brand-50); padding: var(--s-1) var(--s-2); border-radius: var(--r-xs); margin-bottom: 2px; }
+.mr-card.status-archived .mr-cat, .mr-card.status-closed .mr-cat { color: var(--text-faint); background: var(--surface-2); }
+.mr-badge { flex: none; padding: var(--s-1) var(--s-2); border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 600; white-space: nowrap; }
+.mr-badge.open { background: #E7F5EC; color: #1B7A48; }
+.mr-badge.closed { background: #FDF0E0; color: #9A5B12; }
+.mr-badge.archived { background: var(--surface-2); color: var(--text-muted); }
+.mr-card-bd { padding: var(--s-3) var(--s-5) var(--s-1); display: flex; flex-direction: column; gap: var(--s-3); }
+.mr-identity { display: flex; align-items: center; gap: var(--s-3); }
+.mr-identity .av { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: var(--r-md); background: var(--brand-50, #EEF2FF); color: var(--brand-700); font-size: var(--fs-base); font-weight: 700; flex: none; }
+.mr-identity .t { display: flex; flex-direction: column; line-height: 1.3; }
+.mr-identity .t b { font-size: var(--fs-base); color: var(--text-strong); }
+.mr-identity .t .s { font-size: var(--fs-sm); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.mr-slots { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-2); }
+.mr-slot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); padding: var(--s-2) var(--s-3); border: 1px solid var(--surface-2); border-radius: var(--r-md); background: #FCFCFD; }
+.mr-slot-type { font-size: var(--fs-sm); font-weight: 600; color: var(--brand-700); }
+.mr-slot-when { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-base); color: var(--text-2); font-variant-numeric: tabular-nums; }
+.mr-slot-loc { font-size: var(--fs-sm); color: var(--text-muted); }
+.mr-noslot { margin: 0; font-size: var(--fs-base); color: var(--text-muted); }
+.mr-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin: 0; margin-top: auto; padding: var(--s-3) var(--s-5) var(--s-4); font-size: var(--fs-sm); color: var(--text-faint); }
+.mr-foot .btn.sm { flex: none; }
+
+/* Admin "User lookup" tab */
+.ur-search { display: flex; gap: 10px; align-items: center; margin-bottom: 18px; max-width: 520px; }
+.ur-search .input { flex: 1; }
+.ur-search .btn { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.ur-search .btn svg { width: 15px; height: 15px; }
+.ur-hint { font-size: 14px; color: var(--ink-500); margin: 0; }
+.ur-count { font-size: 14px; color: var(--ink-600); margin: 0 0 16px; }
+.ur-count b { color: var(--ink-900); }
+

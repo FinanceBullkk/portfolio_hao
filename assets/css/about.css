@@ -1,85 +1,98 @@
 /* ============================================================
-   About hero — photo + bio
+   About page
+   Spec: docs/design-guidelines.md §3
    ============================================================ */
+
+/* ---- Header row: avatar + name + bio + meta ----
+   flex-start, not center: the text column holds the lede and the meta
+   row too, so it is much taller than the 64px avatar. */
 .about-hero {
   display: flex;
-  gap: 44px;
   align-items: flex-start;
-  padding: 100px 0 48px;
+  gap: 16px;
+  padding: 0;
+  margin-bottom: 32px;
 }
-@media (max-width: 680px) {
-  .about-hero { flex-direction: column; padding-top: 64px; }
+@media (max-width: 560px) {
+  .about-hero { flex-direction: column; }
 }
 
 .about-hero h1 {
-  font-family: var(--font-sans);
-  font-size: 54px;
-  font-weight: 700;
-  letter-spacing: -.025em;
-  line-height: 1.08;
-  margin-bottom: 22px;
-}
-@media (max-width: 680px) {
-  .about-hero h1 { font-size: 34px; }
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--fg);
+  margin-bottom: 8px;
 }
 
 .about-hero .lede {
-  font-size: 18px;
-  color: var(--fg-mute);
-  max-width: 60ch;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--n-800);
+  max-width: none;
   text-wrap: pretty;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
+:root.dark .about-hero .lede { color: var(--n-200); }
+.about-hero .lede b { font-weight: 600; color: var(--fg); }
 
 .avatar-placeholder {
   flex: 0 0 auto;
-  width: 148px;
-  height: 148px;
-  border: 1.5px solid var(--border-lg);
-  border-radius: 6px;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--r-edge);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 56px;
-  color: var(--fg-ghost);
-  background: var(--bg-card);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--r-meta);
+  background: var(--r-surface);
 }
 
 .about-meta {
   display: flex;
-  gap: 10px 24px;
+  gap: 8px 16px;
   flex-wrap: wrap;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--fg-faint);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--r-secondary);
 }
 .about-meta a {
-  color: var(--fg-mute);
-  text-decoration: none;
-  border-bottom: 1px solid var(--border-lg);
-  padding-bottom: 1px;
-  transition: color .18s, border-color .18s;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--r-line);
+  text-underline-offset: 2px;
+  border: 0;
+  transition: all 0.15s ease;
 }
-.about-meta a:hover { color: var(--fg); border-color: var(--fg); }
+.about-meta a:hover { color: var(--r-meta); }
 
-/* ============================================================
-   Full skills list — grouped
-   ============================================================ */
+/* ---- Grouped skill list ---- */
 .skills-groups {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 34px 48px;
-  margin-top: 30px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 0;
+  margin-bottom: 32px;
 }
-@media (max-width: 680px) {
-  .skills-groups { grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+  .skills-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.skills-groups .group {
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
+  padding: 16px;
 }
 .skills-groups .group h3 {
-  font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 14px;
-  color: var(--fg-dim);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  margin-bottom: 8px;
 }

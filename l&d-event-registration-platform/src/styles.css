@@ -1,0 +1,21 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Global stylesheet · aggregator only — rules live in src/styles/*.
+   IMPORT ORDER IS THE CASCADE ORDER: later files override earlier ones,
+   exactly as they did when this was one flat file. Append new sections as
+   new files at the position their rules must win/lose in the cascade.
+   ───────────────────────────────────────────────────────────────────────── */
+@import './styles/design-tokens.css';
+@import './styles/base-layout-buttons-forms.css';
+@import './styles/feedback-and-booking-widgets.css';
+@import './styles/admin-legacy-and-settings.css';
+@import './styles/admin-shell-sidebar.css';
+@import './styles/admin-data-grid.css';
+@import './styles/admin-drawer.css';
+@import './styles/booking-result-and-a11y.css';
+@import './styles/admin-events-cards-config-dashboard.css';
+@import './styles/signin-hero.css';
+@import './styles/event-landing.css';
+@import './styles/register-confirm-screens.css';
+@import './styles/slotted-booking-calendar.css';
+@import './styles/program-booking-grid.css';
+@import './styles/admin-dashboard-workspace.css';

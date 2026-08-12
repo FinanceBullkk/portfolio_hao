@@ -1,0 +1,85 @@
+/* ─── Pronunciation Program · booking grid + book drawer ─────────────────
+   concho2-aligned UX, adapted to Corgi7 tokens: a Today-aware week nav,
+   scannable day headers (day name + big number + month), today-column tint,
+   a card-wrapped grid with a selected-cell ring, and a book drawer that is a
+   right-side panel on desktop but a bottom sheet on phones. */
+
+/* Week navigation */
+.pg-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin: var(--s-2) 0 var(--s-4); flex-wrap: wrap; }
+.pg-nav-mid { display: inline-flex; align-items: center; gap: var(--s-3); }
+.pg-week { font-size: var(--fs-md); font-weight: 650; color: var(--ink-900); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+
+/* Grid card wrapper — spaced rounded cells (design: per-class colored cells read
+   better as distinct rounded tiles than as a gridlined table). */
+.pg-grid-wrap { border: 1px solid var(--ink-150); border-radius: 14px; background: var(--white); box-shadow: 0 1px 2px rgba(15,18,23,.04); padding: var(--s-2); }
+.pg-scroll { overflow-x: auto; }
+.pg-grid { width: 100%; border-collapse: separate; border-spacing: 7px; min-width: 720px; }
+
+/* Headers — weekday abbr + big day number; today tints the number brand. */
+.pg-grid th.pg-corner { width: 68px; }
+.pg-th { padding: 2px 0 6px; text-align: center; vertical-align: bottom; }
+.pg-th .dow { font-size: 12px; font-weight: 700; color: var(--ink-700); }
+.pg-th .num { font-size: 17px; font-weight: 700; line-height: 1.1; color: var(--ink-900); font-variant-numeric: tabular-nums; }
+.pg-th.today .dow, .pg-th.today .num { color: var(--brand-600); }
+
+/* Time column */
+.pg-time { width: 68px; padding-top: 12px; font-size: 11.5px; color: var(--ink-500); white-space: nowrap; font-variant-numeric: tabular-nums; vertical-align: top; }
+
+/* Cells */
+.pg-td { padding: 0; vertical-align: top; }
+.pg-cell { border: 1px solid var(--ink-150); border-radius: 9px; padding: 8px 9px; min-height: 58px; font-size: 13px; display: flex; flex-direction: column; gap: 2px; transition: box-shadow var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out); }
+/* P1-6: stronger borders/text so the four states are distinguishable (incl. for
+   colour-blind users, which the icons in the cells reinforce). */
+.pg-cell.mine { background: #DCF0E4; border-color: #5FB283; cursor: pointer; }
+.pg-cell.mine:hover { box-shadow: var(--sh-2); }
+.pg-cell.bookable { background: var(--white); border-style: dashed; border-color: #8AA1C2; cursor: pointer; align-items: center; justify-content: center; }
+.pg-cell.bookable:hover { border-color: var(--brand-500); background: var(--brand-50); }
+.pg-cell.blackout { background: #F8E1DD; border-color: #D98C80; align-items: center; justify-content: center; }
+/* .pg-cell.taken colours are per-class and applied inline (background/border/accent). */
+.pg-cell.past { opacity: .45; }
+/* Outside the registration window (other month / past deadline) — locked, not clickable. */
+.pg-cell.closed { background: var(--ink-50, #f4f5f7); border-style: dashed; border-color: var(--ink-150); opacity: .55; align-items: center; justify-content: center; cursor: not-allowed; }
+.pg-cell.sel { box-shadow: inset 0 0 0 2px var(--brand-500); border-color: var(--brand-500); }
+.pg-cell:focus-visible { outline: none; box-shadow: var(--sh-focus); }
+.pg-cell .tag { display: inline-flex; align-items: center; gap: 3px; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--success-700); }
+.pg-cell .code { font-weight: 700; font-size: 13px; color: var(--ink-900); }
+.pg-cell .sub { font-size: 11px; color: var(--ink-500); line-height: 1.2; }
+.pg-cell .add { font-size: 12.5px; font-weight: 600; color: var(--brand-600); }
+.pg-cell .unavail { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: #9B5F57; }
+.pg-cell .pic { font-size: 13.5px; font-weight: 700; color: var(--ink-900); line-height: 1.2; }
+.pg-cell .tk-meta { display: flex; align-items: center; gap: 5px; margin-top: 4px; }
+.pg-cell .tk-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.pg-cell .tk-code { font-size: 10.5px; font-weight: 600; }
+
+/* Legend */
+.pg-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: var(--s-3); font-size: 12px; color: var(--ink-500); }
+.pg-legend .lg { display: inline-flex; align-items: center; gap: 7px; }
+.pg-legend .sw { width: 12px; height: 12px; border-radius: 3px; border: 1px solid var(--ink-150); flex-shrink: 0; }
+/* P1-6: darker borders so the swatches read at a glance, plus a ringed
+   "selected" swatch matching the in-grid blue ring. */
+.pg-legend .sw.mine { background: #D2EBDC; border-color: #5FB283; }
+.pg-legend .sw.bookable { background: var(--white); border-style: dashed; border-color: #7E97BC; }
+.pg-legend .sw.taken { background: #DDE8F6; border-color: #7FA3D0; }
+.pg-legend .sw.blackout { background: #F8E1DD; border-color: #D98C80; }
+.pg-legend .sw.sel { background: var(--white); border-color: var(--brand-500); box-shadow: inset 0 0 0 2px var(--brand-500); }
+
+/* Book drawer — info rows + mobile drag grip */
+.pg-info { border: 1px solid var(--ink-150); border-radius: var(--r-md); overflow: hidden; margin-bottom: 18px; }
+.pg-info .row { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); padding: 9px 12px; font-size: 12.5px; }
+.pg-info .row + .row { border-top: 1px solid var(--ink-100); }
+.pg-info .k { color: var(--ink-500); }
+.pg-info .v { color: var(--ink-900); text-align: right; min-width: 0; }
+.pg-info .v.strong { font-weight: 700; }
+/* P1-7: schedule-clash warning shown in the book/move drawer. */
+.pg-conflict { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 14px; padding: 10px 12px; border-radius: var(--r-md); background: var(--danger-50, #fef2f2); border: 1px solid var(--danger-200, #fecaca); color: var(--danger-700, #b91c1c); font-size: 12.5px; line-height: 1.4; }
+.pg-conflict svg { flex-shrink: 0; margin-top: 1px; }
+.drawer-grip { display: none; }
+
+@media (max-width: 640px) {
+  .drawer-back.sheet { align-items: flex-end; justify-content: stretch; }
+  .drawer.sheet { width: 100%; max-width: 100%; height: auto; max-height: 88vh; border-radius: var(--r-xl) var(--r-xl) 0 0; animation: sheetUp var(--t-slow) var(--ease-out); }
+  .drawer.sheet .drawer-grip { display: flex; justify-content: center; padding: 8px 0 2px; }
+  .drawer.sheet .drawer-grip::before { content: ''; width: 40px; height: 4px; border-radius: 999px; background: var(--ink-200); }
+}
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+

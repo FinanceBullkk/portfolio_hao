@@ -1,0 +1,89 @@
+/* ─── Booking result redesign · calm cards ──────────────────────────── */
+.r-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s-4); margin-bottom: var(--s-5); }
+.r-head h1 { font-size: var(--fs-2xl); font-weight: 650; letter-spacing: -.02em; color: var(--ink-900); }
+.r-head p { font-size: var(--fs-base); color: var(--ink-500); margin-top: 4px; }
+.r-id { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) var(--s-4); background: var(--white); border: 1px solid var(--ink-150); border-radius: var(--r-lg); box-shadow: var(--sh-1); }
+.r-av { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-500); color: var(--white); display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-base); font-weight: 700; flex-shrink: 0; letter-spacing: -.01em; }
+.r-id-main { flex: 1; min-width: 0; }
+.r-id-name { font-size: var(--fs-md); font-weight: 600; color: var(--ink-900); }
+.r-id-name .muted { color: var(--ink-400); font-weight: 500; }
+.r-id-sub { font-size: var(--fs-sm); color: var(--ink-500); margin-top: 2px; overflow-wrap: anywhere; }
+.r-sessions { margin-top: var(--s-5); }
+.r-sess-head { display: flex; align-items: baseline; gap: var(--s-2); margin-bottom: var(--s-3); }
+.r-sess-head .t { font-size: var(--fs-xs); font-weight: 700; color: var(--ink-500); text-transform: uppercase; letter-spacing: .08em; }
+.r-sess-head .c { font-size: var(--fs-xs); color: var(--ink-400); }
+.r-list { display: flex; flex-direction: column; gap: var(--s-3); }
+.r-sess { display: flex; background: var(--white); border: 1px solid var(--ink-150); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-1); transition: box-shadow var(--t-fast) var(--ease-out); }
+.r-sess:hover { box-shadow: var(--sh-2); }
+.r-rail { width: 92px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--s-4) var(--s-2); }
+.r-rail .dow { font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.r-rail .num { font-size: 30px; font-weight: 800; line-height: 1.05; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.r-rail .mon { font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+.r-sess.sp .r-rail { background: var(--brand-50); color: var(--brand-700); border-right: 1px solid var(--brand-100); }
+.r-sess.sk .r-rail { background: var(--accent-50); color: var(--accent-700); border-right: 1px solid var(--accent-100); }
+.r-body { flex: 1; min-width: 0; padding: var(--s-4) var(--s-5); display: flex; flex-direction: column; gap: 6px; }
+.r-body-top { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+.r-type { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.r-sess.sp .r-type { color: var(--brand-600); }
+.r-sess.sk .r-type { color: var(--accent-600); }
+.r-dur { font-size: var(--fs-xs); color: var(--ink-400); font-weight: 500; }
+.r-time { font-size: var(--fs-xl); font-weight: 700; color: var(--ink-900); font-variant-numeric: tabular-nums; letter-spacing: -.01em; line-height: 1.1; }
+.r-time .dash { color: var(--ink-300); font-weight: 500; margin: 0 2px; }
+.r-where { font-size: var(--fs-sm); color: var(--ink-500); }
+.r-next { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; padding: 4px 10px; border-radius: var(--r-pill); background: var(--brand-500); color: var(--white); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
+.r-next .d { font-variant-numeric: tabular-nums; }
+.r-next::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: .9; box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
+.r-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin-top: var(--s-5); padding-top: var(--s-4); border-top: 1px solid var(--ink-150); flex-wrap: wrap; }
+.r-note { font-size: var(--fs-sm); color: var(--ink-500); }
+.r-note b { color: var(--ink-900); font-weight: 600; }
+.r-act-btns { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; justify-content: flex-end; }
+.btn.icon { width: 40px; padding: 0; font-size: 18px; }
+.btn.sm.icon { width: 32px; }
+
+@media (max-width: 600px) {
+  .r-head { align-items: flex-start; }
+  .r-id { align-items: flex-start; }
+  .r-sess { min-width: 0; }
+  .r-rail { width: 76px; }
+  .r-body { padding: var(--s-4); }
+  .r-next { margin-left: 0; }
+  .r-actions { align-items: stretch; }
+  .r-note { width: 100%; }
+  .r-act-btns { width: 100%; justify-content: stretch; }
+  .r-act-btns .btn:not(.icon) { flex: 1 1 auto; }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────
+   Honor prefers-reduced-motion: drop entrance/looping animations and shrink
+   transitions to ~instant. Spinner kept (essential progress affordance) but
+   slowed to reduce vestibular impact. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .spinner { animation-duration: 1.4s !important; }
+}
+
+/* ─── Touch targets ──────────────────────────────────────────────────────
+   On touch / coarse-pointer devices, grow small controls to the ~44px tap
+   minimum (WCAG 2.5.5 / Apple HIG). Only the hit area expands via min-height;
+   padding/border/font are untouched, so the desktop (fine-pointer) look is
+   unchanged. Width-media queries can't do this — a touch laptop is "wide". */
+@media (pointer: coarse) {
+  .btn { min-height: 44px; }
+  .admin-btn { height: auto; min-height: 40px; }
+  .topbar-signout { width: 44px; height: 44px; }
+  .toast-x { padding: 6px 8px; margin: -4px; }
+  button.small { min-height: 44px; }
+  /* Row action menus were opacity:0 until row-hover — invisible AND untappable on touch
+     (no hover). Reveal + grow to the tap minimum (P0-4). */
+  .icon-act { opacity: 1; min-width: 44px; min-height: 44px; }
+  /* Segmented filters + workspace sub-tabs + danger-zone buttons to tap minimum (P1-8). */
+  .seg button { min-height: 40px; }
+  .ws-tabs button { min-height: 44px; }
+  .dz-btn { min-height: 40px; }
+}
+

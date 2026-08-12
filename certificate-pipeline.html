@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="assets/css/case-study.css">
   <link rel="stylesheet" href="assets/css/certificate-pipeline-mocks.css">
   <link rel="stylesheet" href="assets/css/certificate-pipeline-flow-demo.css">
+  <script>try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
 </head>
 <body>
 
@@ -21,8 +22,8 @@
       <a href="index.html" class="subnav-back">← all projects</a>
       <div class="subnav-title">Cert pipeline <span class="subnav-sub">/ case study</span></div>
       <div class="subnav-actions">
-        <a href="about.html" class="subnav-link">About</a>
-        <a href="https://github.com/FinanceBullkk/ConCho4" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Splitter repo ↗</a>
+        <a href="automated-certificate-issuance-flow/dist/index.html" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Live Studio ⚡</a>
+        <a href="https://github.com/FinanceBullkk/ConCho4" target="_blank" rel="noopener" class="btn btn-outline btn-sm">Splitter repo ↗</a>
       </div>
     </div>
   </nav>
@@ -51,74 +52,23 @@
       <p>The L&amp;D team made the certs in Canva. Then someone split the merged PDF <b class="hl">one page at a time</b> through a free online splitter, renamed every file by hand, and attached and sent each one individually through Gmail. About <b class="hl">1 to 2 days</b> to make a batch, then <b class="hl">2 to 3 more days</b> renaming and sending it. Slow, easy to get wrong, and it got worse every time training volume grew.</p>
     </section>
 
-    <!-- THE PIPELINE -->
+    <!-- THE PIPELINE LIVE INTERACTIVE STUDIO -->
     <section class="cs-section tight" data-reveal>
-      <div class="eyebrow">What I built · one pipeline, six steps end to end</div>
+      <div class="eyebrow">Interactive Studio · Try the live workflow</div>
+      <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Live Interactive Pipeline Studio</h2>
+      <p style="font-size: 14px; line-height: 22px; color: var(--n-800); margin-bottom: 20px;">Experience the 6-step automated certificate pipeline live in your browser: edit sheet records, customize templates, preview mappings, bulk generate PDFs, and test email dispatch.</p>
 
-      <div class="mock-shot flow-demo">
-        <div class="chrome"><div class="dots"><i></i><i></i><i></i></div> Watch the flow</div>
-        <div class="flow-demo-stage">
-          <div class="flow-demo-panel p1 active">
-            <div class="mini-label">1 · Check the Sheet</div>
-            <div class="mini-desc">See who is due for a cert this cycle. 43 people in this batch.</div>
-            <div class="mini-row"><span>Nguyen Van A</span><span class="tag">To-be-printed</span></div>
-            <div class="mini-row"><span>Tran Thi B</span><span class="tag">To-be-printed</span></div>
-            <div class="mini-row"><span>Le Van C</span><span class="tag">To-be-printed</span></div>
+      <div class="mock-shot flow-studio-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--n-200); background: #050505; box-shadow: 0 12px 32px rgba(0,0,0,0.15);">
+        <div class="chrome" style="padding: 10px 16px; background: #121212; border-bottom: 1px solid #262626; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <span style="font-size: 12px; font-weight: 500; color: #a3a3a3; font-family: monospace;">Certificate Pipeline Studio — Interactive Live Demo</span>
           </div>
-          <div class="flow-demo-panel p2">
-            <div class="mini-label">2 · Bulk Create in Canva</div>
-            <div class="mini-desc">Sheet columns fill the template. One page per person.</div>
-            <div class="mini-grid">
-              <div class="mini-cell"><div class="kind">English Proficiency</div><div class="name">Nguyen Van A</div></div>
-              <div class="mini-cell"><div class="kind">English Proficiency</div><div class="name">Tran Thi B</div></div>
-              <div class="mini-cell"><div class="kind">English Proficiency</div><div class="name">Le Van C</div></div>
-              <div class="mini-cell"><div class="kind">English Proficiency</div><div class="name">Pham Thi D</div></div>
-            </div>
-          </div>
-          <div class="flow-demo-panel p3">
-            <div class="mini-label">3 · Download the merged PDF</div>
-            <div class="mini-desc">The whole batch exports as one file. 1 page = 1 cert.</div>
-            <div class="mini-row"><span>(Bulk 1) Level 3.pdf</span><span class="tag ok">43 pages · Completed</span></div>
-          </div>
-          <div class="flow-demo-panel p4">
-            <div class="mini-label">4 · CLT Certificate Renamer</div>
-            <div class="mini-desc">My tool reads each page's own text, so page order cannot matter.</div>
-            <div class="mini-toolbar">
-              <span class="mini-btn">Xem Trước (Dry Run)</span>
-              <span class="mini-btn primary">Đổi Tên Thật</span>
-            </div>
-            <div class="mini-log">
-              <div><span class="check">✓</span>split_001.pdf → NGUYEN VAN A (C-COM 26.02-001).pdf</div>
-              <div><span class="check">✓</span>split_002.pdf → TRAN THI B (C-COM 26.02-002).pdf</div>
-            </div>
-          </div>
-          <div class="flow-demo-panel p5">
-            <div class="mini-label">5 · Push to Drive</div>
-            <div class="mini-desc">Renamed certs land in the team's shared folder.</div>
-            <div class="mini-row"><span>NGUYEN VAN A (C-COM 26.02-001).pdf</span><span class="tag file">255 KB</span></div>
-            <div class="mini-row"><span>TRAN THI B (C-COM 26.02-002).pdf</span><span class="tag file">255 KB</span></div>
-          </div>
-          <div class="flow-demo-panel p6">
-            <div class="mini-label">6 · Test-send &amp; log</div>
-            <div class="mini-desc">Name and cert number must both match or the row is flagged. Then a test send to myself before the real batch.</div>
-            <div class="mini-row"><span>Nguyen Van A</span><span class="tag ok">you@example.com</span></div>
-            <div class="mini-row"><span>Tran Thi B</span><span class="tag">To-be-printed</span></div>
-          </div>
+          <a href="automated-certificate-issuance-flow/dist/index.html" target="_blank" rel="noopener" style="font-size: 12px; color: #38bdf8; text-decoration: none; font-weight: 500;">Open Fullscreen ↗</a>
         </div>
-        <div class="flow-demo-controls">
-          <button class="flow-demo-nav" data-dir="-1" aria-label="Previous step">←</button>
-          <div class="flow-demo-dots">
-            <button class="dot active" aria-label="Step 1"></button>
-            <button class="dot" aria-label="Step 2"></button>
-            <button class="dot" aria-label="Step 3"></button>
-            <button class="dot" aria-label="Step 4"></button>
-            <button class="dot" aria-label="Step 5"></button>
-            <button class="dot" aria-label="Step 6"></button>
-          </div>
-          <button class="flow-demo-nav" data-dir="1" aria-label="Next step">→</button>
-        </div>
+        <iframe src="automated-certificate-issuance-flow/dist/index.html" style="width: 100%; height: 750px; border: none; display: block;" title="Certificate Pipeline Interactive Demo"></iframe>
       </div>
-      <div class="caption" style="margin-bottom:32px">Mockup · the whole flow, looped · hover to pause (test data)</div>
+      <div class="caption" style="margin-top: 12px; margin-bottom: 32px;">Interactive Studio · You can test data entry, template customization, bulk generation and guided tour right inside this viewport.</div>
 
       <div class="flow-sequence">
 

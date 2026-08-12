@@ -1,0 +1,6 @@
+{
+  "name": "Automated Certificate Issuance Flow",
+  "description": "Interactive workflow demo showcasing automated certificate creation, bulk generation, template mapping, and dispatch from employee spreadsheet data.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

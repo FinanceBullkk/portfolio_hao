@@ -1,28 +1,104 @@
 /* ============================================================
    Design tokens — stark monochrome
+
+   Dark mode is CLASS based (`<html class="dark">`), not a media
+   query. The inline snippet in each page's <head> sets the class
+   from localStorage, falling back to the OS preference. That is
+   what lets the nav toggle override the OS in both directions —
+   a media query would always win back on a dark-set machine.
+   Keep the two token blocks below in sync.
    ============================================================ */
 :root {
-  --bg: #0a0a0a;
-  --bg-raised: #111110;
-  --bg-card: #141413;
-  --bg-card-2: #171716;
-  --bg-input: #232322;
+  /* Neutral ramp. Same values in both themes; the role tokens
+     underneath pick a different step per theme. */
+  --n-50:  oklch(98.5% 0 none);
+  --n-100: oklch(97% 0 none);
+  --n-200: oklch(92.2% 0 none);
+  --n-300: oklch(87% 0 none);
+  --n-400: oklch(70.8% 0 none);
+  --n-500: oklch(55.6% 0 none);
+  --n-600: oklch(43.9% 0 none);
+  --n-700: oklch(37.1% 0 none);
+  --n-800: oklch(26.9% 0 none);
+  --n-900: oklch(20.5% 0 none);
 
-  --fg: #f0f0ee;
-  --fg-dim: #c6c4c0;
-  --fg-mute: #93918c;
-  --fg-faint: #6e6c66;
-  --fg-ghost: #4a4842;
-  --fg-whisper: #292825;
+  --bg: #ffffff;
+  --bg-raised: #fafafa;
+  --bg-card: #ffffff;
+  --bg-card-2: #f5f5f5; /* neutral-100 */
+  --bg-input: #f5f5f5;
 
-  --border: rgba(255, 255, 255, .09);
+  --fg: #000000;
+  --fg-dim: #404040;      /* neutral-700 */
+  --fg-mute: #737373;     /* neutral-500 */
+  --fg-faint: #a3a3a3;    /* neutral-400 */
+  --fg-ghost: #d4d4d4;    /* neutral-300 */
+  --fg-whisper: #e5e5e5;  /* neutral-200 */
+
+  --border: #e5e5e5;      /* neutral-200 */
+  --border-md: #d4d4d4;
+  --border-lg: #a3a3a3;
+
+  /* Role tokens for the home page. Each one is a light/dark pair. */
+  --r-secondary:    var(--n-600);  /* tagline, role lines, subtitles */
+  --r-body:         var(--n-700);  /* product description */
+  --r-meta:         var(--n-500);  /* section counts, chip text */
+  --r-footer:       var(--n-600);
+  --r-line:         var(--n-400);  /* link underline colour */
+  --r-edge:         var(--n-200);  /* card border */
+  --r-edge-hover:   var(--n-400);
+  --r-surface:      var(--n-50);   /* hero card fill */
+  --r-chip:         var(--n-100);
+  --r-hover-bg:     var(--n-100);
+  --r-nav-hover:    var(--n-800);
+  --r-nav-active:   var(--n-900);
+  --r-toggle:       var(--n-600);
+  --r-toggle-hover: var(--n-900);
+
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* The reference portfolio ships Geist but never applies it — its
+     body font resolves to the OS UI stack. `--font-ui` reproduces
+     that exactly; `--font-sans` stays Geist for the case studies. */
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', Arial, sans-serif,
+             'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --container: 1120px;
+}
+
+:root.dark {
+  --bg: #000000;
+  --bg-raised: #171717;     /* neutral-900 */
+  --bg-card: rgba(23,23,23,0.5); /* neutral-900/50 */
+  --bg-card-2: #262626;     /* neutral-800 */
+  --bg-input: #262626;
+
+  --fg: #ffffff;
+  --fg-dim: #d4d4d4;      /* neutral-300 */
+  --fg-mute: #a3a3a3;     /* neutral-400 */
+  --fg-faint: #737373;    /* neutral-500 */
+  --fg-ghost: #525252;    /* neutral-600 */
+  --fg-whisper: #404040;  /* neutral-700 */
+
+  --border: #262626;      /* neutral-800 */
   --border-md: rgba(255, 255, 255, .16);
   --border-lg: rgba(255, 255, 255, .24);
 
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
-  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-
-  --container: 1120px;
+  --r-secondary:    var(--n-400);
+  --r-body:         var(--n-300);
+  --r-meta:         var(--n-400);
+  --r-footer:       var(--n-300);
+  --r-line:         var(--n-600);
+  --r-edge:         var(--n-800);
+  --r-edge-hover:   var(--n-600);
+  --r-surface:      color-mix(in srgb, var(--n-900) 50%, transparent);
+  --r-chip:         var(--n-800);
+  --r-hover-bg:     var(--n-800);
+  --r-nav-hover:    var(--n-200);
+  --r-nav-active:   var(--n-100);
+  --r-toggle:       var(--n-400);
+  --r-toggle-hover: var(--n-100);
 }
 
 /* ============================================================
@@ -46,6 +122,12 @@ body {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 40px;
+}
+
+.container-sm {
+  max-width: 672px; /* max-w-2xl like Tailwind */
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 @media (max-width: 560px) {
@@ -226,37 +308,40 @@ body {
    light-surface mockups use <b> on white and must stay dark. */
 .hl { color: var(--fg); font-weight: 600; }
 
+/* Chips. The old design separated tags with a "/" glyph; chips do not
+   need a separator, so that ::after rule is gone. */
 .tag {
-  font-family: var(--font-mono);
+  font-family: inherit;
   font-size: 12px;
-  color: var(--fg-mute);
+  line-height: 16px;
+  color: var(--r-meta);
+  background: var(--r-chip);
+  border-radius: 4px;
+  padding: 2px 8px;
   white-space: nowrap;
 }
-.tag-lg { font-size: 12.5px; }
+.tag-lg { font-size: 12px; }
 
 .tag-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0;
-  row-gap: 8px;
-}
-.tag-row .tag:not(:last-child)::after {
-  content: '/';
-  margin: 0 10px;
-  color: var(--fg-ghost);
+  gap: 8px;
 }
 
 /* ============================================================
    Section labels / headings
    ============================================================ */
+/* Small kicker above a section heading. Was mono uppercase on the old
+   dark design; now a plain meta line to match the new language. */
 .eyebrow {
-  font-family: var(--font-mono);
+  font-family: inherit;
   font-size: 12px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-  margin-bottom: 18px;
+  line-height: 16px;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--r-meta);
+  margin-bottom: 4px;
 }
 
 .link-underline {
@@ -268,19 +353,18 @@ body {
 .link-underline:hover { color: var(--fg); border-color: var(--fg); }
 
 .text-link {
-  font-family: var(--font-mono);
-  font-size: 13.5px;
-  color: var(--fg);
-  text-decoration: none;
-  border-bottom: 1.5px solid var(--fg);
-  padding-bottom: 3px;
-  transition: opacity .16s;
+  font-family: inherit;
+  font-size: 14px;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--r-line);
+  text-underline-offset: 2px;
+  border-bottom: 0;
+  padding-bottom: 0;
+  transition: all 0.15s ease;
 }
-.text-link:hover { opacity: .7; }
-.text-link.muted {
-  color: var(--fg-mute);
-  border-bottom-color: var(--fg-faint);
-}
+.text-link:hover { color: var(--r-meta); opacity: 1; }
+.text-link.muted { color: inherit; border-bottom: 0; }
 
 /* ============================================================
    Footer
@@ -341,36 +425,42 @@ body {
 /* ============================================================
    Numbered row list (used across case studies)
    ============================================================ */
-.numbered-list { display: flex; flex-direction: column; }
+.numbered-list { display: flex; flex-direction: column; gap: 12px; }
 
 .numbered-row {
   display: flex;
-  gap: 22px;
-  padding: 24px 0;
-  border-top: 1px solid var(--border);
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
 }
-.numbered-row:last-child { border-bottom: 1px solid var(--border); }
+.numbered-row:last-child { border-bottom: 1px solid var(--r-edge); }
 
 .numbered-row .num {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  color: var(--fg-ghost);
-  flex: 0 0 40px;
-  padding-top: 3px;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--r-meta);
+  flex: 0 0 24px;
+  padding-top: 0;
 }
 
 .numbered-row .title {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 17px;
-  margin-bottom: 6px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  margin-bottom: 4px;
 }
 
 .numbered-row .body {
-  color: var(--fg-mute);
-  font-size: 14.5px;
+  color: var(--r-secondary);
+  font-size: 14px;
+  line-height: 1.625;
   text-wrap: pretty;
-  max-width: 64ch;
+  max-width: none;
 }
 
 /* ============================================================
@@ -387,16 +477,15 @@ body {
 }
 
 .role-grid h2 {
-  font-family: var(--font-sans);
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -.02em;
-  line-height: 1.12;
-  margin-bottom: 16px;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  margin-bottom: 12px;
 }
-
-.role-grid p { color: var(--fg-mute); font-size: 15px; text-wrap: pretty; }
-.role-grid .aside { color: var(--fg-faint); }
+.role-grid p { color: var(--r-secondary); font-size: 14px; line-height: 1.625; text-wrap: pretty; }
+.role-grid .aside { color: var(--r-meta); }
 
 /* ============================================================
    Line-flow diagram (used for pipeline / process visuals)
@@ -418,29 +507,25 @@ body {
   gap: 10px;
 }
 .flow-node .kicker {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--fg-ghost);
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--r-meta);
 }
 .flow-node .title {
-  font-family: var(--font-sans);
-  font-size: 18px;
-  font-weight: 600;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--fg);
 }
 .flow-node p {
-  font-size: 13.5px;
-  color: var(--fg-mute);
-  max-width: 30ch;
+  font-size: 14px;
+  line-height: 1.625;
+  color: var(--r-secondary);
+  max-width: none;
 }
-
-.flow-connector {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: flex-start;
-  padding-top: 8px;
-  margin: 0 22px;
-  color: var(--fg-faint);
-}
-.flow-connector svg { width: 46px; height: 12px; }
+.flow-connector { color: var(--r-meta); }

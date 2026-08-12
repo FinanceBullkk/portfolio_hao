@@ -1,0 +1,18 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Sign-in · split hero (Corgi7 Redesign.dc.html · screen 01)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.signin-screen {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: var(--s-8) var(--s-5); background:
+    radial-gradient(circle at 18% 12%, var(--brand-50) 0%, transparent 46%),
+    radial-gradient(circle at 84% 88%, var(--accent-50) 0%, transparent 44%), var(--ink-50);
+}
+/* Wrong-domain notice — reuses the sign-in canvas */
+.signin-note-card { width: 100%; max-width: 420px; background: var(--white); border: 1px solid var(--ink-150); border-radius: 18px; box-shadow: var(--sh-4); padding: 40px 36px 32px; text-align: center; }
+.signin-note-logo { height: 26px; object-fit: contain; margin-bottom: 22px; }
+.signin-note-ic { width: 56px; height: 56px; border-radius: 50%; background: var(--warn-50); color: var(--warn-600); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+.signin-note-card h1 { font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -.02em; color: var(--ink-900); margin: 0 0 8px; }
+.signin-note-card p { font-size: var(--fs-base); line-height: 1.55; color: var(--ink-500); margin: 0 0 8px; }
+.signin-note-card .cur { font-size: var(--fs-sm); color: var(--ink-400); margin: 0 0 24px; }
+.signin-note-card .cur b { color: var(--ink-600); }
+

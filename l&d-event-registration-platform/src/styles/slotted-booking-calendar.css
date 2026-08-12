@@ -1,0 +1,47 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Slotted booking · day-column chips (Redesign · screen 04)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.cal-legend { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.cal-legend .lg { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); color: var(--ink-500); }
+.cal-legend .sw { width: 13px; height: 13px; border-radius: var(--r-xs); }
+.cal-legend .sw.avail { border: 1.5px solid var(--brand-500); background: var(--brand-50); }
+.cal-legend .sw.sel { background: var(--brand-500); }
+.cal-legend .sw.full { background: repeating-linear-gradient(135deg, var(--ink-150) 0 3px, var(--ink-50) 3px 6px); }
+
+.cal-cols { display: grid; background: var(--ink-25); }
+.cal-daycol { border-right: 1px solid var(--ink-100); min-width: 0; }
+.cal-daycol:last-child { border-right: 0; }
+.cal-dayhd { text-align: center; padding: 11px 4px; border-bottom: 1px solid var(--ink-150); background: var(--white); }
+.cal-dayhd .d { display: block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-400); }
+.cal-dayhd .n { display: block; font-size: 17px; font-weight: 700; color: var(--ink-700); }
+.cal-chips { display: flex; flex-direction: column; gap: var(--s-2); padding: 12px 10px; min-height: 260px; }
+.cal-none { text-align: center; color: var(--ink-300); font-size: var(--fs-sm); padding: var(--s-2) 0; }
+
+.cal-chip { position: relative; text-align: left; border: 1.5px solid var(--ink-150); background: var(--white); border-radius: 9px; padding: 9px 11px; cursor: pointer; font-family: inherit; transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast); }
+.cal-chip .t { display: block; font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.cal-chip .m { display: block; font-size: 11px; color: var(--ink-500); margin-top: 1px; }
+.cal-chip.sp .t { color: var(--brand-700); }
+.cal-chip.sk .t { color: var(--accent-700); }
+.cal-chip.sp { border-color: var(--brand-100); }
+.cal-chip.sk { border-color: var(--accent-100); }
+.cal-chip.sp:not(:disabled):hover { border-color: var(--brand-400); background: var(--brand-50); }
+.cal-chip.sk:not(:disabled):hover { border-color: var(--accent-400); background: var(--accent-50); }
+.cal-chip:focus-visible { outline: none; box-shadow: var(--sh-focus); }
+/* selected */
+.cal-chip.sel.sp { background: var(--brand-500); border-color: var(--brand-500); box-shadow: 0 4px 10px -3px rgba(11,79,139,.4); }
+.cal-chip.sel.sk { background: var(--accent-500); border-color: var(--accent-500); box-shadow: 0 4px 10px -3px rgba(178,106,31,.4); }
+.cal-chip.sel .t { color: #fff; }
+.cal-chip.sel .m { color: rgba(255,255,255,.85); }
+.cal-chip .chk { position: absolute; top: 8px; right: 9px; width: 16px; height: 16px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.cal-chip.sel.sp .chk { color: var(--brand-500); }
+.cal-chip.sel.sk .chk { color: var(--accent-500); }
+/* low seats */
+.cal-chip.low { border-color: var(--warn-100); background: var(--warn-50); }
+.cal-chip.low .m { color: var(--warn-700); font-weight: 600; }
+/* full + conflict (disabled) */
+.cal-chip:disabled { cursor: not-allowed; }
+.cal-chip.full, .cal-chip.conflict { background: repeating-linear-gradient(135deg, rgba(15,18,23,.04) 0 5px, transparent 5px 10px), var(--ink-25); border-color: var(--ink-150); }
+.cal-chip.full .t, .cal-chip.conflict .t { color: var(--ink-300); text-decoration: line-through; }
+.cal-chip.full .m { color: var(--danger-700); text-transform: uppercase; font-weight: 700; font-size: 10.5px; letter-spacing: .04em; }
+.cal-chip.conflict .m { color: var(--ink-400); }
+

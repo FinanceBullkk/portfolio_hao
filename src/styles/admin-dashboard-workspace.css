@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin redesign · Dashboard + Event workspace + inline toggles (A1–A6)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Notifications nav badge turns red when there are email failures. */
+.nav-item .ni-count.danger { background: var(--danger-500); color: #fff; }
+
+/* ── Inline enrollment toggle (Events card + workspace header) ── */
+.ev-toggle { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; cursor: pointer; font-family: inherit; padding: 0; }
+.ev-toggle .knob { position: relative; width: 34px; height: 20px; border-radius: 999px; background: var(--ink-300); transition: background var(--t-fast); flex-shrink: 0; }
+.ev-toggle .knob::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(15,18,23,0.25); transition: transform var(--t-fast) var(--ease-out); }
+.ev-toggle.on .knob { background: var(--success-600); }
+.ev-toggle.on .knob::after { transform: translateX(14px); }
+.ev-toggle.off .knob { background: var(--danger-500); }
+.ev-toggle .lbl { font-size: 12px; font-weight: 700; }
+.ev-toggle.on .lbl { color: var(--success-700); }
+.ev-toggle.off .lbl { color: var(--danger-700); }
+.ev-toggle:disabled { opacity: 0.55; cursor: default; }
+.ev-toggle.lg .knob { width: 40px; height: 23px; }
+.ev-toggle.lg .knob::after { width: 19px; height: 19px; }
+.ev-toggle.lg.on .knob::after { transform: translateX(17px); }
+.ev-toggle.lg .lbl { font-size: 13px; }
+
+/* Card action cluster (Manage → + ⋯) replaces the old menu-only column. */
+.ev-actions { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; }
+.ev-actions .icon-act { opacity: 1; width: 32px; height: 32px; border: 1px solid var(--ink-150); }
+.ev-actions .icon-act:hover { background: var(--ink-50); color: var(--ink-900); }
+
+/* Text-triggered overflow menu ("More ▾"). */
+.rowmenu.more-menu { min-width: 220px; }
+
+/* ── Global Dashboard ── */
+.dash { display: flex; flex-direction: column; gap: var(--s-5); }
+.dash-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--s-4); }
+.kpi { background: var(--white); border: 1px solid var(--ink-150); border-radius: var(--r-lg); box-shadow: var(--sh-1); padding: 16px 18px; text-align: left; }
+/* The Email-failures KPI is a <button> grid item; a button doesn't expand to fit stacked
+   block children, so its content overflowed and collided with "Needs attention" at 390px.
+   Flex-column makes it size to its content like the sibling .kpi <div>s (P1-7). */
+.kpi.as-btn { cursor: pointer; font-family: inherit; transition: box-shadow var(--t-fast); display: flex; flex-direction: column; align-items: flex-start; height: auto; }
+.kpi.as-btn:hover { box-shadow: var(--sh-2); }
+.kpi.danger { background: var(--danger-50); border-color: var(--danger-100); }
+.kpi .k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-500); }
+.kpi .v { font-size: 30px; font-weight: 800; letter-spacing: -.02em; color: var(--ink-900); margin-top: 6px; }
+.kpi .v small { font-size: 16px; font-weight: 700; color: var(--ink-400); }
+.kpi.danger .v { color: var(--danger-700); }
+.kpi-trend { font-size: 12px; font-weight: 700; margin-top: 4px; }
+.kpi-trend.up { color: var(--success-600); }
+.kpi-sub { font-size: 12px; color: var(--ink-500); margin-top: 4px; }
+.kpi-link { font-size: 12px; font-weight: 700; color: var(--danger-700); margin-top: 6px; }
+.kpi:not(.danger) .kpi-link { color: var(--success-600); }
+.kpi-bar { height: 7px; border-radius: 999px; background: var(--ink-100); overflow: hidden; margin-top: 8px; }
+.kpi-bar > span { display: block; height: 100%; background: var(--brand-500); border-radius: 999px; }
+
+.dash-attn-hd { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-500); margin-top: 2px; }
+.dash-attn { display: flex; flex-direction: column; gap: 10px; }
+.dash-attn-empty { font-size: 13.5px; color: var(--ink-400); padding: 4px 2px; }
+.attn-row { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; font-family: inherit; padding: 13px 16px; border-radius: var(--r-md); border: 1px solid transparent; }
+.attn-row.warn { background: var(--warn-50); border-color: var(--warn-100); }
+.attn-row.danger { background: var(--danger-50); border-color: var(--danger-100); }
+.attn-ic { flex-shrink: 0; display: inline-flex; }
+.attn-row.warn .attn-ic { color: var(--warn-600); }
+.attn-row.danger .attn-ic { color: var(--danger-600); }
+.attn-tx { flex: 1; font-size: 13.5px; font-weight: 500; color: var(--ink-800); }
+.attn-go { font-size: 12.5px; font-weight: 700; flex-shrink: 0; }
+.attn-row.warn .attn-go { color: var(--warn-700); }
+.attn-row.danger .attn-go { color: var(--danger-700); }
+
+.dash-cols { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.dash-card { background: var(--white); border: 1px solid var(--ink-150); border-radius: var(--r-lg); box-shadow: var(--sh-1); padding: 4px 6px 8px; }
+.dash-card-hd { font-size: 14px; font-weight: 700; color: var(--ink-900); padding: 13px 14px 8px; }
+.dash-feed-empty { font-size: 13px; color: var(--ink-400); padding: 6px 14px 12px; }
+.fill-row { display: block; width: 100%; text-align: left; cursor: pointer; font-family: inherit; background: transparent; border: 0; padding: 9px 14px; border-radius: var(--r-sm); }
+.fill-row:hover { background: var(--ink-25); }
+.fill-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.fill-top .nm { font-size: 13px; font-weight: 600; color: var(--ink-800); }
+.fill-top .pc { font-size: 12.5px; font-weight: 700; color: var(--ink-600); font-variant-numeric: tabular-nums; }
+.fill-track { height: 7px; border-radius: 999px; background: var(--ink-100); overflow: hidden; }
+.fill-track > span { display: block; height: 100%; background: var(--brand-500); border-radius: 999px; }
+.fill-track > span.warn { background: var(--warn-600); }
+.fill-track > span.full { background: var(--danger-500); }
+.act-row { display: flex; align-items: center; gap: 10px; padding: 8px 14px; }
+.act-tx { flex: 1; font-size: 13px; color: var(--ink-700); }
+.act-ago { font-size: 12px; color: var(--ink-400); flex-shrink: 0; }
+
+@media (max-width: 760px) { .dash-cols { grid-template-columns: 1fr; } }
+
+/* ── Event workspace ── */
+.ws { display: flex; flex-direction: column; gap: var(--s-4); }
+.ws-crumb { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.crumb-link { background: transparent; border: 0; padding: 0; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--brand-600); }
+.crumb-link:hover { text-decoration: underline; }
+.crumb-sep { color: var(--ink-300); }
+.crumb-cur { font-weight: 600; color: var(--ink-700); }
+
+.ws-head { background: var(--white); border: 1px solid var(--ink-150); border-radius: var(--r-lg); box-shadow: var(--sh-1); padding: 18px 20px 0; }
+.ws-head-top { display: flex; align-items: center; gap: 14px; }
+.ws-icon { width: 48px; height: 48px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ws-icon.sp { background: var(--brand-50); color: var(--brand-600); }
+.ws-icon.sk { background: var(--accent-50); color: var(--accent-700); }
+.ws-name-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ws-name { font-size: 22px; font-weight: 700; letter-spacing: -.02em; color: var(--ink-900); }
+.ws-meta { font-size: 13px; color: var(--ink-500); margin-top: 3px; }
+.ws-acts { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
+.ws-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); padding: 14px 0; border-top: 1px solid var(--ink-100); }
+.ws-stat .k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-500); }
+.ws-stat .v { font-size: 24px; font-weight: 800; letter-spacing: -.02em; color: var(--ink-900); margin-top: 4px; }
+.ws-stat.accent .v { color: var(--brand-600); }
+.ws-stat.warn .v { color: var(--accent-600); }
+.ws-tabs { display: flex; gap: 4px; border-top: 1px solid var(--ink-100); overflow-x: auto; }
+.ws-tabs button { background: transparent; border: 0; border-bottom: 2px solid transparent; padding: 12px 14px; margin-bottom: -1px; cursor: pointer; font-family: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink-500); }
+.ws-tabs button:hover { color: var(--ink-800); }
+.ws-tabs button.active { color: var(--brand-600); border-bottom-color: var(--brand-600); }
+.ws-body { display: block; }
+.ws-settings { padding: 4px 18px 0; }
+.ws-set-grid { display: flex; gap: var(--s-4); flex-wrap: wrap; align-items: flex-start; padding-bottom: 8px; }
+.set-sec { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-500); margin: 18px 0 4px; }
+.set-sec.danger { color: var(--danger-700); }
+
+@media (max-width: 760px) { .ws-stats { grid-template-columns: 1fr 1fr; } }
+
+/* ── Registrations quick-filter chips + slotted slot view (A6) ── */
+.reg-chips { display: flex; gap: 8px; flex-wrap: wrap; padding: 12px var(--s-5); border-bottom: 1px solid var(--ink-100); background: var(--white); }
+.reg-chips button { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: var(--r-pill); border: 1px solid var(--ink-150); background: var(--white); cursor: pointer; font-family: inherit; font-size: 12.5px; font-weight: 600; color: var(--ink-600); }
+.reg-chips button:hover { border-color: var(--ink-300); color: var(--ink-900); }
+.reg-chips button.active { background: var(--brand-50); border-color: var(--brand-200); color: var(--brand-700); }
+.reg-chips button .n { font-variant-numeric: tabular-nums; color: var(--ink-400); font-weight: 700; }
+.reg-chips button.active .n { color: var(--brand-600); }
+.dgrid tr.incomplete { background: #FDFBF6; }
+.dgrid tr.incomplete:hover { background: #FBF6EC; }
+
+/* Cross-event roster: clickable rows + event chip tones. */
+.dgrid tr.row-click { cursor: pointer; }
+.dgrid tr.row-click:hover { background: var(--ink-25); }
+.dgrid tr.row-click .row-open { font-size: 12px; font-weight: 700; color: var(--brand-600); opacity: 0; }
+.dgrid tr.row-click:hover .row-open { opacity: 1; }
+.pill.sp { background: var(--brand-50); color: var(--brand-700); border-color: var(--brand-100); }
+.pill.sk { background: var(--accent-50); color: var(--accent-700); border-color: var(--accent-100); }
+
+.event-desc { margin-top: var(--s-4); font-size: var(--fs-base); color: var(--ink-700); line-height: 1.6; }
+.event-desc > :first-child { margin-top: 0; }
+.event-desc h1, .event-desc h2, .event-desc h3, .event-desc h4 { font-weight: 700; color: var(--ink-900); margin: var(--s-4) 0 var(--s-2); line-height: 1.3; }
+.event-desc h1 { font-size: var(--fs-lg); }
+.event-desc h2 { font-size: var(--fs-base); }
+.event-desc p { margin: 0 0 var(--s-3); }
+.event-desc ul, .event-desc ol { margin: 0 0 var(--s-3); padding-left: var(--s-5); }
+.event-desc li { margin: 2px 0; }
+.event-desc a { color: var(--brand-700); text-decoration: underline; }
+.event-desc code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; background: var(--ink-100); padding: 1px 4px; border-radius: var(--r-xs); }
+.event-desc pre { background: var(--ink-100); padding: var(--s-3); border-radius: var(--r-sm); overflow-x: auto; }
+.event-desc pre code { background: none; padding: 0; }
+.event-desc table { border-collapse: collapse; width: 100%; margin: 0 0 var(--s-3); font-size: var(--fs-sm); }
+.event-desc th, .event-desc td { border: 1px solid var(--ink-150); padding: 4px 8px; text-align: left; }
+.event-desc blockquote { border-left: 3px solid var(--ink-200); margin: 0 0 var(--s-3); padding-left: var(--s-3); color: var(--ink-600); }
+.event-desc img { max-width: 100%; height: auto; border-radius: var(--r-sm); }
+.event-desc hr { border: none; border-top: 1px solid var(--ink-150); margin: var(--s-4) 0; }

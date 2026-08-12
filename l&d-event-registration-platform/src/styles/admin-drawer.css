@@ -1,0 +1,75 @@
+/* ─── Drawer (edit panels) ─────────────────────────────────────────────── */
+/* No backdrop-filter here either — see .modal-backdrop. The edit drawer holds
+   text inputs, so blur-induced repaint lag was most noticeable while typing. */
+.drawer-back { position: fixed; inset: 0; background: rgba(10,14,22,0.42); z-index: var(--z-modal); display: flex; justify-content: flex-end; overscroll-behavior: contain; animation: fadeIn var(--t-base) var(--ease-out); }
+.drawer { width: 480px; max-width: 94vw; height: 100%; background: var(--white); box-shadow: -16px 0 48px -16px rgba(15,18,23,.3); display: flex; flex-direction: column; overflow: hidden; animation: drawerIn var(--t-slow) var(--ease-out); }
+@keyframes drawerIn { from { transform: translateX(40px); opacity: 0.6; } to { transform: translateX(0); opacity: 1; } }
+.drawer-hd { padding: 20px 24px 16px; border-bottom: 1px solid var(--ink-100); display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-3); }
+.drawer-hd-main { min-width: 0; }
+.drawer-hd .dt { font-size: 18px; font-weight: 700; letter-spacing: -.015em; color: var(--ink-900); margin: 0 0 4px; }
+.drawer-hd .ds-row { display: flex; align-items: center; gap: 8px; }
+.drawer-hd .ds { font-size: 12.5px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+.drawer-x { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--ink-150); background: var(--white); color: var(--ink-500); cursor: pointer; font-size: 18px; line-height: 1; flex-shrink: 0; }
+.drawer-x:hover { background: var(--ink-50); color: var(--ink-900); }
+.drawer-bd { padding: 22px 24px 24px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; flex: 1; }
+.drawer-bd .field { min-width: 0; margin-bottom: 18px; }
+.drawer-bd .label { font-size: 13px; font-weight: 600; color: var(--ink-700); margin-bottom: 7px; }
+.drawer-bd .input { width: 100%; height: 44px; border-width: 1.5px; border-radius: 10px; }
+.drawer-bd .help { margin-top: 6px; font-size: 11.5px; color: var(--ink-400); }
+.drawer-bd .row { display: flex; flex-wrap: nowrap; }
+.drawer-row2 { display: flex; gap: 14px; align-items: flex-start; }
+.drawer-row2 .cap-field { flex: 0 0 130px; }
+.drawer-row2 .grow { flex: 1; min-width: 0; }
+.drawer-ft { padding: 14px 24px; border-top: 1px solid var(--ink-100); background: var(--ink-25); display: flex; align-items: center; gap: 10px; }
+.drawer-ft-sp { flex: 1; }
+.drawer-dirty { font-size: 12px; color: var(--warn-700); display: inline-flex; align-items: center; gap: 6px; }
+.drawer-dirty .d { width: 7px; height: 7px; border-radius: 50%; background: var(--warn-500); }
+
+/* Drawer sections + toggle rows (handoff Edit/Add event) */
+.drawer-sec { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-400); margin-bottom: 12px; }
+.drawer-sec.danger { color: var(--danger-600); }
+.drawer-div { height: 1px; background: var(--ink-100); margin: 22px 0; }
+.id-locked { display: flex; align-items: center; gap: 8px; height: 44px; border: 1.5px solid var(--ink-150); border-radius: 10px; padding: 0 13px; background: var(--ink-50); color: var(--ink-300); }
+.id-locked .id { font-size: 14px; color: var(--ink-500); font-variant-numeric: tabular-nums; }
+/* "Cannot be changed" note: --ink-300 was 1.89:1 on the locked row; --ink-500 → 5.42:1 (P1-10). */
+.id-locked .note { margin-left: auto; font-size: 11.5px; color: var(--ink-500); }
+.type-chip { font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 5px; }
+.type-chip.simple { color: var(--accent-700); background: var(--accent-50); }
+.type-chip.slot { color: var(--brand-600); background: var(--brand-50); }
+.tgl-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 15px 0; cursor: pointer; }
+.tgl-row + .tgl-row { border-top: 1px solid var(--ink-100); }
+.tgl-txt { min-width: 0; display: flex; flex-direction: column; }
+.tgl-txt .tt { font-size: 14px; font-weight: 600; color: var(--ink-900); }
+.tgl-txt .td { font-size: 12.5px; color: var(--ink-500); margin-top: 2px; }
+.tgl-in { position: absolute; opacity: 0; width: 0; height: 0; }
+.tgl { width: 44px; height: 25px; border-radius: 999px; background: var(--ink-200); position: relative; flex-shrink: 0; margin-top: 2px; transition: background var(--t-fast); }
+.tgl::after { content: ''; position: absolute; top: 2.5px; left: 2.5px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform var(--t-fast); }
+.tgl-in:checked + .tgl { background: var(--brand-500); }
+.tgl-in:checked + .tgl::after { transform: translateX(19px); }
+.tgl-in:focus-visible + .tgl { box-shadow: var(--sh-focus); }
+.danger-zone { border: 1px solid #F4CFC9; border-radius: 12px; overflow: hidden; }
+.danger-zone .dz-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 16px; }
+.danger-zone .dz-row.archive { border-bottom: 1px solid #F8E3DF; }
+/* Protected events (assessment-q2) show only the Archive row — drop its divider. */
+.danger-zone .dz-row.archive:last-child { border-bottom: 0; }
+.danger-zone .dz-row.delete { background: #FDF6F5; }
+.danger-zone .dz-row .t { font-size: 13.5px; font-weight: 600; color: var(--ink-900); }
+.danger-zone .dz-row.delete .t { color: var(--danger-700); }
+.danger-zone .dz-row .d { font-size: 12px; color: var(--ink-500); margin-top: 2px; }
+.danger-zone .dz-row.delete .d { color: var(--danger-600); }
+.dz-btn { height: 34px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--ink-150); background: var(--white); color: var(--ink-700); font-size: 12.5px; font-weight: 600; font-family: inherit; cursor: pointer; flex-shrink: 0; }
+/* Delete button: base `button.danger` set a red fill that this rule didn't reset, leaving
+   dark-red text on red = 1.71:1. Force the white surface so text↔bg is 8.4:1 (P0-3). */
+.dz-btn.danger { background: var(--white); border-color: #D9534A; color: var(--danger-700); }
+.dz-btn:hover { background: var(--ink-50); }
+.dz-btn.danger:hover { background: var(--danger-50); }
+
+/* responsive */
+@media (max-width: 860px) {
+  .sidebar { width: 64px; }
+  .side-brand .wm, .side-section, .nav-item .ni-label, .nav-item .ni-count, .side-user .uu, .side-back span { display: none; }
+  .nav-item { justify-content: center; }
+  .content { padding: var(--s-5) var(--s-4); }
+  .main-hd { padding: var(--s-4); }
+}
+

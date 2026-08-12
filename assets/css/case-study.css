@@ -1,249 +1,348 @@
 /* ============================================================
-   Case-study hero
+   Case-study page primitives
+   Spec: docs/design-guidelines.md §3
+   Depends on home.css for the shell (.container-sm, nav, footer).
+   Class names are unchanged from the old dark design on purpose —
+   the HTML keeps its markup, only the meaning of each class moves.
    ============================================================ */
-.cs-hero { padding: 100px 0 48px; }
+
+/* ---- Hero ---- */
+.cs-hero { margin-bottom: 24px; }
 
 .cs-hero h1 {
-  font-family: var(--font-sans);
-  font-size: 54px;
-  font-weight: 700;
-  letter-spacing: -.025em;
-  line-height: 1.08;
-  max-width: 19ch;
-  margin-bottom: 26px;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--fg);
+  max-width: none;
+  margin-bottom: 8px;
 }
 
 .cs-hero p.lede {
-  font-size: 18px;
-  color: var(--fg-mute);
-  max-width: 62ch;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--n-800);
+  max-width: none;
   text-wrap: pretty;
 }
-
-.cs-hero p.lede b { color: var(--fg); font-weight: 600; }
+:root.dark .cs-hero p.lede { color: var(--n-200); }
+.cs-hero p.lede b { font-weight: 600; color: var(--fg); }
 
 .cs-live-badge {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-  margin-bottom: 24px;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--r-meta);
+  background: var(--r-chip);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-bottom: 12px;
 }
 
-.cs-tags { display: flex; flex-wrap: wrap; align-items: center; row-gap: 8px; margin-top: 32px; }
-.cs-tags .tag { font-size: 12px; }
-.cs-tags .tag:not(:last-child)::after {
-  content: '/';
-  margin: 0 10px;
-  color: var(--fg-ghost);
+.cs-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
 }
 
-@media (max-width: 680px) {
-  .cs-hero h1 { font-size: 34px; }
+/* ---- Primary call to action ----
+   The old design hid each case study's repo / live-demo link inside the
+   sticky subnav. That subnav is gone, so the link becomes a real button
+   under the lede, the way the reference detail pages do it. */
+.cs-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--n-900);
+  color: var(--n-100);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s ease;
 }
+.cs-cta:hover { background: var(--n-700); }
+:root.dark .cs-cta { background: var(--n-100); color: var(--n-900); }
+:root.dark .cs-cta:hover { background: var(--n-300); }
 
-/* ============================================================
-   Metric / stat bar
-   ============================================================ */
-.stat-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--border-lg);
-  border-bottom: 1px solid var(--border);
+/* ---- Section blocks ---- */
+.cs-section { margin-bottom: 32px; padding: 0; }
+.cs-section.tight { padding: 0; }
+.cs-section.bordered {
+  border-top: 1px solid var(--r-edge);
+  padding-top: 32px;
+  margin-top: 0;
 }
-.stat-bar .stat { padding: 26px 8px; border-left: 1px solid var(--border); }
-.stat-bar .stat:first-child { padding-left: 0; border-left: none; }
-.stat-bar .stat .value { font-family: var(--font-sans); font-size: 28px; font-weight: 700; letter-spacing: -.02em; }
-.stat-bar .stat .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--fg-faint); margin-top: 6px; }
-
-@media (max-width: 680px) {
-  .stat-bar { grid-template-columns: repeat(2, 1fr); }
-  .stat-bar .stat:nth-child(3) { border-left: none; padding-left: 0; }
-}
-
-/* ============================================================
-   Section blocks
-   ============================================================ */
-.cs-section { padding: 60px 0 0; }
-.cs-section.tight { padding-top: 52px; }
-.cs-section.bordered { border-top: 1px solid var(--border-lg); margin-top: 8px; }
 
 .cs-section h2 {
-  font-family: var(--font-sans);
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: -.02em;
-  margin-bottom: 18px;
-  max-width: 22ch;
+  /* weight 500 here, NOT 600. The home page uses 600; detail pages use 500. */
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  max-width: none;
+  margin-bottom: 12px;
 }
-.cs-section > p { font-size: 16px; color: var(--fg-mute); max-width: 64ch; text-wrap: pretty; }
 
-/* ============================================================
-   Two-column stage detail (pipeline breakdown)
-   ============================================================ */
-.stage-grid {
+.cs-section > p {
+  font-size: 14px;
+  line-height: 1.625;
+  color: var(--n-800);
+  max-width: none;
+  text-wrap: pretty;
+}
+:root.dark .cs-section > p { color: var(--n-200); }
+.cs-section > p b { font-weight: 600; color: var(--fg); }
+
+/* ---- Caption under a mockup ---- */
+.caption {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--r-secondary);
+  margin-top: 8px;
+  margin-bottom: 32px;
+  max-width: none;
+  text-wrap: pretty;
+  font-family: inherit;
+}
+.caption em { font-style: normal; font-weight: 500; color: var(--fg); }
+.cs-section > p.caption { font-size: 14px; max-width: none; }
+
+/* ---- Stat row ---- */
+.stat-bar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  margin-top: 30px;
-  border-top: 1px solid var(--border-lg);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  border: 0;
+  margin-bottom: 32px;
 }
-@media (max-width: 860px) {
-  .stage-grid { grid-template-columns: 1fr; }
-  .stage-card { border-left: none !important; padding-left: 0 !important; }
+@media (min-width: 640px) {
+  .stat-bar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.stat-bar .stat {
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
+  padding: 16px;
+}
+.stat-bar .stat .value {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--fg);
+}
+.stat-bar .stat .label {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  color: var(--r-meta);
+  margin-top: 4px;
 }
 
-.stage-card {
-  padding: 28px 32px 0 0;
+/* ---- Two-column stage / before-after grids ---- */
+.stage-grid,
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  border: 0;
+  margin: 0 0 32px;
 }
-.stage-card + .stage-card {
-  border-left: 1px solid var(--border);
-  padding-left: 32px;
-}
-@media (max-width: 860px) {
-  .stage-card + .stage-card { padding-top: 32px; border-top: 1px solid var(--border); margin-top: 8px; }
+@media (min-width: 640px) {
+  .stage-grid,
+  .ba-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-.stage-card .head { margin-bottom: 20px; }
-.stage-card .head .kicker { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .1em; color: var(--fg-ghost); margin-bottom: 8px; }
-.stage-card .head .title { font-family: var(--font-sans); font-size: 21px; font-weight: 700; }
+.stage-card,
+.ba-card {
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
+  padding: 16px;
+}
+.stage-card + .stage-card,
+.ba-card.after { border-left: 1px solid var(--r-edge); padding-left: 16px; }
 
-.stage-card .body > p { font-size: 14.5px; color: var(--fg-mute); margin-bottom: 20px; text-wrap: pretty; }
-.stage-card code, .stage-card .code { font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-dim); }
+.stage-card .head { margin-bottom: 12px; }
+.stage-card .head .kicker {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  color: var(--r-meta);
+  margin-bottom: 4px;
+}
+.stage-card .head .title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+}
+.stage-card .body > p {
+  font-size: 14px;
+  line-height: 1.625;
+  color: var(--r-secondary);
+  margin-bottom: 12px;
+  text-wrap: pretty;
+}
 
-.rename-example {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 0;
-  margin-bottom: 20px;
+.ba-card .heading {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  color: var(--r-meta);
+  margin-bottom: 12px;
+}
+.ba-card .rows { display: flex; flex-direction: column; gap: 8px; }
+.ba-card .rows div {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--r-secondary);
+}
+.ba-card .rows div .mark { color: var(--r-meta); }
+
+/* ---- Inline code + small code blocks on the page (not in mockups) ---- */
+.stage-card code, .stage-card .code {
   font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-size: 13px;
+  color: var(--r-secondary);
 }
-.rename-example .file-line { display: flex; align-items: center; gap: 8px; color: var(--fg-mute); margin-bottom: 5px; }
-.rename-example .file-line:last-child { margin-bottom: 0; color: var(--fg-ghost); }
-.rename-example .file-line .arrow { color: var(--fg-faint); }
-.rename-example .meta { color: var(--fg-faint); margin-bottom: 8px; }
 
-.sheet-log {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
+.rename-example, .sheet-log {
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
 }
-.sheet-log .row { display: flex; padding: 8px 0; color: var(--fg-mute); border-top: 1px solid var(--border); }
+.rename-example .file-line { display: flex; align-items: center; gap: 8px; color: var(--r-secondary); margin-bottom: 4px; }
+.rename-example .file-line:last-child { margin-bottom: 0; color: var(--r-meta); }
+.rename-example .file-line .arrow { color: var(--r-meta); }
+.rename-example .meta { color: var(--r-meta); margin-bottom: 8px; }
+.sheet-log .row { display: flex; padding: 6px 0; color: var(--r-secondary); border-top: 1px solid var(--r-edge); }
 .sheet-log .row:first-child { border-top: none; }
-.sheet-log .row.head { color: var(--fg-ghost); }
+.sheet-log .row.head { color: var(--r-meta); }
 .sheet-log .row .who { flex: 1; }
 .sheet-log .row .status { width: 80px; text-align: right; }
-.sheet-log .row.ok .status { color: var(--fg-dim); }
+.sheet-log .row.ok .status { color: var(--r-secondary); }
 .sheet-log .row.err .status { color: var(--fg); font-weight: 600; }
 
-.checklist { display: flex; flex-direction: column; gap: 9px; }
-.checklist .item { display: flex; gap: 9px; font-size: 13.5px; color: var(--fg-dim); }
-.checklist .item .check { color: var(--fg-faint); }
-.checklist .kicker { font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--fg-ghost); margin-bottom: 11px; }
-
-/* ============================================================
-   Before / after
-   ============================================================ */
-.ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 28px; border-top: 1px solid var(--border-lg); }
-@media (max-width: 860px) { .ba-grid { grid-template-columns: 1fr; } }
-
-.ba-card { padding: 26px 32px 0 0; }
-.ba-card.after { border-left: 1px solid var(--border); padding-left: 32px; }
-@media (max-width: 860px) {
-  .ba-card.after { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 26px; margin-top: 8px; }
+/* ---- Checklist ---- */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.checklist .item { display: flex; gap: 8px; font-size: 14px; line-height: 20px; color: var(--r-secondary); }
+.checklist .item .check { color: var(--r-meta); }
+.checklist .kicker {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  color: var(--r-meta);
+  margin-bottom: 8px;
 }
-.ba-card .heading { font-family: var(--font-mono); font-size: 11px; letter-spacing: .08em; margin-bottom: 18px; color: var(--fg-faint); }
-.ba-card .rows { display: flex; flex-direction: column; gap: 13px; }
-.ba-card .rows div { display: flex; gap: 11px; font-size: 14px; }
-.ba-card.before .rows div { color: var(--fg-mute); }
-.ba-card.after .rows div { color: var(--fg-dim); }
-.ba-card .rows div .mark { color: var(--fg-ghost); }
-.ba-card.after .rows div .mark { color: var(--fg-faint); }
 
-/* ============================================================
-   Kanban-style board mock (recruitment case study)
-   ============================================================ */
+/* ---- Board mockup (recruitment). Stays a light-ish surface, framed. ---- */
 .board-mock {
-  border: 1px solid var(--border-md);
-  border-radius: 6px;
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
   overflow: hidden;
-  background: var(--bg-card);
+  background: var(--r-surface);
 }
 .board-mock .chrome {
-  padding: 11px 14px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-raised);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--fg-faint);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--r-edge);
+  font-size: 12px;
+  color: var(--r-meta);
+  font-family: inherit;
 }
-.board-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 22px; }
+.board-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 16px; }
 @media (max-width: 680px) { .board-cols { grid-template-columns: repeat(2, 1fr); } }
 .board-cols .col-head {
-  display: flex; align-items: center; gap: 7px;
-  font-family: var(--font-mono); font-size: 10px; margin-bottom: 12px; color: var(--fg-faint);
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; line-height: 16px; margin-bottom: 8px; color: var(--r-meta);
 }
 .board-cols .col-head .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-.board-cols .cards { display: flex; flex-direction: column; gap: 9px; }
+.board-cols .cards { display: flex; flex-direction: column; gap: 8px; }
 .board-cols .card {
-  border-radius: 4px; background: var(--bg-raised); padding: 12px;
-  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--r-chip);
+  padding: 10px;
+  border: 1px solid var(--r-edge);
 }
-.board-cols .card .bar-1 { height: 8px; border-radius: 2px; background: var(--bg-input); margin-bottom: 8px; }
-.board-cols .card .bar-2 { height: 6px; border-radius: 2px; background: var(--bg-card-2); }
+.board-cols .card .bar-1 { height: 8px; border-radius: 2px; background: var(--r-edge); margin-bottom: 6px; }
+.board-cols .card .bar-2 { height: 6px; border-radius: 2px; background: var(--r-edge); }
 .board-cols .card .comment-row { display: flex; gap: 5px; margin-top: 8px; align-items: center; }
-.board-cols .card .comment-row .avatar { width: 14px; height: 14px; border-radius: 50%; background: var(--bg-input); }
-.board-cols .card .comment-row .comment-label { font-family: var(--font-mono); font-size: 8px; color: var(--fg-ghost); }
+.board-cols .card .comment-row .avatar { width: 14px; height: 14px; border-radius: 50%; background: var(--r-edge); }
+.board-cols .card .comment-row .comment-label { font-size: 10px; color: var(--r-meta); }
 
-.caption {
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--fg-mute);
-  margin-top: 16px;
-  max-width: 74ch;
-  text-wrap: pretty;
-  font-family: var(--font-mono);
-}
-.caption em { color: var(--fg-dim); font-style: normal; font-weight: 500; }
-/* .cs-section > p is more specific than .caption — restore caption sizing there */
-.cs-section > p.caption { font-size: 13px; max-width: 74ch; }
+/* ---- Numbered step sequence ----
+   Was an absolutely-positioned rail with a connector line. Now a plain
+   card stack, which is what the new language uses everywhere else. ---- */
+.flow-sequence { display: flex; flex-direction: column; gap: 12px; margin: 0 0 32px; }
 
-/* ============================================================
-   Flow sequence — numbered, connected steps
-   Shared primitive: used by registration / tms / certificate-pipeline
-   ============================================================ */
-.flow-sequence { display: flex; flex-direction: column; margin-top: 12px; }
-.flow-step { position: relative; padding-left: 60px; padding-bottom: 48px; }
-.flow-step:last-child { padding-bottom: 0; }
-.flow-step .connector-line {
-  position: absolute; left: 19px; top: 44px; bottom: 4px; width: 1px; background: var(--border-lg);
+.flow-step {
+  position: static;
+  padding: 16px;
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
 }
-.flow-step:last-child .connector-line { display: none; }
-.flow-step .connector-arrow {
-  position: absolute; left: 14px; bottom: 2px;
-  font-family: var(--font-mono); font-size: 13px; line-height: 1; color: var(--fg-faint);
-}
-.flow-step:last-child .connector-arrow { display: none; }
+.flow-step .connector-line,
+.flow-step .connector-arrow { display: none; }
+
 .flow-step .num-badge {
-  position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%;
-  border: 1.5px solid var(--border-lg); background: var(--bg);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--fg);
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--r-chip);
+  color: var(--r-meta);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
 }
-.flow-step .step-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-mute); margin-bottom: 6px; }
-.flow-step .step-title { font-family: var(--font-sans); font-weight: 700; font-size: 20px; margin-bottom: 10px; }
-.flow-step .step-body { font-size: 14.5px; color: var(--fg-mute); max-width: 68ch; margin-bottom: 18px; }
+.flow-step .step-kicker {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--r-meta);
+  margin-bottom: 4px;
+}
+.flow-step .step-title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+.flow-step .step-body {
+  font-size: 14px;
+  line-height: 1.625;
+  color: var(--r-secondary);
+  max-width: none;
+  margin-bottom: 12px;
+}
 .flow-step .step-body code {
-  font-family: var(--font-mono); font-size: 12.5px; color: var(--fg-dim);
-  background: var(--bg-card-2); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg);
+  background: var(--r-chip);
+  border: 0;
+  border-radius: 4px;
+  padding: 1px 5px;
 }
+
 @media (max-width: 680px) {
-  .flow-step { padding-left: 48px; }
-  .flow-step .num-badge { width: 32px; height: 32px; font-size: 12px; }
-  .flow-step .connector-line { left: 15px; }
-  .flow-step .connector-arrow { left: 10px; }
+  .flow-step { padding: 16px; }
 }

@@ -1,0 +1,695 @@
+/* Dark, Luma-style theme for the employee-facing event app (design_handoff_user_events).
+   Every selector is scoped under .c7d so the light admin panel is untouched. Values are
+   lifted verbatim from the handoff (README "Design Tokens" + the prototype HTML). Inter,
+   weights 400/500 only (600 only inside decorative cover glyphs). */
+
+.c7d {
+  /* Warm-dark direction (2026-07, replaces the pure-Luma-black canvas): the near-black
+     #0c0c0e ground read cold and gloomy for a daytime HR audience, and the whole user
+     side was achromatic (white-pill CTA, no brand hue). Canvas lifted to a warm dark
+     gray with the same elevation ladder shape, and the primary CTA gains an indigo
+     brand accent. Mirrored in the .c7d-skin + booking-flow .c7d remap blocks below. */
+  --bg: #17181d; --card: #22232b; --card-alt: #1d1e25; --input: #22232b;
+  --s2: #272833; --s3: #2b2c37; --s4: #2f303b;
+  --bd: #35363f; --bd2: #3d3e49; --bd3: #434450; --bdStrong: #4d4e5c; --hairline: #272833;
+  /* Muted/faint text brightened for low-vision comfort. Hierarchy preserved:
+     tx > tx2 > txSec > txMut > txFaint. On the lifted #17181d canvas --txMut ≈ 6.3:1
+     and --txFaint ≈ 5.4:1 — both comfortably above WCAG AA 4.5:1. */
+  --tx: #ffffff; --tx2: #d4d4da; --txSec: #b6b6bd; --txMut: #a2a2ac; --txFaint: #909098;
+  --ok: #4cc985; --okSoft: rgba(76,201,133,.12); --okBd: rgba(76,201,133,.28);
+  --err: #e5645f; --errSoft: rgba(229,100,95,.11); --errBd: rgba(229,100,95,.3);
+  --btn: #5a63e8;
+  /* Canonical button tokens (design-system convergence phase 01) — primary = the indigo
+     accent pill; white label is ~4.9:1 on #5a63e8 (AA). */
+  --btn-primary-bg: var(--btn); --btn-primary-text: #ffffff;
+  /* Display face for headings/titles (self-hosted, see main.tsx). Inter stays the body face. */
+  --font-display: 'Sora Variable', 'Inter', -apple-system, sans-serif;
+  background: var(--bg); color: var(--tx); min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400; -webkit-font-smoothing: antialiased; letter-spacing: -0.005em;
+}
+.c7d ::selection { background: #3a3f6b; color: #fff; }
+.c7d *, .c7d *::before, .c7d *::after { box-sizing: border-box; }
+.c7d h1, .c7d h2, .c7d h3 { margin: 0; font-weight: 500; color: var(--tx); }
+/* Sora display face on the app's titles (headings + a few title divs that aren't h-tags).
+   Body text, labels and data stay on Inter. */
+.c7d h1, .c7d h2, .c7d h3, .c7d-mini .t, .c7d .mr-card-ttl h3 {
+  font-family: var(--font-display); letter-spacing: -0.028em;
+}
+.c7d p { margin: 0; }
+
+/* content column — width varies per screen */
+.c7d-wrap { margin: 0 auto; padding: 40px 24px 80px; max-width: 860px; }
+.c7d-wrap.detail { max-width: 720px; }
+.c7d-wrap.slots { max-width: 640px; }
+.c7d-wrap.form { max-width: 560px; }
+.c7d-wrap.confirm { max-width: 540px; }
+.c7d-wrap.program { max-width: 900px; }
+
+/* ── Top nav ─────────────────────────────────────────────────────────── */
+.c7d-nav { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(14px);
+  background: rgba(23,24,29,.72); border-bottom: 1px solid var(--hairline); }
+.c7d-nav-in { max-width: 860px; margin: 0 auto; padding: 13px 24px; display: flex;
+  align-items: center; justify-content: space-between; }
+.c7d-nav-l { display: flex; align-items: center; gap: 18px; }
+.c7d-logo { height: 15px; opacity: .95; cursor: pointer; }
+.c7d-navitems { display: flex; gap: 6px; }
+.c7d-navitem { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px;
+  border-radius: 9px; font-size: 14px; color: var(--txMut); background: none; border: none;
+  cursor: pointer; font-family: inherit; }
+.c7d-navitem.active { background: var(--s2); color: #fff; font-weight: 500; }
+.c7d-nav-r { display: flex; align-items: center; gap: 14px; color: var(--txMut); font-size: 13px; position: relative; }
+.c7d-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 12px; font-weight: 500; color: #fff; border: none; cursor: pointer;
+  font-family: inherit; background: linear-gradient(135deg, #2f4d7a, #3a6b52); }
+.c7d-menu-back { position: fixed; inset: 0; z-index: 40; }
+.c7d-menu { position: absolute; top: 40px; right: 0; z-index: 41; min-width: 200px; background: var(--card);
+  border: 1px solid var(--bd2); border-radius: 12px; padding: 6px; box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.c7d-menu-head { font-size: 12px; color: var(--txMut); padding: 8px 10px 6px; border-bottom: 1px solid var(--bd);
+  margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.c7d-menu button { display: block; width: 100%; text-align: left; background: none; border: none; color: var(--tx2);
+  font-size: 14px; font-family: inherit; padding: 9px 10px; border-radius: 8px; cursor: pointer; }
+.c7d-menu button:hover { background: var(--s2); color: #fff; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────── */
+/* One button component (F22). Variants: primary (default) · secondary/ghost · danger · disabled.
+   Primary reads canonical --btn-primary-* so it is token-driven, not hardcoded. */
+.c7d-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--btn-primary-bg); color: var(--btn-primary-text); border: none; border-radius: 999px;
+  padding: 12px 24px; font-size: 15px; font-weight: 500; font-family: inherit; cursor: pointer;
+  transition: opacity .15s ease, background .15s ease, border-color .15s ease; }
+.c7d-btn:hover { opacity: .88; }
+.c7d-btn:disabled, .c7d-btn.disabled { background: var(--card); color: var(--txFaint);
+  border: 1px solid var(--bd); cursor: not-allowed; opacity: 1; }
+.c7d-btn.full { width: 100%; }
+.c7d-btn.ghost, .c7d-btn.secondary { background: var(--s2); color: var(--tx); border: 1px solid var(--bd2); }
+.c7d-btn.ghost:hover, .c7d-btn.secondary:hover { border-color: #3a3a42; opacity: 1; }
+/* Destructive variant — folds the ad-hoc .c7d-cancel-link into the button system. */
+.c7d-btn.danger { background: var(--errSoft); color: var(--err); border: 1px solid var(--errBd); }
+.c7d-btn.danger:hover { background: rgba(229,100,95,.18); border-color: var(--err); opacity: 1; }
+.c7d-back { display: inline-flex; align-items: center; gap: 6px; background: none; border: none;
+  /* fallback so the link reads muted under .c7d-skin too, where --txMut isn't defined */
+  color: var(--txMut, #a2a2ac); font-size: 14px; font-family: inherit; cursor: pointer; padding: 0; margin-bottom: 18px; }
+.c7d-link { background: none; border: none; font-family: inherit; cursor: pointer; padding: 0; }
+.c7d-logo-btn { background: none; border: none; padding: 0; cursor: pointer; display: inline-flex; align-items: center; }
+
+/* ── Keyboard focus (a11y) ───────────────────────────────────────────────
+   The dark app's native buttons/links/cards had NO visible focus style, so
+   keyboard users couldn't tell where they were. One consistent ring on
+   :focus-visible — keyboard only; mouse clicks don't trigger it, so the look
+   is unchanged for pointer users. Higher specificity than `.c7d-input:focus`
+   so inputs get the ring on keyboard focus too. */
+.c7d a:focus-visible,
+.c7d button:focus-visible,
+.c7d [role="button"]:focus-visible,
+.c7d input:focus-visible,
+.c7d select:focus-visible,
+.c7d textarea:focus-visible {
+  outline: 2px solid #5b9bff;
+  outline-offset: 2px;
+}
+
+/* ── Status pills + facepile ─────────────────────────────────────────── */
+.c7d-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px;
+  border-radius: 999px; font-size: 12.5px; font-weight: 500; border: 1px solid var(--bd3); }
+.c7d-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.c7d-pill.reg { background: var(--okSoft); border-color: var(--okBd); color: var(--ok); }
+.c7d-pill.open { background: var(--s3); border-color: var(--bd3); color: var(--txSec); }
+.c7d-pill.full { background: var(--errSoft); border-color: var(--errBd); color: var(--err); }
+.c7d-pill.lock { background: var(--s3); border-color: var(--bd3); color: var(--txSec); }
+.c7d-pill.closed { background: var(--s2); border-color: var(--bd); color: var(--txFaint); }
+.c7d-faces { display: inline-flex; align-items: center; }
+.c7d-faces .f { width: 24px; height: 24px; border-radius: 50%; margin-left: -8px;
+  border: 2px solid var(--card); display: inline-flex; align-items: center; justify-content: center; }
+.c7d-faces .f svg { width: 12px; height: 12px; color: rgba(255,255,255,.62); }
+.c7d-faces .f:first-child { margin-left: 0; }
+.c7d-plus { font-size: 13px; color: var(--txMut); margin-left: 8px; font-variant-numeric: tabular-nums; }
+.c7d-seg { display: inline-flex; gap: 0; background: var(--card); border: 1px solid var(--bd2);
+  padding: 3px; border-radius: 999px; }
+.c7d-seg button { padding: 7px 16px; font-size: 13.5px; font-weight: 500; border-radius: 999px;
+  border: none; background: none; color: var(--txMut); cursor: pointer; font-family: inherit; }
+.c7d-seg button.active { color: #fff; background: var(--bd2); box-shadow: 0 1px 2px rgba(0,0,0,.3); }
+
+/* ── List — day-grouped timeline ─────────────────────────────────────── */
+.c7d-day { display: grid; grid-template-columns: 82px 26px 1fr; column-gap: 16px; padding-bottom: 34px; }
+.c7d-day-d { font-size: 15px; font-weight: 500; color: #fff; }
+.c7d-day-w { font-size: 13px; color: var(--txMut); margin-top: 2px; }
+.c7d-rail { position: relative; }
+.c7d-rail::before { content: ''; position: absolute; left: 50%; top: 7px; bottom: -34px;
+  border-left: 1.5px dashed #2c2c33; }
+.c7d-rail .node { position: absolute; left: 50%; top: 7px; width: 9px; height: 9px; border-radius: 50%;
+  background: #3a3a42; border: 2px solid var(--bg); transform: translateX(-50%); }
+.c7d-day:last-child .c7d-rail::before { bottom: 0; }
+.c7d-cards { display: flex; flex-direction: column; gap: 14px; }
+
+/* event card */
+.c7d-card { background: var(--card); border: 1px solid var(--bd); border-radius: 14px;
+  padding: 18px; display: flex; gap: 16px; cursor: pointer; transition: all .16s ease;
+  text-align: left; width: 100%; font-family: inherit; color: inherit; }
+.c7d-card:hover { background: #1a1a1f; border-color: #3a3a42; transform: translateY(-1px); }
+.c7d-card-main { flex: 1; min-width: 0; }
+.c7d-card-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.c7d-time { font-size: 13px; color: var(--txMut); }
+.c7d-chip { font-size: 10.5px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; border: 1px solid var(--bd3); white-space: nowrap; }
+.c7d-card :is(h2, h3) { font-size: 19px; letter-spacing: -0.01em; margin-top: 7px; color: #fff; }
+.c7d-org { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.c7d-org-av { width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center;
+  justify-content: center; font-size: 10px; font-weight: 500; }
+.c7d-org-by { font-size: 14px; color: var(--txSec); }
+.c7d-loc { display: flex; align-items: center; gap: 7px; margin-top: 8px; font-size: 14px; color: var(--txSec); }
+.c7d-loc svg { color: var(--txMut); flex-shrink: 0; }
+.c7d-status { display: flex; align-items: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+.c7d-thumb { width: 104px; height: 104px; border-radius: 12px; overflow: hidden; position: relative;
+  flex-shrink: 0; }
+.c7d-thumb .blob { position: absolute; width: 110px; height: 110px; border-radius: 50%; right: -34px;
+  top: -34px; filter: blur(24px); opacity: .75; }
+.c7d-thumb .glyph { position: absolute; left: 10px; bottom: 9px; font-size: 26px; font-weight: 600;
+  color: rgba(255,255,255,.9); letter-spacing: -0.02em; }
+
+/* empty state */
+.c7d-empty { border: 1px dashed var(--bd2); border-radius: 16px; padding: 64px 24px; text-align: center; }
+.c7d-empty .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--card);
+  display: inline-flex; align-items: center; justify-content: center; color: var(--txMut); margin-bottom: 14px; }
+.c7d-empty :is(h2, h3) { font-size: 16px; color: #fff; }
+.c7d-empty p { font-size: 14px; color: var(--txMut); margin-top: 6px; }
+
+/* ── Detail ──────────────────────────────────────────────────────────── */
+.c7d-cover { position: relative; height: 240px; border-radius: 16px; overflow: hidden; }
+.c7d-cover .blob1 { position: absolute; width: 320px; height: 320px; border-radius: 50%; right: -60px;
+  top: -120px; filter: blur(50px); opacity: .7; }
+.c7d-cover .blob2 { position: absolute; width: 200px; height: 200px; border-radius: 50%; left: -50px;
+  bottom: -90px; filter: blur(46px); opacity: .35; }
+/* The monogram is the cover's intentional focal mark (consistent with the list thumbnail):
+   centred, legible — not a near-invisible watermark jammed against the edge. */
+.c7d-cover .glyph { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-size: 116px; font-weight: 600; color: rgba(255,255,255,.13); letter-spacing: -0.04em;
+  line-height: 1; user-select: none; }
+.c7d-cover .chip { position: absolute; left: 16px; top: 16px; font-size: 11px; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px;
+  background: rgba(23,24,29,.55); backdrop-filter: blur(6px); color: #fff; }
+.c7d-cover.thumb { height: auto; }
+.c7d-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+.c7d-detail h1 { font-size: 33px; letter-spacing: -0.022em; line-height: 1.15; margin-top: 14px; }
+.c7d-detail .org { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.c7d-detail .org-av { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center;
+  justify-content: center; font-size: 11px; font-weight: 500; }
+.c7d-detail .org-by { font-size: 14.5px; color: var(--txSec); }
+.c7d-detail .org-by b { color: #fff; font-weight: 500; }
+
+.c7d-cta-top { display: flex; align-items: center; gap: 16px; margin-top: 26px; flex-wrap: wrap; }
+.c7d-cta-note { font-size: 13px; color: var(--txMut); line-height: 1.5; }
+.c7d-cta-note b { color: var(--txSec); font-weight: 500; }
+.c7d-reg-badge { display: inline-flex; align-items: center; gap: 8px; color: var(--ok); font-size: 15px; font-weight: 500; }
+/* Cancel registration now uses the unified .c7d-btn.danger (DS phase 02). */
+
+.c7d-qinfo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+.c7d-qcard { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 16px;
+  display: flex; gap: 12px; align-items: center; }
+.c7d-qcard .tile { width: 40px; height: 40px; border-radius: 10px; background: var(--s4); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; color: var(--txSec); }
+.c7d-qcard .t1 { font-size: 14.5px; font-weight: 500; color: #fff; }
+.c7d-qcard .t2 { font-size: 13px; color: var(--txMut); margin-top: 2px; }
+
+.c7d-seats { background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 16px; margin-top: 12px; }
+.c7d-seats .hd { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.c7d-seats .head { font-size: 14.5px; font-weight: 500; color: #fff; }
+.c7d-track { height: 6px; border-radius: 999px; background: var(--bd); margin-top: 12px; overflow: hidden; }
+.c7d-track .fill { height: 100%; border-radius: 999px; }
+.c7d-seats .cap { font-size: 13px; color: var(--txMut); margin-top: 8px; font-variant-numeric: tabular-nums; }
+.c7d-stats { display: flex; gap: 12px; margin-top: 12px; }
+.c7d-stat { flex: 1; background: var(--card); border: 1px solid var(--bd); border-radius: 14px; padding: 14px 16px; }
+.c7d-stat .k { font-size: 12px; color: var(--txMut); }
+.c7d-stat .v { font-size: 14.5px; color: #fff; font-weight: 500; margin-top: 4px; font-variant-numeric: tabular-nums; }
+
+.c7d-eyebrow { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--txMut); }
+.c7d-about { margin-top: 36px; }
+.c7d-about p.desc { font-size: 15px; line-height: 1.7; color: var(--txSec); margin-top: 12px; }
+.c7d-about .get { font-size: 15px; font-weight: 500; color: #fff; margin-top: 22px; }
+
+.c7d-cta-bottom { margin-top: 40px; background: var(--card-alt); border: 1px solid var(--bd);
+  border-radius: 16px; padding: 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.c7d-cta-bottom .h { font-size: 16px; font-weight: 500; color: #fff; }
+.c7d-cta-bottom .s { font-size: 13.5px; color: var(--txMut); margin-top: 4px; }
+
+/* ── Mini event header (slots / register / confirm) ──────────────────── */
+.c7d-mini { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--bd);
+  border-radius: 14px; padding: 14px 16px; }
+.c7d-mini .cov { width: 48px; height: 48px; border-radius: 10px; overflow: hidden; position: relative; flex-shrink: 0; }
+.c7d-mini .cov .glyph { position: absolute; left: 7px; bottom: 4px; font-size: 16px; font-weight: 600; color: rgba(255,255,255,.9); }
+.c7d-mini .t { font-size: 15px; font-weight: 500; color: #fff; }
+.c7d-mini .s { font-size: 13px; color: var(--txMut); margin-top: 3px; }
+/* Higher specificity than the `.c7d p { margin: 0 }` reset (which was clobbering the
+   top gap → the fine print sat flush against the Confirm button). */
+.c7d p.c7d-fine { font-size: 12.5px; color: var(--txMut); margin-top: 18px; line-height: 1.5; }
+
+/* ── Register confirmation card (Vòng 1 reframe) ─────────────────────────
+   Replaces the four near-invisible locked input boxes with one raised card:
+   bright values + a lock chip make the read-only nature explicit, and the
+   event accent (inline border-top + avatar) ties it to the event's colour. */
+.c7d-cc { background: var(--card); border: 1px solid var(--bd); border-top: 2px solid var(--bd);
+  border-radius: 14px; padding: 0 18px 16px; margin-top: 22px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 1px 2px rgba(0,0,0,.25), 0 14px 30px -22px rgba(0,0,0,.8); }
+.c7d-cc-head { display: flex; align-items: center; gap: 13px; padding: 16px 0 15px; border-bottom: 1px solid var(--bd); }
+/* Dark initials on the light event accent (like the primary pill's dark-on-light) — white
+   failed WCAG on lighter accents (violet #9b8bf2 = 2.84:1); #0c0c0e passes ~7-9:1 on all 8. */
+.c7d-cc-av { width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0; display: flex; align-items: center;
+  justify-content: center; color: #0c0c0e; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+.c7d-cc-id { flex: 1; min-width: 0; }
+.c7d-cc-name { font-size: 16px; font-weight: 500; color: #fff; }
+.c7d-cc-sub { font-size: 13px; color: var(--txMut); margin-top: 2px; }
+.c7d-cc-edit { color: var(--txSec); font-size: 13.5px; }
+.c7d-cc-edit:hover { color: #fff; }
+.c7d-cc-rows { display: flex; flex-direction: column; }
+.c7d-cc-row { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 13px 0; border-bottom: 1px solid var(--hairline); }
+.c7d-cc-row:last-child { border-bottom: 0; }
+.c7d-cc-k { font-size: 13.5px; color: var(--txMut); }
+.c7d-cc-v { display: inline-flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--tx);
+  font-weight: 500; font-variant-numeric: tabular-nums; }
+.c7d-cc-v svg { color: var(--txFaint); width: 13px; height: 13px; }
+.c7d-cc-note { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--txMut);
+  margin-top: 14px; line-height: 1.5; }
+.c7d-cc-note svg { color: var(--txFaint); flex-shrink: 0; }
+.c7d-cc-note b { color: var(--txSec); font-weight: 500; }
+
+/* "After you register" — fills the empty lower half + sets expectations. */
+.c7d-next { margin-top: 34px; }
+.c7d-next-list { list-style: none; padding: 0; margin: 14px 0 0; display: flex; flex-direction: column; gap: 13px; }
+.c7d-next-list li { display: flex; align-items: flex-start; gap: 11px; font-size: 14px; line-height: 1.5; color: var(--tx2); }
+.c7d-next-list b { color: var(--tx); font-weight: 500; }
+.c7d-next-ic { width: 26px; height: 26px; border-radius: 8px; background: var(--s2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; margin-top: -1px; color: var(--txSec); }
+.c7d-next-ic.ok { color: var(--ok); }
+
+/* Shared button spinner — currentColor arc, so one primitive works on every .c7d-btn tone
+   (dark-on-light primary pill AND the light-red text of .c7d-btn.danger). */
+.c7d-spin { width: 15px; height: 15px; border-radius: 50%; border: 2px solid transparent;
+  border-top-color: currentColor; display: inline-block; animation: c7-spin .7s linear infinite; }
+@keyframes c7-spin { to { transform: rotate(360deg); } }
+
+/* ── Confirmation ────────────────────────────────────────────────────── */
+.c7d-confirm { text-align: center; padding-top: 20px; }
+.c7d-confirm .ring { width: 72px; height: 72px; border-radius: 50%; background: var(--okSoft);
+  display: inline-flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+.c7d-confirm .disc { width: 48px; height: 48px; border-radius: 50%; background: var(--ok);
+  display: flex; align-items: center; justify-content: center; }
+.c7d-confirm h1 { font-size: 27px; letter-spacing: -0.02em; }
+.c7d-confirm .sub { font-size: 15px; color: var(--txSec); margin-top: 10px; line-height: 1.5; }
+.c7d-confirm .recap { margin-top: 28px; text-align: left; }
+.c7d-confirm-foot { display: flex; gap: 12px; margin-top: 22px; }
+.c7d-confirm-foot > * { flex: 1; }
+
+/* ── Sign-in ─────────────────────────────────────────────────────────── */
+.c7d-signin { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px;
+  margin: 0 auto; padding: 48px 40px; align-items: center; min-height: 100vh; }
+.c7d-signin .l { max-width: 440px; }
+.c7d-signin .logo { height: 20px; margin-bottom: 40px; }
+.c7d-signin h1 { font-size: 44px; letter-spacing: -0.03em; line-height: 1.08; }
+.c7d-signin .lead { font-size: 16px; line-height: 1.6; color: var(--txSec); max-width: 38ch; margin-top: 20px; }
+.c7d-signin .subline { font-size: 13px; color: var(--txMut); margin-top: 14px; }
+.c7d-signin .pile { display: flex; align-items: center; gap: 12px; margin-top: 28px; }
+.c7d-signin .r { position: relative; height: 440px; }
+.c7d-deco { position: absolute; width: 300px; background: #161619; border: 1px solid var(--bd2);
+  border-radius: 16px; padding: 16px; box-shadow: 0 30px 70px rgba(0,0,0,.5); }
+.c7d-deco .cov { height: 120px; border-radius: 10px; position: relative; overflow: hidden; }
+.c7d-deco .cov .blob { position: absolute; width: 140px; height: 140px; border-radius: 50%; right: -30px;
+  top: -40px; filter: blur(30px); opacity: .6; }
+.c7d-deco .cov .glyph { position: absolute; left: 14px; bottom: 10px; font-size: 30px; font-weight: 600; color: rgba(255,255,255,.9); }
+.c7d-deco .t { font-size: 15px; font-weight: 500; color: #fff; margin-top: 12px; }
+.c7d-deco .m { font-size: 13px; color: var(--txMut); margin-top: 4px; }
+
+/* ── Dark re-skin of the existing (light) screens that wrap real money-path logic:
+   the slotted BookingFlow, the Program grid, profile + my-registrations. Rather than
+   rewrite their components, we re-theme the design tokens for this subtree so the same
+   markup renders dark. `--white` doubles as surface AND text-on-brand, so we flip it for
+   surfaces here and re-force white text on brand-coloured chips/buttons/avatars below. */
+.c7d-skin {
+  --ink-900: #ffffff; --ink-800: #e8e8ee; --ink-700: #d4d4da; --ink-600: #b6b6bd;
+  --ink-500: #a2a2ac; --ink-400: #a2a2ac; --ink-300: #5a5a62; --ink-200: #34343c;
+  --ink-150: #35363f; --ink-100: #272833; --ink-50: #17181d; --ink-25: #1d1e25;
+  --white: #22232b;
+  /* surface-lift "mức A" mirror (see .c7d block) */
+  --bg: #17181d; --card: #22232b; --border: #35363f; --border-strong: #434450;
+  --text: #e8e8ee; --text-muted: #a2a2ac; --txt-2: #a2a2ac;
+  /* Neutral semantic tokens (DS phase 03) — explicit dark values == the --ink-* remap
+     output, so components on semantic names render identically and the remap can later go. */
+  --text-strong: #fff; --text-2: #d4d4da; --text-secondary: #b6b6bd; --text-faint: #a2a2ac;
+  --border-3: #5a5a62; --surface-2: #212128;
+  --canvas-user: #17181d; --canvas-admin: #17181d; --canvas-overview: #17181d;
+  --disabled-bg: #1c1c20; --disabled-text: #6a6a72;
+  --sh-1: 0 1px 2px rgba(0,0,0,.4); --sh-2: 0 2px 6px rgba(0,0,0,.45);
+  --sh-3: 0 6px 16px rgba(0,0,0,.5); --sh-4: 0 12px 32px rgba(0,0,0,.55);
+  --selected-bg: rgba(91,155,255,.16); --selected-border: #5b9bff;
+  /* Tint scales for the program/booking/profile subtrees that live under .c7d-skin
+     (NOT .c7d), so they don't inherit the .c7d tint remap. Without these the light
+     scale leaked: conflict alert + "Cancel session" rendered near-white/dark-red on the
+     dark drawer, and amber tint-text failed WCAG (P1-4, P1-5). Mirror the .c7d values. */
+  --brand-50: rgba(122,162,247,.13); --brand-100: rgba(122,162,247,.24);
+  --brand-600: #9db2ff; --brand-700: #9db2ff; --brand-800: #b9c8ff;
+  --accent-50: rgba(224,164,92,.14); --accent-100: rgba(224,164,92,.24);
+  --accent-600: #e0a45c; --accent-700: #e0a45c;
+  --success-50: rgba(76,201,133,.13); --success-100: rgba(76,201,133,.24); --success-700: #4cc985;
+  --warn-50: rgba(229,170,95,.13); --warn-100: rgba(229,170,95,.24); --warn-700: #e6b06f;
+  --danger-50: rgba(229,100,95,.12); --danger-100: rgba(229,100,95,.24);
+  --danger-600: #e5645f; --danger-700: #e5645f;
+  background: var(--bg); color: var(--text); min-height: 100vh;
+}
+/* Re-force light text where the background is a brand/status colour (var(--white) was
+   the text colour there and just got flipped to a dark surface value). */
+.c7d-skin .btn:not(.ghost):not(.subtle), .c7d-skin .r-av, .c7d-skin .r-next, .c7d-skin .step.active .step-dot, .c7d-skin .step.done .step-dot, .c7d-skin .confirm-recap .av, .c7d-skin .pill.brand, .c7d-skin .badge.brand { color: #fff; }
+/* Surfaces that hardcode #fff (not the token) need an explicit dark value. */
+.c7d-skin .slot,
+.c7d-skin .input, .c7d-skin .select, .c7d-skin textarea,
+.c7d-skin .search input { background: var(--card); color: var(--ink-900); }
+.c7d-skin .slot { border-color: var(--ink-200); }
+
+/* ── Program booking grid — exact dark cell states (handoff "Known divergences" #1).
+   The light .pg-cell.* fills (#DCF0E4, #F8E1DD, …) and the inline pastel "taken" tints
+   would read as bright pastels on the dark canvas; override each state to a muted tint.
+   No cell is lighter than ~#1c1c20; accent washes stay low-alpha. */
+.c7d-skin .pg-grid-wrap { background: #0e0e10; border-color: #2c2c33; box-shadow: none; }
+.c7d-skin .pg-th .dow { color: #b6b6bd; }
+.c7d-skin .pg-th .num { color: #fff; }
+.c7d-skin .pg-th.today .dow, .c7d-skin .pg-th.today .num { color: #9cc3ff; }
+.c7d-skin .pg-time { color: #a2a2ac; }
+/* Cells lifted off the near-black grid to match the Vòng-1 surface ladder (bookable was
+   #121214 ≈ 1.05:1 vs canvas — the "flat/hard to see" complaint applied to empty slots too). */
+.c7d-skin .pg-cell { border-color: #2c2c33; }
+.c7d-skin .pg-cell.bookable { background: #17171c; border-style: dashed; border-color: #2e2e34; }
+.c7d-skin .pg-cell.bookable:hover { background: #22232b; border-color: #4a5580; }
+/* "+ Book" affordance: #7a7a82 was 4.39:1 (fail AA) and read as disabled; the light
+   accent makes it legible AND signals "clickable to book" (P1-2). */
+.c7d-skin .pg-cell.bookable .add { color: #9cc3ff; }
+/* Own booked session = GREEN (status-colour convention: green = confirmed/registered only,
+   blue stays reserved for selection/.sel). Mirrors the light view's green .mine cell. */
+.c7d-skin .pg-cell.mine { background: rgba(76,201,133,0.14); border: 1px solid rgba(76,201,133,0.42); }
+.c7d-skin .pg-cell.mine .tag { color: #4cc985; }
+.c7d-skin .pg-cell.mine .code { color: #fff; }
+.c7d-skin .pg-cell.mine .sub { color: #a2a2ac; }
+.c7d-skin .pg-cell.blackout { background: repeating-linear-gradient(45deg, #141416 0 6px, #171719 6px 12px); border: 1px solid #232328; }
+.c7d-skin .pg-cell.blackout .unavail { color: #6a6a72; }
+.c7d-skin .pg-cell.closed, .c7d-skin .pg-cell.past { background: #0e0e10; border: 1px solid #1c1c20; opacity: 1; }
+.c7d-skin .pg-cell.closed .unavail, .c7d-skin .pg-cell.past .unavail { color: #4a4a52; }
+.c7d-skin .pg-cell.taken .pic { color: #cfcfd6; }
+.c7d-skin .pg-cell.sel { box-shadow: inset 0 0 0 2px #5b9bff; border-color: #5b9bff; }
+/* Legend swatches mirror the cell states. */
+.c7d-skin .pg-legend .sw.mine { background: rgba(76,201,133,0.14); border-color: rgba(76,201,133,0.42); }
+.c7d-skin .pg-legend .sw.bookable { background: #17171c; border-style: dashed; border-color: #2e2e34; }
+.c7d-skin .pg-legend .sw.taken { background: rgba(91,155,255,0.12); border-color: rgba(91,155,255,0.4); border-left: 3px solid #5b9bff; }
+.c7d-skin .pg-legend .sw.blackout { background: repeating-linear-gradient(45deg, #141416 0 6px, #171719 6px 12px); border-color: #232328; }
+.c7d-skin .pg-legend .sw.sel { background: #121214; border-color: #5b9bff; box-shadow: inset 0 0 0 2px #5b9bff; }
+
+@media (max-width: 760px) {
+  .c7d-signin { grid-template-columns: 1fr; }
+  .c7d-signin .r { display: none; }
+  .c7d-qinfo, .c7d .mr-grid { grid-template-columns: 1fr; }
+  .c7d-day { grid-template-columns: 64px 20px 1fr; }
+}
+
+/* ── Phones: stop the employee app overflowing sideways ─────────────────────────
+   The desktop nav (centre links + clock) and the timeline date-gutter force the page
+   wider than a ~390px viewport, so every screen scrolled horizontally and clipped its
+   right edge. Below 600px we collapse the nav to logo + avatar, drop the decorative
+   timeline rail so cards take the full width, and tighten the hero/padding. This block
+   MUST stay after the 760px block so its single-column rules win on small screens. */
+@media (max-width: 600px) {
+  /* Nav — the centre links + "GMT+7" are what push the page past the viewport. Calendar/
+     Discover are stubs; the logo still returns home and the avatar menu keeps profile /
+     registrations / admin / sign-out, so nothing actionable is lost. */
+  .c7d-navitems { display: none; }
+  .c7d-nav-r > span { display: none; }
+  .c7d-nav-in { padding: 12px 16px; }
+  .c7d-wrap { padding: 26px 16px 56px; }
+
+  /* List header stacks; timeline goes single-column (rail hidden) so cards get the full
+     width instead of being squeezed into the 1fr beside the date gutter. */
+  .c7d-hero { padding: 26px 20px 22px; border-radius: 16px; margin-bottom: 26px; }
+  .c7d-hero h1 { font-size: 30px; }
+  .c7d-hero .sub { font-size: 14px; }
+  .c7d-hero-foot { gap: 12px; }
+  .c7d-day { grid-template-columns: 1fr; row-gap: 10px; padding-bottom: 26px; }
+  .c7d-rail { display: none; }
+  .c7d-day > :first-child { display: flex; align-items: baseline; gap: 8px; }
+
+  /* Detail — smaller hero + title so they fit a narrow column. */
+  .c7d-chips { margin-top: 18px; }
+  .c7d-cover { height: 188px; }
+  .c7d-cover .glyph { font-size: 92px; }
+  .c7d-detail h1 { font-size: 26px; }
+}
+
+/* Event description (markdown) — contrast fix.
+   It renders inside the dark screens as <div class="event-desc">, but .event-desc's base
+   palette (styles.css) is the LIGHT ink scale → body text --ink-700 (#2E343F) on --bg
+   (#0c0c0e) is ~1.5:1 and fails WCAG AA. Remap to the dark tokens so the description, its
+   tables and blockquotes are legible (--tx2 on --bg ≈ 15:1). Scoped under .c7d, so any
+   light-context use of .event-desc keeps its original palette. */
+.c7d .event-desc { color: var(--tx2); }
+.c7d .event-desc h1,
+.c7d .event-desc h2,
+.c7d .event-desc h3,
+.c7d .event-desc h4 { color: var(--tx); }
+.c7d .event-desc th { color: var(--tx); }
+.c7d .event-desc th,
+.c7d .event-desc td { border-color: var(--bd2); }
+.c7d .event-desc code { background: var(--s2); color: var(--tx2); }
+.c7d .event-desc pre { background: var(--s2); }
+.c7d .event-desc pre code { background: none; }
+.c7d .event-desc blockquote { border-left-color: var(--bd3); color: var(--txSec); }
+.c7d .event-desc hr { border-top-color: var(--bd); }
+
+/* "My registrations" (user) — dark theme.
+   The screen reuses the light .lc-* shell + .mr-* cards that the admin User-lookup tab
+   also renders. Only the user screen is wrapped in .c7d, so these overrides darken it to
+   match the rest of the employee app WITHOUT touching the light admin reuse. Each
+   `.c7d X` selector outranks the base `X` (specificity), so import order is irrelevant. */
+.c7d .lc-head h1 { color: var(--tx); }
+.c7d .lc-head p { color: var(--txSec); }
+.c7d .lc-active { background: var(--card); border: 1px solid var(--bd); color: var(--txSec); }
+.c7d .lc-active b { color: var(--tx); } /* the count digit is a directly-coloured <b> — must target it, not inherit */
+.c7d .lc-active .dot { background: var(--ok); }
+
+.c7d .mr-card { background: var(--card); border-color: var(--bd); box-shadow: none; }
+.c7d .mr-card.status-archived { background: var(--card-alt); }
+.c7d .mr-card-hd { border-bottom-color: var(--bd); }
+.c7d .mr-card-ttl :is(h2, h3) { color: var(--tx); }
+.c7d .mr-card-ttl p { color: var(--txSec); }
+.c7d .mr-cat { color: var(--tx2); background: var(--s3); }
+.c7d .mr-card.status-archived .mr-cat,
+.c7d .mr-card.status-closed .mr-cat { color: var(--txMut); background: var(--s2); }
+.c7d .mr-badge.open { background: var(--okSoft); color: var(--ok); }
+.c7d .mr-badge.closed { background: rgba(229,170,95,.12); color: #e6b06f; }
+.c7d .mr-badge.archived { background: var(--s2); color: var(--txMut); }
+.c7d .mr-identity .av { background: var(--s4); color: var(--tx2); }
+.c7d .mr-identity .t b { color: var(--tx); }
+.c7d .mr-identity .t .s { color: var(--txMut); }
+.c7d .mr-slot { background: var(--s2); border-color: var(--bd2); }
+.c7d .mr-slot-type { color: #9db2ff; }
+.c7d .mr-slot-when { color: var(--tx2); }
+.c7d .mr-slot-loc { color: var(--txMut); }
+.c7d .mr-noslot { color: var(--txMut); }
+.c7d .mr-foot { color: var(--txMut); }
+
+/* Empty / error / loading states on the same screen. */
+.c7d .card { background: var(--card); border: 1px solid var(--bd); }
+.c7d .text-muted { color: var(--txMut); }
+/* Booking-flow primary (admin `.btn`) adopts the events light-pill look under .c7d.
+   Scope to the SOLID primary only — ghost/subtle/danger/disabled keep their own
+   (token-remapped, dark) styling instead of being clobbered near-white. The :not()
+   chain also raises specificity above the ancestor `.c7d-skin .btn:not(.ghost):not(.subtle)`
+   force-white rule, so the nested `.c7d-skin > .c7d` booking flow keeps dark-on-light
+   text rather than rendering white-on-near-white (invisible). */
+.c7d .btn:not(.ghost):not(.subtle):not(.danger):not(:disabled):not(.disabled) {
+  background: var(--btn); color: var(--btn-primary-text, #fff); border: none;
+}
+.c7d .sk-line { background: linear-gradient(90deg, var(--s2), var(--s3), var(--s2)); }
+/* Text-link buttons default to the solid --brand-500 (navy), which is ~2.1:1 on the dark
+   booking-flow canvas. Use the dark-mode-safe light brand the theme already defines. */
+.c7d .btn-link { color: var(--brand-700); }
+.c7d .btn-link:hover { color: var(--brand-800); }
+
+/* ── Dark neutral + tint remap for light-built flows under .c7d ──────────────────
+   The slotted booking flow (booking/*: stepper, type-tabs, calendar, slot cards,
+   sticky summary, result views, banners) was authored on the LIGHT ink scale
+   (--white / --ink-* / soft --brand-50 etc.). Rather than override its ~80 classes,
+   we invert those TOKENS under .c7d, so every class using them adopts dark surfaces
+   and text automatically. The native .c7d-* screens use the --bg/--tx/--card palette
+   (not these), so they are unaffected; admin (no .c7d) keeps the light scale. Solid
+   accents (--brand-500 / --accent-500 / --success-500) read fine on dark and are left
+   as-is — only surfaces, neutrals, soft tints and tint-text flip. */
+.c7d {
+  /* surface-lift "mức A" mirror for the booking-flow surfaces */
+  --white: #22232b;
+  --ink-25: #22232b;
+  --ink-50: #1e1e24;  --ink-100: #212128; --ink-150: #2c2c33; --ink-200: #34343c;
+  --ink-300: #3a3a42; --ink-400: #909098; --ink-500: #a2a2ac; --ink-600: #b6b6bd;
+  --ink-700: #d4d4da; --ink-800: #e8e8ec; --ink-900: #ffffff;
+  /* soft tints (pale-on-white) → dark-tinted backgrounds. accent base is AMBER (#B26A1F),
+     so accent tints must be amber too — the old violet rgba(168,120,247) was a mis-remap
+     that gave the 3-Skills slot type a split amber/violet identity (fixed, P1-9). */
+  --brand-50: rgba(122,162,247,.13);  --brand-100: rgba(122,162,247,.24);
+  --accent-50: rgba(224,164,92,.14); --accent-100: rgba(224,164,92,.24);
+  --success-50: rgba(76,201,133,.13); --success-100: rgba(76,201,133,.24);
+  --warn-50: rgba(229,170,95,.13);    --warn-100: rgba(229,170,95,.24);
+  --danger-50: rgba(229,100,95,.12);  --danger-100: rgba(229,100,95,.24);
+  /* tint-text (was dark-on-pale) → light accent so it reads on the dark tints. accent-700/600
+     and danger-600 were missing from this remap → dark amber #7A4612 (2.33:1) and dark red
+     #A8362A (2.77:1) leaked from the light scale and failed WCAG on dark (P0-1, P1-5). */
+  --brand-600: #9db2ff; --brand-700: #9db2ff; --brand-800: #b9c8ff;
+  --accent-600: #e0a45c; --accent-700: #e0a45c;
+  --success-700: #4cc985; --warn-700: #e6b06f; --danger-600: #e5645f; --danger-700: #e5645f;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PREMIUM POLISH — depth, cover glow-up, delightful states, micro-interactions.
+   Purely cosmetic (no layout/logic change). All motion respects the user's
+   reduced-motion preference (guard at the very bottom of this block).
+   ════════════════════════════════════════════════════════════════════════════ */
+@keyframes c7-float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(10px,-14px); } }
+@keyframes c7-float-2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-12px,10px); } }
+@keyframes c7-shimmer { 100% { background-position: 200% 0; } }
+@keyframes c7-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes c7-pop { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.06); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes c7-draw { to { stroke-dashoffset: 0; } }
+@keyframes c7-pulse-dot { 0%,100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; } 50% { box-shadow: 0 0 0 3px transparent; opacity: .6; } }
+@keyframes c7-ring { 0% { box-shadow: 0 0 0 0 var(--okBd); } 70% { box-shadow: 0 0 0 16px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+
+/* ── Depth: lift the flat, border-only surfaces with soft layered shadows + a
+   1px top sheen so cards read as raised panels, not outlines. ── */
+.c7d-card, .c7d-qcard, .c7d-seats, .c7d-stat, .c7d-cta-bottom, .c7d-mini {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 1px 2px rgba(0,0,0,.25), 0 14px 30px -22px rgba(0,0,0,.8);
+}
+.c7d-cta-bottom { background-image: linear-gradient(180deg, rgba(255,255,255,.025), transparent 60%); }
+
+/* ── Micro-interactions: hover lift + press feedback (keyboard focus unchanged). ── */
+.c7d-card { transition: transform .18s cubic-bezier(.2,.7,.2,1), background .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.c7d-card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 26px 44px -24px rgba(0,0,0,.9); }
+.c7d-btn { transition: opacity .15s ease, transform .12s ease, box-shadow .15s ease; }
+.c7d-btn:not(:disabled):active { transform: translateY(1px) scale(.985); }
+.c7d-btn.ghost:hover { transform: translateY(-1px); }
+.c7d-qcard, .c7d-stat, .c7d-seg button, .c7d-navitem { transition: all .16s ease; }
+.c7d-pill, .c7d-chip, .c7d-reg-badge svg, .org-av { transition: transform .16s ease; }
+
+/* ── Cover glow-up: living gradient (slow-floating blobs), film-grain noise, a
+   bottom vignette + top sheen for depth, and a glassier category chip. ── */
+.c7d-cover { box-shadow: inset 0 1px 0 rgba(255,255,255,.07), inset 0 -70px 90px -50px rgba(0,0,0,.55), 0 24px 50px -30px rgba(0,0,0,.7); }
+.c7d-cover .blob1 { animation: c7-float 9s ease-in-out infinite; }
+.c7d-cover .blob2 { animation: c7-float-2 11s ease-in-out infinite; }
+.c7d-cover::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.c7d-cover .chip { background: rgba(23,24,29,.4); backdrop-filter: blur(10px) saturate(1.3); border: 1px solid rgba(255,255,255,.12); box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+/* Admin-uploaded cover photo: fills the cover surface (thumb / hero / mini), layered
+   over the gradient fallback. Containers are position:relative; overflow:hidden. */
+.c7d-cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; border: none; }
+
+/* ── Entrance: list cards + detail hero rise in (replays on tab/route switch). ── */
+.c7d-card { animation: c7-rise .42s cubic-bezier(.2,.7,.2,1) both; }
+.c7d-day:nth-child(2) .c7d-card { animation-delay: .04s; }
+.c7d-day:nth-child(3) .c7d-card { animation-delay: .08s; }
+.c7d-day:nth-child(4) .c7d-card { animation-delay: .12s; }
+.c7d-day:nth-child(5) .c7d-card { animation-delay: .16s; }
+.c7d-day:nth-child(n+6) .c7d-card { animation-delay: .2s; }
+.c7d-wrap.detail .c7d-cover { animation: c7-rise .5s cubic-bezier(.2,.7,.2,1) both; }
+
+/* ── Seat-bar: the fill grows in from 0 so availability reads as a gauge. ── */
+.c7d-track .fill { transition: width .6s cubic-bezier(.3,.8,.3,1); transform-origin: left; animation: c7-rise .5s ease both; }
+
+/* ── Status pill "open" dot gently pulses (live availability). ── */
+.c7d-pill.open .dot { animation: c7-pulse-dot 2.4s ease-in-out infinite; }
+
+/* ── Confirm screen: the success ring pulses once and the check draws itself. ── */
+.c7d-confirm .ring { animation: c7-ring 1.1s ease-out .1s both; }
+.c7d-confirm .disc { animation: c7-pop .5s cubic-bezier(.2,.8,.2,1.2) both; box-shadow: 0 8px 24px -6px var(--okBd); }
+.c7d-confirm .disc svg path { stroke-dasharray: 26; stroke-dashoffset: 26; animation: c7-draw .45s ease .45s forwards; }
+
+/* ── Loading skeletons: a sweeping shimmer instead of a flat bar. ── */
+.c7d .sk-line { background: linear-gradient(90deg, var(--s2) 25%, var(--s3) 37%, var(--s2) 63%); background-size: 200% 100%; animation: c7-shimmer 1.4s linear infinite; }
+
+/* ── Empty state: a soft tinted panel instead of a bare dashed box. ── */
+.c7d-empty { background: radial-gradient(120% 80% at 50% 0%, var(--s2), transparent 70%); }
+
+/* ── My Registrations: this screen reuses the light admin .mr-* card (User-lookup
+   tab), so it was visually out of step with the Luma event cards everywhere else.
+   Bring it up to the same language — raised panel, hover lift, pill chip/badge,
+   pill action button — without touching the shared component markup. ── */
+/* The shared .lc-main is 1040px wide with a 2-col grid (built for the admin User-lookup
+   table). For a personal history that's usually 1–3 cards, that left a lone card sprawled
+   beside a huge empty column. Narrow this screen + make it a single-column feed so any
+   count reads intentionally (admin keeps the wide 2-col layout — this is scoped to .c7d). */
+.c7d .lc-main { max-width: 760px; }
+.c7d .mr-grid { grid-template-columns: 1fr; gap: 16px; }
+.c7d .mr-card {
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 14px 30px -22px rgba(0,0,0,.8);
+  transition: transform .18s cubic-bezier(.2,.7,.2,1), box-shadow .18s ease, border-color .18s ease;
+  animation: c7-rise .42s cubic-bezier(.2,.7,.2,1) both;
+}
+.c7d .mr-card:hover { transform: translateY(-3px); border-color: var(--bd2);
+  box-shadow: 0 2px 4px rgba(0,0,0,.3), 0 26px 44px -24px rgba(0,0,0,.9); }
+.c7d .mr-cat { border: 1px solid var(--bd3); border-radius: 999px; letter-spacing: .06em; padding: 3px 10px; }
+.c7d .mr-badge { border-radius: 999px; padding: 5px 11px; }
+.c7d .mr-badge.open { border: 1px solid var(--okBd); }
+.c7d .mr-badge.closed { border: 1px solid rgba(229,170,95,.3); }
+.c7d .mr-identity .av { border-radius: 9px; }
+.c7d .mr-foot .btn { border-radius: 999px; transition: opacity .15s ease, transform .12s ease; }
+.c7d .mr-foot .btn:not(:disabled):active { transform: translateY(1px) scale(.985); }
+
+/* ── Brand hero (Events landing) — a mesh-gradient banner so the first screen lands with
+   identity, not just a bare heading. The Upcoming/Past toggle lives inside it. ── */
+.c7d-hero {
+  position: relative; overflow: hidden; border-radius: 20px; margin: 6px 0 34px;
+  padding: 38px 34px 30px; border: 1px solid var(--bd);
+  background:
+    radial-gradient(120% 150% at 0% 0%, rgba(107,116,255,.2), transparent 52%),
+    radial-gradient(110% 140% at 100% 0%, rgba(155,139,242,.15), transparent 55%),
+    radial-gradient(150% 130% at 60% 130%, rgba(70,192,168,.1), transparent 60%),
+    var(--card-alt);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 26px 56px -34px rgba(0,0,0,.75);
+}
+.c7d-hero-glow {
+  position: absolute; width: 440px; height: 440px; border-radius: 50%; right: -130px; top: -210px;
+  filter: blur(64px); opacity: .55; pointer-events: none;
+  background: radial-gradient(circle, rgba(115,124,255,.55), rgba(155,139,242,.3) 45%, transparent 65%);
+  animation: c7-float 13s ease-in-out infinite;
+}
+.c7d-hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .4; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.c7d-hero-in { position: relative; }
+.c7d-hero-eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--txMut); }
+.c7d-hero h1 { font-size: 42px; letter-spacing: -0.03em; line-height: 1.04; margin-top: 12px; }
+.c7d-hero .sub { font-size: 15px; color: var(--txSec); margin-top: 10px; max-width: 470px; line-height: 1.5; }
+.c7d-hero-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 26px; flex-wrap: wrap; }
+.c7d-hero-count { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--txSec); font-variant-numeric: tabular-nums; }
+.c7d-hero-count .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: c7-pulse-dot 2.4s ease-in-out infinite; }
+/* F6: emphasise the "closing soon" count in the error tone. */
+.c7d-hero-count .soon { color: var(--err); font-weight: 600; }
+/* F17: actions cluster (urgency count + a visible path to history). */
+.c7d-hero-actions { display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.c7d-hero-mine { font-family: inherit; font-size: 13px; font-weight: 500; color: var(--txSec); cursor: pointer;
+  padding: 7px 14px; border: 1px solid var(--bd2); border-radius: 999px; background: var(--card);
+  transition: border-color .15s ease, color .15s ease; }
+.c7d-hero-mine:hover { border-color: var(--bdStrong); color: var(--tx); }
+
+/* Cover craft: a faint dot-grid (masked to fade at the edges) under the monogram — gives the
+   hero cover a designed texture beyond the flat gradient. Sits below the blobs + glyph. */
+.c7d-cover::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.6px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(115% 95% at 50% 45%, #000 22%, transparent 72%);
+  mask-image: radial-gradient(115% 95% at 50% 45%, #000 22%, transparent 72%);
+}
+
+/* Respect users who prefer less motion — keep the look, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+  .c7d *, .c7d *::before, .c7d *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}

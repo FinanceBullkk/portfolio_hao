@@ -1,0 +1,6 @@
+
+.confirm-recap { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) 0; border-bottom: 1px solid var(--ink-100); }
+.confirm-recap .av { width: 34px; height: 34px; border-radius: var(--r-md); background: var(--brand-500); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: var(--fs-sm); font-weight: 700; flex-shrink: 0; }
+.confirm-recap .t { font-size: var(--fs-base); color: var(--ink-700); }
+.confirm-recap .t .s { display: block; color: var(--ink-500); font-size: var(--fs-sm); }
+

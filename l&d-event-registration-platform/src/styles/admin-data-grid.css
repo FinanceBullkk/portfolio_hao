@@ -1,0 +1,136 @@
+/* ─── Data grid ────────────────────────────────────────────────────────── */
+.dgrid { width: 100%; border-collapse: collapse; font-size: var(--fs-base); }
+/* Data tables must scroll horizontally rather than drop columns on phones — at 390px the
+   un-scrolled .dgrid silently clipped Email/Full-name off-screen = data loss (P0-5). */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 600px) { .table-scroll .dgrid { min-width: 620px; } }
+/* Focusable schedule-grid cells (role=button) had no keyboard focus ring (P1-13). */
+.psg-cell:focus-visible { outline: 2px solid var(--brand-500); outline-offset: 2px; border-radius: 8px; }
+.dgrid thead th {
+  text-align: left; padding: var(--s-3) var(--s-4);
+  font-size: var(--fs-xs); font-weight: 700; color: var(--ink-500);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--ink-150); white-space: nowrap; background: var(--white);
+}
+.dgrid thead th.num, .dgrid tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.dgrid thead th.center, .dgrid tbody td.center { text-align: center; }
+/* Clickable sortable column header — inherits the th styling, adds a pointer. */
+.sort-hd {
+  background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+  font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit;
+  display: inline-flex; align-items: center;
+}
+.sort-hd:hover { color: var(--ink-800); }
+.dgrid tbody td { padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--ink-100); color: var(--ink-700); vertical-align: middle; }
+.dgrid tbody tr { transition: background var(--t-fast); }
+.dgrid tbody tr:hover { background: var(--ink-25); }
+.dgrid tbody tr:last-child td { border-bottom: 0; }
+.dgrid tbody tr.selected { background: var(--brand-50); }
+.dgrid .strong { font-weight: 600; color: var(--ink-900); }
+.dgrid .muted { color: var(--ink-400); }
+.dgrid .empty-dash { color: var(--ink-300); }
+
+/* checkbox cell */
+.cbx { width: 16px; height: 16px; border: 1.5px solid var(--ink-300); border-radius: var(--r-xs); background: var(--white); cursor: pointer; appearance: none; flex-shrink: 0; position: relative; transition: background var(--t-fast), border-color var(--t-fast); touch-action: manipulation; }
+.cbx:checked { background: var(--brand-500); border-color: var(--brand-500); }
+.cbx:checked::after { content: '✓'; position: absolute; inset: 0; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.cbx:focus-visible { outline: none; box-shadow: var(--sh-focus); }
+.dgrid td.cbx-cell, .dgrid th.cbx-cell { width: 40px; padding-left: var(--s-5); padding-right: 0; }
+
+/* identity cell (name + meta) */
+.id-cell { display: flex; flex-direction: column; gap: 1px; }
+.id-cell .nm { font-weight: 600; color: var(--ink-900); }
+.id-cell .mt { font-size: var(--fs-xs); color: var(--ink-500); font-variant-numeric: tabular-nums; }
+
+/* type pill */
+.typ { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px 3px 7px; border-radius: var(--r-pill); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
+.typ::before { content: ''; width: 7px; height: 7px; border-radius: 2px; }
+.typ.sp { background: var(--brand-50); color: var(--brand-700); }
+.typ.sp::before { background: var(--brand-500); }
+.typ.sk { background: var(--accent-50); color: var(--accent-700); }
+.typ.sk::before { background: var(--accent-500); }
+
+/* capacity bar */
+.cap { display: flex; align-items: center; gap: var(--s-3); min-width: 150px; }
+.cap-track { flex: 1; height: 7px; border-radius: 4px; background: var(--ink-100); overflow: hidden; max-width: 120px; }
+.cap-fill { height: 100%; border-radius: 4px; background: var(--brand-500); transition: width var(--t-base); }
+.cap-fill.sk { background: var(--accent-500); }
+.cap-fill.warn { background: var(--warn-500); }
+.cap-fill.full { background: var(--danger-500); }
+.cap-num { font-size: var(--fs-sm); color: var(--ink-700); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cap-num b { color: var(--ink-900); }
+
+/* row actions */
+.row-acts { display: flex; align-items: center; justify-content: flex-end; gap: 2px; }
+.icon-act { width: 30px; height: 30px; border-radius: var(--r-sm); border: 0; background: transparent; color: var(--ink-500); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background var(--t-fast), color var(--t-fast), opacity var(--t-fast); opacity: 0; }
+.dgrid tbody tr:hover .icon-act { opacity: 1; }
+.icon-act:hover { background: var(--ink-100); color: var(--ink-900); }
+.icon-act:focus-visible { opacity: 1; outline: none; box-shadow: var(--sh-focus); }
+.icon-act.danger:hover { background: var(--danger-50); color: var(--danger-600); }
+
+/* row dropdown menu */
+.rowmenu-wrap { position: relative; display: inline-block; }
+.rowmenu { position: absolute; right: 0; top: calc(100% + 4px); z-index: var(--z-overlay); background: var(--white); border: 1px solid var(--ink-150); border-radius: var(--r-md); box-shadow: var(--sh-4); min-width: 168px; padding: var(--s-1); }
+.rowmenu button { display: flex; align-items: center; gap: var(--s-2); width: 100%; text-align: left; padding: var(--s-2) var(--s-3); border: 0; background: transparent; border-radius: var(--r-xs); font-size: var(--fs-sm); color: var(--ink-700); cursor: pointer; font-family: inherit; }
+.rowmenu button:hover { background: var(--ink-50); color: var(--ink-900); }
+.rowmenu button.danger { color: var(--danger-600); }
+.rowmenu button.danger:hover { background: var(--danger-50); }
+.rowmenu .div { height: 1px; background: var(--ink-100); margin: var(--s-1) 0; }
+
+/* ─── Empty state (admin grids) ─────────────────────────────────────── */
+.empty-state { padding: var(--s-12) var(--s-6); text-align: center; color: var(--ink-500); }
+.empty-state .es-title { font-size: var(--fs-md); font-weight: 600; color: var(--ink-700); margin-bottom: var(--s-1); }
+
+/* ─── Calendar empty states (F16) ────────────────────────────────────── */
+/* No slots at all */
+.cal-empty-state {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--s-2); padding: var(--s-16) var(--s-6); text-align: center;
+  color: var(--ink-500);
+}
+.cal-empty-state svg { color: var(--ink-300); margin-bottom: var(--s-2); }
+.cal-empty-state .ces-title {
+  font-size: var(--fs-md); font-weight: 600; color: var(--ink-700); margin: 0;
+}
+.cal-empty-state .ces-body {
+  font-size: var(--fs-sm); color: var(--ink-500); max-width: 320px; margin: 0;
+}
+
+/* No slots for the active type (other type has slots) */
+.cal-type-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--s-3); padding: var(--s-10) var(--s-6); text-align: center;
+  border-top: 1px solid var(--ink-100);
+}
+.cal-type-empty p { font-size: var(--fs-sm); color: var(--ink-600); margin: 0; }
+
+/* ─── Audit (human-readable) ───────────────────────────────────────────── */
+.aud-list { display: flex; flex-direction: column; }
+.aud-row { display: grid; grid-template-columns: 156px 1fr; gap: var(--s-4); padding: var(--s-4) var(--s-5); border-bottom: 1px solid var(--ink-100); }
+.aud-row:last-child { border-bottom: 0; }
+.aud-row:hover { background: var(--ink-25); }
+.aud-when { font-size: var(--fs-xs); color: var(--ink-500); font-variant-numeric: tabular-nums; line-height: 1.5; }
+.aud-when .ago { display: block; color: var(--ink-400); }
+.aud-main { min-width: 0; }
+.aud-head { display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+.aud-ev { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: var(--r-pill); font-size: var(--fs-xs); font-weight: 600; }
+.aud-ev.create { background: var(--success-50); color: var(--success-700); }
+.aud-ev.update { background: var(--brand-50); color: var(--brand-700); }
+.aud-ev.cancel { background: var(--danger-50); color: var(--danger-700); }
+.aud-ev.block { background: var(--warn-50); color: var(--warn-700); }
+.aud-ev.config { background: var(--ink-100); color: var(--ink-600); }
+.aud-subject { font-weight: 600; color: var(--ink-900); }
+.aud-actor { font-size: var(--fs-sm); color: var(--ink-500); }
+.aud-diffs { margin-top: var(--s-2); display: flex; flex-direction: column; gap: 4px; }
+.aud-diff { font-size: var(--fs-sm); color: var(--ink-600); display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap; }
+.aud-diff .dk { color: var(--ink-500); min-width: 88px; }
+.aud-diff .from { color: var(--ink-500); text-decoration: line-through; }
+.aud-diff .arrow { color: var(--ink-400); }
+.aud-diff .to { color: var(--ink-900); font-weight: 600; }
+.aud-note { font-size: var(--fs-sm); color: var(--ink-600); margin-top: var(--s-1); font-style: italic; }
+
+/* ─── Reason cell (block list, bilingual) ──────────────────────────────── */
+.reason { max-width: 460px; }
+.reason .vn { color: var(--ink-800); font-weight: 500; }
+.reason .en { color: var(--ink-400); font-size: var(--fs-xs); margin-top: 2px; }
+

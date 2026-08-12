@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin · Events lifecycle cards (Corgi7 Admin.dc.html)
+   Replaces the flat events table: segmented lifecycle filter + grouped rich
+   cards with real fill (single bar for simple, dual SP/3S meters for slotted).
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ev-tab { display: flex; flex-direction: column; }
+
+/* toolbar: lifecycle filter + actions */
+.ev-toolbar { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-5); flex-wrap: wrap; }
+.ev-toolbar .spacer { flex: 1; }
+
+/* segmented filter */
+.seg { display: inline-flex; gap: 4px; background: #EBEEF3; border-radius: 9px; padding: 3px; }
+.seg button {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 13px; border-radius: var(--r-sm); border: 0; cursor: pointer; font-family: inherit;
+  font-size: var(--fs-sm); font-weight: 500; color: var(--ink-500); background: transparent;
+  transition: background var(--t-fast), color var(--t-fast), box-shadow var(--t-fast);
+}
+.seg button:hover { color: var(--ink-900); }
+.seg button.active { background: var(--white); color: var(--ink-900); font-weight: 600; box-shadow: var(--sh-1); }
+.seg button .n { opacity: 0.6; font-variant-numeric: tabular-nums; }
+.seg button.active .n { opacity: 0.75; }
+.seg button:focus-visible { outline: none; box-shadow: var(--sh-focus); }
+
+/* lifecycle group */
+.ev-group { margin-bottom: var(--s-6); }
+.ev-group-hd { display: flex; align-items: center; gap: 9px; margin-bottom: var(--s-3); padding: 0 2px; }
+.ev-group-hd .lbl { font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-500); }
+.ev-group-hd .cnt { font-size: var(--fs-xs); font-weight: 700; color: var(--ink-500); background: var(--ink-150); border-radius: var(--r-pill); padding: 1px 8px; font-variant-numeric: tabular-nums; }
+.ev-group-hd .rule { flex: 1; height: 1px; background: var(--ink-150); }
+.ev-cards { display: flex; flex-direction: column; gap: var(--s-3); }
+
+/* card */
+.ev-card {
+  display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap;
+  padding: var(--s-4) 18px; background: var(--white);
+  border: 1px solid var(--ink-150); border-radius: 13px; box-shadow: var(--sh-1);
+  transition: box-shadow var(--t-fast) var(--ease-out);
+}
+.ev-card:hover { box-shadow: var(--sh-2); }
+.ev-card.muted { opacity: 0.72; }
+.ev-accent { width: 46px; height: 46px; border-radius: 11px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ev-accent.sp { background: var(--brand-50); color: var(--brand-600); }
+.ev-accent.sk { background: var(--accent-50); color: var(--accent-700); }
+.ev-accent.muted { background: var(--ink-100); color: var(--ink-400); }
+
+.ev-idwrap { flex: 1 1 240px; min-width: 200px; }
+.ev-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.ev-name { font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink-900); }
+.ev-type { font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 9px; border-radius: var(--r-xs); }
+.ev-type.sp { background: var(--brand-50); color: var(--brand-600); }
+.ev-type.sk { background: var(--accent-50); color: var(--accent-700); }
+.ev-type.muted { background: var(--ink-100); color: var(--ink-400); }
+.ev-eid { font-size: var(--fs-sm); color: var(--ink-400); margin-top: 3px; }
+
+/* fill region */
+.ev-fill { flex: 0 0 230px; }
+.ev-fill-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.ev-fill-head .k { font-size: 11.5px; font-weight: 600; color: var(--ink-500); }
+.ev-fill-head .v { font-size: 12.5px; font-weight: 600; color: var(--ink-700); font-variant-numeric: tabular-nums; }
+.ev-meter { height: 7px; border-radius: var(--r-pill); background: var(--ink-100); overflow: hidden; }
+.ev-meter.sm { height: 6px; }
+.ev-meter > span { display: block; height: 100%; border-radius: var(--r-pill); transition: width var(--t-base) var(--ease-out); }
+.ev-reglabel { font-size: 12.5px; font-weight: 600; color: var(--ink-700); margin-bottom: 7px; }
+.ev-dual { display: flex; gap: var(--s-3); }
+.ev-dual-col { flex: 1; }
+.ev-dual-hd { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.ev-dual-hd .sp { font-size: 10px; font-weight: 700; color: var(--brand-600); }
+.ev-dual-hd .sk { font-size: 10px; font-weight: 700; color: var(--accent-700); }
+.ev-dual-hd .tnum { font-size: 10px; color: var(--ink-400); font-variant-numeric: tabular-nums; }
+.ev-fill-pending { font-size: var(--fs-sm); color: var(--ink-400); }
+
+/* status rail */
+.ev-status { flex: 0 0 158px; display: flex; flex-direction: column; gap: 7px; align-items: flex-start; }
+.ev-enroll { font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: var(--r-pill); }
+.ev-enroll.open { background: var(--success-100); color: var(--success-700); }
+.ev-enroll.closed { background: var(--danger-100); color: var(--danger-700); }
+.ev-enroll.ended { background: var(--ink-100); color: var(--ink-400); }
+.ev-ddl { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: var(--r-pill); background: var(--brand-50); color: var(--brand-600); }
+.ev-ddl.urgent { background: var(--danger-50); color: var(--danger-700); }
+.ev-ddl.passed { background: var(--ink-100); color: var(--ink-400); }
+
+.ev-foot { font-size: 12.5px; color: var(--ink-400); margin: 2px 4px 0; }
+
+@media (max-width: 720px) {
+  .ev-fill, .ev-status { flex-basis: 100%; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin · Configuration restructure (banner + scoped sections)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.cfg-banner { display: flex; align-items: flex-start; gap: 11px; padding: var(--s-4); background: var(--brand-50); border: 1px solid var(--brand-100); border-radius: var(--r-lg); margin-bottom: var(--s-6); }
+.cfg-banner .ic { color: var(--brand-600); flex-shrink: 0; margin-top: 1px; display: inline-flex; }
+.cfg-banner p { font-size: var(--fs-base); line-height: var(--lh-base); color: var(--brand-700); margin: 0; }
+
+.cfg-sec-hd { display: flex; align-items: center; gap: 9px; margin: 0 0 var(--s-3); padding: 0 2px; }
+.cfg-sec-hd .lbl { font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-500); }
+.cfg-sec-hd .rule { flex: 1; height: 1px; background: var(--ink-150); }
+.scope-badge { font-size: 10.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 2px 8px; border-radius: var(--r-xs); }
+.scope-badge.brand { color: var(--brand-700); background: var(--brand-100); }
+.scope-badge.amber { color: var(--accent-700); background: var(--accent-100); }
+
+.cfg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); margin-bottom: var(--s-7); align-items: start; }
+.cfg-grid .set-group { margin-bottom: 0; }
+@media (max-width: 720px) { .cfg-grid { grid-template-columns: 1fr; } }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin · Registrations bulk-action bar (light, matches mockup)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.reg-bulk { display: flex; align-items: center; gap: var(--s-3); padding: var(--s-3) 18px; background: var(--brand-50); border-bottom: 1px solid var(--brand-100); flex-wrap: wrap; }
+.reg-bulk .bcount { font-size: var(--fs-base); font-weight: 700; color: var(--brand-700); }
+.reg-bulk .blink { background: transparent; border: 0; color: var(--brand-500); font-size: var(--fs-sm); font-weight: 600; cursor: pointer; font-family: inherit; }
+.reg-bulk .blink:hover { color: var(--brand-700); text-decoration: underline; }
+.reg-bulk .spacer { flex: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin · Audit diffs as inline chips (was a vertical list)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.aud-diffs { flex-direction: row; flex-wrap: wrap; gap: var(--s-2); }
+.aud-diff { background: var(--ink-25); border: 1px solid var(--ink-100); border-radius: 7px; padding: 3px 9px; font-size: 11.5px; gap: 6px; }
+.aud-diff .dk { min-width: auto; font-weight: 700; color: var(--ink-500); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Admin · Overview dashboard (capacity-by-day + recent registrations)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.ov-grid { display: grid; grid-template-columns: 1fr; gap: var(--s-4); align-items: start; }
+.ov-grid:has(> .panel + .panel) { grid-template-columns: 1fr 1.1fr; }
+@media (max-width: 860px) { .ov-grid:has(> .panel + .panel) { grid-template-columns: 1fr; } }
+.ov-day { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-3) 0; border-bottom: 1px solid var(--ink-100); }
+.ov-day:last-child { border-bottom: 0; }
+.ov-day-lbl { width: 110px; flex-shrink: 0; }
+.ov-day-num { width: 112px; text-align: right; }
+
