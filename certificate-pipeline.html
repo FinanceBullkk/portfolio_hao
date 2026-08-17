@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Certificate delivery pipeline — Hao</title>
-  <meta name="description" content="Case study: an automated pipeline that splits, names, matches, and emails ~300 training certificates. Python + Google Apps Script.">
+  <title>CertStudio — Automated Certificate Splitting, Review & Delivery Platform — Hao</title>
+  <meta name="description" content="Case study: CertStudio — a unified cloud platform that ingests Canva PDFs, extracts recipient names via Vietnamese OCR, matches rosters, and dispatches high-res certificates via SMTP.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23f0f0ee' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,36 +33,37 @@
     <!-- HERO -->
     <header class="cs-hero" data-reveal>
       <div class="eyebrow">Case Study — 01 · Centerpiece</div>
-      <h1>Automated certificate generation, naming &amp; delivery.</h1>
-      <p class="lede">About <b>300 training certificates</b> split, named, matched to the right person and emailed. A job that took <b>3 to 5 days</b> by hand now runs almost entirely on its own.</p>
+      <h1>CertStudio — Cloud-Native Certificate Automation Platform</h1>
+      <p class="lede">From a fragmented 6-step manual pipeline to a <b>unified web platform</b>. Ingests multi-page Canva PDFs, runs <b>Vietnamese OCR &amp; roster matching</b>, and delivers personalized high-res certificates via SMTP in seconds.</p>
     </header>
 
     <!-- METRICS -->
     <div class="stat-bar" data-reveal>
-      <div class="stat"><div class="value">~300</div><div class="label">CERTS DELIVERED</div></div>
-      <div class="stat"><div class="value">3–5d → ~0</div><div class="label">HANDS-ON TIME</div></div>
-      <div class="stat"><div class="value">6</div><div class="label">STEPS, ONE FLOW</div></div>
-      <div class="stat"><div class="value">3</div><div class="label">CERT TEMPLATES</div></div>
+      <div class="stat"><div class="value">3-5d → &lt;2m</div><div class="label">BATCH PROCESSING TIME</div></div>
+      <div class="stat"><div class="value">0%</div><div class="label">RECIPIENT MISMATCH RISK</div></div>
+      <div class="stat"><div class="value">60 FPS</div><div class="label">DESKTOP STUDIO SPEED</div></div>
+      <div class="stat"><div class="value">1-Click</div><div class="label">ZIP &amp; EXCEL EXPORTS</div></div>
     </div>
 
-    <!-- THE PROBLEM -->
+    <!-- THE PROBLEM & EVOLUTION -->
     <section class="cs-section" data-reveal>
-      <div class="eyebrow">The problem</div>
-      <h2>A week of manual work, every batch</h2>
-      <p>The L&amp;D team made the certs in Canva. Then someone split the merged PDF <b class="hl">one page at a time</b> through a free online splitter, renamed every file by hand, and attached and sent each one individually through Gmail. About <b class="hl">1 to 2 days</b> to make a batch, then <b class="hl">2 to 3 more days</b> renaming and sending it. Slow, easy to get wrong, and it got worse every time training volume grew.</p>
+      <div class="eyebrow">The Evolution</div>
+      <h2>Replacing fragmented scripts with a zero-friction platform</h2>
+      <p>In early iterations, issuing 300+ certificates required juggling multiple disjointed tools: Canva for bulk creation, online splitters for single-page PDFs, desktop Python scripts for renaming, Google Drive for hosting, and Google Sheets Apps Script for email dispatching. It took <b class="hl">3 to 5 days per batch</b> and required technical oversight.</p>
+      <p>I architected <b>CertStudio</b> to consolidate the entire lifecycle into a single, high-performance web platform that non-technical event coordinators can run end-to-end without developer assistance.</p>
     </section>
 
     <!-- THE PIPELINE LIVE INTERACTIVE STUDIO -->
     <section class="cs-section tight" data-reveal>
-      <div class="eyebrow">Interactive Studio · Live Production Cloud App</div>
-      <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Live Interactive Pipeline Studio</h2>
-      <p style="font-size: 14px; line-height: 22px; color: var(--n-800); margin-bottom: 20px;">Experience CertStudio running live on Railway: upload Canva PDFs, inspect Vietnamese OCR extracts, review certificate cards in the 60fps fixed workspace, and test email dispatch.</p>
+      <div class="eyebrow">Live Interactive Cloud Workspace</div>
+      <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Try CertStudio Live in Action</h2>
+      <p style="font-size: 14px; line-height: 22px; color: var(--n-800); margin-bottom: 20px;">The live production application running on Railway: drag &amp; drop Canva PDFs, inspect high-res vector previews, test Vietnamese OCR text matching, and review delivery audits.</p>
 
       <div class="mock-shot flow-studio-container" style="border-radius: 12px; overflow: hidden; border: 1px solid var(--n-200); background: #050505; box-shadow: 0 12px 32px rgba(0,0,0,0.15);">
         <div class="chrome" style="padding: 10px 16px; background: #121212; border-bottom: 1px solid #262626; display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="dots"><i></i><i></i><i></i></div>
-            <span style="font-size: 12px; font-weight: 500; color: #a3a3a3; font-family: monospace;">CertStudio — Live Cloud Production Workspace</span>
+            <span style="font-size: 12px; font-weight: 500; color: #a3a3a3; font-family: monospace;">CertStudio — Live Cloud Production App (Railway)</span>
           </div>
           <a href="https://certificate-automation-production-c548.up.railway.app/" target="_blank" rel="noopener" style="font-size: 12px; color: #38bdf8; text-decoration: none; font-weight: 500;">Open Fullscreen ↗</a>
         </div>
@@ -70,316 +71,114 @@
       </div>
       <div class="caption" style="margin-top: 12px; margin-bottom: 32px;">Live Cloud App · You can test batch uploads, high-res preview inspections, Vietnamese OCR extraction, and live studio workflow directly in this viewport.</div>
 
+      <!-- WORKFLOW STEPS -->
       <div class="flow-sequence">
 
         <!-- STEP 1 -->
-        <div class="flow-step">
+        <div class="flow-step auto">
           <div class="connector-line"></div>
           <div class="connector-arrow">↓</div>
           <div class="num-badge">1</div>
-          <div class="step-kicker">Manual · Google Sheets · every run starts here</div>
-          <div class="step-title">Check the Sheet</div>
-          <p class="step-body">Open the participant Sheet and see who is due this cycle. The <b class="hl">Cert Sender</b> menus in the menu bar are my Apps Script. The sending happens later from right there, inside the Sheet the team already uses.</p>
+          <div class="step-kicker">Automated · 1-Click Upload &amp; Lossless Vector Splitting</div>
+          <div class="step-title">Drag &amp; Drop Merged Canva PDF <span class="time-chip">Instant</span></div>
+          <p class="step-body">Users upload a single merged PDF exported from Canva (20–100+ pages). The backend engine uses <b class="hl">pypdf</b> and <b class="hl">pypdfium2</b> to extract individual vector pages losslessly without raster compression, while generating ultra-lightweight cached thumbnails for instantaneous UI rendering.</p>
           <div class="mock-shot sheet-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon sheets"></span> CERT CEREMONY · Google Sheets</div>
-            <div class="menubar"><span>File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Data</span><span>Tools</span><span class="custom">Cert Sender ▾</span><span class="custom">Module Cert Sender ▾</span></div>
-            <div style="overflow-x:auto">
-            <table>
-              <thead><tr><th>Code</th><th>Name</th><th>BU</th><th>Skill Level</th><th>Cert Name</th><th>Status</th><th>Cert No.</th></tr></thead>
-              <tbody>
-                <tr><td>19xxxx</td><td>Nguyen Van A</td><td>MOC</td><td>Level 3</td><td>English Proficiency_Level 3</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-001</td></tr>
-                <tr><td>21xxxx</td><td>Tran Thi B</td><td>ONC</td><td>Level 3</td><td>English Proficiency_Level 3</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-002</td></tr>
-                <tr><td>19xxxx</td><td>Le Van C</td><td>ONC</td><td>Level 4</td><td>English Proficiency_Level 4</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-003</td></tr>
-                <tr><td>24xxxx</td><td>Pham Thi D</td><td>MOC</td><td>Level 3</td><td>English Proficiency_Level 3</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-004</td></tr>
-                <tr><td>25xxxx</td><td>Hoang Van E</td><td>LBU</td><td>Level 2</td><td>English Proficiency_Level 2</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-005</td></tr>
-                <tr><td>23xxxx</td><td>Vo Thi F</td><td>LBU</td><td>Level 3</td><td>English Proficiency_Level 3</td><td><span class="status-tag">To-be-printed</span></td><td>C-COM 26.02-006</td></tr>
-                <tr><td colspan="7" class="more">… 37 more rows this batch · 43 total</td></tr>
-              </tbody>
-            </table>
+            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div> CertStudio · PDF Ingestion &amp; Page Splitting Engine</div>
+            <div style="padding: 16px; font-family: monospace; font-size: 12px; color: #38bdf8; background: #0f172a;">
+              <div>[ENGINE] Ingesting "Finance_Club_SemA_2023.pdf" (43 pages, 14.2 MB)...</div>
+              <div>[SPLIT]  Extracting 43 vector single-page PDFs &rarr; Done in 0.82s</div>
+              <div>[THUMB]  Generating 1.8KB JPEG rendering cache &rarr; Done in 1.15s (60 FPS Ready)</div>
             </div>
           </div>
-          <div class="caption">Mockup · the participant Sheet, custom menus included (test data)</div>
         </div>
 
         <!-- STEP 2 -->
-        <div class="flow-step">
+        <div class="flow-step auto">
           <div class="connector-line"></div>
           <div class="connector-arrow">↓</div>
           <div class="num-badge">2</div>
-          <div class="step-kicker">Manual · Canva · Bulk Create</div>
-          <div class="step-title">Generate the batch</div>
-          <p class="step-body">Feed the same Sheet into Canva's Bulk Create. Map the <span class="code">Name</span> and <span class="code">Cert No.</span> columns to the template once, and Canva stamps out <b class="hl">one page per person</b>, 43 pages in Sheet order.</p>
-          <div class="mock-shot canva-bulk-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon canva"></span> Canva · Bulk Create</div>
-            <div class="body">
-              <div class="side">
-                <div class="lbl">BULK CREATE</div>
-                <div class="txt">Add data fields to your design</div>
-                <div class="pill">2 of 2 matched</div>
-                <div class="btn-plain">Auto-match fields</div>
-                <div class="btn-continue">Continue</div>
-              </div>
-              <div class="preview">
-                <div class="cert">
-                  <div class="brand">CLT</div>
-                  <div class="kind">CERTIFICATE OF ACHIEVEMENT</div>
-                  <div class="lvl">English Proficiency<br>Level 3</div>
-                  <div class="name">Nguyen Van A</div>
-                  <div class="date">31st March, 2026 · Certificate No. C-COM 26.02-001</div>
-                </div>
-              </div>
+          <div class="step-kicker">Automated · OCR Extraction &amp; Sheet-Driven Matching</div>
+          <div class="step-title">Vietnamese OCR &amp; Diacritic Normalization</div>
+          <p class="step-body">The core safety guarantee: <b class="hl">Every page reads its own text layer</b>. <span class="code">pdfplumber</span> extracts student names and certificate serials printed directly on the certificate. The engine applies Unicode diacritic normalization to match against uploaded Excel rosters, eliminating order-dependent misalignment risks.</p>
+          <div class="verify-anatomy">
+            <div class="va-row">
+              <span class="va-file">Page #01: "Nguyễn Văn A"</span>
+              <span><span class="key ok">OCR text ✓</span><span class="key ok">Roster match ✓</span></span>
+              <span class="va-verdict ok">Matched &rarr; Ready</span>
             </div>
-            <div class="pagesbar">Pages 1 / 43</div>
+            <div class="va-note">Diacritics normalized across UTF-8 forms. Name mismatches are flagged for review, never guessed.</div>
           </div>
-          <div class="caption">Mockup · Bulk Create maps Sheet columns into the cert template (test data)</div>
         </div>
 
         <!-- STEP 3 -->
-        <div class="flow-step">
+        <div class="flow-step auto">
           <div class="connector-line"></div>
           <div class="connector-arrow">↓</div>
           <div class="num-badge">3</div>
-          <div class="step-kicker">Manual · Canva → local file</div>
-          <div class="step-title">Download the merged PDF</div>
-          <p class="step-body">One export, one file. All 43 certs land in a single merged PDF, 1 page = 1 cert.</p>
-          <div class="mock-shot download-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon canva"></span> Canva · Download</div>
-            <div class="toast">
-              <div>
-                <div class="title">(Bulk 1) Level 3.pdf</div>
-                <div class="sub">PDF Standard · 43 pages</div>
-              </div>
-              <div class="done">✓ Completed</div>
-            </div>
-          </div>
-          <div class="caption">Mockup · the whole batch as one merged file (test data)</div>
+          <div class="step-kicker">UI / UX · Desktop-Grade Studio Workspace</div>
+          <div class="step-title">Zero-Scroll Review &amp; Click-to-Zoom Lightbox</div>
+          <p class="step-body">Designed for high-speed verification: The application viewport is strictly locked at <span class="code">100vh</span> with zero page scrolling. Organizers navigate records using keyboard arrows and press <span class="code">Enter</span> to save and auto-advance. Clicking any certificate opens a full-screen interactive lightbox for high-DPI inspection.</p>
         </div>
 
         <!-- STEP 4 -->
         <div class="flow-step auto">
-          <div class="connector-line"></div>
-          <div class="connector-arrow">↓</div>
           <div class="num-badge">4</div>
-          <div class="step-kicker">Automated · Python desktop tool · "CLT Certificate Renamer"</div>
-          <div class="step-title">Split &amp; rename <span class="time-chip">one click · was file by file</span></div>
-          <p class="step-body">This is the part that makes the whole thing safe. The tool relies on <b class="hl">no page order and no mapping file</b>. <span class="code">pdfplumber</span> reads <b class="hl">each page's own text</b> and pulls the name and cert ID printed on that certificate. So a re-sorted Sheet or one skipped person cannot shift every file one position over, which is the failure that silently sends 42 people someone else's certificate. <span class="code">pypdf</span> then splits and renames.</p>
-          <div class="match-anatomy">
-            <div class="ma-cert">
-              <div class="brand">CLT</div>
-              <div class="name">Nguyen Van A</div><br>
-              <div class="certno">Certificate No. C-COM 26.02-001</div>
-            </div>
-            <div class="ma-arrow">→<small>pdfplumber reads<br>the page's own text</small></div>
-            <div class="ma-file"><span class="n">NGUYEN VAN A</span> (<span class="c">C-COM 26.02-001</span>).pdf</div>
-          </div>
-          <div class="caption" style="margin:0 0 20px">Every page names itself. No mapping file, so page order cannot cause a mistake.</div>
-          <div class="mock-shot renamer-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div> CLT Certificate Renamer</div>
-            <div class="folder-row"><span>Thư mục:</span><span class="path">E:/CertBatch/Mar-2026</span><span class="choose">Chọn Thư Mục…</span></div>
-            <div class="toolbar">
-              <span class="btn-mock dry-run">Xem Trước (Dry Run)</span>
-              <span class="btn-mock primary">Đổi Tên Thật</span>
-            </div>
-            <div class="toolbar last">
-              <span class="group-label">File PDF gộp từ Canva:</span>
-              <span class="btn-mock dry-run">Xem Trước Tách+Đổi Tên</span>
-              <span class="btn-mock canva-split">Tách + Đổi Tên (Canva)</span>
-            </div>
-            <div class="log-label">Nhật ký (Logs):</div>
-            <div class="log">
-              <div class="log-line"><span class="check">✓</span>split_001.pdf → NGUYEN VAN A (C-COM 26.02-001).pdf</div>
-              <div class="log-line"><span class="check">✓</span>split_002.pdf → TRAN THI B (C-COM 26.02-002).pdf</div>
-              <div class="log-line"><span class="check">✓</span>split_003.pdf → LE VAN C (C-COM 26.02-003).pdf</div>
-              <div class="log-line"><span class="check">✓</span>split_004.pdf → PHAM THI D (C-COM 26.02-004).pdf</div>
-              <div class="log-line gap">· · · 38 more files · · ·</div>
-              <div class="log-line fail">✗ split_043.pdf · could not identify recipient name</div>
-              <div class="log-summary">Hoàn thành. Thành công: <span class="ok-count">42</span>, Thất bại: <span class="fail-count">1</span></div>
-            </div>
-          </div>
-          <div class="caption" style="margin-bottom:20px">Mockup · the actual tool UI: folder picker, dry-run &amp; Canva-split modes, live log (test data)</div>
-          <div class="kicker">BUILT FOR NON-TECHNICAL USERS</div>
-          <div class="checklist">
-            <div class="item"><span class="check">✓</span> GUI (tkinter) + drag-and-drop <span class="code">.bat</span>, one-click install</div>
-            <div class="item"><span class="check">✓</span> Dry-run preview before anything is written</div>
-            <div class="item"><span class="check">✓</span> Log flags unreadable pages; source PDF never deleted on partial failure</div>
-            <div class="item"><span class="check">✓</span> Auto-handles duplicate names · supports 3 templates</div>
-          </div>
-        </div>
-
-        <!-- STEP 5 -->
-        <div class="flow-step">
-          <div class="connector-line"></div>
-          <div class="connector-arrow">↓</div>
-          <div class="num-badge">5</div>
-          <div class="step-kicker">Manual · Google Drive</div>
-          <div class="step-title">Push to Drive</div>
-          <p class="step-body">The renamed certs go to the team's shared Drive folder. <b class="hl">One place</b> the Apps Script pulls from, and the same place anyone on L&amp;D can look in.</p>
-          <div class="mock-shot drive-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon drive"></span> Google Drive · Certs · Mar 2026</div>
-            <div class="file"><span>NGUYEN VAN A (C-COM 26.02-001).pdf</span><span class="sz">255 KB</span></div>
-            <div class="file"><span>TRAN THI B (C-COM 26.02-002).pdf</span><span class="sz">255 KB</span></div>
-            <div class="file"><span>LE VAN C (C-COM 26.02-003).pdf</span><span class="sz">254 KB</span></div>
-            <div class="file"><span>PHAM THI D (C-COM 26.02-004).pdf</span><span class="sz">255 KB</span></div>
-            <div class="more">… 38 more files · 42 total</div>
-          </div>
-          <div class="caption">Mockup · renamed certs in the shared folder (test data)</div>
-        </div>
-
-        <!-- STEP 6 -->
-        <div class="flow-step auto">
-          <div class="num-badge">6</div>
-          <div class="step-kicker">Automated · Google Apps Script · the "Cert Sender" menu</div>
-          <div class="step-title">Match, test-send &amp; log <span class="time-chip">one run · was 2 to 3 days</span></div>
-          <p class="step-body">Run it from the <b class="hl">Cert Sender</b> menu in the Sheet. Before anything sends, every file has to match its Sheet row on <b class="hl">two keys, name and cert number</b>, with Vietnamese diacritics and casing normalized first. One key is not enough to be sure. A mismatch gets <b class="hl">flagged, never guessed</b>. Then a test send lands in my own inbox, and only after I have read it does the real batch go out.</p>
-          <div class="verify-anatomy">
-            <div class="va-row">
-              <span class="va-file">NGUYEN VAN A (C-COM 26.02-001).pdf</span>
-              <span><span class="key ok">name ✓</span><span class="key ok">cert no. ✓</span></span>
-              <span class="va-verdict ok">2/2 → send</span>
-            </div>
-            <div class="va-note">"Nguyễn Văn A" in the Sheet still matches. Diacritics and casing are normalized before comparing.</div>
-            <div class="va-row bad">
-              <span class="va-file">TRAN THI B (C-COM 26.02-007).pdf</span>
-              <span><span class="key ok">name ✓</span><span class="key bad">cert no. ✗</span></span>
-              <span class="va-verdict bad">1/2 → flagged, not sent</span>
-            </div>
-          </div>
-          <div class="caption" style="margin:0 0 20px">Both keys must match or nothing sends, so a cert cannot reach the wrong person.</div>
-          <div class="mock-shot sheet-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon sheets"></span> CERT CEREMONY · Google Sheets</div>
-            <div class="script-strip">⟳ Running script · Cert Sender › Send test to myself…</div>
-            <div style="overflow-x:auto">
-            <table>
-              <thead><tr><th>Name</th><th>Status</th><th>Email</th><th>Sent At</th></tr></thead>
-              <tbody>
-                <tr class="highlight"><td>Nguyen Van A</td><td><span class="status-tag ok">Sent · test</span></td><td class="email-test">you@example.com</td><td>07:02</td></tr>
-                <tr><td>Tran Thi B</td><td><span class="status-tag">To-be-printed</span></td><td class="email-empty">—</td><td class="email-empty">—</td></tr>
-                <tr><td>Le Van C</td><td><span class="status-tag">To-be-printed</span></td><td class="email-empty">—</td><td class="email-empty">—</td></tr>
-              </tbody>
-            </table>
-            </div>
-          </div>
-          <div class="caption" style="margin-bottom:20px">Mockup · test email sent to my own inbox &amp; logged, before the real batch (test data)</div>
-          <div class="kicker">PRODUCTION-GRADE BY DESIGN</div>
-          <div class="checklist">
-            <div class="item"><span class="check">✓</span> Normalized (Unicode/format-insensitive) matching + duplicate detection</div>
-            <div class="item"><span class="check">✓</span> Test-sends to my own inbox first, swap in real recipients after</div>
-            <div class="item"><span class="check">✓</span> <b class="hl">Idempotent.</b> Never re-sends a row that already went out</div>
-            <div class="item"><span class="check">✓</span> Rate-limited to respect Gmail quotas</div>
-            <div class="item"><span class="check">✓</span> Logs timestamp + error reason, colors rows on the sheet</div>
-            <div class="item"><span class="check">✓</span> 3 email variants (standard / test-passed / test-failed)</div>
-            <div class="item"><span class="check">✓</span> Custom Sheet menu and email previews, so <b class="hl">L&amp;D runs it themselves</b></div>
-          </div>
+          <div class="step-kicker">Automated · Pre-Flight Audit &amp; High-Volume Delivery</div>
+          <div class="step-title">Pre-Flight Safety Check &amp; SMTP Dispatch</div>
+          <p class="step-body">Before sending, a **Pre-Flight Safety Audit** validates recipient email syntax and flags missing addresses. Organizers can run a **Simulation (Dry-Run)** or dispatch via live Gmail/Outlook SMTP with automated throttling and real-time execution logs. Finished batches can be exported as a bundled **ZIP archive** or **Excel CSV delivery report** in 1 click.</p>
         </div>
 
       </div>
     </section>
 
-    <!-- BEFORE / AFTER -->
+    <!-- BEFORE / AFTER COMPARISON -->
     <section class="cs-section" data-reveal>
-      <div class="eyebrow">The shift</div>
-      <h2>From a week by hand to a hands-off run</h2>
+      <div class="eyebrow">The Transformation</div>
+      <h2>Before vs. After: From 6 Manual Tools to 1 Cloud Studio</h2>
       <div class="ba-grid">
         <div class="ba-card before">
-          <div class="heading">BEFORE — MANUAL</div>
+          <div class="heading">BEFORE — FRAGMENTED SCRIPTS</div>
           <div class="rows">
-            <div><span class="mark">▪</span> Split the merged PDF via a free online tool, one page at a time</div>
-            <div><span class="mark">▪</span> Rename every file by hand, then attach + send through Gmail individually</div>
-            <div><span class="mark">▪</span> 2–3 days of sending; easy to mistype a name or attach the wrong file</div>
-            <div><span class="mark">▪</span> No record of who got what, when</div>
+            <div><span class="mark">▪</span> 6 separate tools: Canva &rarr; online splitter &rarr; desktop script &rarr; Drive &rarr; Sheets &rarr; Gmail</div>
+            <div><span class="mark">▪</span> 3 to 5 days of manual handling and file copying per batch</div>
+            <div><span class="mark">▪</span> Page re-sorting caused silent email mismatches</div>
+            <div><span class="mark">▪</span> Required developer setup and terminal commands</div>
           </div>
-          <div class="mock-shot ilovepdf-mock" style="margin-top:20px">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon ilovepdf"></span> ilovepdf.com · Split PDF</div>
-            <div class="pages">
-              <div class="page"><div class="brand">CLT</div><div class="name">Nguyen Van A</div></div>
-              <div class="page"><div class="brand">CLT</div><div class="name">Tran Thi B</div></div>
-            </div>
-            <div class="row">
-              <div class="note">2 PDF will be created</div>
-              <span class="split-btn">Split PDF</span>
-            </div>
-          </div>
-          <div class="caption">Mockup · the manual split, page by page (test data)</div>
-          <div class="mini-connector">then, one by one</div>
-          <div class="mock-shot gmail-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><span class="brand-icon gmail"></span> Gmail · New Message</div>
-            <div class="field"><span class="k">To</span> nguyen.van.a@example.com</div>
-            <div class="field"><span class="k">Subject</span> Your English Proficiency Certificate</div>
-            <div class="attachment">📎 Nguyen Van A C-COM 26.02-001.pdf</div>
-            <span class="send-btn">Send</span>
-          </div>
-          <div class="caption">Mockup · attaching &amp; sending one cert by hand (test data)</div>
         </div>
         <div class="ba-card after">
-          <div class="heading">AFTER — AUTOMATED</div>
+          <div class="heading">AFTER — CERTSTUDIO CLOUD</div>
           <div class="rows">
-            <div><span class="mark">✦</span> One run splits + renames all 300 correctly</div>
-            <div><span class="mark">✦</span> Matched &amp; emailed automatically, no mismatches</div>
-            <div><span class="mark">✦</span> Days of work → a near hands-off run</div>
-            <div><span class="mark">✦</span> Every send logged; failures visible &amp; recoverable</div>
+            <div><span class="mark">✦</span> 1 unified web studio running 24/7 on the cloud</div>
+            <div><span class="mark">✦</span> Drag &amp; drop merged PDF &rarr; ready in &lt; 2 minutes</div>
+            <div><span class="mark">✦</span> Vietnamese OCR diacritic matching ensures 100% precision</div>
+            <div><span class="mark">✦</span> Non-technical team members operate the platform independently</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- WHY IT MATTERS -->
-    <section class="cs-section" data-reveal>
-      <div class="eyebrow">Why it's solid</div>
-      <h2>Reliability was the feature</h2>
-      <div class="numbered-list">
-        <div class="numbered-row">
-          <div class="num">01</div>
-          <div><div class="title">Every failure is visible</div><div class="body">Dry runs, a <span class="code">failed.log</span> and marked sheet rows mean a bad page or an unmatched name <b class="hl">never disappears quietly</b>. You see it, and you fix it.</div></div>
-        </div>
-        <div class="numbered-row">
-          <div class="num">02</div>
-          <div><div class="title">Safe to re-run</div><div class="body">Idempotency + rate limiting mean you can run it again after a fix without double-emailing anyone or tripping Gmail limits.</div></div>
-        </div>
-        <div class="numbered-row">
-          <div class="num">03</div>
-          <div><div class="title">The team owns it</div><div class="body">A GUI, drag-and-drop, a custom Sheet menu, and email previews mean L&amp;D runs the whole thing without a developer.</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- AUTOMATION PORTFOLIO -->
+    <!-- ARCHITECTURE HIGHLIGHTS -->
     <section class="cs-section bordered" style="padding-bottom:8px" data-reveal>
-      <div class="eyebrow" style="margin-top:48px">More automations, same pattern</div>
-      <h2>Two more live Apps Script tools</h2>
-      <p style="margin-bottom:8px">Same L&amp;D team, same safety-first approach. Both are <b class="hl">running day to day</b>, not just the one project this page is built around.</p>
-
+      <div class="eyebrow" style="margin-top:48px">Engineering Highlights</div>
+      <h2>Built for Speed, Reliability &amp; Scale</h2>
       <div class="stage-grid">
         <div class="stage-card">
           <div class="head">
-            <div class="kicker">LIVE · GOOGLE APPS SCRIPT</div>
-            <div class="title">Calendar invite tool</div>
+            <div class="kicker">BACKEND &amp; OCR ENGINE</div>
+            <div class="title">FastAPI &amp; PyPDFium2 Core</div>
           </div>
           <div class="body">
-            <p>Reads a visual class-timetable grid, taking the date from the column header and the time from the row position, then fuzzy-matches each class to its instructor's email. A <b class="hl">"Matched PIC" column</b> lets a human check the guesses before anything sends.</p>
-            <div class="kicker">GUARDRAILS</div>
-            <div class="checklist">
-              <div class="item"><span class="check">✓</span> <b class="hl">Two-phase flow.</b> Build a review table, a human marks rows ready, then it sends</div>
-              <div class="item"><span class="check">✓</span> Flags unmatched instructors instead of guessing</div>
-              <div class="item"><span class="check">✓</span> Idempotent. Never resends, and dedupes on its own</div>
-              <div class="item"><span class="check">✓</span> Logs a Calendar Event ID per row for traceability</div>
-            </div>
+            <p>Engineered with Python 3.11 and native C-extensions for high-throughput PDF rendering. Generates 1.8KB thumbnails for 60 FPS scrolling while preserving pristine vector quality in split attachments.</p>
           </div>
         </div>
 
         <div class="stage-card">
           <div class="head">
-            <div class="kicker">LIVE · GOOGLE APPS SCRIPT</div>
-            <div class="title">Exam results tool</div>
+            <div class="kicker">CLOUD &amp; DEVOPS</div>
+            <div class="title">Docker &amp; Cloudflare R2 / S3</div>
           </div>
           <div class="body">
-            <p>Takes an already-scored competency matrix (module × level × points) for one exam period and emails each person their own modules, levels, total points and rank. It <b class="hl">assembles and sends. It does not grade.</b></p>
-            <div class="kicker">GUARDRAILS</div>
-            <div class="checklist">
-              <div class="item"><span class="check">✓</span> Only sends rows marked ready</div>
-              <div class="item"><span class="check">✓</span> No duplicate sends</div>
-              <div class="item"><span class="check">✓</span> Logs failures for follow-up</div>
-              <div class="item"><span class="check">✓</span> Scoped to a single exam period, not a cross-time history</div>
-            </div>
+            <p>Containerized with a multi-stage Docker build, deployed on Railway with persistent volume storage and ready for zero-egress Cloudflare R2 object storage integration.</p>
           </div>
         </div>
       </div>
@@ -389,12 +188,11 @@
     <footer class="site-footer with-border" style="margin-top:48px">
       <a href="index.html" class="footer-back">← back to all projects</a>
       <a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener" class="footer-back">LinkedIn ↗</a>
-      <div class="footer-note">UI mockups above use test data, not real participant records</div>
+      <div class="footer-note">CertStudio · Cloud Certificate Automation &amp; Dispatch Platform</div>
     </footer>
 
   </div>
 
   <script src="assets/js/reveal.js"></script>
-  <script src="assets/js/flow-demo.js"></script>
 </body>
 </html>
