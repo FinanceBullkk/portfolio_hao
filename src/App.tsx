@@ -11,7 +11,7 @@ import { ErrorBoundary } from './components/error-boundary';
 import { EventsFlow } from './events/events-flow';
 import { ProfileScreen } from './events/profile-screen';
 import { DarkSignIn } from './events/dark/dark-signin';
-import cltLogo from './assets/clt-logo.webp';
+import cltLogo from './assets/clt-logo.svg';
 import {
   ALLOWED_EMAIL_SUFFIX,
   COMPANY_EMAIL_REQUIRED_MESSAGE,

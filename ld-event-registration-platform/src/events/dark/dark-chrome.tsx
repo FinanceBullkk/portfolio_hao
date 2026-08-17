@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactNode } from 'react';
 import { eventTheme, eventGlyph } from '../../lib/event-theme';
-import logoUrl from '../../assets/clt-logo-white.webp';
+import logoUrl from '../../assets/clt-logo-white.svg';
 
 // Shared primitives for the dark, Luma-style employee app (design_handoff_user_events):
 // the top nav, the gradient cover/thumbnail, status pills, and an ANONYMOUS facepile

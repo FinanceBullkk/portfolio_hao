@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import cltLogo from '../assets/clt-logo.webp';
+import cltLogo from '../assets/clt-logo.svg';
 import { emailInitials, emailShortName, type DeadlineInfo } from './booking-utils';
 
 // ─── Topbar ───────────────────────────────────────────────────────────────

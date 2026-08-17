@@ -1,5 +1,5 @@
 import { eventTheme } from '../../lib/event-theme';
-import logoUrl from '../../assets/clt-logo-white.webp';
+import logoUrl from '../../assets/clt-logo-white.svg';
 
 // Dark, Luma-style sign-in hero (design_handoff_user_events screen 0). SSO entry — the
 // button calls the same Google sign-in the light screen used.
