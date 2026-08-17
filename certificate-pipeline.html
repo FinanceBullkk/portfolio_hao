@@ -8,12 +8,177 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23f0f0ee' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/case-study.css">
   <link rel="stylesheet" href="assets/css/certificate-pipeline-mocks.css">
   <link rel="stylesheet" href="assets/css/certificate-pipeline-flow-demo.css">
   <script>try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
+  <style>
+    /* ============================================================
+       Visual System Architecture & Pipeline Styles
+       ============================================================ */
+    .arch-container {
+      background: #090d16;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0 36px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      color: #e2e8f0;
+      overflow-x: auto;
+    }
+    .arch-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    .arch-title {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 40px 1.4fr 40px 1.1fr;
+      align-items: center;
+      gap: 0;
+      min-width: 720px;
+    }
+    .arch-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .arch-arrow {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: #3b82f6;
+      font-weight: 700;
+    }
+    .arch-card {
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      padding: 12px 14px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .arch-card:hover {
+      border-color: #3b82f6;
+      transform: translateY(-2px);
+    }
+    .arch-card.highlight {
+      border-color: rgba(59, 130, 246, 0.5);
+      background: linear-gradient(145deg, #111827, #0f172a);
+    }
+    .arch-tag {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 6px;
+      border-radius: 3px;
+      display: inline-block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    .tag-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+    .tag-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .tag-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    .tag-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    
+    .arch-card-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+    .arch-card-desc {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* Before vs After Visual Diagram */
+    .compare-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin: 24px 0 36px;
+    }
+    @media (max-width: 720px) {
+      .compare-box { grid-template-columns: 1fr; }
+    }
+    .compare-card {
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .compare-card.bad {
+      border-color: rgba(239, 68, 68, 0.3);
+      background: rgba(239, 68, 68, 0.03);
+    }
+    .compare-card.good {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.03);
+    }
+    .compare-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .compare-badge.bad { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    .compare-badge.good { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+
+    .step-track {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .step-node {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: var(--card-bg, rgba(255, 255, 255, 0.04));
+      border: 1px solid var(--border);
+    }
+    .step-node .icon-pill {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .node-bad .icon-pill { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .node-good .icon-pill { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+    /* Visual OCR Breakdown Box */
+    .ocr-diagram-box {
+      background: #0f172a;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      font-family: var(--font-mono);
+    }
+  </style>
 </head>
 <body>
 
@@ -33,29 +198,165 @@
     <!-- HERO -->
     <header class="cs-hero" data-reveal>
       <div class="eyebrow">Case Study — 01 · Centerpiece</div>
-      <h1>CertStudio — Cloud-Native Certificate Automation Platform</h1>
-      <p class="lede">From a fragmented 6-step manual pipeline to a <b>unified web platform</b>. Ingests multi-page Canva PDFs, runs <b>Vietnamese OCR &amp; roster matching</b>, and delivers personalized high-res certificates via SMTP in seconds.</p>
+      <h1>CertStudio — Cloud-Native Certificate Automation &amp; Dispatch Hub</h1>
+      <p class="lede">From a fragile 6-tool manual pipeline to a <b>unified full-stack cloud platform</b>. Ingests multi-page Canva PDFs, runs <b>Vietnamese OCR &amp; Unicode diacritic matching</b>, and delivers high-res certificates via SMTP in under 2 minutes.</p>
     </header>
 
-    <!-- METRICS -->
+    <!-- METRICS BAR -->
     <div class="stat-bar" data-reveal>
       <div class="stat"><div class="value">3-5d → &lt;2m</div><div class="label">BATCH PROCESSING TIME</div></div>
-      <div class="stat"><div class="value">0%</div><div class="label">RECIPIENT MISMATCH RISK</div></div>
-      <div class="stat"><div class="value">60 FPS</div><div class="label">DESKTOP STUDIO SPEED</div></div>
+      <div class="stat"><div class="value">0%</div><div class="label">MISMATCH ERROR RATE</div></div>
+      <div class="stat"><div class="value">60 FPS</div><div class="label">DESKTOP STUDIO ENGINE</div></div>
       <div class="stat"><div class="value">1-Click</div><div class="label">ZIP &amp; EXCEL EXPORTS</div></div>
     </div>
 
-    <!-- THE PROBLEM & EVOLUTION -->
+    <!-- 🌟 VISUAL SYSTEM ARCHITECTURE DIAGRAM -->
     <section class="cs-section" data-reveal>
-      <div class="eyebrow">The Evolution</div>
-      <h2>Replacing fragmented scripts with a zero-friction platform</h2>
-      <p>In early iterations, issuing 300+ certificates required juggling multiple disjointed tools: Canva for bulk creation, online splitters for single-page PDFs, desktop Python scripts for renaming, Google Drive for hosting, and Google Sheets Apps Script for email dispatching. It took <b class="hl">3 to 5 days per batch</b> and required technical oversight.</p>
-      <p>I architected <b>CertStudio</b> to consolidate the entire lifecycle into a single, high-performance web platform that non-technical event coordinators can run end-to-end without developer assistance.</p>
+      <div class="eyebrow">System Design</div>
+      <h2>Cloud System Architecture</h2>
+      <p>CertStudio connects document ingestion, OCR text mining, interactive verification, and SMTP delivery into a containerized high-performance pipeline:</p>
+
+      <div class="arch-container">
+        <div class="arch-header">
+          <div class="arch-title">
+            <span>⚡ CERTSTUDIO PIPELINE FLOW DIAGRAM</span>
+          </div>
+          <span style="font-size: 11px; font-family: var(--font-mono); color: #94a3b8;">Docker · FastAPI · PyPDFium2 · Railway</span>
+        </div>
+
+        <div class="arch-grid">
+          <!-- COLUMN 1: INPUTS -->
+          <div class="arch-col">
+            <div class="arch-card">
+              <span class="arch-tag tag-purple">Document Ingestion</span>
+              <div class="arch-card-name">📄 Merged Canva PDF</div>
+              <div class="arch-card-desc">Multi-page vector PDF export (20–100+ certificate pages).</div>
+            </div>
+            <div class="arch-card">
+              <span class="arch-tag tag-green">Class Roster</span>
+              <div class="arch-card-name">📊 Excel / CSV Roster</div>
+              <div class="arch-card-desc">Student names, emails &amp; certificate serial codes.</div>
+            </div>
+          </div>
+
+          <div class="arch-arrow">➔</div>
+
+          <!-- COLUMN 2: BACKEND ENGINE -->
+          <div class="arch-col">
+            <div class="arch-card highlight">
+              <span class="arch-tag tag-blue">FastAPI Core</span>
+              <div class="arch-card-name">⚙️ Vector Splitting &amp; Caching</div>
+              <div class="arch-card-desc">PyPDF extracts vector pages losslessly; PyPDFium2 builds 1.8KB JPEG thumbnails.</div>
+            </div>
+            <div class="arch-card highlight">
+              <span class="arch-tag tag-amber">OCR &amp; NLP Engine</span>
+              <div class="arch-card-name">🔍 Vietnamese Diacritic Matcher</div>
+              <div class="arch-card-desc">Unicode NFC/NFD normalization aligns Vietnamese accents to roster records.</div>
+            </div>
+            <div class="arch-card highlight">
+              <span class="arch-tag tag-green">Safety Gate</span>
+              <div class="arch-card-name">🛡️ Pre-Flight Audit Validator</div>
+              <div class="arch-card-desc">Detects missing addresses and duplicate sends before live dispatch.</div>
+            </div>
+          </div>
+
+          <div class="arch-arrow">➔</div>
+
+          <!-- COLUMN 3: OUTPUTS & CLIENT -->
+          <div class="arch-col">
+            <div class="arch-card">
+              <span class="arch-tag tag-blue">Client Workspace</span>
+              <div class="arch-card-name">🖥️ 60 FPS Desktop Studio</div>
+              <div class="arch-card-desc">Zero-scroll fixed viewport, Lightbox zoom &amp; Projects Hub.</div>
+            </div>
+            <div class="arch-card">
+              <span class="arch-tag tag-green">Delivery Layer</span>
+              <div class="arch-card-name">✉️ SMTP Dispatcher</div>
+              <div class="arch-card-desc">Throttled Gmail/Outlook delivery with live execution logs.</div>
+            </div>
+            <div class="arch-card">
+              <span class="arch-tag tag-purple">Storage &amp; Audit</span>
+              <div class="arch-card-name">📦 1-Click ZIP &amp; Excel</div>
+              <div class="arch-card-desc">Bundled vector PDFs + UTF-8 BOM CSV delivery records.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- THE PIPELINE LIVE INTERACTIVE STUDIO -->
+    <!-- 🌟 BEFORE VS AFTER VISUAL SYSTEM COMPARISON -->
+    <section class="cs-section" data-reveal>
+      <div class="eyebrow">The Transformation</div>
+      <h2>Before vs. After: Eliminating 6 Fragile Hops</h2>
+
+      <div class="compare-box">
+        <!-- OLD WAY -->
+        <div class="compare-card bad">
+          <div class="compare-badge bad">❌ BEFORE — FRAGMENTED 6-STEP TOOLCHAIN (3–5 DAYS)</div>
+          <div class="step-track">
+            <div class="step-node node-bad">
+              <span class="icon-pill">1. Canva</span>
+              <span>Bulk create merged multi-page PDF</span>
+            </div>
+            <div class="step-node node-bad">
+              <span class="icon-pill">2. Web Splitter</span>
+              <span>Split pages 1-by-1 (file size &amp; timeout limits)</span>
+            </div>
+            <div class="step-node node-bad">
+              <span class="icon-pill">3. Desktop Script</span>
+              <span>Rename files locally (page order shift risks)</span>
+            </div>
+            <div class="step-node node-bad">
+              <span class="icon-pill">4. Google Drive</span>
+              <span>Manually upload 300+ PDFs to cloud folder</span>
+            </div>
+            <div class="step-node node-bad">
+              <span class="icon-pill">5. Apps Script</span>
+              <span>Trigger Google Sheets script to fetch Drive files</span>
+            </div>
+            <div class="step-node node-bad">
+              <span class="icon-pill">6. Gmail Manual</span>
+              <span>Send emails with no real-time progress recovery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW WAY -->
+        <div class="compare-card good">
+          <div class="compare-badge good">✅ AFTER — CERTSTUDIO UNIFIED CLOUD PLATFORM (&lt; 2 MINS)</div>
+          <div class="step-track">
+            <div class="step-node node-good">
+              <span class="icon-pill">1. Drag &amp; Drop</span>
+              <span>Upload merged Canva PDF in 1 click</span>
+            </div>
+            <div class="step-node node-good">
+              <span class="icon-pill">2. Auto-Split &amp; OCR</span>
+              <span>Backend splits vector PDFs &amp; reads Vietnamese names</span>
+            </div>
+            <div class="step-node node-good">
+              <span class="icon-pill">3. Studio Review</span>
+              <span>60 FPS fixed viewport, Lightbox &amp; keyboard editing</span>
+            </div>
+            <div class="step-node node-good">
+              <span class="icon-pill">4. Pre-Flight Audit</span>
+              <span>Catches missing emails &amp; validates integrity</span>
+            </div>
+            <div class="step-node node-good">
+              <span class="icon-pill">5. Live SMTP Dispatch</span>
+              <span>Throttled delivery with live terminal log streaming</span>
+            </div>
+            <div class="step-node node-good">
+              <span class="icon-pill">6. 1-Click Export</span>
+              <span>Instant ZIP archive + Excel audit report</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🌟 LIVE INTERACTIVE EMBED -->
     <section class="cs-section tight" data-reveal>
-      <div class="eyebrow">Live Interactive Cloud Workspace</div>
+      <div class="eyebrow">Interactive Studio · Live Production Cloud App</div>
       <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Try CertStudio Live in Action</h2>
       <p style="font-size: 14px; line-height: 22px; color: var(--n-800); margin-bottom: 20px;">The live production application running on Railway: drag &amp; drop Canva PDFs, inspect high-res vector previews, test Vietnamese OCR text matching, and review delivery audits.</p>
 
@@ -63,122 +364,63 @@
         <div class="chrome" style="padding: 10px 16px; background: #121212; border-bottom: 1px solid #262626; display: flex; align-items: center; justify-content: space-between;">
           <div style="display: flex; align-items: center; gap: 8px;">
             <div class="dots"><i></i><i></i><i></i></div>
-            <span style="font-size: 12px; font-weight: 500; color: #a3a3a3; font-family: monospace;">CertStudio — Live Cloud Production App (Railway)</span>
+            <span style="font-size: 12px; font-weight: 500; color: #a3a3a3; font-family: monospace;">CertStudio — Live Cloud Production Workspace</span>
           </div>
           <a href="https://certificate-automation-production-c548.up.railway.app/" target="_blank" rel="noopener" style="font-size: 12px; color: #38bdf8; text-decoration: none; font-weight: 500;">Open Fullscreen ↗</a>
         </div>
         <iframe src="https://certificate-automation-production-c548.up.railway.app/" style="width: 100%; height: 780px; border: none; display: block;" title="CertStudio Live Cloud Demo" loading="lazy"></iframe>
       </div>
       <div class="caption" style="margin-top: 12px; margin-bottom: 32px;">Live Cloud App · You can test batch uploads, high-res preview inspections, Vietnamese OCR extraction, and live studio workflow directly in this viewport.</div>
-
-      <!-- WORKFLOW STEPS -->
-      <div class="flow-sequence">
-
-        <!-- STEP 1 -->
-        <div class="flow-step auto">
-          <div class="connector-line"></div>
-          <div class="connector-arrow">↓</div>
-          <div class="num-badge">1</div>
-          <div class="step-kicker">Automated · 1-Click Upload &amp; Lossless Vector Splitting</div>
-          <div class="step-title">Drag &amp; Drop Merged Canva PDF <span class="time-chip">Instant</span></div>
-          <p class="step-body">Users upload a single merged PDF exported from Canva (20–100+ pages). The backend engine uses <b class="hl">pypdf</b> and <b class="hl">pypdfium2</b> to extract individual vector pages losslessly without raster compression, while generating ultra-lightweight cached thumbnails for instantaneous UI rendering.</p>
-          <div class="mock-shot sheet-mock">
-            <div class="chrome"><div class="dots"><i></i><i></i><i></i></div> CertStudio · PDF Ingestion &amp; Page Splitting Engine</div>
-            <div style="padding: 16px; font-family: monospace; font-size: 12px; color: #38bdf8; background: #0f172a;">
-              <div>[ENGINE] Ingesting "Finance_Club_SemA_2023.pdf" (43 pages, 14.2 MB)...</div>
-              <div>[SPLIT]  Extracting 43 vector single-page PDFs &rarr; Done in 0.82s</div>
-              <div>[THUMB]  Generating 1.8KB JPEG rendering cache &rarr; Done in 1.15s (60 FPS Ready)</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 2 -->
-        <div class="flow-step auto">
-          <div class="connector-line"></div>
-          <div class="connector-arrow">↓</div>
-          <div class="num-badge">2</div>
-          <div class="step-kicker">Automated · OCR Extraction &amp; Sheet-Driven Matching</div>
-          <div class="step-title">Vietnamese OCR &amp; Diacritic Normalization</div>
-          <p class="step-body">The core safety guarantee: <b class="hl">Every page reads its own text layer</b>. <span class="code">pdfplumber</span> extracts student names and certificate serials printed directly on the certificate. The engine applies Unicode diacritic normalization to match against uploaded Excel rosters, eliminating order-dependent misalignment risks.</p>
-          <div class="verify-anatomy">
-            <div class="va-row">
-              <span class="va-file">Page #01: "Nguyễn Văn A"</span>
-              <span><span class="key ok">OCR text ✓</span><span class="key ok">Roster match ✓</span></span>
-              <span class="va-verdict ok">Matched &rarr; Ready</span>
-            </div>
-            <div class="va-note">Diacritics normalized across UTF-8 forms. Name mismatches are flagged for review, never guessed.</div>
-          </div>
-        </div>
-
-        <!-- STEP 3 -->
-        <div class="flow-step auto">
-          <div class="connector-line"></div>
-          <div class="connector-arrow">↓</div>
-          <div class="num-badge">3</div>
-          <div class="step-kicker">UI / UX · Desktop-Grade Studio Workspace</div>
-          <div class="step-title">Zero-Scroll Review &amp; Click-to-Zoom Lightbox</div>
-          <p class="step-body">Designed for high-speed verification: The application viewport is strictly locked at <span class="code">100vh</span> with zero page scrolling. Organizers navigate records using keyboard arrows and press <span class="code">Enter</span> to save and auto-advance. Clicking any certificate opens a full-screen interactive lightbox for high-DPI inspection.</p>
-        </div>
-
-        <!-- STEP 4 -->
-        <div class="flow-step auto">
-          <div class="num-badge">4</div>
-          <div class="step-kicker">Automated · Pre-Flight Audit &amp; High-Volume Delivery</div>
-          <div class="step-title">Pre-Flight Safety Check &amp; SMTP Dispatch</div>
-          <p class="step-body">Before sending, a **Pre-Flight Safety Audit** validates recipient email syntax and flags missing addresses. Organizers can run a **Simulation (Dry-Run)** or dispatch via live Gmail/Outlook SMTP with automated throttling and real-time execution logs. Finished batches can be exported as a bundled **ZIP archive** or **Excel CSV delivery report** in 1 click.</p>
-        </div>
-
-      </div>
     </section>
 
-    <!-- BEFORE / AFTER COMPARISON -->
+    <!-- 🌟 CORE TECHNICAL DEEP-DIVES -->
     <section class="cs-section" data-reveal>
-      <div class="eyebrow">The Transformation</div>
-      <h2>Before vs. After: From 6 Manual Tools to 1 Cloud Studio</h2>
-      <div class="ba-grid">
-        <div class="ba-card before">
-          <div class="heading">BEFORE — FRAGMENTED SCRIPTS</div>
-          <div class="rows">
-            <div><span class="mark">▪</span> 6 separate tools: Canva &rarr; online splitter &rarr; desktop script &rarr; Drive &rarr; Sheets &rarr; Gmail</div>
-            <div><span class="mark">▪</span> 3 to 5 days of manual handling and file copying per batch</div>
-            <div><span class="mark">▪</span> Page re-sorting caused silent email mismatches</div>
-            <div><span class="mark">▪</span> Required developer setup and terminal commands</div>
-          </div>
+      <div class="eyebrow">Deep Dive</div>
+      <h2>Core Engineering Highlights</h2>
+
+      <!-- OCR EXHIBIT -->
+      <div class="mock-shot" style="margin-bottom: 24px;">
+        <div class="chrome">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span>Vietnamese OCR &amp; Unicode Diacritic Normalizer Engine</span>
         </div>
-        <div class="ba-card after">
-          <div class="heading">AFTER — CERTSTUDIO CLOUD</div>
-          <div class="rows">
-            <div><span class="mark">✦</span> 1 unified web studio running 24/7 on the cloud</div>
-            <div><span class="mark">✦</span> Drag &amp; drop merged PDF &rarr; ready in &lt; 2 minutes</div>
-            <div><span class="mark">✦</span> Vietnamese OCR diacritic matching ensures 100% precision</div>
-            <div><span class="mark">✦</span> Non-technical team members operate the platform independently</div>
+        <div style="padding: 18px; background: #090d16; color: #e2e8f0; font-family: var(--font-mono); font-size: 12px;">
+          <div style="color: #94a3b8; margin-bottom: 8px;">// 1. Text Layer Extraction &rarr; Unicode Normalization</div>
+          <div style="display: flex; gap: 12px; align-items: center; background: #111827; padding: 10px 14px; border-radius: 6px; margin-bottom: 12px;">
+            <span style="color: #60a5fa;">PDF Raw:</span> <code>"Nguyễn Văn Ánh Hào"</code>
+            <span style="color: #3b82f6;">➔</span>
+            <span style="color: #34d399;">Normalized:</span> <code>"NGUYEN VAN ANH HAO"</code>
+            <span style="color: #fbbf24; font-size: 10px; border: 1px solid #fbbf24; padding: 1px 6px; border-radius: 3px;">Unicode NFC/NFD</span>
+          </div>
+
+          <div style="color: #94a3b8; margin-bottom: 8px;">// 2. Sheet-Driven Dual-Key Verification</div>
+          <div style="background: #111827; padding: 10px 14px; border-radius: 6px;">
+            <div style="color: #34d399;">✓ Key 1 (Name Match):  "Nguyen Van Anh Hao" == "Nguyễn Văn Ánh Hào" (Normalized True)</div>
+            <div style="color: #34d399;">✓ Key 2 (Cert Serial): "FC-2023-088" == "FC-2023-088" (Exact True)</div>
+            <div style="color: #60a5fa; margin-top: 6px;">➔ Status: READY_FOR_DISPATCH (Confidence: 1.00)</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ARCHITECTURE HIGHLIGHTS -->
-    <section class="cs-section bordered" style="padding-bottom:8px" data-reveal>
-      <div class="eyebrow" style="margin-top:48px">Engineering Highlights</div>
-      <h2>Built for Speed, Reliability &amp; Scale</h2>
+      <!-- DESKTOP STUDIO PERFORMANCE -->
       <div class="stage-grid">
         <div class="stage-card">
           <div class="head">
-            <div class="kicker">BACKEND &amp; OCR ENGINE</div>
-            <div class="title">FastAPI &amp; PyPDFium2 Core</div>
+            <div class="kicker">PERFORMANCE ENGINEERING</div>
+            <div class="title">60 FPS Fixed Viewport Engine</div>
           </div>
           <div class="body">
-            <p>Engineered with Python 3.11 and native C-extensions for high-throughput PDF rendering. Generates 1.8KB thumbnails for 60 FPS scrolling while preserving pristine vector quality in split attachments.</p>
+            <p>To eliminate lag when browsing batches with 100+ certificates, CertStudio utilizes <b>1.8 KB lightweight JPEG thumbnails</b> with CSS <code>content-visibility: auto</code> and GPU compositing layers. The viewport is strictly locked at <code>100vh</code> with zero page scroll.</p>
           </div>
         </div>
 
         <div class="stage-card">
           <div class="head">
-            <div class="kicker">CLOUD &amp; DEVOPS</div>
-            <div class="title">Docker &amp; Cloudflare R2 / S3</div>
+            <div class="kicker">SAFETY &amp; RELIABILITY</div>
+            <div class="title">Pre-Flight Safety Audit</div>
           </div>
           <div class="body">
-            <p>Containerized with a multi-stage Docker build, deployed on Railway with persistent volume storage and ready for zero-egress Cloudflare R2 object storage integration.</p>
+            <p>Every dispatch is protected by an automated Pre-Flight audit that checks for RFC-compliant email syntax, flags missing recipients, and provides Dry-Run simulations to eliminate delivery failures.</p>
           </div>
         </div>
       </div>
