@@ -2,11 +2,77 @@
    Case-study page primitives
    Spec: docs/design-guidelines.md §3
    Depends on home.css for the shell (.container-sm, nav, footer).
-   Class names are unchanged from the old dark design on purpose —
-   the HTML keeps its markup, only the meaning of each class moves.
    ============================================================ */
 
-/* ---- Hero ---- */
+/* ---- Breadcrumb / Back link ---- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--r-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--r-line);
+  text-underline-offset: 2px;
+  margin-bottom: 24px;
+  transition: all 0.15s ease;
+}
+.back-link:hover { color: var(--r-meta); }
+
+/* ---- Detail Header ---- */
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.detail-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  object-fit: cover;
+}
+@media (min-width: 640px) {
+  .detail-icon { width: 64px; height: 64px; }
+}
+
+.detail-title-wrap {
+  min-width: 0;
+  flex: 1;
+}
+.detail-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.detail-title-row h1 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  color: var(--fg);
+}
+.detail-tag {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--r-meta);
+  background: var(--r-chip);
+  border-radius: 4px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.detail-subtitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--r-secondary);
+  margin-top: 2px;
+}
+
+/* ---- Hero / Lede ---- */
 .cs-hero { margin-bottom: 24px; }
 
 .cs-hero h1 {
@@ -19,15 +85,19 @@
   margin-bottom: 8px;
 }
 
-.cs-hero p.lede {
+.cs-hero p.lede,
+p.lede {
   font-size: 16px;
   line-height: 24px;
   color: var(--n-800);
   max-width: none;
   text-wrap: pretty;
+  margin-bottom: 20px;
 }
-:root.dark .cs-hero p.lede { color: var(--n-200); }
-.cs-hero p.lede b { font-weight: 600; color: var(--fg); }
+:root.dark .cs-hero p.lede,
+:root.dark p.lede { color: var(--n-200); }
+.cs-hero p.lede b,
+p.lede b { font-weight: 600; color: var(--fg); }
 
 .cs-live-badge {
   display: inline-block;
@@ -45,22 +115,29 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 16px;
+  margin-bottom: 24px;
 }
 
-/* ---- Primary call to action ----
-   The old design hid each case study's repo / live-demo link inside the
-   sticky subnav. That subnav is gone, so the link becomes a real button
-   under the lede, the way the reference detail pages do it. */
+/* ---- Detail Actions & Primary Call to Action ---- */
+.detail-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
 .cs-cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin-bottom: 32px;
-  padding: 12px 20px;
+  padding: 10px 18px;
   border-radius: 8px;
   background: var(--n-900);
   color: var(--n-100);
   font-size: 14px;
+  line-height: 20px;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.15s ease;
@@ -79,7 +156,7 @@
 }
 
 .cs-section h2 {
-  /* weight 500 here, NOT 600. The home page uses 600; detail pages use 500. */
+  /* weight 500 on detail pages, NOT 600 */
   font-size: 18px;
   line-height: 28px;
   font-weight: 500;
@@ -95,6 +172,7 @@
   color: var(--n-800);
   max-width: none;
   text-wrap: pretty;
+  margin-bottom: 12px;
 }
 :root.dark .cs-section > p { color: var(--n-200); }
 .cs-section > p b { font-weight: 600; color: var(--fg); }
@@ -165,7 +243,7 @@
   padding: 16px;
 }
 .stage-card + .stage-card,
-.ba-card.after { border-left: 1px solid var(--r-edge); padding-left: 16px; }
+.ba-card.after { border-left: 1px solid var(--r-edge); }
 
 .stage-card .head { margin-bottom: 12px; }
 .stage-card .head .kicker {
@@ -207,82 +285,19 @@
 }
 .ba-card .rows div .mark { color: var(--r-meta); }
 
-/* ---- Inline code + small code blocks on the page (not in mockups) ---- */
-.stage-card code, .stage-card .code {
+/* ---- Inline code + small code blocks on the page ---- */
+.stage-card code, .stage-card .code,
+.flow-step code, .flow-step .code {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--r-secondary);
-}
-
-.rename-example, .sheet-log {
-  border: 1px solid var(--r-edge);
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 12px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-}
-.rename-example .file-line { display: flex; align-items: center; gap: 8px; color: var(--r-secondary); margin-bottom: 4px; }
-.rename-example .file-line:last-child { margin-bottom: 0; color: var(--r-meta); }
-.rename-example .file-line .arrow { color: var(--r-meta); }
-.rename-example .meta { color: var(--r-meta); margin-bottom: 8px; }
-.sheet-log .row { display: flex; padding: 6px 0; color: var(--r-secondary); border-top: 1px solid var(--r-edge); }
-.sheet-log .row:first-child { border-top: none; }
-.sheet-log .row.head { color: var(--r-meta); }
-.sheet-log .row .who { flex: 1; }
-.sheet-log .row .status { width: 80px; text-align: right; }
-.sheet-log .row.ok .status { color: var(--r-secondary); }
-.sheet-log .row.err .status { color: var(--fg); font-weight: 600; }
-
-/* ---- Checklist ---- */
-.checklist { display: flex; flex-direction: column; gap: 8px; }
-.checklist .item { display: flex; gap: 8px; font-size: 14px; line-height: 20px; color: var(--r-secondary); }
-.checklist .item .check { color: var(--r-meta); }
-.checklist .kicker {
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: normal;
-  color: var(--r-meta);
-  margin-bottom: 8px;
-}
-
-/* ---- Board mockup (recruitment). Stays a light-ish surface, framed. ---- */
-.board-mock {
-  border: 1px solid var(--r-edge);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--r-surface);
-}
-.board-mock .chrome {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--r-edge);
-  font-size: 12px;
-  color: var(--r-meta);
-  font-family: inherit;
-}
-.board-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 16px; }
-@media (max-width: 680px) { .board-cols { grid-template-columns: repeat(2, 1fr); } }
-.board-cols .col-head {
-  display: flex; align-items: center; gap: 6px;
-  font-size: 12px; line-height: 16px; margin-bottom: 8px; color: var(--r-meta);
-}
-.board-cols .col-head .dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-.board-cols .cards { display: flex; flex-direction: column; gap: 8px; }
-.board-cols .card {
-  border-radius: 4px;
+  color: var(--fg);
   background: var(--r-chip);
-  padding: 10px;
-  border: 1px solid var(--r-edge);
+  border: 0;
+  border-radius: 4px;
+  padding: 1px 5px;
 }
-.board-cols .card .bar-1 { height: 8px; border-radius: 2px; background: var(--r-edge); margin-bottom: 6px; }
-.board-cols .card .bar-2 { height: 6px; border-radius: 2px; background: var(--r-edge); }
-.board-cols .card .comment-row { display: flex; gap: 5px; margin-top: 8px; align-items: center; }
-.board-cols .card .comment-row .avatar { width: 14px; height: 14px; border-radius: 50%; background: var(--r-edge); }
-.board-cols .card .comment-row .comment-label { font-size: 10px; color: var(--r-meta); }
 
-/* ---- Numbered step sequence ----
-   Was an absolutely-positioned rail with a connector line. Now a plain
-   card stack, which is what the new language uses everywhere else. ---- */
+/* ---- Numbered step sequence ---- */
 .flow-sequence { display: flex; flex-direction: column; gap: 12px; margin: 0 0 32px; }
 
 .flow-step {
@@ -333,16 +348,39 @@
   max-width: none;
   margin-bottom: 12px;
 }
-.flow-step .step-body code {
-  font-family: var(--font-mono);
-  font-size: 13px;
+
+/* ---- Bottom CTA section ---- */
+.cta-section {
+  border-top: 1px solid var(--r-edge);
+  padding-top: 32px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+.cta-section h2 {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
   color: var(--fg);
-  background: var(--r-chip);
-  border: 0;
-  border-radius: 4px;
-  padding: 1px 5px;
+  margin-bottom: 8px;
+}
+.cta-section p {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--r-secondary);
+  margin-bottom: 16px;
+}
+.cta-section .cold-start {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--r-meta);
+  margin-top: 12px;
 }
 
-@media (max-width: 680px) {
-  .flow-step { padding: 16px; }
+/* ---- Mock shot framing in light/dark ---- */
+.mock-shot {
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
 }

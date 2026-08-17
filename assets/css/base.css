@@ -118,20 +118,30 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
+.container,
 .container-sm {
-  max-width: 672px; /* max-w-2xl like Tailwind */
   margin: 0 auto;
-  padding: 0 24px;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  max-width: 42rem;
+  flex-direction: column;
+  padding: 40px 20px 0;
+  font-family: var(--font-ui);
+  line-height: 1.5;
 }
 
-@media (max-width: 560px) {
-  .container { padding: 0 22px; }
+@media (min-width: 640px) {
+  .container,
+  .container-sm { padding: 56px 24px 0; }
+}
+@media (min-width: 1024px) {
+  .container,
+  .container-sm { max-width: 46rem; }
+}
+@media (min-width: 1280px) {
+  .container,
+  .container-sm { max-width: 48rem; }
 }
 
 /* ============================================================

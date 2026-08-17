@@ -3,18 +3,16 @@
    Spec: docs/design-guidelines.md §3
    ============================================================ */
 
-/* ---- Header row: avatar + name + bio + meta ----
-   flex-start, not center: the text column holds the lede and the meta
-   row too, so it is much taller than the 64px avatar. */
+/* ---- Header row: avatar + name + bio + meta ---- */
 .about-hero {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 20px;
   padding: 0;
   margin-bottom: 32px;
 }
 @media (max-width: 560px) {
-  .about-hero { flex-direction: column; }
+  .about-hero { flex-direction: column; gap: 16px; }
 }
 
 .about-hero h1 {
@@ -51,6 +49,7 @@
   letter-spacing: -0.05em;
   color: var(--r-meta);
   background: var(--r-surface);
+  user-select: none;
 }
 
 .about-meta {
@@ -94,5 +93,5 @@
   font-weight: 500;
   letter-spacing: -0.025em;
   color: var(--fg);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
