@@ -12,7 +12,8 @@
   --a-line-soft: #1b1b20;
   --a-text: #f2f2f5;
   --a-text-2: #9d9da8;
-  --a-text-3: #6b6b76;
+  /* Secondary labels sit on near-black mock surfaces; keep them AA-readable. */
+  --a-text-3: #a3a3ad;
   --a-blue: #6f9bff;
   --a-amber: #e3a33d;
   --a-green: #4cc985;
@@ -66,7 +67,7 @@
   background: var(--s-pink); font-weight: 700; font-size: 10.5px; text-align: center; line-height: 1.3;
 }
 .sheet-table th.wide-head { background: var(--s-pink-dark); }
-.sheet-table th small { display: block; font-weight: 400; font-size: 9px; color: #4a3a44; margin-top: 2px; }
+.sheet-table th small { display: block; font-weight: 400; font-size: 9px; color: #3d2935; margin-top: 2px; }
 .sheet-table th .fil { float: right; color: var(--s-ink-2); font-size: 9px; }
 .sheet-table td.n { text-align: center; color: var(--s-ink-2); width: 26px; }
 .sheet-table tr:nth-child(even) td { background: #fbfbfb; }
@@ -96,14 +97,19 @@
   background: var(--bg-input); border: 1px solid var(--border-md); display: block;
 }
 .sm-seats i.over { background: rgba(239,88,88,.22); border-color: rgba(239,88,88,.65); }
-.sm-seats .more { font-family: var(--font-mono); font-size: 13px; color: #ff9b9b; margin-left: 2px; }
+.sm-seats .more { font-family: var(--font-mono); font-size: 13px; color: #a61b1b; margin-left: 2px; }
 .sm-lab { font-size: 13px; font-weight: 600; color: var(--fg-dim); margin-top: 10px; }
-.sm-lab small { display: block; font-weight: 400; font-size: 11.5px; color: var(--fg-faint); margin-top: 3px; }
-.sm-col.over .sm-lab { color: #ff9b9b; }
+.sm-lab small { display: block; font-weight: 400; font-size: 11.5px; color: #525252; margin-top: 3px; }
+.sm-col.over .sm-lab { color: #a61b1b; }
 .sm-vs {
   align-self: center; font-family: var(--font-mono); font-size: 11px;
-  color: var(--fg-faint); text-transform: uppercase; letter-spacing: .08em;
+  color: #525252; text-transform: uppercase; letter-spacing: .08em;
 }
+
+html.dark .sm-lab small,
+html.dark .sm-vs { color: #a3a3a3; }
+html.dark .sm-seats .more,
+html.dark .sm-col.over .sm-lab { color: #ff9b9b; }
 
 /* ------------------------------------------------------------
    Diagram 0 — same moment, two systems. Answers "who wins?"
@@ -115,25 +121,25 @@
   padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-raised);
   font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase; color: var(--fg-mute);
 }
-.vs-col.app .vs-head { color: #9ae7bd; }
+.vs-col.app .vs-head { color: #137333; }
 
 .vs-log { padding: 6px 0; }
 .vs-line { display: grid; grid-template-columns: 74px 1fr auto; align-items: center; gap: 12px; padding: 8px 16px; }
-.vs-line .t { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-ghost); white-space: nowrap; }
+.vs-line .t { font-family: var(--font-mono); font-size: 10.5px; color: var(--fg-mute); white-space: nowrap; }
 @media (max-width: 420px) { .vs-line { grid-template-columns: 1fr auto; } .vs-line .t { display: none; } }
 .vs-line .act { font-size: 13px; color: var(--fg-dim); }
 .vs-line .res {
   font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: .04em;
   padding: 3px 7px; border-radius: 4px; white-space: nowrap;
 }
-.vs-line .res.ok { background: rgba(76,201,133,.14); color: #7fe0ab; border: 1px solid rgba(76,201,133,.4); }
-.vs-line .res.bad { background: rgba(239,88,88,.13); color: #ff9b9b; border: 1px solid rgba(239,88,88,.38); }
-.vs-line .res.same { background: var(--bg-input); color: var(--fg-mute); border: 1px solid var(--border-md); }
+.vs-line .res.ok { background: #e6f7ee; color: #146c2e; border: 1px solid #9fd6b2; }
+.vs-line .res.bad { background: #fde9e9; color: #a61b1b; border: 1px solid #e6a3a3; }
+.vs-line .res.same { background: var(--bg-input); color: #606060; border: 1px solid var(--border-md); }
 
 .vs-facts { margin-top: auto; padding: 13px 16px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
 .vs-facts div { display: flex; gap: 9px; font-size: 12.5px; color: var(--fg-mute); line-height: 1.45; }
-.vs-facts .mk { color: var(--fg-ghost); flex: 0 0 auto; }
-.vs-col.app .vs-facts .mk { color: #4cc985; }
+.vs-facts .mk { color: var(--fg-mute); flex: 0 0 auto; }
+.vs-col.app .vs-facts .mk { color: #137333; }
 .vs-facts b { color: var(--fg-dim); font-weight: 600; }
 
 /* ------------------------------------------------------------
@@ -258,12 +264,12 @@
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase;
   padding: 3px 8px; border-radius: 4px; align-self: flex-start;
 }
-.mech .load.rush { background: rgba(239,88,88,.13); color: #ff9b9b; border: 1px solid rgba(239,88,88,.36); }
-.mech .load.spread { background: rgba(111,155,255,.13); color: #a6c1ff; border: 1px solid rgba(111,155,255,.36); }
-.mech .load.unique { background: rgba(76,201,133,.13); color: #7fe0ab; border: 1px solid rgba(76,201,133,.36); }
+.mech .load.rush { background: #fde9e9; color: #a61b1b; border: 1px solid #e6a3a3; }
+.mech .load.spread { background: #ecf2ff; color: #1557b0; border: 1px solid #aecbfa; }
+.mech .load.unique { background: #e8f8ef; color: #146c2e; border: 1px solid #9fd6b2; }
 .mech .measure { font-size: 13px; color: var(--fg-mute); line-height: 1.5; }
 .mech .measure b { color: var(--fg-dim); font-weight: 600; }
-.mech .arrow { font-family: var(--font-mono); font-size: 12px; color: var(--fg-ghost); }
+.mech .arrow { font-family: var(--font-mono); font-size: 12px; color: var(--fg-mute); }
 .mech .how {
   border: 1px solid var(--border); border-radius: 6px; background: var(--bg-card); padding: 11px 12px;
   margin-top: auto;
@@ -279,21 +285,41 @@
   display: grid; grid-template-columns: 30px 1fr auto; align-items: center; gap: 6px 14px;
   padding: 13px 16px; border-bottom: 1px solid var(--border);
 }
-.gate-row .n { font-family: var(--font-mono); font-size: 11px; color: var(--fg-ghost); }
+.gate-row .n { font-family: var(--font-mono); font-size: 11px; color: var(--fg-mute); }
 .gate-row .what { font-size: 14px; font-weight: 600; }
 .gate-row .detail { grid-column: 2 / -1; font-size: 12.5px; color: var(--fg-mute); line-height: 1.5; }
 .gate-verdict {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .07em; text-transform: uppercase;
   padding: 3px 8px; border-radius: 4px; white-space: nowrap;
-  background: rgba(239,88,88,.12); color: #ff9b9b; border: 1px solid rgba(239,88,88,.34);
+  background: #fdebeb; color: #a61b1b; border: 1px solid #e6a3a3;
 }
-.gate-verdict.gated { background: rgba(227,163,61,.12); color: #edc07b; border-color: rgba(227,163,61,.34); }
+.gate-verdict.gated { background: #fcf4e8; color: #8a5200; border-color: #e7c58d; }
 .gate-pass {
-  display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: rgba(76,201,133,.06);
-  font-size: 13.5px; font-weight: 600; color: #9ae7bd;
+  display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: #f4fcf8;
+  font-size: 13.5px; font-weight: 600; color: #146c2e;
 }
 .gate-pass .tick { font-size: 12px; }
 .gate-foot {
   padding: 11px 16px; border-top: 1px solid var(--border); background: var(--bg-raised);
-  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); line-height: 1.6;
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-mute); line-height: 1.6;
 }
+
+/* The comparison diagrams use the light page canvas by default.  Their
+   original exhibit palette was tuned for a dark canvas, so provide an
+   explicit dark counterpart instead of allowing pale labels on white. */
+html.dark .vs-line .t,
+html.dark .mech .arrow,
+html.dark .gate-row .n { color: #a3a3a3; }
+html.dark .vs-line .res.ok { background: rgba(76,201,133,.18); color: #7fe0ab; border-color: rgba(76,201,133,.48); }
+html.dark .vs-line .res.bad { background: rgba(239,88,88,.18); color: #ff9b9b; border-color: rgba(239,88,88,.45); }
+html.dark .vs-line .res.same { background: var(--bg-input); color: #d4d4d4; }
+html.dark .vs-facts .mk { color: #a3a3a3; }
+html.dark .vs-col.app .vs-facts .mk { color: #4cc985; }
+html.dark .vs-col.app .vs-head { color: #9ae7bd; }
+html.dark .mech .load.rush { background: rgba(239,88,88,.18); color: #ff9b9b; border-color: rgba(239,88,88,.45); }
+html.dark .mech .load.spread { background: rgba(111,155,255,.18); color: #a6c1ff; border-color: rgba(111,155,255,.45); }
+html.dark .mech .load.unique { background: rgba(76,201,133,.18); color: #7fe0ab; border-color: rgba(76,201,133,.45); }
+html.dark .gate-verdict { background: rgba(239,88,88,.18); color: #ff9b9b; border-color: rgba(239,88,88,.45); }
+html.dark .gate-verdict.gated { background: rgba(227,163,61,.18); color: #edc07b; border-color: rgba(227,163,61,.45); }
+html.dark .gate-pass { background: rgba(76,201,133,.12); color: #9ae7bd; }
+html.dark .gate-foot { color: #a3a3a3; }

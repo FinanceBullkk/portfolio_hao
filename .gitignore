@@ -2,3 +2,7 @@ Video/
 assets/raw/
 node_modules/
 **/node_modules/
+.portfolio-dist/
+/dist/
+playwright-report/
+test-results/

@@ -16,7 +16,7 @@
   text-decoration-color: var(--r-line);
   text-underline-offset: 2px;
   margin-bottom: 24px;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 .back-link:hover { color: var(--r-meta); }
 
@@ -140,7 +140,7 @@ p.lede b { font-weight: 600; color: var(--fg); }
   line-height: 20px;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 .cs-cta:hover { background: var(--n-700); }
 :root.dark .cs-cta { background: var(--n-100); color: var(--n-900); }
@@ -190,6 +190,18 @@ p.lede b { font-weight: 600; color: var(--fg); }
 }
 .caption em { font-style: normal; font-weight: 500; color: var(--fg); }
 .cs-section > p.caption { font-size: 14px; max-width: none; }
+
+/* Page-level provenance label for illustrative mock values. Keep it visible
+   next to the first mockup so numbers cannot be mistaken for outcomes. */
+.mock-data-disclosure {
+  border-left: 3px solid var(--r-edge-hover);
+  padding: 8px 12px;
+  color: var(--r-secondary);
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0 0 16px;
+}
+.mock-data-disclosure strong { color: var(--fg); font-weight: 600; }
 
 /* ---- Stat row ---- */
 .stat-bar {
@@ -384,3 +396,81 @@ p.lede b { font-weight: 600; color: var(--fg); }
   overflow: hidden;
   margin-bottom: 24px;
 }
+
+/* ---- Trust / access summary ---- */
+.case-summary {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+@media (min-width: 640px) {
+  .case-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.case-summary > div {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--r-edge);
+  border-radius: 8px;
+  background: var(--r-surface);
+}
+.summary-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--r-meta);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+}
+.case-summary p {
+  color: var(--r-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  text-wrap: pretty;
+}
+
+.detail-icon-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--r-edge);
+  background: var(--r-surface);
+  color: var(--r-meta);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+
+.proof-callout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid var(--r-edge);
+  border-radius: 10px;
+  background: var(--r-surface);
+}
+@media (min-width: 640px) {
+  .proof-callout { grid-template-columns: 1fr auto; }
+}
+.proof-callout h3 {
+  color: var(--fg);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.proof-callout p {
+  color: var(--r-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  max-width: 62ch;
+}
+.proof-callout .cs-cta { white-space: nowrap; }
+.proof-callout + .caption { margin-top: 8px; }
+
+/* Detail links are evidence labels, so keep their tap target usable on mobile. */
+.detail-actions a,
+.cta-section a { min-height: 44px; }

@@ -22,13 +22,14 @@
   --m-bg2: #f1f3f4;
   --m-text: #202124;
   --m-text2: #5f6368;
-  --m-text3: #9aa0a6;
+  /* Muted labels still need readable contrast on the light mock surface. */
+  --m-text3: #6b7280;
   --m-border: #e0e3e7;
   --m-border2: #cdd1d6;
-  --m-green: #188038;
+  --m-green: #137333;
   --m-green-bg: #e6f4ea;
   --m-green-bd: #b7dfc2;
-  --m-amber: #b26a00;
+  --m-amber: #8a5200;
   --m-amber-bg: #fdf1dc;
   --m-amber-bd: #ecc98c;
   --m-mint: #0e8a6f;
@@ -124,9 +125,9 @@
 .canva-bulk-mock .cert { width: min(320px, 100%); border: 1px solid var(--m-border); border-radius: 4px; padding: 18px; background: #fff; }
 .canva-bulk-mock .cert .brand { font-family: var(--font-sans); font-weight: 700; font-size: 13px; color: #1b1b1b; margin-bottom: 10px; }
 .canva-bulk-mock .cert .kind { font-family: var(--font-mono); font-size: 7px; letter-spacing: .1em; color: #8a8a8a; margin-bottom: 4px; }
-.canva-bulk-mock .cert .lvl { font-family: var(--font-sans); font-weight: 600; font-size: 13px; line-height: 1.25; color: #12a5b0; margin-bottom: 12px; }
-.canva-bulk-mock .cert .name { font-family: var(--font-sans); font-weight: 700; font-size: 13.5px; color: #12a5b0; }
-.canva-bulk-mock .cert .date { font-size: 8px; color: #777; margin-top: 3px; }
+.canva-bulk-mock .cert .lvl { font-family: var(--font-sans); font-weight: 600; font-size: 13px; line-height: 1.25; color: #0b5f66; margin-bottom: 12px; }
+.canva-bulk-mock .cert .name { font-family: var(--font-sans); font-weight: 700; font-size: 13.5px; color: #0b5f66; }
+.canva-bulk-mock .cert .date { font-size: 8px; color: #5f6368; margin-top: 3px; }
 .canva-bulk-mock .pagesbar { border-top: 1px solid var(--m-border); padding: 8px 14px; font-family: var(--font-mono); font-size: 10px; color: var(--m-text3); text-align: right; }
 @media (max-width: 680px) {
   .canva-bulk-mock .body { flex-direction: column; }

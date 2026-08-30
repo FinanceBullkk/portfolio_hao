@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>L&amp;D Registration static walkthrough — Hao</title>
+  <meta name="description" content="A sanitised, static walkthrough of the L&amp;D event registration platform using synthetic data.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/proof.css">
+  <script>try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main id="main-content" class="container-sm proof-page" tabindex="-1" data-proof-page="registration">
+    <aside class="nav-container">
+      <div class="nav-sticky">
+        <nav class="nav-bar" aria-label="Primary navigation">
+          <div class="nav">
+            <a href="../../index.html">home</a>
+            <a href="../../about.html">about</a>
+          </div>
+          <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode">
+            <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
+            <svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          </button>
+        </nav>
+      </div>
+    </aside>
+
+    <header class="proof-header">
+      <div class="proof-kicker">Static walkthrough · L&amp;D Event Registration</div>
+      <h1>Let teams open events while the server protects each seat</h1>
+      <p>This walkthrough demonstrates the registration journey with synthetic people and events. It is a read-only illustration: no Firebase project, employee record, or confirmation email is touched.</p>
+      <div class="proof-state" aria-label="Access state">
+        <span class="proof-badge">Static walkthrough</span>
+        <span class="proof-badge">Synthetic data</span>
+        <span class="proof-badge">Production access required</span>
+      </div>
+    </header>
+
+    <div class="proof-actions">
+      <a class="cs-cta" href="../../registration.html">Read the case study</a>
+      <a class="u-link" href="https://github.com/FinanceBullkk/Corgi77" target="_blank" rel="noopener noreferrer">View source repository ↗</a>
+    </div>
+
+    <section class="proof-section" aria-labelledby="journey-heading">
+      <h2 id="journey-heading">Registration journey</h2>
+      <div class="proof-flow">
+        <article class="proof-card"><h3>Choose an event</h3><p>An employee sees only listed events that are open for enrollment.</p></article>
+        <article class="proof-card"><h3>Check eligibility</h3><p>Server-side rules evaluate blocks, allowlists, and the employee-code claim in a fixed order.</p></article>
+        <article class="proof-card"><h3>Claim the seat</h3><p>The seat decision and identity claim are written together so the transaction is designed to resolve competing requests to one winner.</p></article>
+        <article class="proof-card"><h3>Leave an audit trail</h3><p>A confirmation is queued after the transaction and the action remains inspectable by an authorised operator.</p></article>
+      </div>
+    </section>
+
+    <section class="proof-section" aria-labelledby="event-heading">
+      <h2 id="event-heading">Synthetic event view</h2>
+      <div class="proof-grid">
+        <article class="proof-card"><h3>English assessment</h3><p>Timed slots · enrollment open</p><p><span class="proof-status">Eligibility checked</span></p></article>
+        <article class="proof-card"><h3>Workshop: feedback basics</h3><p>One seat per person · enrollment open</p><p><span class="proof-status">Seats protected server-side</span></p></article>
+        <article class="proof-card"><h3>Demo participant</h3><p>Nguyen Van A · <code>19xxxx</code></p><p><span class="proof-status">Synthetic profile</span></p></article>
+      </div>
+    </section>
+
+    <section class="proof-section" aria-labelledby="rules-heading">
+      <h2 id="rules-heading">Decision trace</h2>
+      <div class="proof-table-wrap" tabindex="0" role="region" aria-label="Scrollable synthetic registration decision trace">
+        <table class="proof-table">
+          <thead><tr><th>Check</th><th>Result</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>Permanent block</td><td><span class="proof-status">Pass</span></td><td>Platform-wide exclusions are respected.</td></tr>
+            <tr><td>Event eligibility</td><td><span class="proof-status">Pass</span></td><td>Only an allowed participant can continue.</td></tr>
+            <tr><td>Identity claim</td><td><span class="proof-status">Atomic</span></td><td>A duplicate claim is rejected inside the write.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="proof-note">The rows are synthetic examples, not production telemetry. Scale, dates, and test totals require owner evidence before publication.</p>
+    </section>
+
+    <footer class="proof-footer"><p><a class="u-link" href="../../index.html">← Back to selected work</a></p></footer>
+  </main>
+  <script src="../js/theme.js"></script>
+</body>
+</html>

@@ -3,209 +3,116 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio</title>
-  <meta name="description" content="Hao, AI Automation Specialist in Ho Chi Minh City. I find the manual steps in how a team works and build what removes them. Apps Script, Python, Zapier, React, Firebase, PostgreSQL.">
-  <meta property="og:title" content="Hao — AI Automation Specialist">
-  <meta property="og:description" content="I find the manual steps in how a team works and build what removes them.">
+  <title>Nguyen Huynh Anh Hao — AI Automation Specialist</title>
+  <meta name="description" content="Nguyen Huynh Anh Hao is a fresher focused on AI automation and digital transformation in Ho Chi Minh City. He turns manual team workflows into reliable internal tools.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="Nguyen Huynh Anh Hao — AI Automation Specialist">
+  <meta property="og:description" content="Fresher focused on AI automation and digital transformation. Reliable internal tools for real team workflows.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23f0f0ee' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/home.css">
   <script>try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
 </head>
 <body>
-
-  <main class="container-sm">
-
-    <!-- NAV -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main id="main-content" class="container-sm" tabindex="-1">
     <aside class="nav-container">
       <div class="nav-sticky">
-        <nav class="nav-bar" id="nav">
+        <nav class="nav-bar" id="nav" aria-label="Primary navigation">
           <div class="nav">
             <a href="index.html" class="active" aria-current="page">home</a>
             <a href="about.html">about</a>
           </div>
-          <button type="button" class="theme-toggle" aria-label="Switch to dark mode" title="Dark mode">
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode">
+            <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
+            <svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
           </button>
         </nav>
       </div>
     </aside>
 
-    <section>
-
-      <!-- HERO CARD -->
+    <section aria-labelledby="hero-heading">
       <div class="hero-card">
-        <div class="hero-avatar" aria-hidden="true">
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='58' r='34' fill='%23a3a3a3'/%3E%3Cpath d='M100 100c-38 0-62 26-62 60v40h124v-40c0-34-24-60-62-60z' fill='%23a3a3a3'/%3E%3C/svg%3E" alt="" width="200" height="200" draggable="false">
-        </div>
+        <div class="hero-avatar" aria-hidden="true"><span>HA</span></div>
         <div class="hero-content">
-          <h1>Portfolio</h1>
-          <p>AI Automation Specialist finding the manual steps in how a team works and building the software that removes them.</p>
-          <div class="hero-socials">
-            <a href="https://github.com/FinanceBullkk" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" width="20" height="20" style="width:20px;height:20px;" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+          <div class="hero-kicker">Fresher · Ho Chi Minh City</div>
+          <h1 id="hero-heading">Nguyen Huynh Anh Hao</h1>
+          <p>AI Automation Specialist and Digital Transformation Officer candidate. I turn manual team workflows into reliable internal tools people can run and understand.</p>
+          <p class="hero-meta">Open to entry-level roles in AI automation, internal tools, and digital transformation.</p>
+          <div class="hero-actions">
+            <a class="hero-primary" href="mailto:anhhao.dl108@gmail.com?subject=AI%20automation%20or%20digital%20transformation%20role">Talk about a role</a>
+            <a class="u-link" href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener noreferrer">View LinkedIn ↗</a>
+          </div>
+          <div class="hero-socials" aria-label="Social profiles">
+            <a href="https://github.com/FinanceBullkk" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
             </a>
             <a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" width="20" height="20" style="width:20px;height:20px;" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
             </a>
-            <a href="mailto:anhhao.dl108@gmail.com" aria-label="Email">
-              <svg viewBox="0 0 24 24" width="20" height="20" style="width:20px;height:20px;" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"></path></svg>
+            <a href="mailto:anhhao.dl108@gmail.com" aria-label="Email Hao">
+              <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"></path></svg>
             </a>
           </div>
         </div>
       </div>
 
-      <!-- SKILLS & FOCUS -->
       <div class="section-header">
-        <h2>Skills &amp; Focus</h2>
+        <h2>Skills &amp; focus</h2>
         <span class="section-tag">AI · Web · Automation</span>
       </div>
-      <div class="card-grid is-spaced">
-        <div class="skill-card">
-          <div class="skill-icon"><div class="circle"></div></div>
-          <div class="skill-info">
-            <h3>Workflow automation</h3>
-            <p>Apps Script, Zapier, n8n</p>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon"><div class="square"></div></div>
-          <div class="skill-info">
-            <h3>Internal web apps</h3>
-            <p>React, Firebase, PostgreSQL</p>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon"><div class="diamond"></div></div>
-          <div class="skill-info">
-            <h3>APIs &amp; data mapping</h3>
-            <p>Gmail, Calendar, Sheets, Drive</p>
-          </div>
-        </div>
-        <div class="skill-card">
-          <div class="skill-icon"><div class="triangle"></div></div>
-          <div class="skill-info">
-            <h3>Error handling &amp; monitoring</h3>
-            <p>Validation, logging, idempotency</p>
-          </div>
-        </div>
+      <div class="card-grid is-spaced" data-reveal-group>
+        <div class="skill-card"><div class="skill-icon" aria-hidden="true"><div class="circle"></div></div><div class="skill-info"><h3>Workflow automation</h3><p>Apps Script, Zapier, n8n</p></div></div>
+        <div class="skill-card"><div class="skill-icon" aria-hidden="true"><div class="square"></div></div><div class="skill-info"><h3>Internal web apps</h3><p>React, Firebase, PostgreSQL</p></div></div>
+        <div class="skill-card"><div class="skill-icon" aria-hidden="true"><div class="diamond"></div></div><div class="skill-info"><h3>APIs &amp; data mapping</h3><p>Gmail, Calendar, Sheets, Drive</p></div></div>
+        <div class="skill-card"><div class="skill-icon" aria-hidden="true"><div class="triangle"></div></div><div class="skill-info"><h3>Error handling &amp; monitoring</h3><p>Validation, logging, idempotency</p></div></div>
       </div>
 
-      <!-- PRODUCTS -->
       <div class="section-header">
-        <h2>Products</h2>
-        <span class="section-tag">2 shipped</span>
+        <h2>Selected work</h2>
+        <span class="section-tag">4 projects · evidence-labelled</span>
       </div>
-      <div class="card-grid">
-
-        <div class="product-card">
-          <div class="product-header">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88'%3E%3Crect width='88' height='88' fill='%232563eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='700' fill='%23ffffff'%3ECS%3C/text%3E%3C/svg%3E" alt="CertStudio icon" width="44" height="44" class="product-icon">
-            <div class="product-title-wrap">
-              <div class="product-title-row">
-                <h3>CertStudio</h3>
-                <span class="product-tag">FastAPI · Python · Docker</span>
-              </div>
-              <p class="product-subtitle">Certificate Automation Platform</p>
-            </div>
-          </div>
-          <p class="product-desc">AI-powered studio that ingests multi-page Canva PDFs, runs Vietnamese OCR &amp; roster matching, and dispatches high-res vector certificates via SMTP in seconds.</p>
-          <div class="product-links">
-            <a href="https://certificate-automation-production-c548.up.railway.app/" target="_blank" rel="noopener noreferrer" class="u-link">Live App ⚡</a>
-            <a href="certificate-pipeline.html" class="u-link">Case study 📄</a>
-            <a href="https://github.com/FinanceBullkk/certificate-automation" target="_blank" rel="noopener noreferrer" class="u-link">GitHub ↗</a>
-          </div>
-        </div>
-
-        <!-- Temporarily hidden: TMS & Recruitment intake
-        <div class="product-card">
-          <div class="product-header">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88'%3E%3Crect width='88' height='88' fill='%23e5e5e5'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='600' fill='%23a3a3a3'%3ETM%3C/text%3E%3C/svg%3E" alt="TMS icon" width="44" height="44" class="product-icon">
-            <div class="product-title-wrap">
-              <div class="product-title-row">
-                <h3>TMS</h3>
-                <span class="product-tag">PostgreSQL</span>
-              </div>
-              <p class="product-subtitle">Training Management</p>
-            </div>
-          </div>
-          <p class="product-desc">Replaces spreadsheets for ~1,000 employees. Removes 120+ hours of admin a month and keeps every completion record ready for audit.</p>
-          <div class="product-links">
-            <a href="tms.html" class="u-link">Details →</a>
-            <a href="https://concho2.onrender.com" target="_blank" rel="noopener noreferrer" class="u-link">Live demo ↗</a>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88'%3E%3Crect width='88' height='88' fill='%23e5e5e5'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='600' fill='%23a3a3a3'%3ERI%3C/text%3E%3C/svg%3E" alt="Recruitment intake icon" width="44" height="44" class="product-icon">
-            <div class="product-title-wrap">
-              <div class="product-title-row">
-                <h3>Recruitment intake</h3>
-                <span class="product-tag">Zapier</span>
-              </div>
-              <p class="product-subtitle">No-code automation</p>
-            </div>
-          </div>
-          <p class="product-desc">Moved intake for 40+ club applications onto a Notion board with real statuses, triggering Zapier workflows to automate the pipeline.</p>
-          <div class="product-links">
-            <a href="recruitment.html" class="u-link">Details →</a>
-          </div>
-        </div>
-        -->
-
-        <div class="product-card">
-          <div class="product-header">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88'%3E%3Crect width='88' height='88' fill='%23e5e5e5'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='26' font-weight='600' fill='%23a3a3a3'%3ERG%3C/text%3E%3C/svg%3E" alt="Corgi77 Registration icon" width="44" height="44" class="product-icon">
-            <div class="product-title-wrap">
-              <div class="product-title-row">
-                <h3>Corgi77 Registration</h3>
-                <span class="product-tag">Firebase</span>
-              </div>
-              <p class="product-subtitle">L&amp;D event platform</p>
-            </div>
-          </div>
-          <p class="product-desc">Internal platform for booking training events. Four-tier eligibility gate, 31 Cloud Functions, and transactional updates for real-time seats.</p>
-          <div class="product-links">
-            <a href="ld-event-registration-platform/dist/index.html" class="u-link">Details →</a>
-            <a href="registration.html" class="u-link">Case study 📄</a>
-            <a href="https://github.com/FinanceBullkk/Corgi77" target="_blank" rel="noopener noreferrer" class="u-link">GitHub ↗</a>
-          </div>
-        </div>
-
+      <div class="card-grid" data-reveal-group>
+        <article class="product-card">
+          <div class="product-header"><div class="product-icon product-icon--registration" aria-hidden="true">RG</div><div class="product-title-wrap"><div class="product-title-row"><h3>Corgi77 Registration</h3><span class="product-tag">Static walkthrough</span></div><p class="product-subtitle">L&amp;D event platform</p></div></div>
+          <p class="product-desc">A capacity-safe event workflow for employees and L&amp;D operators, with server-side eligibility checks, transactional seat claims, and an audit trail.</p>
+          <p class="product-proof">Ownership: end-to-end build · Data: synthetic walkthrough</p>
+          <div class="product-links"><a data-proof-cta href="assets/proof/registration-walkthrough.html" class="u-link">Static walkthrough →</a><a href="registration.html" class="u-link">Case study</a><a href="https://github.com/FinanceBullkk/Corgi77" target="_blank" rel="noopener noreferrer" class="u-link">Source ↗</a></div>
+        </article>
+        <article class="product-card">
+          <div class="product-header"><div class="product-icon product-icon--certstudio" aria-hidden="true">CS</div><div class="product-title-wrap"><div class="product-title-row"><h3>CertStudio</h3><span class="product-tag">Static walkthrough</span></div><p class="product-subtitle">Certificate delivery workflow</p></div></div>
+          <p class="product-desc">A guided workflow for roster mapping, page-level certificate matching, human review, and safe dispatch. Production access stays separate.</p>
+          <p class="product-proof">Ownership: scope, build, handover · Data: synthetic walkthrough</p>
+          <div class="product-links"><a data-proof-cta href="assets/proof/certstudio-walkthrough.html" class="u-link">Static walkthrough →</a><a href="certificate-pipeline.html" class="u-link">Case study</a><a href="https://certificate-automation-production-c548.up.railway.app/" target="_blank" rel="noopener noreferrer" class="u-link">Production app (access required) ↗</a></div>
+        </article>
+        <article class="product-card">
+          <div class="product-header"><div class="product-icon product-icon--tms" aria-hidden="true">TM</div><div class="product-title-wrap"><div class="product-title-row"><h3>TMS v2</h3><span class="product-tag">Static walkthrough</span></div><p class="product-subtitle">Training operations</p></div></div>
+          <p class="product-desc">An internal learning operations flow that connects identity-safe imports, team scheduling, completion gates, and audit-ready records.</p>
+          <p class="product-proof">Access: production app requires approval · Data: synthetic walkthrough</p>
+          <div class="product-links"><a data-proof-cta href="assets/proof/tms-walkthrough.html" class="u-link">Static walkthrough →</a><a href="tms.html" class="u-link">Case study</a><a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="u-link">Production app (access required) ↗</a></div>
+        </article>
+        <article class="product-card">
+          <div class="product-header"><div class="product-icon product-icon--recruitment" aria-hidden="true">RI</div><div class="product-title-wrap"><div class="product-title-row"><h3>Recruitment intake</h3><span class="product-tag">Static walkthrough</span></div><p class="product-subtitle">Form-to-board automation</p></div></div>
+          <p class="product-desc">A form submission becomes a structured record with stage ownership, comments, and a visible next action for reviewers.</p>
+          <p class="product-proof">Access: illustrative board · Data: synthetic walkthrough</p>
+          <div class="product-links"><a data-proof-cta href="assets/proof/recruitment-walkthrough.html" class="u-link">Static walkthrough →</a><a href="recruitment.html" class="u-link">Case study</a></div>
+        </article>
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="home-footer">
       <ul>
-        <li>
-          <a href="https://github.com/FinanceBullkk" target="_blank" rel="noopener noreferrer" class="u-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
-            <span>github</span>
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener noreferrer" class="u-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
-            <span>linkedin</span>
-          </a>
-        </li>
-        <li>
-          <a href="mailto:anhhao.dl108@gmail.com" class="u-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
-            <span>email</span>
-          </a>
-        </li>
+        <li><a href="https://github.com/FinanceBullkk" target="_blank" rel="noopener noreferrer" class="u-link"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg><span>github</span></a></li>
+        <li><a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener noreferrer" class="u-link"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg><span>linkedin</span></a></li>
+          <li><a href="mailto:anhhao.dl108@gmail.com" class="u-link"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg><span>email</span></a></li>
       </ul>
       <p>© 2026 Nguyen Huynh Anh Hao</p>
     </footer>
-
   </main>
-
   <script src="assets/js/theme.js"></script>
+  <script src="assets/js/reveal.js"></script>
 </body>
 </html>

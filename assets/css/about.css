@@ -32,6 +32,13 @@
   text-wrap: pretty;
   margin-bottom: 12px;
 }
+.about-role {
+  margin-bottom: 4px;
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
 :root.dark .about-hero .lede { color: var(--n-200); }
 .about-hero .lede b { font-weight: 600; color: var(--fg); }
 
@@ -66,7 +73,7 @@
   text-decoration-color: var(--r-line);
   text-underline-offset: 2px;
   border: 0;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 .about-meta a:hover { color: var(--r-meta); }
 

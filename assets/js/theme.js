@@ -18,6 +18,7 @@
     if (!btn) return;
     var dark = root.classList.contains('dark');
     btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    btn.setAttribute('aria-pressed', String(dark));
     btn.setAttribute('title', dark ? 'Light mode' : 'Dark mode');
   }
 
@@ -32,9 +33,12 @@
   }
 
   // Follow the OS, but only until the visitor has picked a side.
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+  var media = window.matchMedia('(prefers-color-scheme: dark)');
+  var onMediaChange = function (e) {
     if (read()) return;
     root.classList.toggle('dark', e.matches);
     syncLabel();
-  });
+  };
+  if (media.addEventListener) media.addEventListener('change', onMediaChange);
+  else if (media.addListener) media.addListener(onMediaChange);
 })();

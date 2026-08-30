@@ -3,9 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TMS — Internal Training Management System — Hao</title>
-  <meta name="description" content="Case study: an internal Training Management System for ~1,000 employees. Express 5, PostgreSQL (52 migrations), React 19, Vitest + Artillery.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230a0a0a'/%3E%3Ctext x='16' y='22' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23f0f0ee' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <title>TMS v2 case study — Nguyen Huynh Anh Hao</title>
+  <meta name="description" content="Case study: an internal training operations workflow for identity-safe imports, scheduling, completion, and audit views.">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="TMS v2 case study — Hao">
+  <meta property="og:description" content="A static, evidence-aware case study of an internal learning operations workflow.">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/home.css">
   <link rel="stylesheet" href="assets/css/case-study.css">
@@ -14,20 +20,21 @@
   <script>try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <main class="container-sm">
+  <main id="main-content" class="container-sm" tabindex="-1">
 
     <!-- NAV -->
     <aside class="nav-container">
       <div class="nav-sticky">
-        <nav class="nav-bar" id="nav">
+        <nav class="nav-bar" id="nav" aria-label="Primary navigation">
           <div class="nav">
             <a href="index.html">home</a>
             <a href="about.html">about</a>
           </div>
-          <button type="button" class="theme-toggle" aria-label="Switch to dark mode" title="Dark mode">
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
-            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+          <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode">
+            <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
+            <svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
           </button>
         </nav>
       </div>
@@ -39,7 +46,7 @@
 
       <!-- 00 · HEADER & SUMMARY -->
       <div class="detail-header" data-reveal>
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88'%3E%3Crect width='88' height='88' fill='%23e5e5e5' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='28' font-weight='600' fill='%23a3a3a3'%3ETM%3C/text%3E%3C/svg%3E" alt="TMS icon" class="detail-icon">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='88'%3E%3Crect width='88' height='88' fill='%23e5e5e5' rx='16'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='28' font-weight='600' fill='%23a3a3a3'%3ETM%3C/text%3E%3C/svg%3E" alt="TMS icon" width="64" height="64" class="detail-icon">
         <div class="detail-title-wrap">
           <div class="detail-title-row">
             <h1>TMS v2</h1>
@@ -49,10 +56,18 @@
         </div>
       </div>
 
-      <p class="lede" data-reveal>An internal Training Management System for CyberLogitec's L&amp;D team. It takes back <b class="hl">120+ admin hours a month</b>, keeps every completion record <b class="hl">ready for an audit</b>, and lets department leaders book their own training instead of emailing L&amp;D and waiting.</p>
+      <p class="lede" data-reveal>An internal training management workflow for an L&amp;D team. It brings identity-safe imports, team scheduling, completion gates, and audit views into one place so department leaders can act without a long email handoff.</p>
+
+      <div class="case-summary" data-reveal aria-label="Case study summary">
+        <div><span class="summary-label">Problem</span><strong>Learning operations were spread across manual files and inbox requests.</strong></div>
+        <div><span class="summary-label">Role</span><strong>Mapped the operating model and built the application flow.</strong></div>
+        <div><span class="summary-label">Result</span><strong>Self-service scheduling and a traceable learning record.</strong></div>
+        <div><span class="summary-label">Access</span><strong>Static walkthrough · synthetic data; production app requires approval.</strong></div>
+      </div>
 
       <div class="detail-actions" data-reveal>
-        <a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="cs-cta">Live Demo ↗</a>
+        <a href="assets/proof/tms-walkthrough.html" class="cs-cta" data-proof-cta>Open static walkthrough</a>
+        <a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="u-link">Production app (access required) ↗</a>
       </div>
 
       <div class="cs-tags" data-reveal>
@@ -62,43 +77,45 @@
         <span class="tag">React 19</span>
         <span class="tag">Express 5</span>
         <span class="tag">PostgreSQL Architecture</span>
+        <span class="tag">Synthetic data</span>
       </div>
 
       <!-- STAT BAR -->
       <div class="stat-bar" data-reveal>
-        <div class="stat"><div class="value">1,000+</div><div class="label">EMPLOYEES MANAGED</div></div>
-        <div class="stat"><div class="value">120+ hrs</div><div class="label">MONTHLY TIME SAVED</div></div>
-        <div class="stat"><div class="value">100%</div><div class="label">AUDIT COMPLIANCE</div></div>
-        <div class="stat"><div class="value">4x</div><div class="label">TRAINING THROUGHPUT</div></div>
+        <div class="stat"><div class="value">Identity-safe</div><div class="label">IMPORT MODEL</div></div>
+        <div class="stat"><div class="value">Self-service</div><div class="label">SCHEDULING PATH</div></div>
+        <div class="stat"><div class="value">Traceable</div><div class="label">COMPLETION RECORD</div></div>
+        <div class="stat"><div class="value">Access-controlled</div><div class="label">PRODUCTION STATE</div></div>
       </div>
 
       <!-- FLOW DEMO CAROUSEL -->
-      <div class="cs-section bordered" data-reveal>
+      <div id="technical-evidence" class="cs-section bordered" data-reveal>
         <div class="section-tag" style="margin-bottom:4px">Executive Summary &amp; Operational Flow</div>
         <h2>Interactive System Tour</h2>
+        <p class="proof-note mock-data-disclosure"><strong>Page-level disclosure: illustrative UI — Synthetic/test data.</strong> Every count, date, score, percentage, employee code, status, and time shown in the TMS mockups is a placeholder for the workflow, not production telemetry or observed impact.</p>
         <div class="flow-demo" style="margin-top:16px">
-          <div class="flow-demo-stage">
+          <div class="flow-demo-stage" role="region" aria-label="TMS workflow panels" aria-live="polite">
 
             <!-- Panel 1: Identity Governance -->
             <div class="flow-demo-panel active">
               <div class="flow-demo-kicker">01 · Identity Governance &amp; Security</div>
               <div class="flow-demo-title">Enterprise Directory Sync &amp; Identity Protection</div>
-              <p class="flow-demo-desc">Cuts about <b>90% of monthly IT credential tickets</b>. Directory updates are matched by empCode in 500-record chunks, so an existing employee gets new profile details without their working password being touched.</p>
+              <p class="flow-demo-desc">Directory updates are matched by <code>empCode</code> in batches, so an existing employee gets new profile details without their working password being touched.</p>
               <div class="mock-shot">
                 <div class="chrome">
                   <div class="dots"><i></i><i></i><i></i></div>
                   <div class="brand-icon"></div>
-                  <div class="url-bar">tms.cyberlogitec.com/people?tab=import</div>
+                  <div class="url-bar">tms.example/people?tab=import</div>
                 </div>
-                <div class="tms-upsert-mock">
+                <div class="tms-upsert-mock" tabindex="0" role="region" aria-label="Scrollable synthetic employee import table">
                   <table>
                     <thead>
                       <tr><th>EMP CODE</th><th>EMPLOYEE NAME</th><th>DEPARTMENT</th><th>L&amp;D STATUS</th><th>IDENTITY &amp; SECURITY GOVERNANCE</th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>EMP0012</td><td>Nguyen Van A</td><td>Engineering</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials Preserved (Zero Password Reset Tickets)</span></td></tr>
-                      <tr><td>EMP0045</td><td>Tran Thi B</td><td>Logistics Ops</td><td><span class="tag insert">NEW ONBOARD</span></td><td><span class="pwd-status hashed">✓ Seed Credentials (mustChangePassword: true)</span></td></tr>
-                      <tr><td>EMP0089</td><td>Le Hoang C</td><td>Customer Success</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials Preserved (Zero Password Reset Tickets)</span></td></tr>
+                      <tr><td>19xxxx</td><td>Nguyen Van A</td><td>Engineering</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials preserved on update</span></td></tr>
+                      <tr><td>19xxxx</td><td>Tran Thi B</td><td>Logistics Ops</td><td><span class="tag insert">NEW ONBOARD</span></td><td><span class="pwd-status hashed">✓ Seed credentials · change required</span></td></tr>
+                      <tr><td>19xxxx</td><td>Le Hoang C</td><td>Customer Success</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials preserved on update</span></td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -109,12 +126,12 @@
             <div class="flow-demo-panel">
               <div class="flow-demo-kicker">02 · Operational Scalability</div>
               <div class="flow-demo-title">Decentralized Team Scheduling &amp; Throughput</div>
-              <p class="flow-demo-desc">Department leaders book their own slots on a <b>7x5 grid</b>. One click enrolls the team, creates the Google Meet room, syncs the Calendar invites and schedules the 24-hour reminder.</p>
+              <p class="flow-demo-desc">Department leaders choose an available slot. The workflow can enrol the team, create the Google Meet room, sync Calendar invites, and queue a reminder.</p>
               <div class="mock-shot">
                 <div class="chrome">
                   <div class="dots"><i></i><i></i><i></i></div>
                   <div class="brand-icon"></div>
-                  <div class="url-bar">tms.cyberlogitec.com/english?tab=book</div>
+                  <div class="url-bar">tms.example/english?tab=book</div>
                 </div>
                 <div class="tms-booking-shell">
                   <div class="tms-grid-mock">
@@ -145,12 +162,12 @@
             <div class="flow-demo-panel">
               <div class="flow-demo-kicker">03 · Employee Learning Journey</div>
               <div class="flow-demo-title">Structured Upskilling Paths &amp; Training History</div>
-              <p class="flow-demo-desc">Answering “what has this person completed?” used to mean opening five spreadsheets. Now every employee has <b>one learning record</b>: courses done, path position, hours accumulated, certificates still valid.</p>
+              <p class="flow-demo-desc">Answering “what has this person completed?” no longer requires searching several files. Each employee has <b>one learning record</b> for courses, path position, and certificate status.</p>
               <div class="mock-shot">
                 <div class="chrome">
                   <div class="dots"><i></i><i></i><i></i></div>
                   <div class="brand-icon"></div>
-                  <div class="url-bar">tms.cyberlogitec.com/learning/employee/EMP0012</div>
+                  <div class="url-bar">tms.example/learning/employee/19xxxx</div>
                 </div>
                 <div class="tms-profile-mock">
                   <div class="profile-header">
@@ -200,45 +217,45 @@
             <div class="flow-demo-panel">
               <div class="flow-demo-kicker">04 · Completion &amp; Credentials</div>
               <div class="flow-demo-title">Multi-Gate Completion Engine &amp; Verifiable Certificates</div>
-              <p class="flow-demo-desc">“Completed” used to be the instructor's judgement call. Now it is <b>three gates</b>: attendance at 80% or above, assessment passed, feedback submitted. Miss one and no certificate exists to argue about.</p>
+              <p class="flow-demo-desc">“Completed” is a set of explicit gates: attendance, assessment, and feedback. Miss one and the record stays open for review.</p>
               <div class="mock-shot">
                 <div class="chrome">
                   <div class="dots"><i></i><i></i><i></i></div>
                   <div class="brand-icon"></div>
-                  <div class="url-bar">tms.cyberlogitec.com/learning/completion/evaluate</div>
+                  <div class="url-bar">tms.example/learning/completion/evaluate</div>
                 </div>
                 <div class="tms-completion-mock">
                   <div class="completion-header">
-                    <span>LEARNER: <b>Nguyen Van A</b> · Communication 2 (Cohort C2-2026A)</span>
+                    <span>SYNTHETIC LEARNER: <b>Nguyen Van A</b> · Communication 2 (Sample cohort C2-2026A)</span>
                   </div>
                   <div class="completion-gates">
                     <div class="gate pass">
                       <div class="gate-icon">✓</div>
                       <div class="gate-body">
                         <div class="gate-label">Attendance</div>
-                        <div class="gate-detail">92% (11/12 sessions) <span class="gate-threshold">≥ 80% required</span></div>
+                        <div class="gate-detail">Sample attendance: 92% (11/12 sessions) <span class="gate-threshold">Illustrative rule: ≥ 80%</span></div>
                       </div>
                     </div>
                     <div class="gate pass">
                       <div class="gate-icon">✓</div>
                       <div class="gate-body">
                         <div class="gate-label">Assessment</div>
-                        <div class="gate-detail">Score: 8.25/10 (Grammar 8.5, Vocab 9.0, Pronunciation 7.5, Fluency 8.0)</div>
+                        <div class="gate-detail">Sample score: 8.25/10 (Grammar 8.5, Vocab 9.0, Pronunciation 7.5, Fluency 8.0)</div>
                       </div>
                     </div>
                     <div class="gate pass">
                       <div class="gate-icon">✓</div>
                       <div class="gate-body">
                         <div class="gate-label">Feedback</div>
-                        <div class="gate-detail">Course feedback submitted on 15 Jul 2026</div>
+                        <div class="gate-detail">Sample feedback date: 15 Jul 2026</div>
                       </div>
                     </div>
                   </div>
                   <div class="completion-result pass">
-                    <div class="cert-badge">CERTIFICATE ISSUED</div>
+                    <div class="cert-badge">SAMPLE CERTIFICATE ISSUED</div>
                     <div class="cert-details">
                       <span>CERT-2026-000847</span>
-                      <span>Valid until: 15 Jul 2027</span>
+                      <span>Sample valid until: 15 Jul 2027</span>
                       <span class="cert-verify">Verification: a3f8c…2e91</span>
                     </div>
                   </div>
@@ -250,36 +267,36 @@
             <div class="flow-demo-panel">
               <div class="flow-demo-kicker">05 · L&amp;D Intelligence &amp; Compliance</div>
               <div class="flow-demo-title">Org-Wide Compliance Matrix, Training Hours &amp; Enrollment Funnel</div>
-              <p class="flow-demo-desc">Building the monthly report took <b>2 to 3 days</b> of pulling numbers out of scattered Excel files. The same report is now a page you open, and an <b>export you click once</b>.</p>
+              <p class="flow-demo-desc">Instead of rebuilding a report from scattered files, an operator can open a compliance view and export the current review set.</p>
               <div class="mock-shot">
                 <div class="chrome">
                   <div class="dots"><i></i><i></i><i></i></div>
                   <div class="brand-icon"></div>
-                  <div class="url-bar">tms.cyberlogitec.com/reports?tab=compliance</div>
+                  <div class="url-bar">tms.example/reports?tab=compliance</div>
                 </div>
                 <div class="tms-intelligence-mock">
                   <div class="intel-grid">
                     <div class="intel-card">
-                      <div class="intel-card-header">COMPLIANCE MATRIX</div>
-                      <div class="intel-row"><span>Safety Orientation</span><span class="intel-pct high">96%</span></div>
-                      <div class="intel-row"><span>English Proficiency L1</span><span class="intel-pct high">88%</span></div>
-                      <div class="intel-row"><span>Data Privacy Training</span><span class="intel-pct med">72%</span></div>
-                      <div class="intel-row"><span>Leadership Development</span><span class="intel-pct low">45%</span></div>
-                      <div class="intel-footer">4 requirements · 12 overdue</div>
+                      <div class="intel-card-header">SYNTHETIC · COMPLIANCE MATRIX</div>
+                      <div class="intel-row"><span>Safety Orientation</span><span class="intel-pct high">Sample 96%</span></div>
+                      <div class="intel-row"><span>English Proficiency L1</span><span class="intel-pct high">Sample 88%</span></div>
+                      <div class="intel-row"><span>Data Privacy Training</span><span class="intel-pct med">Sample 72%</span></div>
+                      <div class="intel-row"><span>Leadership Development</span><span class="intel-pct low">Sample 45%</span></div>
+                      <div class="intel-footer">Illustrative sample · 4 requirements · 12 overdue</div>
                     </div>
                     <div class="intel-card">
-                      <div class="intel-card-header">TRAINING HOURS (Q2 2026)</div>
-                      <div class="intel-row"><span>Engineering</span><span class="intel-hrs">684 hrs <small>· 18.5 avg/person</small></span></div>
-                      <div class="intel-row"><span>Logistics Ops</span><span class="intel-hrs">512 hrs <small>· 14.2 avg/person</small></span></div>
-                      <div class="intel-row"><span>Customer Success</span><span class="intel-hrs">328 hrs <small>· 12.6 avg/person</small></span></div>
-                      <div class="intel-footer">Total: 2,840 hrs across 186 employees</div>
+                      <div class="intel-card-header">SYNTHETIC · TRAINING HOURS</div>
+                      <div class="intel-row"><span>Engineering</span><span class="intel-hrs">Sample 684 hrs <small>· 18.5 avg/person</small></span></div>
+                      <div class="intel-row"><span>Logistics Ops</span><span class="intel-hrs">Sample 512 hrs <small>· 14.2 avg/person</small></span></div>
+                      <div class="intel-row"><span>Customer Success</span><span class="intel-hrs">Sample 328 hrs <small>· 12.6 avg/person</small></span></div>
+                      <div class="intel-footer">Illustrative sample · 2,840 hrs · 186 employees</div>
                     </div>
                     <div class="intel-card">
-                      <div class="intel-card-header">L&amp;D PIPELINE FUNNEL</div>
-                      <div class="funnel-bar"><div class="funnel-fill" style="width:100%"></div><span>847 Enrolled</span></div>
-                      <div class="funnel-bar"><div class="funnel-fill mid" style="width:72%"></div><span>612 Completed</span></div>
-                      <div class="funnel-bar"><div class="funnel-fill end" style="width:58%"></div><span>491 Certified</span></div>
-                      <div class="intel-footer">72% completion rate · 80% cert rate</div>
+                      <div class="intel-card-header">SYNTHETIC · L&amp;D PIPELINE FUNNEL</div>
+                      <div class="funnel-bar"><div class="funnel-fill start" aria-hidden="true"></div><span>Sample 847 Enrolled</span></div>
+                      <div class="funnel-bar"><div class="funnel-fill mid" aria-hidden="true"></div><span>Sample 612 Completed</span></div>
+                      <div class="funnel-bar"><div class="funnel-fill end" aria-hidden="true"></div><span>Sample 491 Certified</span></div>
+                      <div class="intel-footer">Illustrative sample · rates are not production evidence</div>
                     </div>
                   </div>
                   <div class="intel-export-bar">
@@ -295,22 +312,24 @@
           <!-- Controls -->
           <div class="flow-demo-controls">
             <button class="flow-demo-nav" data-dir="-1" aria-label="Previous step">←</button>
-            <div class="flow-demo-dots">
-              <span class="dot active"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
-              <span class="dot"></span>
+            <div class="flow-demo-dots" aria-label="Choose workflow panel">
+              <button type="button" class="dot active" aria-label="Show identity governance panel" aria-current="step"></button>
+              <button type="button" class="dot" aria-label="Show team scheduling panel" aria-current="false"></button>
+              <button type="button" class="dot" aria-label="Show learning journey panel" aria-current="false"></button>
+              <button type="button" class="dot" aria-label="Show completion panel" aria-current="false"></button>
+              <button type="button" class="dot" aria-label="Show intelligence panel" aria-current="false"></button>
             </div>
             <button class="flow-demo-nav" data-dir="1" aria-label="Next step">→</button>
           </div>
         </div>
+        <p class="caption">Interactive tour uses synthetic teams, employee codes, dates, and statuses. It is a visual explanation, not production telemetry (test data).</p>
       </div>
 
       <!-- FLOW SEQUENCE -->
       <div class="cs-section bordered" data-reveal>
         <div class="section-tag" style="margin-bottom:4px">Enterprise Operational Architecture</div>
         <h2>What the system actually does</h2>
+        <p class="proof-note mock-data-disclosure">The detailed screens below continue the same synthetic/test-data illustration; their values are not observed operational results.</p>
 
         <div class="flow-sequence" style="margin-top:20px">
 
@@ -318,25 +337,25 @@
           <div class="flow-step">
             <div class="num-badge">1</div>
             <div class="step-kicker">Pillar 01 · Identity Governance &amp; Security</div>
-            <h3 class="step-title">A sync that never resets a working password</h3>
-            <p class="step-body">Handles joiners, movers and leavers across around 1,000 staff. Records match on <code>empCode</code>. An existing employee gets their new details written while the <b class="hl">password hash is left alone</b>, which is where roughly <b class="hl">90% of IT credential tickets</b> used to come from.</p>
+            <h3 class="step-title">A sync that separates profile updates from credentials</h3>
+            <p class="step-body">Handles joiners, movers, and leavers through an <code>empCode</code>-matched import. An existing employee gets new details while the <b class="hl">password hash is left alone</b>, keeping the identity change separate from credential management.</p>
 
             <div class="mock-shot">
               <div class="chrome">
                 <div class="dots"><i></i><i></i><i></i></div>
                 <div class="brand-icon"></div>
-                <div class="url">concho2.onrender.com/people?tab=import</div>
+              <div class="url">tms.example/people?tab=import</div>
               </div>
-              <div class="tms-upsert-mock">
+              <div class="tms-upsert-mock" tabindex="0" role="region" aria-label="Scrollable synthetic employee import table">
                 <table>
                   <thead>
                     <tr><th>EMP CODE</th><th>EMPLOYEE NAME</th><th>DEPARTMENT</th><th>L&amp;D STATUS</th><th>IDENTITY &amp; SECURITY GOVERNANCE</th></tr>
                   </thead>
                   <tbody>
-                    <tr><td>EMP0012</td><td>Nguyen Van A</td><td>Engineering</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials Preserved (Zero Password Reset Tickets)</span></td></tr>
-                    <tr><td>EMP0045</td><td>Tran Thi B</td><td>Logistics Ops</td><td><span class="tag insert">NEW ONBOARD</span></td><td><span class="pwd-status hashed">✓ Seed Credentials (mustChangePassword: true)</span></td></tr>
-                    <tr><td>EMP0089</td><td>Le Hoang C</td><td>Customer Success</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials Preserved (Zero Password Reset Tickets)</span></td></tr>
-                    <tr><td>EMP0104</td><td>Pham Van D</td><td>QA &amp; Audit</td><td><span class="tag insert">NEW ONBOARD</span></td><td><span class="pwd-status hashed">✓ Seed Credentials (mustChangePassword: true)</span></td></tr>
+                    <tr><td>19xxxx</td><td>Nguyen Van A</td><td>Engineering</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials preserved on update</span></td></tr>
+                    <tr><td>19xxxx</td><td>Tran Thi B</td><td>Logistics Ops</td><td><span class="tag insert">NEW ONBOARD</span></td><td><span class="pwd-status hashed">✓ Seed credentials · change required</span></td></tr>
+                    <tr><td>19xxxx</td><td>Le Hoang C</td><td>Customer Success</td><td><span class="tag update">ACTIVE UPDATE</span></td><td><span class="pwd-status kept">★ Credentials preserved on update</span></td></tr>
+                    <tr><td>19xxxx</td><td>Pham Van D</td><td>QA &amp; Audit</td><td><span class="tag insert">NEW ONBOARD</span></td><td><span class="pwd-status hashed">✓ Seed credentials · change required</span></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -349,13 +368,13 @@
             <div class="num-badge">2</div>
             <div class="step-kicker">Pillar 02 · Operational Scalability</div>
             <h3 class="step-title">Decentralized Team Scheduling &amp; Training Throughput</h3>
-            <p class="step-body">Booking used to be a thread between a leader and L&amp;D. Now the leader picks a slot on the <b class="hl">7x5 grid</b> and the system does the rest in one step: enrolls the active team members, creates the Google Meet link, syncs Workspace Calendars, and queues the <b class="hl">24-hour reminder</b>.</p>
+            <p class="step-body">Booking used to be a thread between a leader and L&amp;D. Now the leader picks an available slot and the system can enrol active team members, create the Google Meet link, sync Workspace Calendars, and queue a reminder.</p>
 
             <div class="mock-shot">
               <div class="chrome">
                 <div class="dots"><i></i><i></i><i></i></div>
                 <div class="brand-icon"></div>
-                <div class="url">concho2.onrender.com/english?tab=book</div>
+                <div class="url">tms.example/english?tab=book</div>
               </div>
               <div class="tms-booking-shell">
                 <div class="tms-grid-mock">
@@ -381,7 +400,7 @@
                 </div>
               </div>
             </div>
-            <p class="caption">7x5 weekly booking grid with slide-out confirmation drawer (test data)</p>
+            <p class="caption">Weekly booking grid with slide-out confirmation drawer (test data)</p>
           </div>
 
           <!-- Step 3 -->
@@ -389,19 +408,19 @@
             <div class="num-badge">3</div>
             <div class="step-kicker">Pillar 03 · Employee Learning Journey</div>
             <h3 class="step-title">Structured Upskilling Paths &amp; Trackable Training History</h3>
-            <p class="step-body">Answering “what has employee X completed?” used to mean cross-referencing <b class="hl">five or more spreadsheets</b>. Each employee now has one profile that tracks programs enrolled and finished, where they are on a <b class="hl">prerequisite-gated path</b>, hours accumulated, and certificates earned.</p>
+            <p class="step-body">Answering “what has employee X completed?” used to mean cross-referencing several files. Each employee now has one profile that tracks programmes, a <b class="hl">prerequisite-gated path</b>, hours, and certificates.</p>
 
             <div class="mock-shot">
               <div class="chrome">
                 <div class="dots"><i></i><i></i><i></i></div>
                 <div class="brand-icon"></div>
-                <div class="url">concho2.onrender.com/learning/employee/EMP0012</div>
+                <div class="url">tms.example/learning/employee/19xxxx</div>
               </div>
               <div class="tms-profile-mock">
                 <div class="profile-header">
                   <div class="profile-avatar">NA</div>
                   <div class="profile-info">
-                    <div class="profile-name">Nguyen Van A <span class="profile-dept">· Engineering · EMP0012</span></div>
+                    <div class="profile-name">Nguyen Van A <span class="profile-dept">· Engineering · 19xxxx</span></div>
                     <div class="profile-stats-row">
                       <span class="pstat"><b>42.5</b> Training Hours</span>
                       <span class="pstat"><b>4</b> Programs Completed</span>
@@ -448,47 +467,47 @@
             <div class="num-badge">4</div>
             <div class="step-kicker">Pillar 04 · Completion &amp; Credentials</div>
             <h3 class="step-title">Three gates before a certificate exists</h3>
-            <p class="step-body">“Completed” was whatever the instructor decided. It is now <b class="hl">three gates</b>: attendance at 80% or above, assessment passed, feedback submitted. Each certificate carries a <b class="hl">verification code and a validity period</b>.</p>
+            <p class="step-body">“Completed” is defined by explicit gates for attendance, assessment, and feedback. Each certificate carries a <b class="hl">verification code and a validity period</b>.</p>
 
             <div class="mock-shot">
               <div class="chrome">
                 <div class="dots"><i></i><i></i><i></i></div>
                 <div class="brand-icon"></div>
-                <div class="url">concho2.onrender.com/learning/completion/evaluate</div>
+                <div class="url">tms.example/learning/completion/evaluate</div>
               </div>
               <div class="tms-completion-mock">
                 <div class="completion-header">
-                  <span>LEARNER: <b>Nguyen Van A</b> · Communication 2 (Cohort C2-2026A)</span>
+                  <span>SYNTHETIC LEARNER: <b>Nguyen Van A</b> · Communication 2 (Sample cohort C2-2026A)</span>
                 </div>
                 <div class="completion-gates">
                   <div class="gate pass">
                     <div class="gate-icon">✓</div>
                     <div class="gate-body">
                       <div class="gate-label">Attendance Gate</div>
-                      <div class="gate-detail">92% (11/12 sessions) <span class="gate-threshold">≥ 80% required</span></div>
+                      <div class="gate-detail">Sample attendance: 92% (11/12 sessions) <span class="gate-threshold">Illustrative rule: ≥ 80%</span></div>
                     </div>
                   </div>
                   <div class="gate pass">
                     <div class="gate-icon">✓</div>
                     <div class="gate-body">
                       <div class="gate-label">Assessment Gate</div>
-                      <div class="gate-detail">Score: 8.25/10 · Grammar 8.5 · Vocab 9.0 · Pronunciation 7.5 · Fluency 8.0</div>
+                      <div class="gate-detail">Sample score: 8.25/10 · Grammar 8.5 · Vocab 9.0 · Pronunciation 7.5 · Fluency 8.0</div>
                     </div>
                   </div>
                   <div class="gate pass">
                     <div class="gate-icon">✓</div>
                     <div class="gate-body">
                       <div class="gate-label">Feedback Gate</div>
-                      <div class="gate-detail">Course feedback submitted on 15 Jul 2026</div>
+                      <div class="gate-detail">Sample feedback date: 15 Jul 2026</div>
                     </div>
                   </div>
                 </div>
                 <div class="completion-result pass">
-                  <div class="cert-badge">CERTIFICATE ISSUED</div>
+                  <div class="cert-badge">SAMPLE CERTIFICATE ISSUED</div>
                   <div class="cert-details">
                     <span>CERT-2026-000847</span>
-                    <span>Issued: 15 Jul 2026</span>
-                    <span>Valid until: 15 Jul 2027</span>
+                    <span>Sample issued: 15 Jul 2026</span>
+                    <span>Sample valid until: 15 Jul 2027</span>
                     <span class="cert-verify">Verification: a3f8c…2e91</span>
                   </div>
                 </div>
@@ -502,37 +521,37 @@
             <div class="num-badge">5</div>
             <div class="step-kicker">Pillar 05 · L&amp;D Intelligence &amp; Compliance</div>
             <h3 class="step-title">Org-Wide Compliance Matrix, Training Hours &amp; Enrollment Funnel</h3>
-            <p class="step-body">L&amp;D leadership spent <b class="hl">2 to 3 days a month</b> assembling reports by hand. The system aggregates it live instead: a <b class="hl">compliance matrix</b>, <b class="hl">training hours</b> per employee and department, and an enrollment funnel.</p>
+            <p class="step-body">L&amp;D leadership can review a <b class="hl">compliance matrix</b>, <b class="hl">training hours</b> by employee or department, and an enrollment funnel without rebuilding the view from scattered files.</p>
 
             <div class="mock-shot">
               <div class="chrome">
                 <div class="dots"><i></i><i></i><i></i></div>
                 <div class="brand-icon"></div>
-                <div class="url">concho2.onrender.com/reports?tab=compliance</div>
+              <div class="url">tms.example/reports?tab=compliance</div>
               </div>
               <div class="tms-intelligence-mock">
                 <div class="intel-grid">
                   <div class="intel-card">
-                    <div class="intel-card-header">REQUIRED-TRAINING COMPLIANCE</div>
-                    <div class="intel-row"><span>Safety Orientation</span><span class="intel-pct high">96%</span></div>
-                    <div class="intel-row"><span>English Proficiency L1</span><span class="intel-pct high">88%</span></div>
-                    <div class="intel-row"><span>Data Privacy Training</span><span class="intel-pct med">72%</span></div>
-                    <div class="intel-row"><span>Leadership Development</span><span class="intel-pct low">45%</span></div>
-                    <div class="intel-footer">4 requirements · 12 overdue</div>
+                    <div class="intel-card-header">SYNTHETIC · REQUIRED-TRAINING COMPLIANCE</div>
+                    <div class="intel-row"><span>Safety Orientation</span><span class="intel-pct high">Sample 96%</span></div>
+                    <div class="intel-row"><span>English Proficiency L1</span><span class="intel-pct high">Sample 88%</span></div>
+                    <div class="intel-row"><span>Data Privacy Training</span><span class="intel-pct med">Sample 72%</span></div>
+                    <div class="intel-row"><span>Leadership Development</span><span class="intel-pct low">Sample 45%</span></div>
+                    <div class="intel-footer">Illustrative sample · 4 requirements · 12 overdue</div>
                   </div>
                   <div class="intel-card">
-                    <div class="intel-card-header">TRAINING HOURS BY DEPARTMENT (Q2 2026)</div>
-                    <div class="intel-row"><span>Engineering (37 staff)</span><span class="intel-hrs">684 hrs <small>· 18.5 avg</small></span></div>
-                    <div class="intel-row"><span>Logistics Ops (36 staff)</span><span class="intel-hrs">512 hrs <small>· 14.2 avg</small></span></div>
-                    <div class="intel-row"><span>Customer Success (26 staff)</span><span class="intel-hrs">328 hrs <small>· 12.6 avg</small></span></div>
-                    <div class="intel-footer">Total: 2,840 hrs · 186 employees</div>
+                    <div class="intel-card-header">SYNTHETIC · TRAINING HOURS BY DEPARTMENT</div>
+                    <div class="intel-row"><span>Engineering (sample staff)</span><span class="intel-hrs">Sample 684 hrs <small>· 18.5 avg</small></span></div>
+                    <div class="intel-row"><span>Logistics Ops (sample staff)</span><span class="intel-hrs">Sample 512 hrs <small>· 14.2 avg</small></span></div>
+                    <div class="intel-row"><span>Customer Success (sample staff)</span><span class="intel-hrs">Sample 328 hrs <small>· 12.6 avg</small></span></div>
+                    <div class="intel-footer">Illustrative sample · 2,840 hrs · 186 employees</div>
                   </div>
                   <div class="intel-card">
-                    <div class="intel-card-header">L&amp;D PIPELINE FUNNEL</div>
-                    <div class="funnel-bar"><div class="funnel-fill" style="width:100%"></div><span>847 Enrolled</span></div>
-                    <div class="funnel-bar"><div class="funnel-fill mid" style="width:72%"></div><span>612 Completed</span></div>
-                    <div class="funnel-bar"><div class="funnel-fill end" style="width:58%"></div><span>491 Certified</span></div>
-                    <div class="intel-footer">72% completion · 80% cert rate</div>
+                    <div class="intel-card-header">SYNTHETIC · L&amp;D PIPELINE FUNNEL</div>
+                    <div class="funnel-bar"><div class="funnel-fill start" aria-hidden="true"></div><span>Sample 847 Enrolled</span></div>
+                    <div class="funnel-bar"><div class="funnel-fill mid" aria-hidden="true"></div><span>Sample 612 Completed</span></div>
+                    <div class="funnel-bar"><div class="funnel-fill end" aria-hidden="true"></div><span>Sample 491 Certified</span></div>
+                    <div class="intel-footer">Illustrative sample · rates are not production evidence</div>
                   </div>
                 </div>
                 <div class="intel-export-bar">
@@ -541,7 +560,7 @@
                 </div>
               </div>
             </div>
-            <p class="caption">Real-time compliance matrix, training hours dashboard, and enrollment funnel (test data)</p>
+        <p class="caption">Illustrative compliance matrix, training-hours dashboard, and enrollment funnel (test data)</p>
           </div>
 
         </div>
@@ -551,12 +570,12 @@
       <div class="cs-section bordered" data-reveal>
         <div class="section-tag" style="margin-bottom:4px">Differentiator Anatomy</div>
         <h2>The directory sync is the part that can do real damage</h2>
-        <p>A monthly sync touches every employee record at once. Done carelessly it locks people out of their own accounts, and IT absorbs the fallout. This is how the write path avoids that.</p>
+ <p>A directory sync can touch each record in one pass. Done carelessly it can lock people out of their own accounts, and IT absorbs the fallout. This is how the write path is designed to avoid that.</p>
 
         <div class="match-anatomy" style="margin-top:24px">
           <div class="ma-cert">
             <div class="brand">ENTERPRISE HR ROSTER</div>
-            <div class="name">EMP0042 · Nguyen Van A</div>
+            <div class="name">19xxxx · Nguyen Van A</div>
             <div class="certno">Department: Logistics Ops</div>
           </div>
           <div class="ma-arrow">
@@ -564,7 +583,7 @@
             <small>EmpCode Pre-load Check</small>
           </div>
           <div class="ma-file">
-            <div><span class="n">EXISTING ACTIVE EMPLOYEE</span> ➔ Update Profile Attributes, <b>PRESERVE CREDENTIALS</b> (Zero IT Password Tickets)</div>
+            <div><span class="n">EXISTING ACTIVE EMPLOYEE</span> ➔ Update profile attributes, <b>PRESERVE CREDENTIALS</b> on update</div>
             <div style="margin-top:6px"><span class="c">NEW ONBOARDING STAFF</span> ➔ Batch Bcrypt Seed Provisioning, <b>ENFORCE mustChangePassword POLICY</b></div>
           </div>
         </div>
@@ -618,25 +637,26 @@
           </div>
           <div class="numbered-row">
             <div class="num">02</div>
-            <div><div class="title">Completion is measured, not judged</div><div class="body">Three gates replace the instructor's opinion. Every certificate carries a <b class="hl">verification code</b> and an expiry date.</div></div>
+            <div><div class="title">Completion is measured, not judged</div><div class="body">Three gates replace the instructor's opinion. Each certificate carries a <b class="hl">verification code</b> and an expiry date.</div></div>
           </div>
           <div class="numbered-row">
             <div class="num">03</div>
-            <div><div class="title">The sync cannot lock people out</div><div class="body">Matching on <code>empCode</code> lets an update skip password hashing entirely for existing staff.</div></div>
+              <div><div class="title">The sync is designed to preserve active access</div><div class="body">Matching on <code>empCode</code> lets an update skip password hashing entirely for existing staff.</div></div>
           </div>
           <div class="numbered-row">
             <div class="num">04</div>
-            <div><div class="title">The export is treated as untrusted output</div><div class="body">The HR Excel export escapes any cell starting with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code>, preventing formula injection.</div></div>
+            <div><div class="title">The export is treated as untrusted output</div><div class="body">The HR Excel export escapes any cell starting with <code>=</code>, <code>+</code>, <code>-</code> or <code>@</code>, designed to prevent formula injection.</div></div>
           </div>
         </div>
       </div>
 
       <!-- CTA -->
       <div class="cta-section" data-reveal>
-        <h2>See it running</h2>
-        <p>Opens as an admin demo session, with test data.</p>
-        <a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="cs-cta">Open the live demo ↗</a>
-        <div class="cold-start">First load may take ~30s. Free-tier cold start.</div>
+        <h2>Explore the public proof</h2>
+        <p>The static walkthrough is available without credentials. The hosted application opens only for an authorised user.</p>
+        <a href="assets/proof/tms-walkthrough.html" class="cs-cta" data-proof-cta>Open static walkthrough</a>
+        <a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="u-link cta-secondary">Open production app (access required) ↗</a>
+        <div class="cold-start">No demo credentials are published. Scale and performance claims remain pending owner evidence.</div>
       </div>
 
     </section>
@@ -646,19 +666,19 @@
       <ul>
         <li>
           <a href="https://github.com/FinanceBullkk" target="_blank" rel="noopener noreferrer" class="u-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
+            <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
             <span>github</span>
           </a>
         </li>
         <li>
           <a href="https://www.linkedin.com/in/nguyenhuynhanhhao/" target="_blank" rel="noopener noreferrer" class="u-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
+            <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
             <span>linkedin</span>
           </a>
         </li>
         <li>
           <a href="mailto:anhhao.dl108@gmail.com" class="u-link">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
+            <svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z" fill="currentColor"></path></svg>
             <span>email</span>
           </a>
         </li>

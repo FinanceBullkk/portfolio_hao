@@ -9,11 +9,23 @@
 
   function show(i) {
     idx = (i + panels.length) % panels.length;
-    panels.forEach(function (p, k) { p.classList.toggle('active', k === idx); });
-    dots.forEach(function (d, k) { d.classList.toggle('active', k === idx); });
+    panels.forEach(function (p, k) {
+      var active = k === idx;
+      p.classList.toggle('active', active);
+      p.setAttribute('aria-hidden', String(!active));
+    });
+    dots.forEach(function (d, k) {
+      var active = k === idx;
+      d.classList.toggle('active', active);
+      d.setAttribute('aria-current', active ? 'step' : 'false');
+    });
   }
   function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  function start() { stop(); timer = setInterval(function () { show(idx + 1); }, DELAY); }
+  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function start() {
+    stop();
+    if (!reducedMotion) timer = setInterval(function () { show(idx + 1); }, DELAY);
+  }
 
   demo.querySelectorAll('.flow-demo-nav').forEach(function (btn) {
     btn.addEventListener('click', function () { show(idx + Number(btn.dataset.dir)); start(); });
@@ -23,6 +35,10 @@
   });
   demo.addEventListener('mouseenter', stop);
   demo.addEventListener('mouseleave', start);
+  demo.addEventListener('focusin', stop);
+  demo.addEventListener('focusout', function (event) {
+    if (!demo.contains(event.relatedTarget)) start();
+  });
 
   show(0);
   start();

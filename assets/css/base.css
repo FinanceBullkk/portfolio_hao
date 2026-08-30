@@ -105,10 +105,39 @@
    Reset
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; color-scheme: light; }
+html.dark { color-scheme: dark; }
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; }
 table { border-collapse: collapse; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 13px;
+  line-height: 20px;
+  text-decoration: none;
+  transform: translateY(-180%);
+  transition: transform .16s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+:where(a, button, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
   background: var(--bg);
@@ -293,7 +322,8 @@ body {
   font-size: 13px;
   letter-spacing: .02em;
   text-decoration: none;
-  transition: .16s ease;
+  min-height: 44px;
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease;
   cursor: pointer;
 }
 .btn-sm { padding: 9px 15px; font-size: 12px; }
@@ -371,7 +401,7 @@ body {
   text-underline-offset: 2px;
   border-bottom: 0;
   padding-bottom: 0;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease, opacity 0.15s ease;
 }
 .text-link:hover { color: var(--r-meta); opacity: 1; }
 .text-link.muted { color: inherit; border-bottom: 0; }
