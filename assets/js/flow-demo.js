@@ -1,45 +1,37 @@
-// Auto-advancing step carousel for the "Watch the flow" demo,
-// with prev/next buttons, clickable dots, and hover-to-pause.
+// Keyboard-safe, manual workflow tour. The visitor controls the pace so a
+// long case study never changes underneath a focused control.
 (function () {
   var demo = document.querySelector('.flow-demo');
   if (!demo) return;
-  var panels = demo.querySelectorAll('.flow-demo-panel');
-  var dots = demo.querySelectorAll('.flow-demo-dots .dot');
-  var idx = 0, timer = null, DELAY = 4000;
 
-  function show(i) {
-    idx = (i + panels.length) % panels.length;
-    panels.forEach(function (p, k) {
-      var active = k === idx;
-      p.classList.toggle('active', active);
-      p.setAttribute('aria-hidden', String(!active));
+  var panels = Array.prototype.slice.call(demo.querySelectorAll('.flow-demo-panel'));
+  var dots = Array.prototype.slice.call(demo.querySelectorAll('.flow-demo-dots .dot'));
+  var idx = 0;
+
+  function show(next) {
+    if (!panels.length) return;
+    idx = (next + panels.length) % panels.length;
+    panels.forEach(function (panel, panelIndex) {
+      var active = panelIndex === idx;
+      panel.classList.toggle('active', active);
+      panel.setAttribute('aria-hidden', String(!active));
+      panel.inert = !active;
     });
-    dots.forEach(function (d, k) {
-      var active = k === idx;
-      d.classList.toggle('active', active);
-      d.setAttribute('aria-current', active ? 'step' : 'false');
+    dots.forEach(function (dot, dotIndex) {
+      var active = dotIndex === idx;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-current', active ? 'step' : 'false');
+      dot.setAttribute('aria-pressed', String(active));
     });
   }
-  function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function start() {
-    stop();
-    if (!reducedMotion) timer = setInterval(function () { show(idx + 1); }, DELAY);
-  }
 
-  demo.querySelectorAll('.flow-demo-nav').forEach(function (btn) {
-    btn.addEventListener('click', function () { show(idx + Number(btn.dataset.dir)); start(); });
+  demo.querySelectorAll('.flow-demo-nav').forEach(function (button) {
+    button.addEventListener('click', function () {
+      show(idx + Number(button.dataset.dir || 0));
+    });
   });
-  dots.forEach(function (d, k) {
-    d.addEventListener('click', function () { show(k); start(); });
+  dots.forEach(function (dot, dotIndex) {
+    dot.addEventListener('click', function () { show(dotIndex); });
   });
-  demo.addEventListener('mouseenter', stop);
-  demo.addEventListener('mouseleave', start);
-  demo.addEventListener('focusin', stop);
-  demo.addEventListener('focusout', function (event) {
-    if (!demo.contains(event.relatedTarget)) start();
-  });
-
   show(0);
-  start();
 })();

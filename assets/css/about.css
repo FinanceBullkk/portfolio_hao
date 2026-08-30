@@ -102,3 +102,41 @@
   color: var(--fg);
   margin-bottom: 10px;
 }
+
+/* ============================================================
+   About page — capability map
+   ============================================================ */
+body.portfolio-redesign .about-page-content { padding-top: clamp(64px, 10vw, 128px); }
+body.portfolio-redesign .about-intro { padding-bottom: 42px; border-bottom: 2px solid var(--ink); }
+body.portfolio-redesign .about-intro-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(260px, 1.1fr); gap: clamp(28px, 8vw, 140px); align-items: end; margin-top: 26px; }
+body.portfolio-redesign .about-intro h1 { color: var(--ink); font-family: var(--font-display); font-size: clamp(48px, 7vw, 92px); font-style: italic; font-weight: 500; letter-spacing: -.07em; line-height: .9; }
+body.portfolio-redesign .about-role { max-width: 34ch; margin-top: 20px; color: var(--ink); font-size: 14px; font-weight: 650; line-height: 1.5; }
+body.portfolio-redesign .about-lede { max-width: 46ch; color: var(--ink-soft); font-size: 16px; line-height: 1.75; }
+body.portfolio-redesign .about-meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 30px; color: var(--ink-faint); font-size: 12px; }
+body.portfolio-redesign .about-meta a { color: var(--signal-dark); font-weight: 650; }
+body.portfolio-redesign .about-thesis { max-width: 760px; padding: clamp(64px, 9vw, 116px) 0 0; }
+body.portfolio-redesign .about-thesis h2,
+body.portfolio-redesign .about-practice h2 { margin-top: 14px; color: var(--ink); font-family: var(--font-display); font-size: clamp(32px, 4.5vw, 62px); font-style: italic; font-weight: 500; letter-spacing: -.065em; line-height: .98; }
+body.portfolio-redesign .about-thesis > p:last-child { max-width: 58ch; margin-top: 20px; color: var(--ink-soft); font-size: 14px; line-height: 1.75; }
+body.portfolio-redesign .capability-section { padding-top: clamp(78px, 10vw, 132px); }
+body.portfolio-redesign .capability-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; margin-top: 32px; border-top: 1px solid var(--hairline); }
+body.portfolio-redesign .capability-card { min-height: 250px; padding: 22px 22px 24px 0; border-bottom: 1px solid var(--hairline); }
+body.portfolio-redesign .capability-card:nth-child(even) { padding-left: 22px; border-left: 1px solid var(--hairline); }
+body.portfolio-redesign .capability-no { color: var(--signal); font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+body.portfolio-redesign .capability-card h3 { margin-top: 28px; color: var(--ink); font-family: var(--font-display); font-size: clamp(24px, 3vw, 38px); font-style: italic; font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+body.portfolio-redesign .capability-card > p { max-width: 38ch; margin-top: 12px; color: var(--ink-soft); font-size: 13px; line-height: 1.65; }
+body.portfolio-redesign .capability-projects { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 22px; }
+body.portfolio-redesign .capability-projects a { min-height: 44px; display: inline-flex; align-items: center; color: var(--signal-dark); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-decoration: underline; text-underline-offset: 4px; text-transform: uppercase; }
+body.portfolio-redesign .about-practice { max-width: 900px; padding-top: clamp(78px, 10vw, 132px); }
+body.portfolio-redesign .principle-list { margin-top: 32px; border-top: 1px solid var(--hairline); }
+body.portfolio-redesign .principle-list > div { display: grid; grid-template-columns: minmax(180px, .65fr) 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+body.portfolio-redesign .principle-list strong { color: var(--ink); font-family: var(--font-display); font-size: 22px; font-style: italic; font-weight: 500; }
+body.portfolio-redesign .principle-list span { color: var(--ink-soft); font-size: 13px; line-height: 1.65; }
+body.portfolio-redesign .about-page-content .contact-panel { margin-top: clamp(78px, 10vw, 132px); }
+@media (max-width: 767px) {
+  body.portfolio-redesign .about-intro-grid { grid-template-columns: 1fr; gap: 28px; }
+  body.portfolio-redesign .about-intro h1 { font-size: clamp(46px, 14vw, 72px); }
+  body.portfolio-redesign .capability-grid { grid-template-columns: 1fr; }
+  body.portfolio-redesign .capability-card:nth-child(even) { padding-left: 0; border-left: 0; }
+  body.portfolio-redesign .principle-list > div { grid-template-columns: 1fr; gap: 8px; }
+}

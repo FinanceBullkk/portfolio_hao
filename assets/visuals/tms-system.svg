@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">Training management system map</title>
+  <desc id="desc">Identity, scheduling, completion, and audit records are connected in a learning operations system.</desc>
+  <rect width="720" height="440" rx="24" fill="#F1ECE2"/>
+  <text x="42" y="50" fill="#171715" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">03 / TMS</text>
+  <g fill="none" stroke="#171715" stroke-opacity=".22"><circle cx="360" cy="222" r="154"/><circle cx="360" cy="222" r="106"/><circle cx="360" cy="222" r="58"/></g>
+  <path d="M130 164C240 56 494 73 590 184S507 390 358 374 116 296 130 164Z" fill="none" stroke="#171715" stroke-width="3"/>
+  <path d="M130 164C240 56 376 71 450 113" fill="none" stroke="#DD5B3A" stroke-width="8" stroke-linecap="round"/>
+  <g stroke="#171715" stroke-width="3"><circle cx="130" cy="164" r="14" fill="#F1ECE2"/><circle cx="450" cy="113" r="18" fill="#DD5B3A"/><circle cx="590" cy="184" r="14" fill="#F1ECE2"/><circle cx="358" cy="374" r="14" fill="#F1ECE2"/></g>
+  <circle cx="360" cy="222" r="30" fill="#171715"/>
+  <text x="360" y="228" fill="#F1ECE2" font-family="Arial, sans-serif" font-size="12" font-weight="700" text-anchor="middle">RECORD</text>
+  <g fill="#171715" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.2">
+    <text x="130" y="132" text-anchor="middle">IDENTITY</text><text x="450" y="79" text-anchor="middle">SCHEDULE</text>
+    <text x="590" y="152" text-anchor="middle">COMPLETE</text><text x="358" y="410" text-anchor="middle">AUDIT</text>
+  </g>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">Recruitment intake workflow</title>
+  <desc id="desc">A form response becomes a normalised board record with a visible owner and next action.</desc>
+  <rect width="720" height="440" rx="24" fill="#171715"/>
+  <text x="42" y="50" fill="#F1ECE2" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">04 / RECRUITMENT</text>
+  <g fill="#F1ECE2" fill-opacity=".06" stroke="#F1ECE2" stroke-opacity=".4">
+    <rect x="52" y="102" width="138" height="226" rx="10"/><rect x="210" y="126" width="138" height="202" rx="10"/>
+    <rect x="368" y="86" width="138" height="242" rx="10"/><rect x="526" y="146" width="138" height="182" rx="10"/>
+  </g>
+  <g fill="#F1ECE2" font-family="Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="1.4">
+    <text x="70" y="126">FORM</text><text x="228" y="150">NORMALISE</text><text x="386" y="110">BOARD</text><text x="544" y="170">HANDOFF</text>
+  </g>
+  <g fill="#F1ECE2" fill-opacity=".72"><rect x="70" y="154" width="92" height="9"/><rect x="70" y="176" width="66" height="9"/><rect x="228" y="180" width="92" height="9"/><rect x="228" y="202" width="72" height="9"/><rect x="386" y="146" width="94" height="40" rx="4"/><rect x="386" y="200" width="94" height="40" rx="4"/><rect x="544" y="204" width="92" height="9"/><rect x="544" y="226" width="64" height="9"/></g>
+  <path d="M120 364H600" stroke="#F1ECE2" stroke-width="3" stroke-dasharray="8 10"/>
+  <path d="M120 364H438" stroke="#DD5B3A" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="120" cy="364" r="10" fill="#F1ECE2"/><circle cx="280" cy="364" r="10" fill="#F1ECE2"/><circle cx="438" cy="364" r="15" fill="#DD5B3A"/><circle cx="600" cy="364" r="10" fill="#F1ECE2"/>
+  <text x="678" y="407" fill="#DD5B3A" font-family="Georgia, serif" font-size="30" font-style="italic" text-anchor="end">the next action has an owner.</text>
+</svg>

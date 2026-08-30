@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">Registration system workflow</title>
+  <desc id="desc">Event intake passes through eligibility and capacity rules before an auditable seat claim.</desc>
+  <rect width="720" height="440" rx="24" fill="#171715"/>
+  <g stroke="#F1ECE2" stroke-opacity=".16"><path d="M0 88H720M0 176H720M0 264H720M0 352H720"/><path d="M120 0V440M240 0V440M360 0V440M480 0V440M600 0V440"/></g>
+  <text x="42" y="52" fill="#F1ECE2" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">01 / REGISTRATION</text>
+  <text x="678" y="52" fill="#A8A096" font-family="Arial, sans-serif" font-size="12" text-anchor="end">CAPACITY-SAFE WRITE PATH</text>
+  <path d="M76 218H208L256 142H392L444 298H642" fill="none" stroke="#F1ECE2" stroke-width="3"/>
+  <path d="M76 218H208L256 142H392" fill="none" stroke="#DD5B3A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#171715" stroke="#F1ECE2" stroke-width="3">
+    <circle cx="76" cy="218" r="14"/><circle cx="256" cy="142" r="14"/><circle cx="444" cy="298" r="14"/>
+  </g>
+  <circle cx="392" cy="142" r="18" fill="#DD5B3A" stroke="#F1ECE2" stroke-width="3"/>
+  <circle cx="642" cy="298" r="9" fill="#F1ECE2"/>
+  <g fill="#F1ECE2" font-family="Arial, sans-serif" font-size="13" letter-spacing="1.5">
+    <text x="76" y="252" text-anchor="middle">INTAKE</text><text x="256" y="108" text-anchor="middle">RULES</text>
+    <text x="392" y="108" text-anchor="middle">SEAT CLAIM</text><text x="444" y="334" text-anchor="middle">CONFIRM</text>
+    <text x="642" y="334" text-anchor="middle">AUDIT</text>
+  </g>
+  <text x="42" y="404" fill="#DD5B3A" font-family="Georgia, serif" font-size="32" font-style="italic">one write. one winner. one trace.</text>
+</svg>

@@ -20,6 +20,13 @@ const rootFiles = [
 
 const assetFiles = [
   'assets/favicon.svg',
+  'assets/fonts/sora-latin-ext-wght-normal.woff2',
+  'assets/fonts/OFL.txt',
+  'assets/visuals/signal-system.svg',
+  'assets/visuals/registration-system.svg',
+  'assets/visuals/certstudio-system.svg',
+  'assets/visuals/tms-system.svg',
+  'assets/visuals/recruitment-system.svg',
   'assets/css/about.css',
   'assets/css/base.css',
   'assets/css/case-study.css',

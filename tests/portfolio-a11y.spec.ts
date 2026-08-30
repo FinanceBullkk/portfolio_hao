@@ -40,3 +40,25 @@ test('reduced motion reveals content immediately', async ({ page }) => {
   const hiddenRevealCount = await page.locator('[data-reveal]').evaluateAll((elements) => elements.filter((element) => getComputedStyle(element).opacity === '0').length);
   expect(hiddenRevealCount).toBe(0);
 });
+
+test('dark theme keeps the recruiter surface accessible', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light', reducedMotion: 'reduce' });
+  await page.goto('/index.html', { waitUntil: 'networkidle' });
+  await page.evaluate(() => localStorage.setItem('theme', 'dark'));
+  await page.reload({ waitUntil: 'networkidle' });
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa'])
+    .analyze();
+  const serious = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact ?? ''));
+  expect(serious, serious.map((violation) => `${violation.id}: ${violation.help}`).join('\n')).toEqual([]);
+});
+
+test('home content stays visible when JavaScript is disabled', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('/index.html', { waitUntil: 'domcontentloaded' });
+  await expect(page.locator('h1')).toBeVisible();
+  const hiddenRevealCount = await page.locator('[data-reveal]').evaluateAll((elements) => elements.filter((element) => getComputedStyle(element).opacity === '0').length);
+  expect(hiddenRevealCount).toBe(0);
+  await context.close();
+});

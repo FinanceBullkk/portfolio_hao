@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">From signal to system workflow</title>
+  <desc id="desc">A four-stage operational workflow moves from signal through rules and automation to a human handoff.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#171715" stroke-opacity=".10"/>
+    </pattern>
+  </defs>
+  <rect width="720" height="520" rx="28" fill="#F1ECE2"/>
+  <rect width="720" height="520" rx="28" fill="url(#grid)"/>
+  <path d="M46 42H674M46 478H674" stroke="#171715" stroke-width="2"/>
+  <text x="48" y="78" fill="#171715" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">FIELD NOTE / 001</text>
+  <text x="673" y="78" fill="#6C675F" font-family="Arial, sans-serif" font-size="13" text-anchor="end">OPERATING MODEL</text>
+  <path d="M88 315C154 315 151 209 226 209S300 356 378 356 450 176 530 176 587 287 642 287" fill="none" stroke="#171715" stroke-width="3"/>
+  <path d="M88 315C154 315 151 209 226 209S300 356 378 356" fill="none" stroke="#DD5B3A" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="88" cy="315" r="13" fill="#F1ECE2" stroke="#171715" stroke-width="3"/>
+  <circle cx="226" cy="209" r="17" fill="#DD5B3A" stroke="#171715" stroke-width="3"/>
+  <circle cx="378" cy="356" r="13" fill="#F1ECE2" stroke="#171715" stroke-width="3"/>
+  <circle cx="530" cy="176" r="13" fill="#F1ECE2" stroke="#171715" stroke-width="3"/>
+  <circle cx="642" cy="287" r="8" fill="#171715"/>
+  <g fill="#171715" font-family="Arial, sans-serif">
+    <text x="88" y="350" font-size="13" text-anchor="middle" letter-spacing="1.5">SIGNAL</text>
+    <text x="226" y="173" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="1.5">RULES</text>
+    <text x="378" y="391" font-size="13" text-anchor="middle" letter-spacing="1.5">AUTOMATION</text>
+    <text x="530" y="141" font-size="13" text-anchor="middle" letter-spacing="1.5">HANDOFF</text>
+  </g>
+  <text x="48" y="453" fill="#171715" font-family="Georgia, serif" font-size="48" font-style="italic">make the next action visible.</text>
+</svg>

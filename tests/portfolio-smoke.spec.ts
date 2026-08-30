@@ -76,3 +76,36 @@ for (const pageInfo of rootPages) {
     }
   });
 }
+
+test('TMS workflow tour is manual and keeps hidden panels out of the tab order', async ({ page }) => {
+  await page.goto('/tms.html', { waitUntil: 'networkidle' });
+  const inactivePanels = page.locator('.flow-demo-panel[aria-hidden="true"]');
+  await expect(inactivePanels).not.toHaveCount(0);
+  const inertStates = await inactivePanels.evaluateAll((panels) => panels.map((panel) => (panel as HTMLElement).inert));
+  expect(inertStates.every(Boolean)).toBe(true);
+  const next = page.locator('.flow-demo-nav[data-dir="1"]');
+  await next.click();
+  await expect(page.locator('.flow-demo-panel.active')).toHaveCount(1);
+  await expect(page.locator('.flow-demo-panel.active')).toHaveAttribute('aria-hidden', 'false');
+});
+
+test('editorial layout holds at intermediate widths', async ({ page }) => {
+  for (const width of [768, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/index.html', { waitUntil: 'networkidle' });
+    const dimensions = await page.evaluate(() => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth }));
+    expect(dimensions.width, `horizontal overflow at ${width}px`).toBeLessThanOrEqual(dimensions.viewport + 1);
+    await expect(page.locator('.flagship')).toBeVisible();
+  }
+});
+
+test('primary navigation controls keep a mobile-sized target', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/index.html', { waitUntil: 'networkidle' });
+  const sizes = await page.locator('.nav a, .theme-toggle').evaluateAll((elements) => elements.map((element) => {
+    const rect = element.getBoundingClientRect();
+    return { width: rect.width, height: rect.height };
+  }));
+  expect(sizes.length).toBeGreaterThan(0);
+  expect(sizes.every(({ width, height }) => width >= 44 && height >= 44)).toBe(true);
+});

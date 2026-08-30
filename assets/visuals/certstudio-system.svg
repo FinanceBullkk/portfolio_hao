@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">CertStudio workflow</title>
+  <desc id="desc">Roster data is mapped to certificate pages, reviewed by a person, and prepared for safe dispatch.</desc>
+  <rect width="720" height="440" rx="24" fill="#E9E2D6"/>
+  <path d="M40 72H680M40 368H680" stroke="#171715" stroke-width="2"/>
+  <text x="42" y="48" fill="#171715" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">02 / CERTSTUDIO</text>
+  <g fill="none" stroke="#171715" stroke-width="2">
+    <rect x="56" y="112" width="126" height="178" rx="8"/><rect x="206" y="92" width="126" height="198" rx="8"/>
+    <rect x="356" y="130" width="126" height="160" rx="8"/><rect x="506" y="104" width="150" height="186" rx="8"/>
+  </g>
+  <g stroke="#171715" stroke-width="2"><path d="M76 144H154M76 164H142M226 128H304M226 148H290M376 166H462M376 186H446M526 144H636M526 164H612"/></g>
+  <path d="M118 324H582" stroke="#171715" stroke-width="3" stroke-dasharray="8 10"/>
+  <path d="M118 324H420" stroke="#DD5B3A" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#171715"><circle cx="118" cy="324" r="10"/><circle cx="274" cy="324" r="10"/><circle cx="420" cy="324" r="15" fill="#DD5B3A"/><circle cx="582" cy="324" r="10"/></g>
+  <g fill="#171715" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.2">
+    <text x="118" y="352" text-anchor="middle">ROSTER</text><text x="274" y="352" text-anchor="middle">MATCH</text>
+    <text x="420" y="352" text-anchor="middle" font-weight="700">REVIEW</text><text x="582" y="352" text-anchor="middle">DISPATCH</text>
+  </g>
+  <text x="678" y="405" fill="#171715" font-family="Georgia, serif" font-size="30" font-style="italic" text-anchor="end">verify before send.</text>
+</svg>
