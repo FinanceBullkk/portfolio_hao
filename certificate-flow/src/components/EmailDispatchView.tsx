@@ -23,7 +23,7 @@ export const EmailDispatchView: React.FC<EmailDispatchViewProps> = ({
   const [emailBody, setEmailBody] = useState(
     'Dear {{Name}},\n\nCongratulations on achieving {{Skill}} ({{Level}}). We are pleased to award you with this official Certificate of Achievement.\n\nYour certificate details have been registered under code {{CertCode}}.\n\nBest regards,\nCenter for Learning & Talent (CLT)'
   );
-  const [testEmailAddress, setTestEmailAddress] = useState('recipient@company.com');
+  const [testEmailAddress, setTestEmailAddress] = useState('reviewer@example.test');
   const [isSendingTest, setIsSendingTest] = useState(false);
   const [testSentSuccess, setTestSentSuccess] = useState(false);
 
@@ -243,7 +243,7 @@ export const EmailDispatchView: React.FC<EmailDispatchViewProps> = ({
                 <div className="flex items-center gap-2">
                   <input
                     type="email"
-                    placeholder="Enter email e.g. name@company.com"
+                    placeholder="Enter email e.g. reviewer@example.test"
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         handleFixEmail(item.id, e.currentTarget.value);

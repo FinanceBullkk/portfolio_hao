@@ -2,22 +2,20 @@
 
 **Status:** current source of truth (2026-08-30)
 
-The portfolio is an **operational editorial** experience. Its job is to make a fresher candidate memorable without making the evidence feel inflated. The authored idea is **from signal to system**: a workflow starts as noise, becomes a model, becomes an automation, and ends with an owned handoff.
+The portfolio is a **product-first operational editorial** experience. Its job is to make a fresher candidate memorable by letting visitors operate the proof before reading the explanation. The authored idea is **build the workflow, click the proof**.
 
 ## 1. Audience and hierarchy
 
 Primary audience: recruiters and hiring managers scanning for an AI Automation Specialist or Digital Transformation Officer fresher. Secondary audience: technical reviewers who want ownership, decisions, implementation boundaries, and proof.
 
-The home sequence is fixed:
+The home sequence is fixed and intentionally short:
 
-1. Hero: name/identity, target roles, operational thesis, public-proof state, contact path.
-2. Transformation ribbon: Observe → Map → Automate → Handover.
-3. Flagship: Corgi77 Registration, with visual system map and public walkthrough.
-4. Supporting work: CertStudio, TMS v2, Recruitment intake.
-5. Approach: four repeatable working steps.
-6. About/contact: capability context and an explicit conversation CTA.
+1. Hero: target roles, one-line thesis, product-gallery preview, and contact path.
+2. Flagship: Corgi77 Registration with a direct playable-build CTA.
+3. Supporting work: CertStudio, TMS v2, Recruitment intake; each opens the product first.
+4. Method/contact: one compact operating loop and an explicit conversation CTA.
 
-Case studies keep a shorter executive summary before technical detail. Public proof pages stay read-only and disclose synthetic data at the header and near tables/mockups.
+Case studies remain optional depth. Product pages expose either a same-origin runtime or a focused in-memory sandbox, and disclose synthetic data plus reset/backend boundaries beside the interaction.
 
 ## 2. Visual language
 
@@ -74,7 +72,7 @@ Links remain real anchors. Buttons are used only for actions such as theme switc
 
 Write plain, specific English. Explain the operational constraint, Hao's ownership, the design/control point, and the next proof path. Keep evidence labels adjacent to claims.
 
-- Synthetic names use `Nguyen Van A`, `Tran Thi B`, masked codes such as `19xxxx`, and `you@example.com`.
+- Public product data uses explicit labels such as `Demo Learner 01`, `Demo Candidate 01`, masked codes, and `example.test` addresses.
 - Never publish real employee data, credentials, private workspace URLs, or unverified metrics.
 - Qualitative outcomes are acceptable when they describe the mechanism. Quantitative outcomes require a dated baseline, sample, and method.
 - Production links say `access required` when authentication or owner approval is needed.
@@ -90,6 +88,8 @@ Validate at 390px, 768px, 1280px, and 1440px. The home hero is split on wide scr
 Run the gates in this order:
 
 ```powershell
+npm --prefix certificate-flow run build
+npm --prefix ld-event-registration-platform run build
 npm run build:portfolio
 npm run check:portfolio
 npm run test:portfolio
@@ -101,4 +101,4 @@ Review light/dark screenshots, keyboard order, no-JS first paint, reduced motion
 
 ## 9. Change boundary
 
-The static publish allowlist is maintained in `scripts/build-portfolio.mjs`. New public assets must be intentional and added there explicitly. Application workspaces, generated bundles, plans, and unresolved reference captures stay outside `.portfolio-dist`.
+The static publish allowlist is maintained in `scripts/build-portfolio.mjs`. New public assets must be intentional and added there explicitly. Only the two approved runtime `dist/assets` folders are copied from application workspaces; source code, environment files, plans, docs, and unresolved reference captures stay outside `.portfolio-dist`. Public demo mode must bypass authentication, backend reads/writes, admin-only surfaces, and persistent browser storage.

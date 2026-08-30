@@ -19,16 +19,16 @@ interface MockStoreState {
   auditLogs: any[];
 }
 
-function getDefaultState(email: string = 'demo.user@cyberlogitec.com'): MockStoreState {
+function getDefaultState(email: string = 'demo.user@example.test'): MockStoreState {
   return {
     email,
     profile: {
       empCode: '262010',
-      fullName: 'Nguyen Van A',
-      bu: 'IT',
+      fullName: 'Demo Employee',
+      bu: 'BSG',
     },
     buList: ['BSG', 'CHORUS', 'LBU', 'MOC', 'ONC', 'POC', 'TBU', 'IT', 'HR'],
-    adminEmails: ['admin@cyberlogitec.com', 'demo.user@cyberlogitec.com', 'anhhao.dl108@gmail.com'],
+    adminEmails: ['demo-admin@example.test'],
     myRegistrations: [
       {
         registrationId: 'reg-demo-1',
@@ -37,8 +37,8 @@ function getDefaultState(email: string = 'demo.user@cyberlogitec.com'): MockStor
         type: 'simple',
         registeredAt: new Date(Date.now() - 86400000 * 2).toISOString(),
         empCode: '262010',
-        fullName: 'Nguyen Van A',
-        bu: 'IT',
+        fullName: 'Demo Employee',
+        bu: 'BSG',
         eventDate: '2026-09-05',
         location: 'Google Meet / Room 4B',
       },
@@ -121,8 +121,8 @@ function getDefaultState(email: string = 'demo.user@cyberlogitec.com'): MockStor
         userRegistration: {
           registeredAt: new Date(Date.now() - 86400000 * 2).toISOString(),
           empCode: '262010',
-          fullName: 'Nguyen Van A',
-          bu: 'IT',
+          fullName: 'Demo Employee',
+          bu: 'BSG',
         },
       },
       {
@@ -208,7 +208,7 @@ function getDefaultState(email: string = 'demo.user@cyberlogitec.com'): MockStor
       {
         id: 'log-1',
         timestamp: new Date().toISOString(),
-        actorEmail: 'admin@cyberlogitec.com',
+        actorEmail: 'demo-admin@example.test',
         action: 'event.create',
         details: 'Created event "English Proficiency Assessment Q3 2026"',
       },

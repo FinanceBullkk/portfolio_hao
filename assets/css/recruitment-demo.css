@@ -1,0 +1,32 @@
+body.demo-recruitment { --app-sidebar: #27211d; --app-accent: #9f3f25; --app-bg: #f4eee5; --app-card: #fffaf2; --app-ink: #2c2420; --app-muted: #62554c; --app-line: #dfd2c5; }
+body.demo-recruitment .demo-main-header h2 { color: #38251f; }
+body.demo-recruitment .demo-kpi strong { color: #38251f; }
+
+.recruitment-board { display: grid; grid-template-columns: repeat(4, minmax(170px, 1fr)); gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.recruitment-column { min-height: 310px; padding: 10px; border: 1px solid var(--app-line); background: color-mix(in srgb, var(--app-card) 70%, transparent); }
+.recruitment-column-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--app-line); }
+.recruitment-column-head strong { font-size: 11px; }
+.recruitment-column-head span { display: grid; min-width: 22px; height: 22px; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--app-accent) 14%, transparent); color: var(--app-accent); font-size: 10px; font-weight: 700; }
+.candidate-stack { display: grid; gap: 8px; margin-top: 10px; }
+.candidate-card { padding: 11px; border: 1px solid var(--app-line); background: var(--app-card); box-shadow: 0 5px 14px rgba(68, 45, 31, .05); }
+.candidate-card strong { display: block; font-size: 12px; }
+.candidate-card p { margin-top: 4px; color: var(--app-muted); font-size: 10px; line-height: 1.4; }
+.candidate-card small { display: block; margin-top: 10px; color: var(--app-muted); font-size: 9px; letter-spacing: .06em; text-transform: uppercase; }
+.candidate-card select { width: 100%; min-height: 34px; margin-top: 8px; padding: 5px 7px; border: 1px solid var(--app-line); background: var(--app-card); color: var(--app-ink); font-size: 10px; }
+.recruitment-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; padding: 14px; border: 1px solid var(--app-line); background: var(--app-card); }
+.recruitment-form label { display: grid; gap: 5px; color: var(--app-muted); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.recruitment-form input, .recruitment-form select { width: 100%; min-height: 40px; margin-top: 0; }
+.recruitment-form button { align-self: end; min-height: 40px; padding: 8px 13px; border: 1px solid var(--app-accent); background: var(--app-accent); color: #fff; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.recruitment-form button:hover { filter: brightness(.92); }
+.automation-callout { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding: 10px 12px; border-left: 3px solid var(--app-accent); background: color-mix(in srgb, var(--app-accent) 8%, transparent); color: var(--app-muted); font-size: 11px; }
+.automation-callout b { color: var(--app-accent); }
+
+@media (max-width: 900px) {
+  .recruitment-board { grid-template-columns: repeat(4, minmax(190px, 1fr)); }
+  .recruitment-form { grid-template-columns: 1fr 1fr; }
+  .recruitment-form button { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .recruitment-form { grid-template-columns: 1fr; }
+  .recruitment-form button { grid-column: auto; }
+}

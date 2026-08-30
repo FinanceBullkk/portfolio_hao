@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light dark">
   <meta property="og:title" content="CertStudio case study — Hao">
-  <meta property="og:description" content="A static, evidence-aware case study of a certificate delivery workflow.">
+  <meta property="og:description" content="A playable, evidence-aware certificate delivery workflow.">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -31,7 +31,7 @@
         <nav class="nav-bar" id="nav" aria-label="Primary navigation">
           <div class="nav">
             <a href="index.html">Work</a>
-            <a href="index.html#approach">Approach</a>
+            <a href="index.html#approach">Method</a>
             <a href="about.html">About</a>
             <a href="index.html#contact">Contact</a>
           </div>
@@ -65,13 +65,13 @@
         <div><span class="summary-label">Problem</span><strong>Certificate batches depended on file order, copy-and-paste, and several disconnected tools.</strong></div>
         <div><span class="summary-label">Role</span><strong>Scoped, built, and documented the workflow end to end.</strong></div>
         <div><span class="summary-label">Result</span><strong>Page-level matching and a visible review queue replace silent handoffs.</strong></div>
-        <div><span class="summary-label">Access</span><strong>Static walkthrough · synthetic data; production access requires approval.</strong></div>
+        <div><span class="summary-label">Access</span><strong>Playable build · synthetic data; production access requires approval.</strong></div>
       </div>
 
-      <figure class="case-hero-visual" data-reveal><img src="assets/visuals/certstudio-system.svg" width="720" height="440" alt="CertStudio workflow from roster mapping through matching, human review, and dispatch"><figcaption>System map / public walkthrough uses synthetic data</figcaption></figure>
+      <figure class="case-hero-visual" data-reveal><img src="assets/visuals/certstudio-system.svg" width="720" height="440" alt="CertStudio workflow from roster mapping through matching, human review, and dispatch"><figcaption>System map / playable build uses synthetic data</figcaption></figure>
 
       <div class="detail-actions" data-reveal>
-        <a href="assets/proof/certstudio-walkthrough.html" class="cs-cta" data-proof-cta>Open static walkthrough</a>
+        <a href="assets/proof/certstudio-walkthrough.html" class="cs-cta" data-proof-cta>Launch playable build →</a>
         <a href="https://certificate-automation-production-c548.up.railway.app/" target="_blank" rel="noopener noreferrer" class="u-link">Production app (access required) ↗</a>
       </div>
 
@@ -82,7 +82,7 @@
         <span class="tag">Vietnamese OCR</span>
         <span class="tag">SMTP Engine</span>
         <span class="tag">Docker</span>
-        <span class="tag">Static proof</span>
+        <span class="tag">Playable build</span>
         <span class="tag">Synthetic data</span>
       </div>
 
@@ -174,7 +174,7 @@
       <div id="technical-evidence" class="cs-section bordered" data-reveal>
         <div class="section-tag" style="margin-bottom:4px">03 · Method &amp; System Architecture</div>
         <h2>A unified, inspectable workflow</h2>
-        <p style="margin-bottom:20px">CertStudio brings document ingestion, OCR text mining, interactive verification, and controlled SMTP delivery into one pipeline. The public walkthrough below uses synthetic data and does not send anything.</p>
+        <p style="margin-bottom:20px">CertStudio brings document ingestion, OCR text mining, interactive verification, and controlled SMTP delivery into one pipeline. The public build below uses synthetic data and does not send anything.</p>
         <p class="proof-note mock-data-disclosure"><strong>Page-level disclosure: illustrative UI — Synthetic/test data.</strong> File names, names, codes, statuses, and architecture labels in the mockups below are placeholders for the workflow, not production records or measured outcomes.</p>
 
         <!-- SYSTEM ARCHITECTURE DIAGRAM -->
@@ -206,10 +206,10 @@
 
         <!-- PUBLIC PROOF (same-origin static fallback) -->
         <div class="proof-callout" role="group" aria-labelledby="cert-proof-title">
-          <div class="proof-callout-copy"><span class="section-tag">Public proof</span><h3 id="cert-proof-title">Explore the sanitised workflow</h3><p>The static walkthrough demonstrates roster mapping, page-level matching, review, and dispatch using synthetic data. It is read-only and does not upload a file or send an email.</p></div>
-          <a href="assets/proof/certstudio-walkthrough.html" class="cs-cta" data-proof-cta>Open walkthrough</a>
+          <div class="proof-callout-copy"><span class="section-tag">Public build</span><h3 id="cert-proof-title">Try the certificate studio</h3><p>The real local React build demonstrates roster mapping, page-level matching, review, and dispatch with synthetic data. It does not upload a file or send an email.</p></div>
+          <a href="assets/proof/certstudio-walkthrough.html" class="cs-cta" data-proof-cta>Launch product →</a>
         </div>
-        <p class="caption">Static walkthrough · synthetic data. The hosted Railway app is a separate authenticated-access environment.</p>
+        <p class="caption">Playable build · synthetic data. The hosted Railway app is a separate authenticated-access environment.</p>
 
         <!-- 4 ENGINEERING PILLARS -->
         <div class="flow-sequence">
@@ -323,8 +323,8 @@
       <!-- CTA SECTION -->
       <div class="cta-section" data-reveal>
         <h2>Explore the public proof</h2>
-        <p>Open the same-origin static walkthrough with synthetic data. The hosted production app is available only to authorised users.</p>
-        <a href="assets/proof/certstudio-walkthrough.html" class="cs-cta" data-proof-cta>Open static walkthrough</a>
+        <p>Launch the same-origin product build with synthetic data. The hosted production app is available only to authorised users.</p>
+        <a href="assets/proof/certstudio-walkthrough.html" class="cs-cta" data-proof-cta>Launch playable build →</a>
         <a href="https://certificate-automation-production-c548.up.railway.app/" target="_blank" rel="noopener noreferrer" class="u-link cta-secondary">Open production app (access required) ↗</a>
         <div class="cold-start">No credentials or real certificate files are published here.</div>
       </div>

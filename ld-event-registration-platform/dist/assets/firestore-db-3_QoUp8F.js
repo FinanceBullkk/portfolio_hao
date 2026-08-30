@@ -1,0 +1,1 @@
+import{getFirestore as o}from"./firebase-firestore-Ckfu-j2c.js";import{d as e}from"./index-BVCnwiRy.js";import"./firebase-BxQ1m8GX.js";import"./vendor-C5LNpiCU.js";import"./react-vendor-YATcyuH6.js";let r=null;try{r=o(e)}catch(t){console.warn("[Firestore Init Warning]",t)}const s=r;export{s as db};

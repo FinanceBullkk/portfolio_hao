@@ -12,6 +12,7 @@ import { DarkListScreen } from './dark/dark-list-screen';
 import { DarkDetailScreen } from './dark/dark-detail-screen';
 import { DarkRegisterScreen } from './dark/dark-register-screen';
 import { DarkConfirmScreen } from './dark/dark-confirm-screen';
+import { cancelDemoEvent, registerDemoEvent } from '../lib/demo-event-actions';
 import {
   eventIdFromPath, isProgramPath, pushEventPath, pushProgramPath,
   replaceWithEventList, returnToEventList,
@@ -24,13 +25,14 @@ import {
 // these screens only present server-authored state from initEvents.
 
 export function EventsFlow({
-  data, setData, canAdmin, onOpenAdmin, onSignOut,
+  data, setData, canAdmin, onOpenAdmin, onSignOut, demoMode = false,
 }: {
   data: EventsInitResult;
   setData: (d: EventsInitResult) => void;
   canAdmin: boolean;
   onOpenAdmin: () => void;
   onSignOut: () => void;
+  demoMode?: boolean;
 }) {
   const [detailId, setDetailId] = useState<string | null>(() => eventIdFromPath(window.location.pathname));
   const [registerId, setRegisterId] = useState<string | null>(null);
@@ -99,12 +101,13 @@ export function EventsFlow({
 
   // Refresh landing counts when the user returns to the tab — only while on the list.
   useEffect(() => {
+    if (demoMode) return undefined;
     if (detailId || registerId || confirmedId || showProgram) return undefined;
     const refresh = () => { if (document.visibilityState === 'visible') initEvents().then(setData).catch(() => {}); };
     window.addEventListener('focus', refresh);
     document.addEventListener('visibilitychange', refresh);
     return () => { window.removeEventListener('focus', refresh); document.removeEventListener('visibilitychange', refresh); };
-  }, [detailId, registerId, confirmedId, showProgram, setData]);
+  }, [demoMode, detailId, registerId, confirmedId, showProgram, setData]);
 
   const now = Date.parse(data.clientNow) || Date.now();
   const byId = (id: string | null) => (id ? data.events.find((e) => e.eventId === id) ?? null : null);
@@ -124,6 +127,14 @@ export function EventsFlow({
     if (!registerEvent || !data.profile) return;
     setBusy(true);
     try {
+      if (demoMode) {
+        setData(registerDemoEvent(data, registerEvent.eventId, data.profile));
+        pushToast('success', `Registered for ${registerEvent.name}.`);
+        setConfirmedId(registerEvent.eventId);
+        setRegisterId(null);
+        setDetailId(null);
+        return;
+      }
       const res = await registerForEventDb({ eventId: registerEvent.eventId, ...data.profile });
       if (res.state) setData(res.state);
       if (!res.ok) { pushToast('error', res.error || 'Registration failed.'); return; }
@@ -148,6 +159,11 @@ export function EventsFlow({
     if (!ok) return;
     setBusyId(eventId);
     try {
+      if (demoMode) {
+        setData(cancelDemoEvent(data, eventId));
+        pushToast('success', 'Registration cancelled.');
+        return;
+      }
       const res = await cancelEventRegistrationDb(eventId);
       if (res.state) setData(res.state);
       if (!res.ok) { pushToast('error', res.error || 'Cancel failed.'); return; }
@@ -216,13 +232,15 @@ export function EventsFlow({
       <div className="c7d-skin">
         <EventBookingScreen
           event={registerEvent}
+          email={data.email}
           fallbackProfile={data.profile ?? null}
           canAdmin={canAdmin}
           onOpenAdmin={onOpenAdmin}
           onSignOut={onSignOut}
           onEditProfile={() => setEditingProfile(true)}
           onViewHistory={() => { setRegisterId(null); setShowHistory(true); }}
-          onBack={() => { setRegisterId(null); initEvents().then(setData).catch(() => {}); }}
+          demoMode={demoMode}
+          onBack={() => { setRegisterId(null); if (!demoMode) initEvents().then(setData).catch(() => {}); }}
         />
       </div>
     );

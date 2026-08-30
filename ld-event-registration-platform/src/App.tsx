@@ -42,6 +42,7 @@ function AppInner() {
   const [adminOpen, setAdminOpen] = useState(false);
   const [canAdmin, setCanAdmin] = useState(false);
   const skewRef = useRef(0);
+  const demoModeRef = useRef(false);
   const [_tick, setTick] = useState(0);
 
   useEffect(() => {
@@ -51,6 +52,7 @@ function AppInner() {
 
   useEffect(() => {
     if (!data?.email) return;
+    if (demoModeRef.current) return;
     setCanAdmin(isAdmin(data.email));
     fetchAdminEmails()
       .then(() => setCanAdmin(isAdmin(data.email)))
@@ -60,6 +62,7 @@ function AppInner() {
   // Firebase Auth listener — run once
   useEffect(() => {
     const unsub = onAuth((u) => {
+      if (demoModeRef.current) return;
       setAuthUser(u);
       setData(null);
       setLoadErr(null);
@@ -97,6 +100,7 @@ function AppInner() {
 
   useEffect(() => {
     if (!authUser?.email) return;
+    if (demoModeRef.current) return;
     if (!isAllowedCompanyEmail(authUser.email)) return;
     loadEvents();
   }, [authUser?.email, loadEvents]);
@@ -105,13 +109,17 @@ function AppInner() {
   const confirm = useConfirm();
 
   const enableDemoMode = useCallback(() => {
+    demoModeRef.current = true;
     setAuthUser({
-      email: 'demo.admin@cyberlogitec.com.vn',
-      displayName: 'Demo Administrator',
+      email: 'demo.viewer@cyberlogitec.com.vn',
+      displayName: 'Demo Viewer',
     } as User);
-    setCanAdmin(true);
+    // The public build demonstrates the employee booking path only. Keep the
+    // admin console out of the iframe so it cannot suggest a privileged demo
+    // surface or trigger admin-only callables.
+    setCanAdmin(false);
     setData({
-      email: 'demo.admin@cyberlogitec.com.vn',
+      email: 'demo.viewer@cyberlogitec.com.vn',
       events: [
         {
           eventId: 'evt-english-q3',
@@ -208,6 +216,14 @@ function AppInner() {
     });
     setLoadErr(null);
   }, []);
+
+  // Public portfolio links opt into the existing in-memory demo without
+  // opening an authentication popup or touching the production backend.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('demo') === '1') {
+      enableDemoMode();
+    }
+  }, [enableDemoMode]);
 
   const openAdmin = useCallback(async () => {
     try {
@@ -368,6 +384,7 @@ function AppInner() {
       canAdmin={canAdmin}
       onOpenAdmin={openAdmin}
       onSignOut={handleSignOut}
+      demoMode={demoModeRef.current}
     />
   );
 }

@@ -30,8 +30,8 @@ export default function App() {
   };
 
   const sampleParticipant =
-    participants.find((p) => p.name === 'Tran Minh Hieu') ||
-    participants.find((p) => p.name === 'Le Anh Tien') ||
+    participants.find((p) => p.name === 'Demo Learner 02') ||
+    participants.find((p) => p.name === 'Demo Learner 01') ||
     participants[0];
 
   return (

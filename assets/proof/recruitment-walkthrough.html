@@ -3,88 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <title>Recruitment intake static walkthrough — Hao</title>
-  <meta name="description" content="A sanitised, static walkthrough of a form-to-board recruitment intake workflow using synthetic data.">
+  <title>Recruitment intake — interactive demo — Hao</title>
+  <meta name="description" content="Play with a synthetic, in-memory recruitment intake and handoff demo by Nguyen Huynh Anh Hao.">
+  <meta name="theme-color" content="#f4eee5">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/home.css">
-  <link rel="stylesheet" href="../css/proof.css">
+  <link rel="stylesheet" href="../css/product-demo.css">
+  <link rel="stylesheet" href="../css/recruitment-demo.css">
   <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
 </head>
-<body class="portfolio-redesign proof-shell proof-recruitment">
+<body class="portfolio-redesign product-demo-page demo-recruitment">
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <main id="main-content" class="container-sm proof-page" tabindex="-1" data-proof-page="recruitment">
-    <aside class="nav-container">
-      <div class="nav-sticky">
-        <div class="editorial-header"><a class="brand-lockup" href="../../index.html" aria-label="Hao portfolio home"><strong>Hao</strong><span>operational systems</span></a><span class="availability">Open to fresher roles · HCMC</span></div>
-        <nav class="nav-bar" aria-label="Primary navigation">
-          <div class="nav">
-            <a href="../../index.html">Work</a>
-            <a href="../../index.html#approach">Approach</a>
-            <a href="../../about.html">About</a>
-            <a href="../../index.html#contact">Contact</a>
-          </div>
-          <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode">
-            <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
-            <svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-          </button>
-        </nav>
-      </div>
-    </aside>
+  <main id="main-content" class="container-sm" tabindex="-1" data-proof-page="recruitment">
+    <aside class="nav-container"><div class="nav-sticky"><div class="editorial-header"><a class="brand-lockup" href="../../index.html" aria-label="Hao portfolio home"><strong>Hao</strong><span>operational systems</span></a><span class="availability">Open to fresher roles · HCMC</span></div><nav class="nav-bar" aria-label="Primary navigation"><div class="nav"><a href="../../index.html">Work</a><a href="../../index.html#approach">Method</a><a href="../../about.html">About</a><a href="../../index.html#contact">Contact</a></div><button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode"><svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg><svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l1.41-1.41"></path></svg></button></nav></div></aside>
 
-    <header class="proof-header">
-      <div class="proof-kicker">Static walkthrough · Recruitment intake</div>
-      <h1>Turn a form response into a record the team can move</h1>
-      <p>This illustrative walkthrough shows a form-to-automation-to-board handoff. It uses synthetic applicants and has no connection to a recruiting workspace.</p>
-      <div class="proof-state" aria-label="Access state">
-        <span class="proof-badge">Static walkthrough</span>
-        <span class="proof-badge">Synthetic data</span>
-        <span class="proof-badge">No production workspace published</span>
-      </div>
-    </header>
+    <header class="demo-intro"><div><p class="demo-kicker">Interactive build / recruitment intake</p><h1>From form response to owned handoff.</h1></div><div class="demo-intro-meta"><span class="demo-badge">Demo mode</span><span>Synthetic · resets on refresh</span><a href="../../recruitment.html">Case notes ↗</a></div></header>
 
-    <div class="proof-actions">
-      <a class="cs-cta" href="../../recruitment.html">Read the case study</a>
-      <a class="u-link" href="mailto:anhhao.dl108@gmail.com?subject=Recruitment%20intake%20walkthrough">Ask about the implementation</a>
-    </div>
-
-    <section class="proof-section" aria-labelledby="pipeline-heading">
-      <h2 id="pipeline-heading">Pipeline</h2>
-      <div class="proof-flow">
-        <article class="proof-card"><h3>Collect</h3><p>A Google Form captures the same fields applicants already know.</p></article>
-        <article class="proof-card"><h3>Normalise</h3><p>Automation maps the response into a consistent record without manual copy and paste.</p></article>
-        <article class="proof-card"><h3>Review</h3><p>Reviewers see ownership, status, and comments in one board.</p></article>
-        <article class="proof-card"><h3>Handover</h3><p>The next action is visible to the person who owns the stage.</p></article>
+    <section class="demo-stage" aria-label="Interactive recruitment intake product demo">
+      <div class="demo-stage-toolbar"><span>Intake / review board</span><span>in-memory sandbox · no workspace connection</span></div>
+      <div class="demo-app" data-recruitment-demo>
+        <aside class="demo-sidebar"><div class="demo-brand"><span class="demo-brand-mark">R</span><div><strong>Intake desk</strong><small>pipeline / demo</small></div></div><nav class="demo-nav" aria-label="Recruitment views"><button type="button" data-recruitment-view="pipeline" aria-pressed="true">Pipeline <span>01</span></button><button type="button" data-recruitment-view="automation" aria-pressed="false">Automation <span>02</span></button></nav><p class="demo-sidebar-note">Add a candidate to see the mapping step. Move the record to make ownership visible.</p></aside>
+        <div class="demo-main"><header class="demo-main-header"><div><small>Workspace / recruitment operations</small><h2>Pipeline</h2></div><button type="button" class="demo-reset" data-recruitment-reset>Reset demo</button></header><div class="demo-content">
+          <section class="demo-panel" data-recruitment-panel="pipeline"><div class="demo-kpi-grid" data-recruitment-kpis></div><div class="demo-panel-heading"><div><h3>New intake</h3><p>Submit a record; the board receives the next action.</p></div></div><form class="recruitment-form" data-recruitment-form><label>Candidate name<input name="name" autocomplete="off" placeholder="Demo Candidate" required></label><label>Role<input name="role" autocomplete="off" placeholder="Operations analyst" required></label><label>Source<select name="source"><option>Website</option><option>Referral</option><option>LinkedIn</option></select></label><button type="submit">Map to board →</button></form><div class="automation-callout" aria-live="polite"><b>Automation</b><span data-recruitment-live>Automation mapped 4 fields → New.</span></div><div class="demo-controls" style="margin-top:18px"><input type="search" data-recruitment-search placeholder="Search candidate, role or ID" aria-label="Search candidates"></div><div class="recruitment-board" data-recruitment-board></div></section>
+          <section class="demo-panel" data-recruitment-panel="automation" hidden><div class="demo-panel-heading"><div><h3>Mapping trace</h3><p>What the automation does before a reviewer sees the record.</p></div></div><div class="demo-list"><div class="demo-list-row"><div><strong>Capture</strong><span>name · role · source</span></div><span class="demo-status">Received</span></div><div class="demo-list-row"><div><strong>Normalise</strong><span>field names and stage defaults</span></div><span class="demo-status">Mapped</span></div><div class="demo-list-row"><div><strong>Handover</strong><span>owner and next action become visible</span></div><span class="demo-status">Ready</span></div></div></section>
+        </div></div>
       </div>
     </section>
-
-    <section class="proof-section" aria-labelledby="board-heading">
-      <h2 id="board-heading">Synthetic board</h2>
-      <div class="proof-table-wrap" tabindex="0" role="region" aria-label="Scrollable synthetic recruitment board">
-        <table class="proof-table">
-          <thead><tr><th>Applicant</th><th>Stage</th><th>Owner</th><th>Next action</th></tr></thead>
-          <tbody>
-            <tr><td>Nguyen Van A</td><td><span class="proof-status">New</span></td><td>Reviewer A</td><td>Check application</td></tr>
-            <tr><td>Tran Thi B</td><td><span class="proof-status">CV checked</span></td><td>Reviewer B</td><td>Leave a note</td></tr>
-            <tr><td>you@example.com</td><td><span class="proof-status">Interview</span></td><td>Reviewer A</td><td>Confirm time</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="proof-note">The board is a synthetic illustration. Applicant names, contact details, counts, and adoption outcomes are not production evidence.</p>
-    </section>
-
-    <section class="proof-section" aria-labelledby="proof-heading">
-      <h2 id="proof-heading">Evidence boundary</h2>
-      <div class="proof-grid">
-        <article class="proof-card"><h3>What is shown</h3><p>Field mapping, stage ownership, comments, and a clear next action.</p></article>
-        <article class="proof-card"><h3>What is not shown</h3><p>No real applicant record, private workspace URL, or adoption metric is published.</p></article>
-        <article class="proof-card"><h3>How to verify more</h3><p>Use the case study or contact Hao to discuss an owner-approved artifact.</p></article>
-      </div>
-    </section>
-
-    <footer class="proof-footer"><p><a class="u-link" href="../../index.html">← Back to selected work</a></p></footer>
+    <p class="demo-footnote">Public demo only: candidate records are synthetic, state is memory-only, and no recruiting workspace is connected.</p>
   </main>
-  <script src="../js/theme.js"></script>
+  <script src="../js/theme.js"></script><script src="../js/recruitment-demo.js"></script>
 </body>
 </html>

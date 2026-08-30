@@ -14,12 +14,12 @@ export const MappingView: React.FC<MappingViewProps> = ({
   highlightedElementId,
 }) => {
   const mappings = [
-    { column: 'Full Name', tag: '{{Full Name}}', sample: participants[0]?.name || 'Le Anh Tien', required: true },
+    { column: 'Full Name', tag: '{{Full Name}}', sample: participants[0]?.name || 'Demo Learner 01', required: true },
     { column: 'Skill Name', tag: '{{Skill Name}}', sample: participants[0]?.skillName || 'English Proficiency', required: true },
     { column: 'Level', tag: '{{Level}}', sample: participants[0]?.level || 'Level 3', required: true },
     { column: 'Issue Date', tag: '{{Issue Date}}', sample: participants[0]?.issueDate || '31 Dec 2025', required: true },
     { column: 'Cert Code', tag: '{{Certificate Code}}', sample: participants[0]?.certCode || 'C-COM 25.12.001', required: true },
-    { column: 'Email', tag: '{{Email Address}}', sample: participants[0]?.email || 'tien.le@company.com', required: false },
+    { column: 'Email', tag: '{{Email Address}}', sample: participants[0]?.email || 'learner-01@example.test', required: false },
   ];
 
   const missingEmailsCount = participants.filter((p) => !p.email).length;

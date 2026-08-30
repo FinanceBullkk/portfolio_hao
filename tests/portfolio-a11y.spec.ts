@@ -28,6 +28,11 @@ for (const path of publicPages) {
     });
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa'])
+      // Product runtimes own their own DOM and design tokens. Their outer
+      // proof shell is scanned here; frame behaviour is covered by the
+      // dedicated interactive smoke tests so one app's internal controls do
+      // not mask regressions in the portfolio shell.
+      .exclude('iframe')
       .analyze();
     const serious = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact ?? ''));
     expect(serious, serious.map((violation) => `${violation.id}: ${violation.help}`).join('\n')).toEqual([]);

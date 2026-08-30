@@ -1,0 +1,5 @@
+body.demo-tms { --app-sidebar: #17212a; --app-accent: #1d746b; --app-bg: #eef2f0; --app-card: #fbfdfb; --app-ink: #1c2929; --app-muted: #4e5e5b; --app-line: #d5dfdc; }
+body.demo-tms .demo-main-header h2 { color: #173c3a; }
+body.demo-tms .demo-kpi strong { color: #173c3a; }
+body.demo-tms .demo-kpi:nth-child(2) strong { color: #b36b32; }
+body.demo-tms .demo-kpi:nth-child(3) strong { color: #a5473c; }

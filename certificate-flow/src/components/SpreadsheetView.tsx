@@ -126,7 +126,7 @@ export const SpreadsheetView: React.FC<SpreadsheetViewProps> = ({
     const newCertCode = `C-COM 26.08.0${participants.length + 1}`;
     const newParticipant: Participant = {
       id: newId,
-      name: 'Nguyen Van Moi',
+      name: 'Demo Learner 13',
       subCompany: 'MOC',
       category: 'Soft Skill',
       subCategory: 'Communication skill',
@@ -135,7 +135,7 @@ export const SpreadsheetView: React.FC<SpreadsheetViewProps> = ({
       issueDate: '31 Aug 2026',
       status: 'To be printed',
       certCode: newCertCode,
-      email: 'vanmoi.nguyen@company.com',
+      email: 'learner-13@example.test',
       emailStatus: 'To Send',
       askCert: 'Yes',
     };

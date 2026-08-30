@@ -25,6 +25,10 @@ const forbiddenPatterns = [
   { label: 'secret-like environment value', pattern: /(?:GEMINI_API_KEY|MY_GEMINI_API_KEY|BEGIN\s+(?:RSA|OPENSSH|PRIVATE)\s+KEY|client_secret\s*[:=])/i },
   { label: 'embedded credential', pattern: /(?:password|passwd|token)\s*[:=]\s*["'][^"']+["']/i },
 ];
+const publicBundleSecretPatterns = [
+  { label: 'Google API key', pattern: /AIza[0-9A-Za-z_-]{20,}/ },
+  { label: 'private key block', pattern: /-----BEGIN (?:RSA|OPENSSH|PRIVATE) KEY-----/ },
+];
 
 const errors = [];
 const notes = [];
@@ -103,15 +107,22 @@ async function checkLocalReference(file, reference, htmlByFile) {
 async function checkHtml(file, html, htmlByFile) {
   const name = relativeName(file);
   const htmlTag = html.match(/<html\b[^>]*>/i)?.[0] ?? '';
+  const runtimeDemo = attr(htmlTag, 'data-runtime-demo') === 'true';
   if (!attr(htmlTag, 'lang')) fail(`${name} is missing <html lang>`);
   if (!/<meta\b[^>]*name\s*=\s*["']viewport["'][^>]*>/i.test(html)) fail(`${name} is missing a viewport meta tag`);
-  const mainTags = tagMatches(html, 'main');
-  if (mainTags.length !== 1) fail(`${name} must contain exactly one <main> (found ${mainTags.length})`);
   const titleTags = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)];
   const titleText = titleTags[0]?.[0].replace(/<\/?title[^>]*>/gi, '').trim() ?? '';
   if (titleTags.length !== 1 || !titleText) fail(`${name} must contain one non-empty <title>`);
-  const h1Tags = tagMatches(html, 'h1');
-  if (h1Tags.length !== 1) fail(`${name} must contain exactly one <h1> (found ${h1Tags.length})`);
+  // React runtime entrypoints intentionally contain only #root; their
+  // accessible heading and <main> are rendered after JavaScript mounts. The
+  // outer proof page carries the static contract, while the runtime bundle is
+  // exercised by Playwright frame tests.
+  if (!runtimeDemo) {
+    const mainTags = tagMatches(html, 'main');
+    if (mainTags.length !== 1) fail(`${name} must contain exactly one <main> (found ${mainTags.length})`);
+    const h1Tags = tagMatches(html, 'h1');
+    if (h1Tags.length !== 1) fail(`${name} must contain exactly one <h1> (found ${h1Tags.length})`);
+  }
 
   const ids = new Map();
   for (const match of html.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)) {
@@ -185,6 +196,15 @@ if (!errors.length) {
   const htmlByFile = new Map();
   for (const file of htmlFiles) htmlByFile.set(file, await readFile(file, 'utf8'));
   for (const [file, html] of htmlByFile) await checkHtml(file, html, htmlByFile);
+  // Runtime bundles are intentionally published, so scan their text contents
+  // for high-confidence credential patterns as well as checking the HTML shell.
+  for (const file of files) {
+    if (!/\.(?:js|css|json|svg)$/i.test(file)) continue;
+    const content = await readFile(file, 'utf8');
+    for (const pattern of publicBundleSecretPatterns) {
+      if (pattern.pattern.test(content)) fail(`${relativeName(file)} contains forbidden ${pattern.label}`);
+    }
+  }
   await checkExternalAccess(files);
 }
 

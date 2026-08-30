@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { EventDoc, InitResult, UserProfile } from '../lib/types';
 import { initEventBooking, makeEventBookingApi } from '../lib/eventBookingDb';
+import { createDemoEventBooking } from '../lib/demo-event-booking';
 import { friendlyFirestoreError } from '../lib/monitoring';
 import { BookingFlow } from '../booking/booking-flow';
 
@@ -8,9 +9,10 @@ import { BookingFlow } from '../booking/booking-flow';
 // assessment BookingFlow bound to this event via an event-scoped BookingApi.
 
 export function EventBookingScreen({
-  event, fallbackProfile, canAdmin, onOpenAdmin, onSignOut, onBack, onEditProfile, onViewHistory,
+  event, email, fallbackProfile, canAdmin, onOpenAdmin, onSignOut, onBack, onEditProfile, onViewHistory, demoMode = false,
 }: {
   event: EventDoc;
+  email: string;
   fallbackProfile?: UserProfile | null;
   canAdmin: boolean;
   onOpenAdmin: () => void;
@@ -18,10 +20,18 @@ export function EventBookingScreen({
   onBack: () => void;
   onEditProfile?: () => void;
   onViewHistory?: () => void;
+  demoMode?: boolean;
 }) {
   const [data, setData] = useState<InitResult | null>(null);
   const [err, setErr] = useState<string | null>(null);
-  const api = useMemo(() => makeEventBookingApi(event.eventId), [event.eventId]);
+  const demo = useMemo(
+    () => demoMode ? createDemoEventBooking(event, fallbackProfile ?? null, email) : null,
+    [demoMode, email, event, fallbackProfile],
+  );
+  const api = useMemo(
+    () => demo?.api ?? makeEventBookingApi(event.eventId),
+    [demo, event.eventId],
+  );
 
   // Keep the user's chosen profile when the server hasn't persisted one yet.
   const applyData = useCallback((d: InitResult) => {
@@ -32,18 +42,26 @@ export function EventBookingScreen({
   // discard the chosen event (held in React state, not the URL) and bounce the
   // user back to the events list, so we re-fetch slots and update in place.
   const reload = useCallback(() => {
+    if (demo) {
+      applyData(demo.snapshot());
+      return;
+    }
     initEventBooking(event.eventId)
       .then(applyData)
       .catch((e: Error) => setErr(friendlyFirestoreError(e) || 'Failed to load.'));
-  }, [event.eventId, applyData]);
+  }, [demo, event.eventId, applyData]);
 
   useEffect(() => {
+    if (demo) {
+      applyData(demo.initial);
+      return;
+    }
     let cancelled = false;
     initEventBooking(event.eventId)
       .then((d) => { if (!cancelled) applyData(d); })
       .catch((e: Error) => { if (!cancelled) setErr(friendlyFirestoreError(e) || 'Failed to load.'); });
     return () => { cancelled = true; };
-  }, [event.eventId, applyData]);
+  }, [demo, event.eventId, applyData]);
 
   if (err) {
     return (
