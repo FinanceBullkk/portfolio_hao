@@ -22,6 +22,8 @@ for (const path of publicPages) {
     // frame cannot be mistaken for the page's accessible colour contrast.
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(path, { waitUntil: 'networkidle' });
+    const deepDive = page.locator('.case-deep-dive');
+    if (await deepDive.count()) await deepDive.locator('summary').click();
     await page.waitForFunction(() => {
       const reveals = Array.from(document.querySelectorAll('[data-reveal]'));
       return reveals.every((element) => getComputedStyle(element).opacity === '1');
@@ -65,5 +67,17 @@ test('home content stays visible when JavaScript is disabled', async ({ browser 
   await expect(page.locator('h1')).toBeVisible();
   const hiddenRevealCount = await page.locator('[data-reveal]').evaluateAll((elements) => elements.filter((element) => getComputedStyle(element).opacity === '0').length);
   expect(hiddenRevealCount).toBe(0);
+  await context.close();
+});
+
+test('case study deep dive works without JavaScript', async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+  const page = await context.newPage();
+  await page.goto('/certificate-pipeline.html', { waitUntil: 'domcontentloaded' });
+  const deepDive = page.locator('.case-deep-dive');
+  await expect(page.locator('[data-proof-cta]').first()).toBeVisible();
+  await expect(deepDive.locator('.cs-section').first()).not.toBeVisible();
+  await deepDive.locator('summary').click();
+  await expect(deepDive.locator('.cs-section').first()).toBeVisible();
   await context.close();
 });

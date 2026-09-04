@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="assets/css/registration-mocks.css">
   <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
 </head>
-<body class="portfolio-redesign case-page case-registration">
+<body>
 
   <a class="skip-link" href="#main-content">Skip to content</a>
 
@@ -27,13 +27,10 @@
     <!-- NAV -->
     <aside class="nav-container">
       <div class="nav-sticky">
-        <div class="editorial-header"><a class="brand-lockup" href="index.html" aria-label="Hao portfolio home"><strong>Hao</strong><span>operational systems</span></a><span class="availability">Open to fresher roles · HCMC</span></div>
         <nav class="nav-bar" id="nav" aria-label="Primary navigation">
           <div class="nav">
-            <a href="index.html">Work</a>
-            <a href="index.html#approach">Method</a>
-            <a href="about.html">About</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="index.html">home</a>
+            <a href="about.html">about</a>
           </div>
           <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode">
             <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
@@ -59,30 +56,34 @@
         </div>
       </div>
 
-      <p class="lede" data-reveal>An L&amp;D team was booking an assessment from a shared sheet and a page hard-coded for one exam. I shaped that workflow into a reusable event platform: L&amp;D can configure a training, workshop or assessment, employees can save details for reuse, and <b class="hl">capacity and eligibility are checked in the write path</b>.</p>
+      <p class="lede" data-reveal>A reusable L&amp;D booking flow that checks capacity and eligibility where the seat is claimed.</p>
 
       <div class="case-summary" data-reveal aria-label="Case study summary">
-        <div><span class="summary-label">Problem</span><p>Shared-sheet booking made capacity and eligibility reconciliation manual.</p></div>
-        <div><span class="summary-label">Role</span><p>Workflow design, React/TypeScript implementation and Firebase data rules.</p></div>
-        <div><span class="summary-label">Result</span><p>A configurable flow that gives operators a visible, reviewable path from event setup to confirmation.</p></div>
-        <div><span class="summary-label">Access</span><p>Playable build uses synthetic data; the production app requires authorized access.</p></div>
+        <div><span class="summary-label">Problem</span><p>Shared sheets could not safely reconcile seats or eligibility.</p></div>
+        <div><span class="summary-label">Built</span><p>Reusable event setup, booking flows and transactional checks.</p></div>
+        <div><span class="summary-label">Outcome</span><p>Operators get a visible path from setup to confirmation.</p></div>
       </div>
 
-      <figure class="case-hero-visual" data-reveal><img src="assets/visuals/registration-system.svg" width="720" height="440" alt="Registration workflow from intake through eligibility, seat claim, confirmation, and audit"><figcaption>System map / playable build uses synthetic data</figcaption></figure>
-
       <div class="detail-actions" data-reveal>
-        <a href="assets/proof/registration-walkthrough.html" class="cs-cta" data-proof-cta>Launch playable build →</a>
+        <a href="assets/proof/registration-walkthrough.html" class="cs-cta" data-proof-cta>Open playable demo →</a>
         <a href="https://github.com/FinanceBullkk/Corgi77" target="_blank" rel="noopener noreferrer" class="u-link">Source repository ↗</a>
         <a href="mailto:anhhao.dl108@gmail.com?subject=Authorized%20registration%20platform%20access" class="u-link">Request authorized access</a>
       </div>
 
-      <div class="cs-tags" data-reveal>
+      <p class="case-proof-state" data-reveal>Public demo · synthetic data. Source is public; production access is by request.</p>
+
+      <details class="case-deep-dive" data-reveal>
+        <summary>
+          <span><span class="case-deep-dive-label">Read the full case study</span><span class="case-deep-dive-meta">Booking model, product decisions and security controls</span></span>
+        </summary>
+        <div class="case-deep-dive-body">
+      <div class="cs-tags">
         <span class="tag">React + TypeScript</span>
         <span class="tag">Vite</span>
         <span class="tag">Firebase Cloud Functions v2</span>
         <span class="tag">Firestore</span>
         <span class="tag">Firebase Auth</span>
-        <span class="tag">Playable build</span>
+        <span class="tag">Playable demo</span>
         <span class="tag">Synthetic data</span>
       </div>
 
@@ -527,6 +528,8 @@
         </div>
         <p class="caption" style="margin-top:16px">Adding an admin is a field in Configuration, not a deploy, and the console refuses to let you remove your own access.</p>
       </div>
+        </div>
+      </details>
 
     </section>
 

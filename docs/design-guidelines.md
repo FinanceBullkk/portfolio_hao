@@ -1,91 +1,123 @@
-# Design Guidelines — portfolio_hao
+# Design Guidelines - portfolio_hao
 
-**Status:** current source of truth (2026-08-30)
+**Status:** current source of truth (2026-09-05)
 
-The portfolio is a **product-first operational editorial** experience. Its job is to make a fresher candidate memorable by letting visitors operate the proof before reading the explanation. The authored idea is **build the workflow, click the proof**.
+The portfolio uses the owner's earlier compact monochrome design. The public proof remains product-first: visitors can open a playable demo, while case studies provide optional technical depth.
 
 ## 1. Audience and hierarchy
 
-Primary audience: recruiters and hiring managers scanning for an AI Automation Specialist or Digital Transformation Officer fresher. Secondary audience: technical reviewers who want ownership, decisions, implementation boundaries, and proof.
+Primary audience: recruiters and hiring managers scanning for an AI Automation Specialist or Digital Transformation Officer fresher. Secondary audience: technical reviewers checking ownership, controls, implementation boundaries, and evidence.
 
-The home sequence is fixed and intentionally short:
+The home sequence is:
 
-1. Hero: target roles, one-line thesis, product-gallery preview, and contact path.
-2. Flagship: Corgi77 Registration with a direct playable-build CTA.
-3. Supporting work: CertStudio, TMS v2, Recruitment intake; each opens the product first.
-4. Method/contact: one compact operating loop and an explicit conversation CTA.
+1. Identity and target-role summary.
+2. Skills and focus.
+3. Four selected-work cards.
+4. Contact and profile links.
 
-Case studies remain optional depth. Product pages expose either a same-origin runtime or a focused in-memory sandbox, and disclose synthetic data plus reset/backend boundaries beside the interaction.
+Each work card links to a playable demo first and a case study second. Production links remain visibly access-controlled.
 
 ## 2. Visual language
 
-- **Surface:** warm paper in light mode (`#f1ece2`), deep ink in dark mode (`#171715`).
-- **Signal:** one vermilion accent. It marks sequence, action, and evidence labels. It is not used as a decorative rainbow palette.
-- **Type:** local Sora variable font for UI/body; Georgia/Iowan-style serif fallback for display moments. No remote font request.
-- **Composition:** offset editorial grids, hairlines, generous whitespace, framed SVG workflow diagrams, and a small recurring corner-bracket motif.
-- **Texture:** a low-opacity CSS grid/grain atmosphere. It must remain subtle, static, and non-interactive.
-- **Product mocks:** retain their light product surfaces and scoped product tokens. Page chrome must not recolour mock internals.
+- Surface: white in light mode and black in dark mode.
+- Type: the operating-system UI stack for the public shell.
+- Colour: neutral grayscale only in portfolio chrome. Product interfaces keep their own scoped tokens.
+- Composition: one narrow reading column, simple cards, small radii, restrained borders, and generous vertical spacing.
+- Navigation: lowercase home/about links with an adjacent theme toggle.
+- Motion: limited to short reveal transitions and state changes.
 
-Avoid generic equal-weight card walls, centered “developer hero” patterns, purple/blue gradients, custom cursors, WebGL, audio, stock imagery, scroll hijacking, and decorative motion with no explanatory role.
+Avoid editorial paper textures, oversized serif headlines, decorative diagrams, warm accent palettes, custom cursors, remote fonts, WebGL, stock imagery, and scroll hijacking.
 
 ## 3. Tokens and typography
 
-Use role tokens instead of hardcoded grays in page chrome:
+Use the role tokens in `assets/css/base.css`; do not introduce arbitrary grays.
 
-| Role | Light | Dark |
-| --- | --- | --- |
-| page surface | `--paper` | `--paper` |
-| primary ink | `--ink` | `--ink` |
-| readable secondary copy | `--ink-soft` | `--ink-soft` |
-| metadata | `--signal-dark` | `--signal-dark` |
-| action fill | `--signal` | `--signal` |
-| separator | `--hairline` | `--hairline` |
+| Role | Token |
+| --- | --- |
+| Page background | `--bg` |
+| Primary text | `--fg` |
+| Secondary text | `--r-secondary` |
+| Metadata | `--r-meta` |
+| Card border | `--r-edge` |
+| Raised surface | `--r-surface` |
+| Link underline | `--r-line` |
 
-Display headings use `--font-display`, usually italic, weight 500, tight tracking, and a short measure. UI labels use Sora, uppercase sparingly, with enough size and contrast to remain scannable. Body copy should stay around 14–16px with a 1.6–1.75 line-height.
-
-The local font is `assets/fonts/sora-latin-ext-wght-normal.woff2` and is loaded through `@font-face` in `assets/css/base.css` with `font-display: swap`.
+Public shell copy uses `--font-ui`. Case-study mockups may retain their internal product or monospace fonts because they represent separate application surfaces.
 
 ## 4. Shared shell
 
-Every public page has:
+Every root public page has:
 
 - `<html lang="en">`, viewport metadata, one `<main id="main-content" tabindex="-1">`, and exactly one `<h1>`.
-- A skip link and a persistent, labelled `.theme-toggle`.
-- A top editorial lockup, availability line, and navigation to Work, Approach, About, and Contact.
-- A footer with GitHub, LinkedIn, and email links.
-- The blocking theme snippet in `<head>`, before the stylesheets can paint the wrong theme.
+- A skip link, home/about navigation, and a labelled theme toggle.
+- The blocking theme snippet in `<head>`; it also adds the `js` class so reveal animation is progressive enhancement.
+- A compact footer with GitHub, LinkedIn, and email links.
+- `assets/css/base.css` followed by `assets/css/home.css`, then page-specific CSS.
 
-Links remain real anchors. Buttons are used only for actions such as theme switching or a controlled workflow panel. Mobile links and buttons have at least a 44px interaction box.
+Links remain anchors. Buttons are reserved for actions. Navigation and theme controls keep at least a 44px interaction target.
 
-## 5. Accessibility and motion
+## 5. Home page
 
-- Maintain WCAG 2 AA contrast for normal text and action labels in both themes.
-- Keep focus visible with a signal-colour outline that is not clipped by an ancestor.
-- Preserve visual/DOM order on narrow layouts; do not hide important copy behind hover.
-- Images have explicit `width`/`height` and useful alt text. Decorative SVGs are `aria-hidden`.
-- `data-reveal` content is visible by default. JavaScript may add a class for enhancement, but a no-JS page must never be blank.
-- Reduced motion disables non-essential animation and smooth scrolling.
-- Use transform/opacity for motion; never use `transition: all`.
-- The TMS workflow tour is manual. Inactive panels are `aria-hidden` and `inert`, so focus cannot move into a hidden panel.
+The home page is the visual reference.
 
-## 6. Content and evidence
+- Hero: compact bordered card with identity, role fit, contact action, and profile links.
+- Skills: four small cards in a two-column desktop grid.
+- Selected work: four cards with a product marker, short description, evidence label, playable-demo link, and case-study link.
+- Responsive: grids collapse to one column below 640px without horizontal overflow.
 
-Write plain, specific English. Explain the operational constraint, Hao's ownership, the design/control point, and the next proof path. Keep evidence labels adjacent to claims.
+Do not replace the narrow shell with a full-width marketing layout or add decorative hero art.
 
-- Public product data uses explicit labels such as `Demo Learner 01`, `Demo Candidate 01`, masked codes, and `example.test` addresses.
-- Never publish real employee data, credentials, private workspace URLs, or unverified metrics.
-- Qualitative outcomes are acceptable when they describe the mechanism. Quantitative outcomes require a dated baseline, sample, and method.
-- Production links say `access required` when authentication or owner approval is needed.
-- The CV CTA remains a pending state until the owner supplies the actual PDF. Do not create a placeholder PDF.
-- Every mockup caption ends with `(test data)` or an equivalent visible synthetic-data disclosure.
+## 6. Case studies
 
-## 7. Responsive composition
+Case studies reuse the same nav, width, typography, and footer. Keep the detailed DOM mockups and diagrams inside their existing framed surfaces.
 
-Validate at 390px, 768px, 1280px, and 1440px. The home hero is split on wide screens and stacks on narrow screens. The flagship remains a two-part visual/copy composition until it reaches the mobile stack. Supporting projects become one column below 768px. No page may create horizontal overflow; wide tables use a labelled `overflow-x: auto` wrapper.
+The default view is a recruiter scan, not a long article. It should show:
 
-## 8. Verification contract
+- one short sentence describing the product;
+- three compact facts: problem, what Hao built, and the outcome or control;
+- the playable-demo action before any technical detail;
+- one concise proof/access statement.
 
-Run the gates in this order:
+Tags, architecture, mockups, decisions, and safeguards belong inside a native `<details>` disclosure labelled `Read the full case study`. The disclosure is collapsed by default, works without JavaScript, keeps a visible keyboard focus state, and must not hide the primary demo action.
+
+Playable-demo links use `data-proof-cta` so automated checks can verify the route.
+
+## 7. Playable demo pages
+
+The four pages under `assets/proof/` keep the current interactive implementations.
+
+- CertStudio and Corgi77 embed approved local React builds.
+- TMS and Recruitment are focused in-memory prototypes.
+- All public records are synthetic.
+- State resets on refresh.
+- No public demo may authenticate, call a production backend, expose admin-only controls, or persist user data.
+
+Their outer shell follows the monochrome portfolio tokens. The embedded product UI keeps its own scoped design system.
+
+## 8. Accessibility and responsive behavior
+
+- Maintain WCAG 2 AA contrast in light and dark themes.
+- Keep visible keyboard focus.
+- Keep meaningful DOM and visual order at narrow widths.
+- Do not hide required information behind hover.
+- Wide tables use labelled horizontal scrolling containers.
+- Reveal content stays visible when JavaScript is unavailable.
+- Reduced motion disables non-essential animation.
+- Validate at 390px, 768px, 1280px, and 1440px.
+
+## 9. Content and evidence
+
+Use plain, specific English. Keep claims adjacent to their evidence state.
+
+- Synthetic names use explicit demo labels and `example.test` addresses.
+- Never publish real employee data, credentials, private URLs, or unverified metrics.
+- Production links say `access required` when authorization is needed.
+- Do not create a placeholder CV.
+- Mockup captions identify test or synthetic data.
+
+## 10. Verification contract
+
+Run:
 
 ```powershell
 npm --prefix certificate-flow run build
@@ -97,8 +129,8 @@ npm run lint
 npm run build
 ```
 
-Review light/dark screenshots, keyboard order, no-JS first paint, reduced motion, 200% zoom, and the generated file list. Treat local green checks and external deployment as separate facts.
+Review both themes, keyboard order, no-JavaScript first paint, reduced motion, 200% zoom, and the generated allowlist. Local green checks do not imply external deployment.
 
-## 9. Change boundary
+## 11. Change boundary
 
-The static publish allowlist is maintained in `scripts/build-portfolio.mjs`. New public assets must be intentional and added there explicitly. Only the two approved runtime `dist/assets` folders are copied from application workspaces; source code, environment files, plans, docs, and unresolved reference captures stay outside `.portfolio-dist`. Public demo mode must bypass authentication, backend reads/writes, admin-only surfaces, and persistent browser storage.
+`scripts/build-portfolio.mjs` owns the static publish allowlist. Only approved public files and the two approved runtime bundles enter `.portfolio-dist`. Source code, environment files, plans, docs, and unresolved captures stay outside the artifact.

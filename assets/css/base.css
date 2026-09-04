@@ -449,17 +449,17 @@ body {
 /* ============================================================
    Scroll reveal
    ============================================================ */
-[data-reveal] {
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .6s ease, transform .6s ease;
 }
-[data-reveal].is-visible {
+.js [data-reveal].is-visible {
   opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
 /* ============================================================
@@ -526,191 +526,6 @@ body {
 }
 .role-grid p { color: var(--r-secondary); font-size: 14px; line-height: 1.625; text-wrap: pretty; }
 .role-grid .aside { color: var(--r-meta); }
-
-/* ============================================================
-   Operational editorial layer
-
-   The legacy primitives above keep the product mockups stable. This layer
-   owns the public portfolio chrome: warm paper, ink, one signal colour, and
-   an offset editorial rhythm that can be read before any interaction runs.
-   ============================================================ */
-@font-face {
-  font-family: "Sora Local";
-  src: url("../fonts/sora-latin-ext-wght-normal.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 800;
-  font-display: swap;
-}
-
-:root {
-  --paper: #f1ece2;
-  --paper-raised: #faf7f0;
-  --paper-deep: #e5ddcf;
-  --ink: #171715;
-  --ink-soft: #4d4942;
-  --ink-faint: #665f56;
-  --signal: #a83d28;
-  --signal-dark: #8e301e;
-  --hairline: rgba(23, 23, 21, .18);
-  --shadow-editorial: 0 18px 40px rgba(23, 23, 21, .08);
-  --font-sans: "Sora Local", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-ui: "Sora Local", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
-  --font-mono: "Sora Local", ui-monospace, SFMono-Regular, Consolas, monospace;
-  --bg: var(--paper);
-  --bg-raised: var(--paper-raised);
-  --bg-card: var(--paper-raised);
-  --bg-card-2: var(--paper-deep);
-  --bg-input: var(--paper-deep);
-  --fg: var(--ink);
-  --fg-dim: #38352f;
-  --fg-mute: var(--ink-soft);
-  --fg-faint: var(--ink-faint);
-  --fg-ghost: var(--ink-faint);
-  --fg-whisper: var(--hairline);
-  --border: var(--hairline);
-  --border-md: var(--hairline);
-  --border-lg: var(--ink-faint);
-  --r-secondary: var(--ink-soft);
-  --r-body: var(--ink-soft);
-  --r-meta: var(--signal-dark);
-  --r-footer: var(--ink-soft);
-  --r-line: var(--signal);
-  --r-edge: var(--hairline);
-  --r-edge-hover: var(--signal);
-  --r-surface: var(--paper-raised);
-  --r-chip: var(--paper-deep);
-  --r-hover-bg: rgba(217, 86, 56, .10);
-  --r-nav-hover: var(--signal-dark);
-  --r-nav-active: var(--ink);
-  --r-toggle: var(--ink-soft);
-  --r-toggle-hover: var(--ink);
-}
-
-:root.dark {
-  --paper: #171715;
-  --paper-raised: #24231f;
-  --paper-deep: #34312b;
-  --ink: #f1ece2;
-  --ink-soft: #c7c0b5;
-  --ink-faint: #989084;
-  --signal: #ff8a6a;
-  --signal-dark: #ffab92;
-  --hairline: rgba(241, 236, 226, .22);
-  --shadow-editorial: 0 18px 40px rgba(0, 0, 0, .28);
-  --bg: var(--paper);
-  --bg-raised: var(--paper-raised);
-  --bg-card: var(--paper-raised);
-  --bg-card-2: var(--paper-deep);
-  --bg-input: var(--paper-deep);
-  --fg: var(--ink);
-  --fg-dim: #e5ddcf;
-  --fg-mute: var(--ink-soft);
-  --fg-faint: var(--ink-faint);
-  --fg-ghost: #989084;
-  --fg-whisper: var(--hairline);
-  --border: var(--hairline);
-  --border-md: var(--hairline);
-  --border-lg: var(--ink-faint);
-  --r-secondary: var(--ink-soft);
-  --r-body: var(--ink-soft);
-  --r-meta: var(--signal);
-  --r-footer: var(--ink-soft);
-  --r-line: var(--signal);
-  --r-edge: var(--hairline);
-  --r-edge-hover: var(--signal);
-  --r-surface: var(--paper-raised);
-  --r-chip: var(--paper-deep);
-  --r-hover-bg: rgba(255, 120, 87, .14);
-  --r-nav-hover: var(--signal);
-  --r-nav-active: var(--ink);
-  --r-toggle: var(--ink-soft);
-  --r-toggle-hover: var(--ink);
-}
-
-body.portfolio-redesign {
-  position: relative;
-  isolation: isolate;
-  min-width: 320px;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: var(--font-sans);
-  line-height: 1.6;
-}
-
-body.portfolio-redesign::before,
-body.portfolio-redesign::after {
-  position: fixed;
-  z-index: -1;
-  inset: 0;
-  pointer-events: none;
-  content: "";
-}
-
-body.portfolio-redesign::before {
-  opacity: .38;
-  background-image: linear-gradient(to right, transparent 0, transparent calc(100% - 1px), var(--hairline) calc(100% - 1px)), linear-gradient(to bottom, transparent 0, transparent calc(100% - 1px), var(--hairline) calc(100% - 1px));
-  background-size: 80px 80px;
-  mask-image: linear-gradient(to bottom, #000 0, transparent 82%);
-}
-
-body.portfolio-redesign::after {
-  opacity: .08;
-  background-image: repeating-linear-gradient(0deg, transparent 0, transparent 3px, var(--ink) 4px), repeating-linear-gradient(90deg, transparent 0, transparent 5px, var(--ink) 6px);
-  mix-blend-mode: multiply;
-}
-
-:root.dark body.portfolio-redesign::after { mix-blend-mode: screen; opacity: .05; }
-
-body.portfolio-redesign .container-sm {
-  position: relative;
-  z-index: 0;
-  display: block;
-  width: min(100% - 48px, 1280px);
-  max-width: none;
-  padding: 0 0 56px;
-  font-family: var(--font-sans);
-  line-height: 1.55;
-}
-
-body.portfolio-redesign .skip-link {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-body.portfolio-redesign :where(a, button, summary, [tabindex]):focus-visible {
-  outline: 2px solid var(--signal);
-  outline-offset: 4px;
-}
-
-body.portfolio-redesign .home-footer,
-body.portfolio-redesign .site-footer {
-  border-top: 1px solid var(--hairline);
-  margin-top: 96px;
-  padding: 24px 0 0;
-}
-
-body.portfolio-redesign .home-footer > p,
-body.portfolio-redesign .footer-meta,
-body.portfolio-redesign .footer-note { color: var(--ink-faint); }
-
-@media (max-width: 767px) {
-  body.portfolio-redesign .container-sm { width: min(100% - 32px, 1280px); }
-  body.portfolio-redesign::before { background-size: 48px 48px; }
-}
-
-/* Progressive enhancement: content is present with CSS disabled or JS
-   unavailable. The .js class is set by the blocking head snippet. */
-[data-reveal] { opacity: 1; transform: none; transition: none; }
-html.js [data-reveal] {
-  opacity: 1;
-  transform: none;
-  transition: opacity .3s ease, transform .3s ease;
-}
-html.js [data-reveal].is-visible { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  html.js [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-}
 
 /* ============================================================
    Line-flow diagram (used for pipeline / process visuals)

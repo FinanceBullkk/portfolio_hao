@@ -124,7 +124,7 @@ p.lede b { font-weight: 600; color: var(--fg); }
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 28px;
+  margin-bottom: 8px;
 }
 
 .cs-cta {
@@ -401,33 +401,131 @@ p.lede b { font-weight: 600; color: var(--fg); }
 .case-summary {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 0;
+  border-top: 1px solid var(--r-edge);
+  border-bottom: 1px solid var(--r-edge);
   margin: 0 0 24px;
-}
-@media (min-width: 640px) {
-  .case-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 .case-summary > div {
   min-width: 0;
-  padding: 14px 16px;
-  border: 1px solid var(--r-edge);
-  border-radius: 8px;
-  background: var(--r-surface);
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--r-edge);
+}
+.case-summary > div:first-child { border-top: 0; }
+@media (min-width: 640px) {
+  .case-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .case-summary > div {
+    display: block;
+    padding: 14px 16px;
+    border-top: 0;
+    border-left: 1px solid var(--r-edge);
+  }
+  .case-summary > div:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .case-summary > div:last-child { padding-right: 0; }
 }
 .summary-label {
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   color: var(--r-meta);
   font-size: 12px;
   line-height: 16px;
   font-weight: 500;
 }
-.case-summary p {
-  color: var(--r-secondary);
+.case-summary p,
+.case-summary strong {
+  display: block;
+  color: var(--fg);
   font-size: 14px;
   line-height: 20px;
+  font-weight: 500;
   text-wrap: pretty;
 }
+
+.case-proof-state {
+  color: var(--r-meta);
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0 0 28px;
+  text-wrap: pretty;
+}
+
+/* Keep recruiter-facing facts visible and place implementation depth behind
+   a native disclosure that remains keyboard- and no-JavaScript-friendly. */
+.case-deep-dive {
+  border-top: 1px solid var(--r-edge);
+  border-bottom: 1px solid var(--r-edge);
+  margin: 0 0 32px;
+}
+.case-deep-dive > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28px;
+  gap: 12px;
+  align-items: center;
+  min-height: 72px;
+  padding: 12px 0;
+  color: var(--fg);
+  cursor: pointer;
+  list-style: none;
+  touch-action: manipulation;
+}
+.case-deep-dive > summary::-webkit-details-marker { display: none; }
+.case-deep-dive > summary::after {
+  content: "";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--r-edge);
+  border-radius: 50%;
+  background-color: transparent;
+  background-image:
+    linear-gradient(currentColor, currentColor),
+    linear-gradient(currentColor, currentColor);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px 1px, 1px 10px;
+  color: var(--r-secondary);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.case-deep-dive > summary:hover::after {
+  border-color: var(--r-edge-hover);
+  background-color: var(--r-surface);
+}
+.case-deep-dive > summary:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 4px;
+}
+.case-deep-dive[open] > summary::after {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 10px 1px;
+}
+.case-deep-dive-label {
+  display: block;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+.case-deep-dive-meta {
+  display: block;
+  color: var(--r-secondary);
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.case-deep-dive-body {
+  border-top: 1px solid var(--r-edge);
+  padding-top: 28px;
+}
+.case-deep-dive-body > .cs-tags:first-child { margin-top: 0; }
+.case-deep-dive-body > :last-child { margin-bottom: 28px; }
 
 .detail-icon-initials {
   display: flex;
@@ -474,78 +572,3 @@ p.lede b { font-weight: 600; color: var(--fg); }
 /* Detail links are evidence labels, so keep their tap target usable on mobile. */
 .detail-actions a,
 .cta-section a { min-height: 44px; }
-
-/* ============================================================
-   Operational editorial case shell
-   ============================================================ */
-body.portfolio-redesign.case-page main > section { max-width: 1120px; margin: 0 auto; }
-body.portfolio-redesign.case-page .back-link { display: inline-flex; margin: 46px 0 34px; color: var(--signal-dark); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-decoration-color: var(--signal); text-transform: uppercase; }
-body.portfolio-redesign.case-page .back-link:hover { color: var(--ink); }
-body.portfolio-redesign.case-page .detail-header { align-items: flex-end; gap: 22px; margin-bottom: 18px; padding-bottom: 22px; border-bottom: 2px solid var(--ink); }
-body.portfolio-redesign.case-page .detail-icon { width: 72px; height: 72px; border-radius: 0; border: 1px solid var(--hairline); }
-body.portfolio-redesign.case-page .detail-icon-initials,
-body.portfolio-redesign.case-page .detail-icon--recruitment { background: var(--ink); color: var(--paper); border-color: var(--ink); font-family: var(--font-display); font-size: 24px; font-style: italic; }
-body.portfolio-redesign.case-page .detail-title-row h1 { color: var(--ink); font-family: var(--font-display); font-size: clamp(42px, 6vw, 82px); font-style: italic; font-weight: 500; letter-spacing: -.07em; line-height: .9; }
-body.portfolio-redesign.case-page .detail-tag { color: var(--signal-dark); background: transparent; border: 1px solid var(--signal); border-radius: 999px; padding: 5px 10px; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-body.portfolio-redesign.case-page .detail-subtitle { margin-top: 10px; color: var(--ink-soft); font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
-body.portfolio-redesign.case-page > .container-sm > section > .lede,
-body.portfolio-redesign.case-page .lede { max-width: 78ch; margin: 28px 0 28px; color: var(--ink-soft); font-size: clamp(17px, 2vw, 23px); line-height: 1.55; }
-body.portfolio-redesign.case-page .lede b { color: var(--ink); font-weight: 700; }
-body.portfolio-redesign.case-page .case-summary { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0 0 24px; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
-body.portfolio-redesign.case-page .case-summary > div { min-height: 126px; padding: 18px 18px 18px 0; border: 0; border-radius: 0; background: transparent; }
-body.portfolio-redesign.case-page .case-summary > div + div { padding-left: 18px; border-left: 1px solid var(--hairline); }
-body.portfolio-redesign.case-page .summary-label { color: var(--signal-dark); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-body.portfolio-redesign.case-page .case-summary p,
-body.portfolio-redesign.case-page .case-summary strong { display: block; margin-top: 10px; color: var(--ink-soft); font-size: 13px; font-weight: 500; line-height: 1.55; }
-body.portfolio-redesign.case-page .detail-actions { align-items: center; gap: 18px; margin: 26px 0 18px; }
-body.portfolio-redesign.case-page .cs-cta { min-height: 48px; border-radius: 999px; background: var(--signal); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-body.portfolio-redesign.case-page .cs-cta:hover { background: var(--ink); }
-body.portfolio-redesign.case-page .cs-cta { color: var(--paper); }
-:root.dark body.portfolio-redesign.case-page .cs-cta { color: var(--paper); }
-body.portfolio-redesign.case-page .cs-tags { margin: 0 0 34px; }
-body.portfolio-redesign.case-page .cs-tags .tag { border: 1px solid var(--hairline); border-radius: 999px; background: transparent; color: var(--ink-soft); font-size: 10px; letter-spacing: .05em; }
-body.portfolio-redesign.case-page .case-hero-visual { margin: 30px 0 56px; }
-body.portfolio-redesign.case-page .case-hero-visual img { width: 100%; max-height: 520px; object-fit: cover; border: 1px solid var(--hairline); box-shadow: var(--shadow-editorial); }
-body.portfolio-redesign.case-page .case-hero-visual figcaption { margin-top: 10px; color: var(--ink-faint); font-size: 11px; line-height: 1.5; }
-body.portfolio-redesign.case-page .stat-bar { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0 0 56px; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
-body.portfolio-redesign.case-page .stat-bar .stat { min-height: 104px; padding: 18px 18px 18px 0; border: 0; border-radius: 0; }
-body.portfolio-redesign.case-page .stat-bar .stat + .stat { padding-left: 18px; border-left: 1px solid var(--hairline); }
-body.portfolio-redesign.case-page .stat-bar .stat .value { color: var(--ink); font-family: var(--font-display); font-size: 24px; font-style: italic; font-weight: 500; letter-spacing: -.04em; line-height: 1.1; }
-body.portfolio-redesign.case-page .stat-bar .stat .label { margin-top: 8px; color: var(--signal-dark); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
-body.portfolio-redesign.case-page .cs-section { margin: 0 0 68px; padding: 0; }
-body.portfolio-redesign.case-page .cs-section.bordered { border-top: 1px solid var(--hairline); padding-top: 24px; }
-body.portfolio-redesign.case-page .cs-section h2 { color: var(--ink); font-family: var(--font-display); font-size: clamp(28px, 3.4vw, 48px); font-style: italic; font-weight: 500; letter-spacing: -.06em; line-height: 1; margin-bottom: 16px; }
-body.portfolio-redesign.case-page .cs-section > p { max-width: 74ch; color: var(--ink-soft); font-size: 14px; line-height: 1.75; }
-body.portfolio-redesign.case-page .section-tag { color: var(--signal-dark); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-body.portfolio-redesign.case-page .numbered-row,
-body.portfolio-redesign.case-page .stage-card,
-body.portfolio-redesign.case-page .ba-card,
-body.portfolio-redesign.case-page .flow-step,
-body.portfolio-redesign.case-page .proof-callout { border-color: var(--hairline); border-radius: 0; background: transparent; }
-body.portfolio-redesign.case-page .numbered-row .num,
-body.portfolio-redesign.case-page .flow-step .num-badge { color: var(--signal-dark); background: transparent; }
-body.portfolio-redesign.case-page .mock-data-disclosure { border-left-color: var(--signal); background: color-mix(in srgb, var(--signal) 8%, transparent); }
-body.portfolio-redesign.case-page .mock-shot { border-color: var(--hairline); border-radius: 0; box-shadow: var(--shadow-editorial); }
-body.portfolio-redesign.case-page .caption { color: var(--ink-faint); font-size: 11px; }
-
-@media (max-width: 900px) {
-  body.portfolio-redesign.case-page .case-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  body.portfolio-redesign.case-page .case-summary > div:nth-child(3) { border-top: 1px solid var(--hairline); }
-  body.portfolio-redesign.case-page .case-summary > div:nth-child(4) { border-top: 1px solid var(--hairline); }
-  body.portfolio-redesign.case-page .stat-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  body.portfolio-redesign.case-page .stat-bar .stat:nth-child(3),
-  body.portfolio-redesign.case-page .stat-bar .stat:nth-child(4) { border-top: 1px solid var(--hairline); }
-}
-@media (max-width: 600px) {
-  body.portfolio-redesign.case-page .back-link { margin-top: 30px; }
-  body.portfolio-redesign.case-page .detail-header { align-items: flex-start; flex-direction: column; }
-  body.portfolio-redesign.case-page .detail-icon { width: 56px; height: 56px; }
-  body.portfolio-redesign.case-page .detail-title-row h1 { font-size: clamp(40px, 13vw, 64px); }
-  body.portfolio-redesign.case-page .case-summary { grid-template-columns: 1fr; }
-  body.portfolio-redesign.case-page .case-summary > div,
-  body.portfolio-redesign.case-page .case-summary > div + div { min-height: 0; padding: 16px 0; border-left: 0; border-top: 1px solid var(--hairline); }
-  body.portfolio-redesign.case-page .case-summary > div:first-child { border-top: 0; }
-  body.portfolio-redesign.case-page .stat-bar { grid-template-columns: 1fr 1fr; }
-  body.portfolio-redesign.case-page .detail-actions { align-items: stretch; flex-direction: column; }
-  body.portfolio-redesign.case-page .detail-actions > * { width: 100%; justify-content: center; text-align: center; }
-}

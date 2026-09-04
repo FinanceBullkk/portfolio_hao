@@ -9,6 +9,8 @@ const rootPages = [
   { name: 'Recruitment', path: '/recruitment.html', proof: ['/assets/proof/recruitment-walkthrough.html'] },
 ];
 
+const caseStudyPages = rootPages.filter(({ name }) => !['home', 'about'].includes(name));
+
 for (const pageInfo of rootPages) {
   test.describe(`${pageInfo.name} page`, () => {
     test('loads without browser errors or horizontal overflow', async ({ page }) => {
@@ -77,8 +79,23 @@ for (const pageInfo of rootPages) {
   });
 }
 
+for (const pageInfo of caseStudyPages) {
+  test(`${pageInfo.name} keeps the demo visible and the deep dive optional`, async ({ page }) => {
+    await page.goto(pageInfo.path, { waitUntil: 'networkidle' });
+    const deepDive = page.locator('.case-deep-dive');
+    await expect(page.locator('[data-proof-cta]').first()).toBeVisible();
+    await expect(page.locator('.case-summary > div')).toHaveCount(3);
+    await expect(deepDive).not.toHaveAttribute('open', '');
+    await expect(deepDive.locator('.cs-section').first()).not.toBeVisible();
+    await deepDive.locator('summary').click();
+    await expect(deepDive).toHaveAttribute('open', '');
+    await expect(deepDive.locator('.cs-section').first()).toBeVisible();
+  });
+}
+
 test('TMS workflow tour is manual and keeps hidden panels out of the tab order', async ({ page }) => {
   await page.goto('/tms.html', { waitUntil: 'networkidle' });
+  await page.locator('.case-deep-dive > summary').click();
   const inactivePanels = page.locator('.flow-demo-panel[aria-hidden="true"]');
   await expect(inactivePanels).not.toHaveCount(0);
   const inertStates = await inactivePanels.evaluateAll((panels) => panels.map((panel) => (panel as HTMLElement).inert));
@@ -89,13 +106,14 @@ test('TMS workflow tour is manual and keeps hidden panels out of the tab order',
   await expect(page.locator('.flow-demo-panel.active')).toHaveAttribute('aria-hidden', 'false');
 });
 
-test('editorial layout holds at intermediate widths', async ({ page }) => {
+test('minimal portfolio layout holds at intermediate widths', async ({ page }) => {
   for (const width of [768, 1280]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/index.html', { waitUntil: 'networkidle' });
     const dimensions = await page.evaluate(() => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth }));
     expect(dimensions.width, `horizontal overflow at ${width}px`).toBeLessThanOrEqual(dimensions.viewport + 1);
-    await expect(page.locator('.flagship')).toBeVisible();
+    await expect(page.locator('.hero-card')).toBeVisible();
+    await expect(page.locator('.product-card')).toHaveCount(4);
   }
 });
 

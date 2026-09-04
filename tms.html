@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="assets/css/tms.css">
   <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
 </head>
-<body class="portfolio-redesign case-page case-tms">
+<body>
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <main id="main-content" class="container-sm" tabindex="-1">
@@ -27,13 +27,10 @@
     <!-- NAV -->
     <aside class="nav-container">
       <div class="nav-sticky">
-        <div class="editorial-header"><a class="brand-lockup" href="index.html" aria-label="Hao portfolio home"><strong>Hao</strong><span>operational systems</span></a><span class="availability">Open to fresher roles · HCMC</span></div>
         <nav class="nav-bar" id="nav" aria-label="Primary navigation">
           <div class="nav">
-            <a href="index.html">Work</a>
-            <a href="index.html#approach">Method</a>
-            <a href="about.html">About</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="index.html">home</a>
+            <a href="about.html">about</a>
           </div>
           <button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode">
             <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg>
@@ -59,23 +56,27 @@
         </div>
       </div>
 
-      <p class="lede" data-reveal>An internal training management workflow for an L&amp;D team. It brings identity-safe imports, team scheduling, completion gates, and audit views into one place so department leaders can act without a long email handoff.</p>
+      <p class="lede" data-reveal>A training operations system for safe imports, self-service scheduling, completion gates and audit-ready learning records.</p>
 
       <div class="case-summary" data-reveal aria-label="Case study summary">
-        <div><span class="summary-label">Problem</span><strong>Learning operations were spread across manual files and inbox requests.</strong></div>
-        <div><span class="summary-label">Role</span><strong>Mapped the operating model and built the application flow.</strong></div>
-        <div><span class="summary-label">Result</span><strong>Self-service scheduling and a traceable learning record.</strong></div>
-        <div><span class="summary-label">Access</span><strong>Playable demo · synthetic data; production app requires approval.</strong></div>
+        <div><span class="summary-label">Problem</span><strong>Learning operations were split across files and inbox requests.</strong></div>
+        <div><span class="summary-label">Built</span><strong>Directory sync, scheduling, completion and audit flows.</strong></div>
+        <div><span class="summary-label">Outcome</span><strong>Teams can self-serve while records remain traceable.</strong></div>
       </div>
 
-      <figure class="case-hero-visual" data-reveal><img src="assets/visuals/tms-system.svg" width="720" height="440" alt="TMS workflow map connecting identity, scheduling, completion, and audit records"><figcaption>System map / interactive demo uses synthetic data</figcaption></figure>
-
       <div class="detail-actions" data-reveal>
-        <a href="assets/proof/tms-walkthrough.html" class="cs-cta" data-proof-cta>Launch playable demo →</a>
+        <a href="assets/proof/tms-walkthrough.html" class="cs-cta" data-proof-cta>Open playable demo</a>
         <a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="u-link">Production app (access required) ↗</a>
       </div>
 
-      <div class="cs-tags" data-reveal>
+      <p class="case-proof-state" data-reveal>Public demo · synthetic data. Production access stays private.</p>
+
+      <details class="case-deep-dive" data-reveal>
+        <summary>
+          <span><span class="case-deep-dive-label">Read the full case study</span><span class="case-deep-dive-meta">System tour, operating model and safety controls</span></span>
+        </summary>
+        <div class="case-deep-dive-body">
+      <div class="cs-tags">
         <span class="tag">Enterprise Operations</span>
         <span class="tag">L&amp;D Governance</span>
         <span class="tag">Compliance Automation</span>
@@ -659,10 +660,12 @@
       <div class="cta-section" data-reveal>
         <h2>Explore the public proof</h2>
         <p>The playable demo is available without credentials. The hosted application opens only for an authorised user.</p>
-        <a href="assets/proof/tms-walkthrough.html" class="cs-cta" data-proof-cta>Launch playable demo →</a>
+        <a href="assets/proof/tms-walkthrough.html" class="cs-cta" data-proof-cta>Open playable demo</a>
         <a href="https://concho2.onrender.com/home" target="_blank" rel="noopener noreferrer" class="u-link cta-secondary">Open production app (access required) ↗</a>
         <div class="cold-start">No demo credentials are published. Scale and performance claims remain pending owner evidence.</div>
       </div>
+        </div>
+      </details>
 
     </section>
 

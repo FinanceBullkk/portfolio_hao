@@ -1,15 +1,15 @@
 # Nguyen Huynh Anh Hao — portfolio
 
-Product-first portfolio for a fresher applying to AI Automation Specialist and Digital Transformation Officer roles. The public experience pairs an editorial paper/ink system with playable, inspectable workflow evidence.
+Product-first portfolio for a fresher applying to AI Automation Specialist and Digital Transformation Officer roles. The public experience uses a compact monochrome shell around playable, inspectable workflow evidence.
 
 ## Experience model
 
 - **Recruiter path:** the home page is a compact product gallery. Each card opens the working surface before asking the visitor to read a case study.
-- **Technical path:** optional case notes retain the problem, ownership, trade-offs, controls, and evidence boundary.
+- **Technical path:** each project keeps the demo and three scan-friendly facts visible, then places the full problem, trade-offs, controls, and evidence inside an optional native disclosure.
 - **Public proof:** CertStudio and Corgi77 embed their real local React builds; TMS and Recruitment are focused in-memory prototypes. Every demo uses synthetic data and resets without touching a production system.
 - **Honest access:** hosted application links remain labelled `access required`; the CV remains a visible pending state until the real PDF is supplied.
 
-The visual system uses a self-hosted Sora variable font for UI/body copy, a resilient editorial serif for display type, warm paper and ink surfaces, and one vermilion signal accent. CSS/SVG carries the art direction; there is no WebGL, scroll hijacking, remote font, stock imagery, or framework migration.
+The visual system uses the local OS UI stack, black/white surfaces, restrained borders, and compact cards. There is no remote font, WebGL, scroll hijacking, stock imagery, or framework migration.
 
 ## Local development
 
@@ -51,7 +51,7 @@ The static checker rejects missing local references, missing image dimensions/al
 
 ## Design source of truth
 
-See [`docs/design-guidelines.md`](docs/design-guidelines.md) for tokens, composition, typography, accessibility, responsive behavior, and content rules. The implementation record and screenshot evidence live in [`plans/260830-1659-art-directed-portfolio-rearchitecture/`](plans/260830-1659-art-directed-portfolio-rearchitecture/).
+See [`docs/design-guidelines.md`](docs/design-guidelines.md) for tokens, composition, typography, accessibility, responsive behavior, and content rules. The restored visual baseline is documented in [`plans/260808-0808-convert-pages-to-new-design/`](plans/260808-0808-convert-pages-to-new-design/); the later playable-demo work remains active.
 
 ## Rollback and release discipline
 
