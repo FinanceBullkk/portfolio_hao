@@ -109,6 +109,12 @@ function AppInner() {
   const confirm = useConfirm();
 
   const enableDemoMode = useCallback(() => {
+    const dateFromNow = (days: number) => {
+      const date = new Date();
+      date.setUTCDate(date.getUTCDate() + days);
+      return date.toISOString().slice(0, 10);
+    };
+
     demoModeRef.current = true;
     setAuthUser({
       email: 'demo.viewer@cyberlogitec.com.vn',
@@ -129,7 +135,7 @@ function AppInner() {
           type: 'slotted',
           examParts: 'both',
           allowEnrollment: true,
-          deadline: '2026-09-30T23:59:59Z',
+          deadline: `${dateFromNow(9)}T23:59:59Z`,
           deadlinePassed: false,
           capacity: 100,
           remaining: 42,
@@ -137,7 +143,7 @@ function AppInner() {
           emailConfirm: true,
           listed: true,
           archived: false,
-          eventDate: '2026-09-15',
+          eventDate: dateFromNow(10),
           location: 'Building B, Floor 4 & Online',
           organizerBu: 'L&D Team',
           description: '### Skill Evaluation\nEvaluate Speaking, Listening, Reading and Writing proficiency according to CEFR standards.',
@@ -154,7 +160,7 @@ function AppInner() {
           category: 'Training',
           type: 'simple',
           allowEnrollment: true,
-          deadline: '2026-08-25T17:00:00Z',
+          deadline: `${dateFromNow(5)}T17:00:00Z`,
           deadlinePassed: false,
           capacity: 50,
           remaining: 18,
@@ -162,7 +168,7 @@ function AppInner() {
           emailConfirm: true,
           listed: true,
           archived: false,
-          eventDate: '2026-08-28',
+          eventDate: dateFromNow(6),
           startMin: 540,
           endMin: 720,
           format: 'onsite',
@@ -187,7 +193,7 @@ function AppInner() {
           emailConfirm: false,
           listed: true,
           archived: false,
-          eventDate: '2026-09-01',
+          eventDate: dateFromNow(3),
           format: 'onsite',
           location: 'Training Room 2',
           organizerBu: 'L&D Team',
@@ -196,7 +202,9 @@ function AppInner() {
           registered: 18
         }
       ],
-      programEligible: true,
+      // The dedicated Program grid still depends on callable-backed data, so
+      // the public build exposes only the in-memory event version above.
+      programEligible: false,
       myRegistrations: {
         'evt-leadership-ws': {
           eventId: 'evt-leadership-ws',
