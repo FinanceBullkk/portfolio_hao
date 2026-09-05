@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publishDir = path.join(root, '.portfolio-dist');
+const pagesWorkflow = path.join(root, '.github', 'workflows', 'portfolio-checks.yml');
 const requiredRootPages = [
   'index.html',
   'about.html',
@@ -184,6 +185,22 @@ try {
   if (!info.isDirectory()) throw new Error('not a directory');
 } catch {
   fail('Missing .portfolio-dist; run npm run build:portfolio first.');
+}
+
+try {
+  const workflow = await readFile(pagesWorkflow, 'utf8');
+  const deploymentRequirements = [
+    { label: 'verified Pages artifact upload', pattern: /actions\/upload-pages-artifact@v\d+/ },
+    { label: '.portfolio-dist upload path', pattern: /\bpath:\s*\.portfolio-dist\s*$/m },
+    { label: 'Pages deployment action', pattern: /actions\/deploy-pages@v\d+/ },
+    { label: 'live CertStudio runtime check', pattern: /assets\/proof\/certstudio-runtime\.html/ },
+    { label: 'live registration runtime check', pattern: /assets\/proof\/registration-runtime\.html/ },
+  ];
+  for (const requirement of deploymentRequirements) {
+    if (!requirement.pattern.test(workflow)) fail(`Pages workflow is missing ${requirement.label}.`);
+  }
+} catch (error) {
+  fail(`Unable to validate Pages workflow: ${error.message}`);
 }
 
 if (!errors.length) {

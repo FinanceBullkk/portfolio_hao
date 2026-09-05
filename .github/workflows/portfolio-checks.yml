@@ -9,6 +9,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   verify-portfolio:
@@ -48,3 +50,42 @@ jobs:
             playwright-report/
             test-results/
           if-no-files-found: ignore
+
+      - name: Configure GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/configure-pages@v5
+
+      - name: Upload verified Pages artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .portfolio-dist
+
+  deploy-pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify-portfolio
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified portfolio
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      - name: Verify deployed demo runtimes
+        shell: bash
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for runtime in assets/proof/certstudio-runtime.html assets/proof/registration-runtime.html; do
+            for attempt in {1..12}; do
+              if curl --fail --silent --show-error "${SITE_URL}${runtime}" > /dev/null; then
+                break
+              fi
+              if [ "$attempt" -eq 12 ]; then
+                echo "Runtime unavailable after deployment: ${SITE_URL}${runtime}" >&2
+                exit 1
+              fi
+              sleep 5
+            done
+          done
