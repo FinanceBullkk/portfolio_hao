@@ -128,16 +128,56 @@ test('primary navigation controls keep a mobile-sized target', async ({ page }) 
   expect(sizes.every(({ width, height }) => width >= 44 && height >= 44)).toBe(true);
 });
 
-test('CertStudio mounts the real product bundle and changes workflow views', async ({ page }) => {
+test('CertStudio completes the current review workflow without external requests or horizontal overflow', async ({ page }) => {
   const errors: string[] = [];
+  const failedRequests: string[] = [];
+  const externalRequests: string[] = [];
   page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
   page.on('pageerror', (error) => errors.push(error.message));
+  page.on('requestfailed', (request) => failedRequests.push(request.url()));
+  page.on('request', (request) => {
+    if (!request.url().startsWith('http://127.0.0.1:4173/')) externalRequests.push(request.url());
+  });
   await page.goto('/assets/proof/certstudio-walkthrough.html', { waitUntil: 'networkidle' });
   const demo = page.frameLocator('iframe[title="CertStudio interactive product demo"]');
-  await expect(demo.getByRole('heading', { name: /FlowStudio Cert Engine/i })).toBeVisible();
-  await demo.getByRole('button', { name: /2\. Cert Template/i }).click();
-  await expect(demo.getByRole('heading', { name: /Canva Certificate Template Studio/i })).toBeVisible();
+  await expect(demo.getByRole('heading', { name: 'Certificate projects' })).toBeVisible();
+  await demo.getByRole('button', { name: 'Open review workspace for English Proficiency Q3' }).click();
+  await expect(demo.getByRole('heading', { name: 'English Proficiency Q3' })).toBeVisible();
+  await demo.getByRole('button', { name: 'Review page 2: Demo Learner O2' }).click();
+  await demo.getByRole('button', { name: /Roster suggestion/i }).click();
+  await expect(demo.getByRole('button', { name: 'Review page 2: Demo Learner 02' })).toBeVisible();
+  await demo.getByRole('button', { name: 'Auto-match 1 review items' }).click();
+  await expect(demo.getByRole('button', { name: 'Roster matching complete' })).toBeDisabled();
+  await demo.getByRole('button', { name: /Delivery check/i }).click();
+  await expect(demo.getByText('No review blockers')).toBeVisible();
+  await demo.getByRole('button', { name: 'Run safe delivery simulation' }).click();
+  await expect(demo.getByText('Dry-run complete · 7 emails simulated')).toBeVisible();
+  await demo.getByRole('button', { name: 'Projects' }).click();
+  await demo.getByRole('button', { name: 'Open review workspace for English Proficiency Q3' }).click();
+  await demo.getByRole('button', { name: /Delivery check/i }).click();
+  await expect(demo.getByText('Dry-run complete · 7 emails simulated')).toBeVisible();
+  const runtimeFrame = page.locator('iframe[title="CertStudio interactive product demo"]');
+  const overflow = await runtimeFrame.evaluate((node) => {
+    const document = node.contentDocument;
+    if (!document) return true;
+    return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+  });
+  expect(overflow).toBe(false);
   expect(errors, errors.join('\n')).toEqual([]);
+  expect(failedRequests, failedRequests.join('\n')).toEqual([]);
+  expect(externalRequests, externalRequests.join('\n')).toEqual([]);
+});
+
+test('CertStudio keeps delivered history read-only', async ({ page }) => {
+  await page.goto('/assets/proof/certstudio-walkthrough.html', { waitUntil: 'networkidle' });
+  const demo = page.frameLocator('iframe[title="CertStudio interactive product demo"]');
+  await demo.getByRole('button', { name: 'Open delivery history for Facilitator Essentials' }).click();
+  await expect(demo.getByText('5 deliveries already recorded')).toBeVisible();
+  await expect(demo.getByRole('button', { name: 'No pending certificates' })).toBeDisabled();
+  await demo.getByRole('button', { name: /Review queue/i }).click();
+  await expect(demo.getByText('Delivery recorded')).toBeVisible();
+  await expect(demo.getByRole('button', { name: 'Save review' })).toHaveCount(0);
+  await expect(demo.getByLabel('Recipient name')).toHaveAttribute('readonly', '');
 });
 
 test('Corgi77 mounts in isolated demo mode and completes a slotted booking', async ({ page }) => {

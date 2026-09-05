@@ -6,7 +6,7 @@ Product-first portfolio for a fresher applying to AI Automation Specialist and D
 
 - **Recruiter path:** the home page is a compact product gallery. Each card opens the working surface before asking the visitor to read a case study.
 - **Technical path:** each project keeps the demo and three scan-friendly facts visible, then places the full problem, trade-offs, controls, and evidence inside an optional native disclosure.
-- **Public proof:** CertStudio and Corgi77 embed their real local React builds; TMS and Recruitment are focused in-memory prototypes. Every demo uses synthetic data and resets without touching a production system.
+- **Public proof:** CertStudio uses a standalone React sandbox that mirrors the production PDF review workflow; Corgi77 embeds its isolated demo build. TMS and Recruitment are focused in-memory prototypes. Every demo uses synthetic data and resets without touching a production system.
 - **Honest access:** hosted application links remain labelled `access required`; the CV remains a visible pending state until the real PDF is supplied.
 
 The visual system uses the local OS UI stack, black/white surfaces, restrained borders, and compact cards. There is no remote font, WebGL, scroll hijacking, stock imagery, or framework migration.

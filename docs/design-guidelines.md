@@ -86,7 +86,7 @@ Playable-demo links use `data-proof-cta` so automated checks can verify the rout
 
 The four pages under `assets/proof/` keep the current interactive implementations.
 
-- CertStudio and Corgi77 embed approved local React builds.
+- CertStudio uses an approved standalone React sandbox mirroring the production PDF/OCR review flow; Corgi77 embeds its approved isolated React demo build.
 - TMS and Recruitment are focused in-memory prototypes.
 - All public records are synthetic.
 - State resets on refresh.

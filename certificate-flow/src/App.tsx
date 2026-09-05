@@ -1,130 +1,121 @@
-import React, { useState } from 'react';
-import { Participant, CertTemplateConfig, ActiveTab } from './types';
-import { INITIAL_PARTICIPANTS, DEFAULT_TEMPLATE_CONFIG } from './data/mockData';
-import { Navbar } from './components/Navbar';
-import { FlowStepsNav } from './components/FlowStepsNav';
-import { SpreadsheetView } from './components/SpreadsheetView';
-import { TemplateEditor } from './components/TemplateEditor';
-import { MappingView } from './components/MappingView';
-import { BulkGeneratorView } from './components/BulkGeneratorView';
-import { EmailDispatchView } from './components/EmailDispatchView';
-import { InteractiveDemoPlayer } from './components/InteractiveDemoPlayer';
+import { useMemo, useState } from 'react';
+import { AppHeader } from './components/Navbar';
+import { WorkspaceNav } from './components/FlowStepsNav';
+import { ProjectsHub } from './components/SpreadsheetView';
+import { ReviewWorkspace } from './components/MappingView';
+import { DeliveryPanel } from './components/EmailDispatchView';
+import { createInitialBatches } from './data/mockData';
+import { CertificateRecord, DeliveryLogEntry, RecordEdits, RecordFilter, WorkspaceSection } from './types';
+
+function isRecordReady(record: CertificateRecord): boolean {
+  return Boolean(record.detectedName.trim() && record.certificateCode.trim() && record.email.includes('@'));
+}
 
 export default function App() {
-  const [participants, setParticipants] = useState<Participant[]>(INITIAL_PARTICIPANTS);
-  const [config, setConfig] = useState<CertTemplateConfig>(DEFAULT_TEMPLATE_CONFIG);
-  const [activeTab, setActiveTab] = useState<ActiveTab>('spreadsheets');
-  const [selectedIds, setSelectedIds] = useState<string[]>(
-    INITIAL_PARTICIPANTS.filter((p) => p.status === 'To be printed').map((p) => p.id)
-  );
-  const [isDemoPlaying, setIsDemoPlaying] = useState<boolean>(false);
-  const [highlightedElementId, setHighlightedElementId] = useState<string | undefined>(undefined);
+  const [batches, setBatches] = useState(createInitialBatches);
+  const [activeBatchId, setActiveBatchId] = useState<string>();
+  const [section, setSection] = useState<WorkspaceSection>('review');
+  const [filter, setFilter] = useState<RecordFilter>('all');
+  const [selectedId, setSelectedId] = useState('cert-02');
+  const [deliveryLogs, setDeliveryLogs] = useState<Record<string, DeliveryLogEntry[]>>({});
+  const [notice, setNotice] = useState('');
+  const activeBatch = useMemo(() => batches.find((batch) => batch.id === activeBatchId), [activeBatchId, batches]);
+  const activeDeliveryLog = activeBatchId ? deliveryLogs[activeBatchId] ?? [] : [];
 
-  const handleResetData = () => {
-    setParticipants(INITIAL_PARTICIPANTS);
-    setConfig(DEFAULT_TEMPLATE_CONFIG);
-    setSelectedIds(INITIAL_PARTICIPANTS.filter((p) => p.status === 'To be printed').map((p) => p.id));
-    setActiveTab('spreadsheets');
-    setIsDemoPlaying(false);
-    setHighlightedElementId(undefined);
-  };
+  function resetDemo() {
+    setBatches(createInitialBatches());
+    setActiveBatchId(undefined);
+    setSection('review');
+    setFilter('all');
+    setSelectedId('cert-02');
+    setDeliveryLogs({});
+    setNotice('Sample data reset.');
+  }
 
-  const sampleParticipant =
-    participants.find((p) => p.name === 'Demo Learner 02') ||
-    participants.find((p) => p.name === 'Demo Learner 01') ||
-    participants[0];
+  function openBatch(batchId: string) {
+    const batch = batches.find((item) => item.id === batchId);
+    setActiveBatchId(batchId);
+    setSelectedId(batch?.records.find((record) => record.status === 'needs_review')?.id ?? batch?.records[0]?.id ?? '');
+    setFilter('all');
+    setSection(batch?.records.every((record) => record.status === 'sent') ? 'delivery' : 'review');
+    setNotice('');
+  }
+
+  function updateRecords(updater: (record: CertificateRecord) => CertificateRecord, invalidateDryRun = false) {
+    if (invalidateDryRun && activeBatchId) {
+      setDeliveryLogs((current) => ({ ...current, [activeBatchId]: [] }));
+    }
+    setBatches((current) => current.map((batch) => batch.id === activeBatchId
+      ? {
+          ...batch,
+          records: batch.records.map((record) => {
+            const updated = updater(record);
+            return invalidateDryRun && updated.deliveryState === 'simulated'
+              ? { ...updated, deliveryState: 'not_run' }
+              : updated;
+          }),
+        }
+      : batch));
+  }
+
+  function applySuggestion(recordId: string) {
+    updateRecords((record) => {
+      if (record.id !== recordId || record.status === 'sent') return record;
+      const matched = { ...record, detectedName: record.rosterName, email: record.email || record.suggestedEmail };
+      return { ...matched, confidence: 99, status: isRecordReady(matched) ? 'ready' : 'needs_review' };
+    }, true);
+    setNotice('Roster match applied. Record is ready for delivery review.');
+  }
+
+  function saveRecord(recordId: string, edits: RecordEdits) {
+    if (activeBatch?.records.find((record) => record.id === recordId)?.status === 'sent') {
+      setNotice('Delivered records are read-only in this demo.');
+      return;
+    }
+    updateRecords((record) => {
+      if (record.id !== recordId) return record;
+      const edited = { ...record, ...edits };
+      return { ...edited, confidence: isRecordReady(edited) ? 100 : record.confidence, status: isRecordReady(edited) ? 'ready' : 'needs_review' };
+    }, true);
+    setNotice('Review saved. Required fields determine delivery readiness.');
+  }
+
+  function autoMatchReviewItems() {
+    updateRecords((record) => {
+      if (record.status !== 'needs_review') return record;
+      const matched = { ...record, detectedName: record.rosterName, email: record.email || record.suggestedEmail };
+      return { ...matched, confidence: 99, status: isRecordReady(matched) ? 'ready' : 'needs_review' };
+    }, true);
+    setNotice('Roster auto-match resolved every review item in this sample batch.');
+  }
+
+  function runDryRun() {
+    if (!activeBatch) return;
+    const readyRecords = activeBatch.records.filter((record) => record.status === 'ready');
+    const nextLog = readyRecords.map((record) => ({
+      id: record.id,
+      recipient: record.detectedName,
+      email: record.email,
+      status: 'simulated' as const,
+      message: 'Validated; no email sent.',
+    }));
+    setDeliveryLogs((current) => ({ ...current, [activeBatch.id]: nextLog }));
+    updateRecords((record) => record.status === 'ready' ? { ...record, deliveryState: 'simulated' } : record);
+    setNotice(`Dry-run complete. ${readyRecords.length} emails simulated; zero external requests.`);
+  }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-neutral-100 font-sans selection:bg-orange-500 selection:text-white flex flex-col">
-      {/* Top Navbar */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        participants={participants}
-        onResetData={handleResetData}
-        onLaunchDemoPlayer={() => setIsDemoPlaying(!isDemoPlaying)}
-        isDemoPlaying={isDemoPlaying}
-      />
-
-      {/* Interactive Video Demo Player Header overlay if active */}
-      {isDemoPlaying && (
-        <InteractiveDemoPlayer
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          setHighlightedElementId={setHighlightedElementId}
-          onCloseDemo={() => {
-            setIsDemoPlaying(false);
-            setHighlightedElementId(undefined);
-          }}
-        />
-      )}
-
-      {/* Flow Stage Stepper Navigation Bar */}
-      <FlowStepsNav activeTab={activeTab} setActiveTab={setActiveTab} />
-
-      {/* Main Studio Viewport */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
-        {activeTab === 'spreadsheets' && (
-          <SpreadsheetView
-            participants={participants}
-            setParticipants={setParticipants}
-            selectedIds={selectedIds}
-            setSelectedIds={setSelectedIds}
-            setActiveTab={setActiveTab}
-            highlightedElementId={highlightedElementId}
-          />
-        )}
-
-        {activeTab === 'template' && (
-          <TemplateEditor
-            config={config}
-            setConfig={setConfig}
-            sampleParticipant={sampleParticipant}
-            setActiveTab={setActiveTab}
-            highlightedElementId={highlightedElementId}
-          />
-        )}
-
-        {activeTab === 'mapping' && (
-          <MappingView
-            participants={participants}
-            setActiveTab={setActiveTab}
-            highlightedElementId={highlightedElementId}
-          />
-        )}
-
-        {activeTab === 'generator' && (
-          <BulkGeneratorView
-            participants={participants}
-            setParticipants={setParticipants}
-            selectedIds={selectedIds}
-            config={config}
-            setActiveTab={setActiveTab}
-            highlightedElementId={highlightedElementId}
-          />
-        )}
-
-        {activeTab === 'dispatch' && (
-          <EmailDispatchView
-            participants={participants}
-            setParticipants={setParticipants}
-            config={config}
-            highlightedElementId={highlightedElementId}
-          />
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-white/5 bg-black/80 backdrop-blur-md text-neutral-500 text-xs py-4 text-center">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <div>
-            Center for Learning & Talent (CLT) — FlowStudio Certificate Engine
-          </div>
-          <div className="text-neutral-600">
-            Powered by Google Sheets • Canva Bulk Engine • Email Dispatch API
-          </div>
-        </div>
-      </footer>
+    <div className="app-shell">
+      <AppHeader batchTitle={activeBatch?.title} onOpenProjects={() => setActiveBatchId(undefined)} onReset={resetDemo} />
+      {activeBatch ? (
+        <>
+          <WorkspaceNav activeSection={section} onChange={setSection} />
+          {section === 'review' ? (
+            <ReviewWorkspace batch={activeBatch} filter={filter} selectedId={selectedId} onFilterChange={setFilter} onSelect={setSelectedId} onApplySuggestion={applySuggestion} onAutoMatch={autoMatchReviewItems} onSave={saveRecord} />
+          ) : <DeliveryPanel batch={activeBatch} deliveryLog={activeDeliveryLog} onRunDryRun={runDryRun} />}
+        </>
+      ) : <ProjectsHub batches={batches} onOpenBatch={openBatch} />}
+      <div className="toast" aria-live="polite" hidden={!notice}>{notice}</div>
     </div>
   );
 }

@@ -1,50 +1,44 @@
-export interface Participant {
+export type WorkspaceSection = 'review' | 'delivery';
+
+export type CertificateStatus = 'needs_review' | 'ready' | 'sent';
+
+export type DeliveryState = 'not_run' | 'simulated' | 'sent';
+
+export interface CertificateRecord {
   id: string;
-  name: string;
-  subCompany: 'MOC' | 'LRU' | 'CHORUS' | 'FPT' | 'HRD';
-  category: 'Soft Skill' | 'Hard Skill';
-  subCategory: string;
-  skillName: string;
-  level: 'Level 1' | 'Level 2' | 'Level 3' | 'Beginner' | 'Intermediate' | 'Expert';
-  issueDate: string;
-  status: 'To be printed' | 'Printed';
-  certCode: string;
+  pageNumber: number;
+  detectedName: string;
+  rosterName: string;
+  certificateCode: string;
   email: string;
-  emailStatus: 'Sent' | 'To Send' | 'Missing Email' | 'Sending...';
-  askCert: 'Yes' | 'No';
+  suggestedEmail: string;
+  confidence: number;
+  status: CertificateStatus;
+  deliveryState: DeliveryState;
 }
 
-export interface CertTemplateConfig {
-  organizationLogo: string;
-  organizationName: string;
+export interface CertificateBatch {
+  id: string;
   title: string;
-  subtitle: string;
-  accentColor: string;
-  themeStyle: 'classic_purple' | 'modern_emerald' | 'gold_executive' | 'navy_blue';
-  signatoryName: string;
-  signatoryTitle: string;
-  showQrCode: boolean;
-  borderPattern: 'geometric' | 'minimal' | 'formal';
+  eventLabel: string;
+  sourceFile: string;
+  uploadedAt: string;
+  records: CertificateRecord[];
+  lastDryRunAt?: string;
 }
 
-export interface BatchProcessingStats {
-  total: number;
-  completed: number;
-  failed: number;
-  pending: number;
-  startTime?: number;
-  endTime?: number;
+export interface RecordEdits {
+  detectedName: string;
+  certificateCode: string;
+  email: string;
 }
 
-export type ActiveTab = 'spreadsheets' | 'template' | 'mapping' | 'generator' | 'dispatch' | 'demo_player';
+export type RecordFilter = 'all' | CertificateStatus;
 
-export interface DemoStep {
-  id: number;
-  tab: ActiveTab;
-  title: string;
-  subtitle: string;
-  narrationVi: string;
-  narrationEn: string;
-  featureKey: string;
-  targetHighlight?: string;
+export interface DeliveryLogEntry {
+  id: string;
+  recipient: string;
+  email: string;
+  status: 'simulated' | 'blocked';
+  message: string;
 }
