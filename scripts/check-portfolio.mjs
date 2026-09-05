@@ -193,6 +193,7 @@ try {
     { label: 'verified Pages artifact upload', pattern: /actions\/upload-pages-artifact@v\d+/ },
     { label: '.portfolio-dist upload path', pattern: /\bpath:\s*\.portfolio-dist\s*$/m },
     { label: 'Pages deployment action', pattern: /actions\/deploy-pages@v\d+/ },
+    { label: 'Pages deployment runner', pattern: /deploy-pages:[\s\S]*?runs-on:\s*ubuntu-latest/ },
     { label: 'live CertStudio runtime check', pattern: /assets\/proof\/certstudio-runtime\.html/ },
     { label: 'live registration runtime check', pattern: /assets\/proof\/registration-runtime\.html/ },
   ];
