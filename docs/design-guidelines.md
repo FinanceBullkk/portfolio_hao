@@ -2,7 +2,7 @@
 
 **Status:** current source of truth (2026-09-05)
 
-The portfolio uses the owner's earlier compact monochrome design. The public proof remains product-first: visitors can open a playable demo, while case studies provide optional technical depth.
+The portfolio uses the owner's earlier compact monochrome design. The public proof remains product-first: visitors get the strongest honest evidence available for each project, while case studies provide optional technical depth.
 
 ## 1. Audience and hierarchy
 
@@ -12,10 +12,10 @@ The home sequence is:
 
 1. Identity and target-role summary.
 2. Skills and focus.
-3. Four selected-work cards.
+3. Two selected-work cards.
 4. Contact and profile links.
 
-Each work card links to a playable demo first and a case study second. Production links remain visibly access-controlled.
+Each work card links to its strongest honest evidence: a playable demo when the interaction is meaningful, otherwise a case study. Production links remain visibly access-controlled.
 
 ## 2. Visual language
 
@@ -62,7 +62,7 @@ The home page is the visual reference.
 
 - Hero: compact bordered card with identity, role fit, contact action, and profile links.
 - Skills: four small cards in a two-column desktop grid.
-- Selected work: four cards with a product marker, short description, evidence label, playable-demo link, and case-study link.
+- Selected work: three cards with a product marker, short description, evidence label, and links matching the project's real proof and access state. Proxy & Browser Profile Management appears first as the flagship system case study.
 - Responsive: grids collapse to one column below 640px without horizontal overflow.
 
 Do not replace the narrow shell with a full-width marketing layout or add decorative hero art.
@@ -73,21 +73,21 @@ Case studies reuse the same nav, width, typography, and footer. Keep the detaile
 
 The default view is a recruiter scan, not a long article. It should show:
 
-- one short sentence describing the product;
-- three compact facts: problem, what Hao built, and the outcome or control;
-- the playable-demo action before any technical detail;
-- one concise proof/access statement.
+- one short sentence combining the product and its evidence boundary;
+- the primary evidence or access action before any technical detail;
+- one concise secondary link when it materially helps access or verification.
 
-Tags, architecture, mockups, decisions, and safeguards belong inside a native `<details>` disclosure labelled `Read the full case study`. The disclosure is collapsed by default, works without JavaScript, keeps a visible keyboard focus state, and must not hide the primary demo action.
+Tags, architecture, mockups, decisions, and safeguards belong inside a native `<details>` disclosure labelled `Read the full case study`. The disclosure is collapsed by default, works without JavaScript, keeps a visible keyboard focus state, and must not hide the primary evidence or access action.
 
-Playable-demo links use `data-proof-cta` so automated checks can verify the route.
+Playable-demo links use `data-proof-cta` so automated checks can verify the route. Case-study-only projects do not expose that attribute.
 
-## 7. Playable demo pages
+## 7. Public proof pages
 
-The four pages under `assets/proof/` keep the current interactive implementations.
+The public proof page under `assets/proof/` keeps the current interactive implementation.
 
-- CertStudio uses an approved standalone React sandbox mirroring the production PDF/OCR review flow; Corgi77 embeds its approved isolated React demo build.
-- TMS and Recruitment are focused in-memory prototypes.
+- Corgi77 embeds its approved isolated React demo build.
+- Proxy & Browser Profile Management uses a same-origin, in-memory guided walkthrough with amber/teal operational states and an explicit revoked-device branch.
+- CertStudio is case-study-only: static architecture and interface evidence explain the workflow, while the production link remains access-controlled.
 - All public records are synthetic.
 - State resets on refresh.
 - No public demo may authenticate, call a production backend, expose admin-only controls, or persist user data.
@@ -120,7 +120,6 @@ Use plain, specific English. Keep claims adjacent to their evidence state.
 Run:
 
 ```powershell
-npm --prefix certificate-flow run build
 npm --prefix ld-event-registration-platform run build
 npm run build:portfolio
 npm run check:portfolio
@@ -133,4 +132,4 @@ Review both themes, keyboard order, no-JavaScript first paint, reduced motion, 2
 
 ## 11. Change boundary
 
-`scripts/build-portfolio.mjs` owns the static publish allowlist. Only approved public files and the two approved runtime bundles enter `.portfolio-dist`. Source code, environment files, plans, docs, and unresolved captures stay outside the artifact.
+`scripts/build-portfolio.mjs` owns the static publish allowlist. Only approved public files and the Corgi77 runtime bundle enter `.portfolio-dist`. Source code, environment files, plans, docs, and unresolved captures stay outside the artifact.

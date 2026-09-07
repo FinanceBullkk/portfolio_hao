@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Proxy and browser profile management trust boundaries</title>
+  <desc id="desc">A shared web console issues a signed scoped handoff to an assigned Relay PC, which performs a loopback-only action against a local browser profile store.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 10 5 0 10z" fill="#5c6762"/>
+    </marker>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#d9dedb" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="420" rx="24" fill="#f5f4ef"/>
+  <rect x="1" y="1" width="1198" height="418" rx="23" fill="url(#grid)" stroke="#c9cfcb" stroke-width="2"/>
+  <g font-family="Segoe UI, sans-serif">
+    <text x="64" y="62" fill="#69736f" font-size="16" font-weight="600" letter-spacing="2">SANITISED SYSTEM VIEW</text>
+    <text x="64" y="96" fill="#17201d" font-size="28" font-weight="700">Split trust keeps shared control separate from local secrets</text>
+
+    <g transform="translate(64 144)">
+      <rect width="270" height="180" rx="14" fill="#fffdfa" stroke="#9da8a3" stroke-width="2"/>
+      <rect x="18" y="18" width="48" height="8" rx="4" fill="#0b6659"/>
+      <text x="18" y="60" fill="#17201d" font-size="21" font-weight="700">Shared web console</text>
+      <text x="18" y="91" fill="#4f5b56" font-size="16">Ownership and authorization</text>
+      <text x="18" y="119" fill="#4f5b56" font-size="16">Proxy readiness</text>
+      <text x="18" y="147" fill="#4f5b56" font-size="16">Sanitised audit record</text>
+    </g>
+
+    <path d="M350 234H456" fill="none" stroke="#5c6762" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="361" y="187" width="84" height="28" rx="5" fill="#fff2da" stroke="#b57924"/>
+    <text x="403" y="206" text-anchor="middle" fill="#754300" font-size="12" font-weight="700">SCOPED</text>
+    <text x="403" y="260" text-anchor="middle" fill="#5c6762" font-size="13">signed handoff</text>
+
+    <g transform="translate(472 144)">
+      <rect width="270" height="180" rx="14" fill="#17201d" stroke="#17201d" stroke-width="2"/>
+      <rect x="18" y="18" width="48" height="8" rx="4" fill="#e5a94f"/>
+      <text x="18" y="60" fill="#f6f8f7" font-size="21" font-weight="700">Assigned Relay PC</text>
+      <text x="18" y="91" fill="#c4cfca" font-size="16">Recipient verification</text>
+      <text x="18" y="119" fill="#c4cfca" font-size="16">Operator-domain secrets</text>
+      <text x="18" y="147" fill="#c4cfca" font-size="16">Fail-closed execution</text>
+    </g>
+
+    <path d="M758 234H864" fill="none" stroke="#5c6762" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="771" y="187" width="80" height="28" rx="5" fill="#e6f4ef" stroke="#328070"/>
+    <text x="811" y="206" text-anchor="middle" fill="#0b5a4e" font-size="12" font-weight="700">LOCAL</text>
+    <text x="811" y="260" text-anchor="middle" fill="#5c6762" font-size="13">loopback only</text>
+
+    <g transform="translate(880 144)">
+      <rect width="256" height="180" rx="14" fill="#fffdfa" stroke="#9da8a3" stroke-width="2"/>
+      <rect x="18" y="18" width="48" height="8" rx="4" fill="#0b6659"/>
+      <text x="18" y="60" fill="#17201d" font-size="21" font-weight="700">Local profile store</text>
+      <text x="18" y="91" fill="#4f5b56" font-size="16">Browser profile data</text>
+      <text x="18" y="119" fill="#4f5b56" font-size="16">Human-controlled login</text>
+      <text x="18" y="147" fill="#4f5b56" font-size="16">No server-side sessions</text>
+    </g>
+
+    <text x="64" y="375" fill="#69736f" font-size="15">Shared state can coordinate the workflow; credentials and browser sessions stay on the assigned device.</text>
+  </g>
+</svg>

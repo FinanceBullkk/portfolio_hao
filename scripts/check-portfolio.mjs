@@ -8,16 +8,13 @@ const pagesWorkflow = path.join(root, '.github', 'workflows', 'portfolio-checks.
 const requiredRootPages = [
   'index.html',
   'about.html',
+  'proxy-browser-profile-management.html',
   'certificate-pipeline.html',
-  'tms.html',
   'registration.html',
-  'recruitment.html',
 ];
 const requiredProofPages = [
-  'assets/proof/certstudio-walkthrough.html',
+  'assets/proof/proxy-browser-profile-management-walkthrough.html',
   'assets/proof/registration-walkthrough.html',
-  'assets/proof/tms-walkthrough.html',
-  'assets/proof/recruitment-walkthrough.html',
 ];
 const forbiddenPatterns = [
   { label: 'reference capture name', pattern: /temp_nghia|nghia_dom|scrape\.js/i },
@@ -194,7 +191,6 @@ try {
     { label: '.portfolio-dist upload path', pattern: /\bpath:\s*\.portfolio-dist\s*$/m },
     { label: 'Pages deployment action', pattern: /actions\/deploy-pages@v\d+/ },
     { label: 'Pages deployment runner', pattern: /deploy-pages:[\s\S]*?runs-on:\s*ubuntu-latest/ },
-    { label: 'live CertStudio runtime check', pattern: /assets\/proof\/certstudio-runtime\.html/ },
     { label: 'live registration runtime check', pattern: /assets\/proof\/registration-runtime\.html/ },
   ];
   for (const requirement of deploymentRequirements) {

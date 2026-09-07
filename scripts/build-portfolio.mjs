@@ -11,10 +11,9 @@ const output = path.join(root, '.portfolio-dist');
 const rootFiles = [
   'index.html',
   'about.html',
+  'proxy-browser-profile-management.html',
   'certificate-pipeline.html',
-  'tms.html',
   'registration.html',
-  'recruitment.html',
   '.nojekyll',
 ];
 
@@ -25,8 +24,7 @@ const assetFiles = [
   'assets/visuals/signal-system.svg',
   'assets/visuals/registration-system.svg',
   'assets/visuals/certstudio-system.svg',
-  'assets/visuals/tms-system.svg',
-  'assets/visuals/recruitment-system.svg',
+  'assets/visuals/proxy-browser-profile-management-system.svg',
   'assets/css/about.css',
   'assets/css/base.css',
   'assets/css/case-study.css',
@@ -34,34 +32,24 @@ const assetFiles = [
   'assets/css/certificate-pipeline-mocks.css',
   'assets/css/home.css',
   'assets/css/product-demo.css',
+  'assets/css/proxy-browser-profile-management.css',
+  'assets/css/proxy-browser-profile-management-demo.css',
   'assets/css/proof.css',
-  'assets/css/recruitment-demo.css',
   'assets/css/registration-mocks.css',
-  'assets/css/tms.css',
-  'assets/css/tms-demo.css',
   'assets/js/flow-demo.js',
-  'assets/js/recruitment-demo.js',
+  'assets/js/proxy-browser-profile-management-demo.js',
   'assets/js/reveal.js',
   'assets/js/theme.js',
-  'assets/js/tms-demo.js',
-  'assets/proof/certstudio-walkthrough.html',
   'assets/proof/registration-walkthrough.html',
-  'assets/proof/tms-walkthrough.html',
-  'assets/proof/recruitment-walkthrough.html',
+  'assets/proof/proxy-browser-profile-management-walkthrough.html',
 ];
 
-// These are the two real, locally runnable product builds. They are copied
+// This real, locally runnable product build is copied
 // into the same-origin proof boundary so a recruiter can interact with the
 // product without receiving a production credential or crossing an iframe
 // origin. The source dist folders are committed build artefacts and are
-// refreshed explicitly when either app changes.
+// refreshed explicitly when the app changes.
 const demoBundles = [
-  {
-    source: 'certificate-flow/dist',
-    runtime: 'assets/proof/certstudio-runtime.html',
-    assets: 'assets/proof/certstudio-runtime-assets',
-    label: 'CertStudio',
-  },
   {
     source: 'ld-event-registration-platform/dist',
     runtime: 'assets/proof/registration-runtime.html',
@@ -155,4 +143,5 @@ const outputFiles = await (async () => {
   await collect(output);
   return files;
 })();
-console.log(`Built .portfolio-dist with ${outputFiles.length} intentional public files (${demoBundles.length} playable bundles).`);
+const demoBundleLabel = demoBundles.length === 1 ? 'playable bundle' : 'playable bundles';
+console.log(`Built .portfolio-dist with ${outputFiles.length} intentional public files (${demoBundles.length} ${demoBundleLabel}).`);

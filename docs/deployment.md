@@ -14,7 +14,7 @@ https://financebullkk.github.io/portfolio_hao/
 git push origin main
 ```
 
-The workflow installs dependencies, builds the allowlisted portfolio artifact, runs static and browser checks, uploads `.portfolio-dist`, deploys it, then probes both embedded runtime URLs.
+The workflow installs dependencies, builds the allowlisted portfolio artifact, runs static and browser checks, uploads `.portfolio-dist`, deploys it, then probes the embedded Corgi77 runtime URL.
 
 ## Environment Variables
 
@@ -35,7 +35,7 @@ git push origin main
 
 ## Troubleshooting
 
-- If a walkthrough loads but its iframe returns 404, confirm Pages uses GitHub Actions rather than legacy branch publishing.
+- If the Corgi77 walkthrough loads but its iframe returns 404, confirm Pages uses GitHub Actions rather than legacy branch publishing.
 - Confirm the workflow uploads `path: .portfolio-dist`, not the repository root.
 - Run `npm run verify:portfolio` locally before pushing.
-- Inspect the `Portfolio checks` workflow and its `Verify deployed demo runtimes` step for the exact failing URL.
+- Inspect the `Portfolio checks` workflow and its `Verify deployed demo runtime` step for the exact failing URL.

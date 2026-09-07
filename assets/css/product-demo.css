@@ -1,4 +1,4 @@
-/* Product surfaces: compact context + a playable, in-memory demo. */
+/* Product surfaces: compact context around public interactive evidence. */
 body.product-demo-page {
   --paper: var(--bg);
   --ink: var(--fg);
@@ -11,7 +11,6 @@ body.product-demo-page {
   min-width: 320px;
 }
 body.product-demo-page .container-sm { padding-bottom: 36px; }
-body.live-certstudio .container-sm { max-width: 90rem; }
 body.product-demo-page .nav-container { margin-bottom: 0; }
 body.product-demo-page .editorial-header { display: none; }
 body.product-demo-page .nav a { font-size: 14px; }

@@ -4,14 +4,11 @@ import { expect, test } from '@playwright/test';
 const publicPages = [
   '/index.html',
   '/about.html',
+  '/proxy-browser-profile-management.html',
   '/certificate-pipeline.html',
-  '/tms.html',
   '/registration.html',
-  '/recruitment.html',
-  '/assets/proof/certstudio-walkthrough.html',
   '/assets/proof/registration-walkthrough.html',
-  '/assets/proof/tms-walkthrough.html',
-  '/assets/proof/recruitment-walkthrough.html',
+  '/assets/proof/proxy-browser-profile-management-walkthrough.html',
 ];
 
 for (const path of publicPages) {
@@ -75,7 +72,8 @@ test('case study deep dive works without JavaScript', async ({ browser }) => {
   const page = await context.newPage();
   await page.goto('/certificate-pipeline.html', { waitUntil: 'domcontentloaded' });
   const deepDive = page.locator('.case-deep-dive');
-  await expect(page.locator('[data-proof-cta]').first()).toBeVisible();
+  await expect(page.locator('[data-proof-cta]')).toHaveCount(0);
+  await expect(page.locator('.lede')).toBeVisible();
   await expect(deepDive.locator('.cs-section').first()).not.toBeVisible();
   await deepDive.locator('summary').click();
   await expect(deepDive.locator('.cs-section').first()).toBeVisible();

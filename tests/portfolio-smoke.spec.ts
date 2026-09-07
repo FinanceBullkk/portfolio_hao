@@ -1,12 +1,11 @@
 import { expect, test } from '@playwright/test';
 
 const rootPages = [
-  { name: 'home', path: '/index.html', proof: ['/assets/proof/registration-walkthrough.html', '/assets/proof/certstudio-walkthrough.html', '/assets/proof/tms-walkthrough.html', '/assets/proof/recruitment-walkthrough.html'] },
+  { name: 'home', path: '/index.html', proof: ['/assets/proof/proxy-browser-profile-management-walkthrough.html', '/assets/proof/registration-walkthrough.html'] },
   { name: 'about', path: '/about.html', proof: [] },
-  { name: 'CertStudio', path: '/certificate-pipeline.html', proof: ['/assets/proof/certstudio-walkthrough.html'] },
-  { name: 'TMS', path: '/tms.html', proof: ['/assets/proof/tms-walkthrough.html'] },
+  { name: 'Proxy & Browser Profile Management', path: '/proxy-browser-profile-management.html', proof: ['/assets/proof/proxy-browser-profile-management-walkthrough.html'] },
+  { name: 'CertStudio', path: '/certificate-pipeline.html', proof: [] },
   { name: 'Registration', path: '/registration.html', proof: ['/assets/proof/registration-walkthrough.html'] },
-  { name: 'Recruitment', path: '/recruitment.html', proof: ['/assets/proof/recruitment-walkthrough.html'] },
 ];
 
 const caseStudyPages = rootPages.filter(({ name }) => !['home', 'about'].includes(name));
@@ -80,11 +79,17 @@ for (const pageInfo of rootPages) {
 }
 
 for (const pageInfo of caseStudyPages) {
-  test(`${pageInfo.name} keeps the demo visible and the deep dive optional`, async ({ page }) => {
+  test(`${pageInfo.name} keeps a concise recruiter view and the deep dive optional`, async ({ page }) => {
     await page.goto(pageInfo.path, { waitUntil: 'networkidle' });
     const deepDive = page.locator('.case-deep-dive');
-    await expect(page.locator('[data-proof-cta]').first()).toBeVisible();
-    await expect(page.locator('.case-summary > div')).toHaveCount(3);
+    if (pageInfo.proof.length) {
+      await expect(page.locator('[data-proof-cta]').first()).toBeVisible();
+    } else {
+      await expect(page.locator('[data-proof-cta]')).toHaveCount(0);
+      await expect(page.getByRole('link', { name: /Production app \(access required\)/ }).first()).toBeVisible();
+    }
+    await expect(page.locator('.lede')).toBeVisible();
+    await expect(page.locator('.case-summary')).toHaveCount(0);
     await expect(deepDive).not.toHaveAttribute('open', '');
     await expect(deepDive.locator('.cs-section').first()).not.toBeVisible();
     await deepDive.locator('summary').click();
@@ -93,19 +98,6 @@ for (const pageInfo of caseStudyPages) {
   });
 }
 
-test('TMS workflow tour is manual and keeps hidden panels out of the tab order', async ({ page }) => {
-  await page.goto('/tms.html', { waitUntil: 'networkidle' });
-  await page.locator('.case-deep-dive > summary').click();
-  const inactivePanels = page.locator('.flow-demo-panel[aria-hidden="true"]');
-  await expect(inactivePanels).not.toHaveCount(0);
-  const inertStates = await inactivePanels.evaluateAll((panels) => panels.map((panel) => (panel as HTMLElement).inert));
-  expect(inertStates.every(Boolean)).toBe(true);
-  const next = page.locator('.flow-demo-nav[data-dir="1"]');
-  await next.click();
-  await expect(page.locator('.flow-demo-panel.active')).toHaveCount(1);
-  await expect(page.locator('.flow-demo-panel.active')).toHaveAttribute('aria-hidden', 'false');
-});
-
 test('minimal portfolio layout holds at intermediate widths', async ({ page }) => {
   for (const width of [768, 1280]) {
     await page.setViewportSize({ width, height: 900 });
@@ -113,7 +105,7 @@ test('minimal portfolio layout holds at intermediate widths', async ({ page }) =
     const dimensions = await page.evaluate(() => ({ width: document.documentElement.scrollWidth, viewport: window.innerWidth }));
     expect(dimensions.width, `horizontal overflow at ${width}px`).toBeLessThanOrEqual(dimensions.viewport + 1);
     await expect(page.locator('.hero-card')).toBeVisible();
-    await expect(page.locator('.product-card')).toHaveCount(4);
+    await expect(page.locator('.product-card')).toHaveCount(3);
   }
 });
 
@@ -126,58 +118,6 @@ test('primary navigation controls keep a mobile-sized target', async ({ page }) 
   }));
   expect(sizes.length).toBeGreaterThan(0);
   expect(sizes.every(({ width, height }) => width >= 44 && height >= 44)).toBe(true);
-});
-
-test('CertStudio completes the current review workflow without external requests or horizontal overflow', async ({ page }) => {
-  const errors: string[] = [];
-  const failedRequests: string[] = [];
-  const externalRequests: string[] = [];
-  page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
-  page.on('pageerror', (error) => errors.push(error.message));
-  page.on('requestfailed', (request) => failedRequests.push(request.url()));
-  page.on('request', (request) => {
-    if (!request.url().startsWith('http://127.0.0.1:4173/')) externalRequests.push(request.url());
-  });
-  await page.goto('/assets/proof/certstudio-walkthrough.html', { waitUntil: 'networkidle' });
-  const demo = page.frameLocator('iframe[title="CertStudio interactive product demo"]');
-  await expect(demo.getByRole('heading', { name: 'Certificate projects' })).toBeVisible();
-  await demo.getByRole('button', { name: 'Open review workspace for English Proficiency Q3' }).click();
-  await expect(demo.getByRole('heading', { name: 'English Proficiency Q3' })).toBeVisible();
-  await demo.getByRole('button', { name: 'Review page 2: Demo Learner O2' }).click();
-  await demo.getByRole('button', { name: /Roster suggestion/i }).click();
-  await expect(demo.getByRole('button', { name: 'Review page 2: Demo Learner 02' })).toBeVisible();
-  await demo.getByRole('button', { name: 'Auto-match 1 review items' }).click();
-  await expect(demo.getByRole('button', { name: 'Roster matching complete' })).toBeDisabled();
-  await demo.getByRole('button', { name: /Delivery check/i }).click();
-  await expect(demo.getByText('No review blockers')).toBeVisible();
-  await demo.getByRole('button', { name: 'Run safe delivery simulation' }).click();
-  await expect(demo.getByText('Dry-run complete · 7 emails simulated')).toBeVisible();
-  await demo.getByRole('button', { name: 'Projects' }).click();
-  await demo.getByRole('button', { name: 'Open review workspace for English Proficiency Q3' }).click();
-  await demo.getByRole('button', { name: /Delivery check/i }).click();
-  await expect(demo.getByText('Dry-run complete · 7 emails simulated')).toBeVisible();
-  const runtimeFrame = page.locator('iframe[title="CertStudio interactive product demo"]');
-  const overflow = await runtimeFrame.evaluate((node) => {
-    const document = node.contentDocument;
-    if (!document) return true;
-    return document.documentElement.scrollWidth > document.documentElement.clientWidth;
-  });
-  expect(overflow).toBe(false);
-  expect(errors, errors.join('\n')).toEqual([]);
-  expect(failedRequests, failedRequests.join('\n')).toEqual([]);
-  expect(externalRequests, externalRequests.join('\n')).toEqual([]);
-});
-
-test('CertStudio keeps delivered history read-only', async ({ page }) => {
-  await page.goto('/assets/proof/certstudio-walkthrough.html', { waitUntil: 'networkidle' });
-  const demo = page.frameLocator('iframe[title="CertStudio interactive product demo"]');
-  await demo.getByRole('button', { name: 'Open delivery history for Facilitator Essentials' }).click();
-  await expect(demo.getByText('5 deliveries already recorded')).toBeVisible();
-  await expect(demo.getByRole('button', { name: 'No pending certificates' })).toBeDisabled();
-  await demo.getByRole('button', { name: /Review queue/i }).click();
-  await expect(demo.getByText('Delivery recorded')).toBeVisible();
-  await expect(demo.getByRole('button', { name: 'Save review' })).toHaveCount(0);
-  await expect(demo.getByLabel('Recipient name')).toHaveAttribute('readonly', '');
 });
 
 test('Corgi77 mounts in isolated demo mode and completes a slotted booking', async ({ page }) => {
@@ -224,21 +164,32 @@ test('Corgi77 simple registration stays inside the public demo state', async ({ 
   await expect(demo.getByText(/You.re on the list/i)).toBeVisible();
 });
 
-test('TMS demo updates state and exposes the action in its audit log', async ({ page }) => {
-  await page.goto('/assets/proof/tms-walkthrough.html', { waitUntil: 'networkidle' });
-  await page.locator('[data-tms-view="learners"]').click();
-  await page.locator('[data-tms-action="complete"]:not([disabled])').first().click();
-  await expect(page.locator('[data-tms-live]')).toContainText('moved to Complete');
-  await page.locator('[data-tms-view="audit"]').click();
-  await expect(page.locator('[data-tms-log]')).toContainText('moved to Complete');
+test('proxy and browser profile demo completes the allowed control path without external requests', async ({ page }) => {
+  const externalRequests: string[] = [];
+  page.on('request', (request) => {
+    if (!request.url().startsWith('http://127.0.0.1:4173/')) externalRequests.push(request.url());
+  });
+  await page.goto('/assets/proof/proxy-browser-profile-management-walkthrough.html', { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: 'Check synthetic proxy' }).click();
+  await expect(page.locator('#proxy-status')).toHaveText('Available');
+  await page.getByRole('button', { name: 'Bind account and profile' }).click();
+  await page.getByRole('button', { name: 'Issue scoped handoff' }).click();
+  await page.getByRole('button', { name: 'Launch local profile' }).click();
+  await expect(page.locator('#launch-status')).toHaveText('Running');
+  await expect(page.locator('#audit-log')).toContainText('LOCAL_PROFILE_READY');
+  expect(externalRequests, externalRequests.join('\n')).toEqual([]);
 });
 
-test('Recruitment demo maps a new intake record into the board', async ({ page }) => {
-  await page.goto('/assets/proof/recruitment-walkthrough.html', { waitUntil: 'networkidle' });
-  const form = page.locator('[data-recruitment-form]');
-  await form.locator('input[name="name"]').fill('Demo Candidate 05');
-  await form.locator('input[name="role"]').fill('Transformation analyst');
-  await form.getByRole('button', { name: /Map to board/i }).click();
-  await expect(page.locator('[data-recruitment-board]')).toContainText('Demo Candidate 05');
-  await expect(page.locator('[data-recruitment-live]')).toContainText('Mapped Demo Candidate 05');
+test('proxy and browser profile demo denies a revoked Relay handoff and resets on refresh', async ({ page }) => {
+  await page.goto('/assets/proof/proxy-browser-profile-management-walkthrough.html', { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: 'Check synthetic proxy' }).click();
+  await page.getByRole('button', { name: 'Bind account and profile' }).click();
+  await page.getByRole('button', { name: 'Revoke Relay PC' }).click();
+  await page.getByRole('button', { name: 'Issue scoped handoff' }).click();
+  await expect(page.locator('#demo-live')).toContainText('Handoff denied');
+  await expect(page.locator('#audit-log')).toContainText('RELAY_RECIPIENT_REVOKED');
+  await expect(page.getByRole('button', { name: 'Launch local profile' })).toBeDisabled();
+  await page.reload({ waitUntil: 'networkidle' });
+  await expect(page.locator('#proxy-status')).toHaveText('Not checked');
+  await expect(page.locator('#audit-log')).toContainText('No actions yet');
 });

@@ -73,20 +73,19 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
 
-      - name: Verify deployed demo runtimes
+      - name: Verify deployed demo runtime
         shell: bash
         env:
           SITE_URL: ${{ steps.deployment.outputs.page_url }}
         run: |
-          for runtime in assets/proof/certstudio-runtime.html assets/proof/registration-runtime.html; do
-            for attempt in {1..12}; do
-              if curl --fail --silent --show-error "${SITE_URL}${runtime}" > /dev/null; then
-                break
-              fi
-              if [ "$attempt" -eq 12 ]; then
-                echo "Runtime unavailable after deployment: ${SITE_URL}${runtime}" >&2
-                exit 1
-              fi
-              sleep 5
-            done
+          runtime="assets/proof/registration-runtime.html"
+          for attempt in {1..12}; do
+            if curl --fail --silent --show-error "${SITE_URL}${runtime}" > /dev/null; then
+              break
+            fi
+            if [ "$attempt" -eq 12 ]; then
+              echo "Runtime unavailable after deployment: ${SITE_URL}${runtime}" >&2
+              exit 1
+            fi
+            sleep 5
           done

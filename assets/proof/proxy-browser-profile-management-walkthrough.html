@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ecebe5">
+  <meta name="color-scheme" content="light dark">
+  <title>Proxy &amp; Browser Profile Management — guided demo — Hao</title>
+  <meta name="description" content="A synthetic guided demo of proxy readiness, device-bound browser profiles, secure Relay handoff, and fail-closed controls.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/product-demo.css">
+  <link rel="stylesheet" href="../css/proxy-browser-profile-management-demo.css">
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');var d=t==='dark'||(t!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d)}catch(e){}</script>
+</head>
+<body class="product-demo-page proxy-demo-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <main id="main-content" class="container-sm" tabindex="-1" data-proof-page="proxy-browser-profile-management">
+    <aside class="nav-container"><div class="nav-sticky"><nav class="nav-bar" aria-label="Primary navigation"><div class="nav"><a href="../../index.html">home</a><a href="../../about.html">about</a></div><button type="button" class="theme-toggle" aria-label="Switch to dark mode" aria-pressed="false" title="Dark mode"><svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path></svg><svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41-1.41"></path></svg></button></nav></div></aside>
+
+    <header class="demo-intro">
+      <div><p class="demo-kicker">Guided demo / synthetic operations</p><h1>Bind the work. Gate the device.</h1></div>
+      <div class="demo-intro-meta"><span class="demo-badge">Demo mode</span><span>Synthetic · resets on refresh</span><a href="../../proxy-browser-profile-management.html">Read case study →</a></div>
+    </header>
+
+    <section class="ops-console" aria-labelledby="ops-title">
+      <div class="ops-toolbar"><strong id="ops-title">Proxy &amp; Browser Profile Management</strong><div class="ops-toolbar-meta"><span class="ops-dot" aria-hidden="true"></span><span>In-memory sandbox</span><span>No backend</span><span>No credentials</span></div></div>
+      <div class="ops-layout">
+        <aside class="ops-rail" aria-label="Workflow progress">
+          <p class="ops-eyebrow">Control path</p>
+          <h2>Five visible gates</h2>
+          <ol class="ops-steps">
+            <li class="ops-step" data-complete="false"><span class="ops-step-index">01</span><span><strong>Check proxy</strong><span>Confirm endpoint readiness.</span></span></li>
+            <li class="ops-step" data-complete="false"><span class="ops-step-index">02</span><span><strong>Bind assignment</strong><span>Connect owner, device, and profile.</span></span></li>
+            <li class="ops-step" data-complete="false"><span class="ops-step-index">03</span><span><strong>Issue handoff</strong><span>Scope action to one Relay PC.</span></span></li>
+            <li class="ops-step" data-complete="false"><span class="ops-step-index">04</span><span><strong>Launch locally</strong><span>Unlock only after all checks pass.</span></span></li>
+            <li class="ops-step" data-complete="false"><span class="ops-step-index">05</span><span><strong>Write audit</strong><span>Record safe result codes.</span></span></li>
+          </ol>
+          <div class="ops-scenario">
+            <p class="ops-eyebrow">Failure drill</p>
+            <p>Revoke the assigned device, then try to issue a handoff. The system denies the action without exposing a secret.</p>
+            <button id="revoke-relay" class="ops-button ops-button--danger" type="button" data-action="revokeRelay">Revoke Relay PC</button>
+            <button class="ops-button ops-button--secondary" type="button" data-action="reset">Reset demo</button>
+          </div>
+        </aside>
+
+        <div class="ops-main">
+          <header class="ops-heading"><div><p class="ops-eyebrow">Synthetic assignment</p><h2>Account workspace / DEMO-14</h2></div><p>One account maps to one dedicated endpoint, one local profile, one Relay PC, and one responsible operator.</p></header>
+          <div class="ops-invariant" aria-label="Current assignment">
+            <div><small>Account</small><strong>ACCOUNT-DEMO-14</strong></div>
+            <div><small>Endpoint</small><strong>PROXY-DEMO-07</strong></div>
+            <div><small>Owner</small><strong>MINH-OPERATOR</strong></div>
+            <div><small>Relay PC</small><strong>RELAY-DEMO-02</strong></div>
+            <div><small>Profile</small><strong id="profile-value">Not created</strong></div>
+          </div>
+
+          <div class="ops-grid">
+            <article class="ops-card"><div class="ops-card-head"><h3>1. Network endpoint</h3><span id="proxy-status" class="ops-status">Not checked</span></div><p class="ops-card-copy">Availability must be known before the assignment can be bound.</p><button class="ops-button" type="button" data-action="checkProxy">Check synthetic proxy</button></article>
+            <article class="ops-card"><div class="ops-card-head"><h3>2. Ownership binding</h3><span id="binding-status" class="ops-status">Not bound</span></div><p class="ops-card-copy">Current binding: <strong id="binding-value">Not assigned</strong>. This creates no browser session.</p><button id="bind-profile" class="ops-button" type="button" data-action="bindProfile" disabled>Bind account and profile</button></article>
+            <article class="ops-card"><div class="ops-card-head"><h3>3. Relay handoff</h3><span id="relay-status" class="ops-status">Authorized</span></div><p class="ops-card-copy">Handoff: <strong id="handoff-value">Not issued</strong>. Payload contents remain sealed and undisclosed.</p><button id="issue-handoff" class="ops-button" type="button" data-action="issueHandoff" disabled>Issue scoped handoff</button></article>
+            <article class="ops-card"><div class="ops-card-head"><h3>4. Local profile action</h3><span id="launch-status" class="ops-status">Locked</span></div><p class="ops-card-copy">Launch stays disabled until endpoint, ownership, recipient, and handoff checks pass.</p><button id="launch-profile" class="ops-button" type="button" data-action="launchProfile" disabled>Launch local profile</button></article>
+            <article class="ops-card ops-audit"><div class="ops-card-head"><h3>5. Sanitised audit</h3><span class="ops-status" data-tone="ready">Local demo only</span></div><div id="audit-log" class="ops-log"><p class="ops-empty">No actions yet. The public demo records only sanitised event codes.</p></div><p id="demo-live" class="ops-live" aria-live="polite"></p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="demo-footnote"><strong>Public demo boundary:</strong> every label and event is synthetic. State exists only in this page, resets on refresh, and makes no network request. The walkthrough does not claim fingerprint uniqueness, identity isolation, or approval for real-account browser use.</p>
+  </main>
+  <script src="../js/theme.js"></script>
+  <script src="../js/proxy-browser-profile-management-demo.js"></script>
+</body>
+</html>

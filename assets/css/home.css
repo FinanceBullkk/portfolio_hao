@@ -352,10 +352,9 @@
   border-radius: 12px;
   object-fit: cover;
 }
+.product-icon--proxy,
 .product-icon--registration,
-.product-icon--certstudio,
-.product-icon--tms,
-.product-icon--recruitment {
+.product-icon--certstudio {
   display: flex;
   align-items: center;
   justify-content: center;
