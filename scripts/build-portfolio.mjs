@@ -26,6 +26,7 @@ const assetFiles = [
   'assets/visuals/certstudio-system.svg',
   'assets/visuals/proxy-browser-profile-management-system.svg',
   'assets/css/about.css',
+  'assets/css/profile-background.css',
   'assets/css/base.css',
   'assets/css/case-study.css',
   'assets/css/certificate-pipeline-flow-demo.css',

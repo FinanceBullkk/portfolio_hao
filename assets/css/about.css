@@ -3,16 +3,10 @@
    Spec: docs/design-guidelines.md §3
    ============================================================ */
 
-/* ---- Header row: avatar + name + bio + meta ---- */
+/* ---- Header: name + bio + meta ---- */
 .about-hero {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
   padding: 0;
   margin-bottom: 32px;
-}
-@media (max-width: 560px) {
-  .about-hero { flex-direction: column; gap: 16px; }
 }
 
 .about-hero h1 {
@@ -42,23 +36,6 @@
 :root.dark .about-hero .lede { color: var(--n-200); }
 .about-hero .lede b { font-weight: 600; color: var(--fg); }
 
-.avatar-placeholder {
-  flex: 0 0 auto;
-  width: 64px;
-  height: 64px;
-  border: 1px solid var(--r-edge);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  color: var(--r-meta);
-  background: var(--r-surface);
-  user-select: none;
-}
-
 .about-meta {
   display: flex;
   gap: 8px 16px;
@@ -76,29 +53,3 @@
   transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 .about-meta a:hover { color: var(--r-meta); }
-
-/* ---- Grouped skill list ---- */
-.skills-groups {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 0;
-  margin-bottom: 32px;
-}
-@media (min-width: 640px) {
-  .skills-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
-.skills-groups .group {
-  border: 1px solid var(--r-edge);
-  border-radius: 8px;
-  padding: 16px;
-}
-.skills-groups .group h3 {
-  font-size: 14px;
-  line-height: 20px;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  color: var(--fg);
-  margin-bottom: 10px;
-}

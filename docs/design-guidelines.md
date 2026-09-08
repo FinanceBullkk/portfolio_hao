@@ -79,6 +79,8 @@ The default view is a recruiter scan, not a long article. It should show:
 
 Tags, architecture, mockups, decisions, and safeguards belong inside a native `<details>` disclosure labelled `Read the full case study`. The disclosure is collapsed by default, works without JavaScript, keeps a visible keyboard focus state, and must not hide the primary evidence or access action.
 
+The Home page adds LinkedIn-inspired background panels after the project gallery without copying LinkedIn branding or account controls. Experience entries group roles under their organisation, use a visible nested timeline, and keep only title, organisation, dates, and useful context. Education uses the same entry structure. Avoid decorative profile placeholders, section counts, repeated category kickers, and generic skill strings. The About page stays focused on working style and does not repeat the Home page's skills or project gallery. Neutral organisation monograms remain until approved original brand assets are available.
+
 Playable-demo links use `data-proof-cta` so automated checks can verify the route. Case-study-only projects do not expose that attribute.
 
 ## 7. Public proof pages

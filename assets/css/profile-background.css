@@ -1,0 +1,104 @@
+/* LinkedIn-inspired information hierarchy, adapted to the portfolio home. */
+.profile-panel {
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 1px solid var(--r-edge);
+  border-radius: 12px;
+  background: var(--r-surface);
+}
+.profile-panel--experience { margin-top: 32px; }
+.profile-panel--education { margin-bottom: 32px; }
+.profile-panel-header { margin-bottom: 4px; }
+.profile-panel-header h2 {
+  color: var(--fg);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -.035em;
+  line-height: 26px;
+}
+.profile-entry-list { display: grid; }
+.profile-entry {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--r-edge);
+}
+.profile-entry:last-child,
+.profile-entry--last { padding-bottom: 0; border-bottom: 0; }
+.profile-mark {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid var(--r-edge-hover);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  user-select: none;
+}
+.profile-mark--wide { font-size: 13px; letter-spacing: -.08em; }
+.profile-mark--rmit { font-size: 9px; letter-spacing: .02em; }
+.profile-entry-body { min-width: 0; }
+.profile-entry h3,
+.timeline-role h4 {
+  color: var(--fg);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 20px;
+  text-wrap: pretty;
+}
+.profile-organisation {
+  color: var(--r-body);
+  font-size: 13px;
+  line-height: 19px;
+}
+.profile-date {
+  color: var(--r-meta);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  line-height: 18px;
+}
+.profile-description {
+  max-width: 62ch;
+  margin-top: 7px;
+  color: var(--r-secondary);
+  font-size: 13px;
+  line-height: 20px;
+  text-wrap: pretty;
+}
+.role-timeline {
+  display: grid;
+  gap: 0;
+  margin-top: 14px;
+  padding-left: 18px;
+}
+.timeline-role {
+  position: relative;
+  padding: 0 0 18px 16px;
+  border-left: 2px solid var(--r-edge-hover);
+}
+.timeline-role:last-child { padding-bottom: 0; border-left-color: transparent; }
+.timeline-role::before {
+  position: absolute;
+  top: 6px;
+  left: -5px;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--r-surface);
+  border-radius: 50%;
+  background: var(--r-meta);
+  content: "";
+}
+
+@media (max-width: 560px) {
+  .profile-panel { padding: 16px; }
+  .profile-entry { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+  .profile-mark { width: 42px; height: 42px; }
+  .profile-description, .profile-organisation { font-size: 14px; line-height: 21px; }
+  .profile-date { font-size: 13px; line-height: 20px; }
+}
